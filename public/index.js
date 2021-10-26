@@ -266,5 +266,6 @@ function WackerHCl() {
     //console.log(myjsonw);
   }
   document.getElementById("btndown").style.display = "inline";
+  document.getElementById("btnHome").style.display = "inline";
   return;
 }

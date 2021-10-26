@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GasesShipment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="3GASC250_DM00608712_06.xsd" MaterialCode="3GASC250" SupplierHoldingDesc="LINDE PLC" ReceivingStPlant="Agrate" MpsSpecNo="DM00608712_06" MpsSpecRev="3.0" ShipmentDate="28-Apr-2021" ShipmentNumber="IT/0208/21" ShipQty="1">
+<GasesShipment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="3GASC250_DM00608712_06.xsd" MaterialCode="3GASC250" SupplierHoldingDesc="LINDE PLC" ReceivingStPlant="Agrate" MpsSpecNo="DM00608712_06" MpsSpecRev="3.0" ShipmentDate="28-Apr-2021" ShipmentNumber="IT/0228/21" ShipQty="1">
     <Lot SupplierSupplyChainSeqCode="LINDE PLC-BURGHAUSEN-1585" ShipLotNo="9321041503" ExpiryDate="16-Apr-2023" MfgDate="16-Apr-2021" LotQty="1">
         <DIM_Carbon_dioxide_CO2>
             <RAW VALUE="0.1"/>
