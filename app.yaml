@@ -3,7 +3,7 @@ runtime: nodejs14
 handlers:
   - url: /
     static_files: public/index.html
-    upload: /*.html
+    upload: */*.html
 
   - url: /
     static_dir: public
