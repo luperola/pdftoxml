@@ -9,14 +9,3 @@ handlers:
 
   - url: /*
     static_dir: /*
-
-    #skip_files:
-  #- (?!^public)
-
-#handlers:
-  - url: /(.*\.(js|css|svg|png)(|\.map))$
-  static_files: public/\1
-  upload: public/(.*)(|\.map)
-  - url: /.*
-  static_files: public/index.html
-  upload: public/.*
