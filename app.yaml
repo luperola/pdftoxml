@@ -1,9 +1,11 @@
-runtime: nodejs14
+runtime: nodejs
 
-handlers:
-  - url: /
-    static_files: public/index.html
-    upload: public/index.html
+env:flex
 
-  - url: /
-    static_dir: public
+#handlers:
+  #- url: /
+    #static_files: public/index.html
+    #upload: public/index.html
+
+ # - url: /
+    #static_dir: public
