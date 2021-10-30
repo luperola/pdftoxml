@@ -7,5 +7,3 @@ handlers:
 
   - url: /
     static_dir: public
-
-  - url: /upload
