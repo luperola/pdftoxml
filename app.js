@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`listening server at ${port}`);
 });
@@ -109,6 +109,7 @@ try {
   console.log(err);
   return;
 }
+
 // Alimenta il contatore per 'shipmentNumber'
 app.post("/api", (request, response) => {
   const data = request.body;
@@ -125,6 +126,21 @@ app.post("/api", (request, response) => {
   response.json(afterCounter);
 });
 
+/* try {
+  const path = "./public/";
+  // Read the directory given in `path`
+  fs.readdirSync(path).forEach((file) => {
+    // Check if the file is with a PDF extension, remove it
+    if (file.split(".").pop().toLowerCase() === "pdf") {
+      console.log(`Deleting file: ${file}`);
+      fs.unlinkSync(path + file);
+    }
+  });
+  console.log("Deleted all the pdf files");
+  return true;
+} catch (err) {
+  console.error("Error in deleting files", err);
+} */
 // Wacker data
 app.post("/apitwo", (req, res) => {
   const dataWacker = req.body;

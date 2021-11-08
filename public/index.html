@@ -42,7 +42,7 @@
         display: inline;
       "
     >
-      Prima fai upload del file poi scegli il supplier
+      Prima fai upload del file poi scegli il supplier - Per HongIn clicca 'Supplier List' poi 'HongIn' qui sotto
     </p>
     <br />
     <div
@@ -75,7 +75,7 @@
             </li>
             <li>
               <a class="list-item" href="#" onclick="HongIn()"
-                ><span>HongIn HCl drums</span></a
+                ><span>HongIn HCl drums/cylinders</span></a
               >
             </li>
 
@@ -89,26 +89,39 @@
       </div>
     </div>
     <br />
-    <!-- Input quantity -->
+
+    <p
+      id="supplierWacker"
+      style="display: none; font-size: large; padding-left: 20px"
+    >
+      Wacker drums
+    </p>
+    <!-- Input # of HongIn COA pages -->
     <div id="qtyinput" style="padding-left: 20px; display: none">
-      <p id="supplier" style="display: none; font-size: large"></p>
+      <p id="supplierHongIn" style="display: none; font-size: large">
+        Hong In HCl drums
+      </p>
+      <br />
       <label id="label1" for="test" class="label" style="padding-left: 20px">
-        # of drums on the COA</label
+        Numero dei lotti di HongIn eCOA</label
       >
-      <input id="test" type="number" style="width: 60px" value="1" />
+      <input id="CoAPages" type="number" style="width: 60px" />
+
       <button
         id="btnqty"
         class="btn btn-primary"
         style="width: 50px"
-        onclick="quantity()"
+        onclick="HongIn()"
       >
         OK
       </button>
-      <br />
-      <p id="qty" style="padding-left: 30px"></p>
+      <p id="qtyPagesHongIn" style="padding-left: 20px"></p>
     </div>
-
-    <br /><br />
+    <div id="separa" style="display: none; padding-left: 20px;">
+    <a href="https://pdftotext.com/it/">Per HongIn a) cliccare qui per andare su pdftotext b) caricare i file pdf c) downloand del file .txt d) salvarlo con il nome "sample.txt" e caricarlo con 'Scegli file' + 'Upload' sul sito</a></p>
+    </div>
+     
+    <br />
     <div id="btndown" style="padding-left: 20px; display: none">
       <a href="\download" class="btn btn-primary">
         Click here to download the xml file
@@ -126,7 +139,6 @@
     <script>
       function goHome() {
         window.location.href = "index.html";
-        return;
       }
     </script>
     <script
@@ -144,12 +156,5 @@
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"
     ></script>
-    <script>
-      function quantity() {
-        document.getElementById("qty").innerHTML =
-          "# of lines in CoA = " +
-          document.getElementById("test").value.toString();
-      }
-    </script>
   </body>
 </html>
