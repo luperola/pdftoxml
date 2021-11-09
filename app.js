@@ -112,7 +112,6 @@ try {
 
 // Alimenta il contatore per 'shipmentNumber'
 app.post("/api", (request, response) => {
-  console.log("I am in counter api");
   const data = request.body;
   try {
     var prevCounter = fs.readFileSync("./public/counter.txt", "utf8");
@@ -234,4 +233,5 @@ app.get("/download", function (req, res) {
     //console.log("files=", files);
     resp.json(files);
   });
-}); */
+});
+ */
