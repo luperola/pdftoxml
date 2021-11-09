@@ -368,7 +368,7 @@ function WackerHCl() {
       H2Ovalue: wackerData.H2Ovalue,
       Fevalue: wackerData.Fevalue,
     };
-    //console.log(wData);
+    console.log(wData);
     // contatore per
     Counter2();
     async function Counter2() {
