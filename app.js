@@ -112,13 +112,14 @@ try {
 
 // Alimenta il contatore per 'shipmentNumber'
 app.post("/api", (request, response) => {
+  console.log("I am in counter api");
   const data = request.body;
   try {
-    var prevCounter = fs.readFileSync("public/counter.txt", "utf8");
+    var prevCounter = fs.readFileSync("./public/counter.txt", "utf8");
     //console.log(prevCounter);
     prevCounter++;
-    fs.writeFileSync("counter.txt", prevCounter.toString());
-    var afterCounter = fs.readFileSync("public/counter.txt", "utf8");
+    fs.writeFileSync("./public/counter.txt", prevCounter.toString());
+    var afterCounter = fs.readFileSync("./public/counter.txt", "utf8");
     //console.log(afterCounter);
   } catch (e) {
     console.log("Error:", e.stack);
