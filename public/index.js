@@ -217,6 +217,7 @@ function WackerHCl() {
   ReadFileJson();
   async function ReadFileJson() {
     const response1 = await fetch("sample.json");
+    //const response1 = await fetch("/sample.json");
     const data = await response1.json();
     //console.log("data in Wacker function", data);
     Counter();

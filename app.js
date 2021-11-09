@@ -19,8 +19,8 @@ var fileOriginale;
 // Uso multer per caricare file a scelta dalla mia directory. Solo pdf
 const storageMultiple = multer.diskStorage({
   destination: function (req, file, cb) {
-    var dir = "public";
-    //var dir = __dirname;
+    //var dir = "public";
+    var dir = __dirname;
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir);
     }
@@ -42,8 +42,8 @@ const uploadMultiple = multer({
 
 // Set storage engine
 const storage = multer.diskStorage({
-  destination: "public",
-  //destination: __dirname,
+  //destination: "public",
+  destination: __dirname,
   filename: function (req, file, cb) {
     cb(null, file.originalname);
   },
@@ -93,11 +93,14 @@ try {
           pdfParser.on("pdfParser_dataReady", (pdfData) => {
             fs.writeFile(
               "D:/VS Code files/Module_pdf2json/public/sample.json",
+              //"D:/VS Code files/Module_pdf2json/sample.json",
               JSON.stringify(pdfData),
               (err) => console.error(err)
             );
           });
-          pdfParser.loadPDF("./public/" + fileOriginale.toString());
+          pdfParser.loadPDF(
+            "D:/VS Code files/Module_pdf2json/" + fileOriginale.toString()
+          );
           res.redirect("index.html");
           res.end();
           return;
