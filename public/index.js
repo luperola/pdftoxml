@@ -221,8 +221,9 @@ function WackerHCl() {
     //console.log("data in Wacker function", data);
     Counter();
     async function Counter() {
-      const alfa = 1;
-      const contatore = { alfa };
+      //const alfa = 1;
+      //const contatore = { alfa };
+      let contatore;
       const options = {
         method: "POST",
         headers: {
