@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GasesShipment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="3GASC250_DM00608712_06.xsd" MaterialCode="3GASC250" SupplierHoldingDesc="LINDE PLC" ReceivingStPlant="Agrate" MpsSpecNo="DM00608712_06" MpsSpecRev="3.0" ShipmentDate="12-May-2021" ShipmentNumber="IT/0111/21" ShipQty="1">
-    <Lot SupplierSupplyChainSeqCode="LINDE PLC-BURGHAUSEN-1585" ShipLotNo="9121042901" ExpiryDate="29-Apr-2023" MfgDate="29-Apr-2021" LotQty="1">
+<GasesShipment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="3GASC250_DM00608712_06.xsd" MaterialCode="3GASC250" SupplierHoldingDesc="LINDE PLC" ReceivingStPlant="Agrate" MpsSpecNo="DM00608712_06" MpsSpecRev="3.0" ShipmentDate="10-Mar-2021" ShipmentNumber="IT/0114/21" ShipQty="1">
+    <Lot SupplierSupplyChainSeqCode="LINDE PLC-BURGHAUSEN-1585" ShipLotNo="9321030302" ExpiryDate="Mar-03-2023" MfgDate="Mar-03-2021" LotQty="1">
         <DIM_Carbon_dioxide_CO2>
             <RAW VALUE="0.1"/>
         </DIM_Carbon_dioxide_CO2>
@@ -8,7 +8,7 @@
             <RAW VALUE="0.1"/>
         </DIM_Carbon_monoxide_CO>
         <DIM_Iron_Fe>
-            <RAW VALUE="1.0"/>
+            <RAW VALUE="3.3"/>
         </DIM_Iron_Fe>
         <DIM_Moisture_H2O>
             <RAW VALUE="0.2"/>
