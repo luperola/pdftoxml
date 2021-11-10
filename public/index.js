@@ -218,7 +218,7 @@ function WackerHCl() {
   async function ReadFileJson() {
     const res = await fetch("/jsonSampleFile");
     const data = await res.json();
-    console.log("data from fetch", data);
+    console.log("data from fetch", data.formImage.Pages[0].Texts[128].R[0].T);
     Counter();
     async function Counter() {
       //const alfa = 1;
