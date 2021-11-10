@@ -92,15 +92,14 @@ try {
           );
           pdfParser.on("pdfParser_dataReady", (pdfData) => {
             fs.writeFile(
-              "D:/VS Code files/Module_pdf2json/public/sample.json",
-              //"D:/VS Code files/Module_pdf2json/sample.json",
+              //"D:/VS Code files/Module_pdf2json/public/sample.json",
+              "D:/VS Code files/Module_pdf2json/sample.json",
               JSON.stringify(pdfData),
               (err) => console.error(err)
             );
           });
-          pdfParser.loadPDF(
-            "D:/VS Code files/Module_pdf2json/" + fileOriginale.toString()
-          );
+          //pdfParser.loadPDF("./public/" + fileOriginale.toString());
+          pdfParser.loadPDF(__dirname + "/" + fileOriginale.toString());
           res.redirect("index.html");
           res.end();
           return;
@@ -144,6 +143,7 @@ app.post("/api", (request, response) => {
 } catch (err) {
   console.error("Error in deleting files", err);
 } */
+
 // Wacker data
 app.post("/apitwo", (req, res) => {
   const dataWacker = req.body;
@@ -218,6 +218,7 @@ app.post("/apitwo", (req, res) => {
   }
 });
 
+// controlla il download e lo salva in sample.xml
 app.get("/download", function (req, res) {
   res.download("sample.xml", function (err) {
     if (err) {
@@ -228,7 +229,15 @@ app.get("/download", function (req, res) {
   });
 });
 
-//Send uploaded file names to client
+// legge il file sample.json e lo manda a public/index.js
+app.get("/jsonSampleFile", (req, res) => {
+  let jsonData = fs.readFileSync("sample.json");
+  let jsonFile = JSON.parse(jsonData);
+  //console.log(jsonFile);
+  res.send(jsonFile);
+});
+
+//Send uploaded file names to client - NON IN USO
 /* app.get("/filename", (req, resp) => {
   const testFolder = "./public";
   fs.readdir(testFolder, (err, files) => {

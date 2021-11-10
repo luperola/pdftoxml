@@ -216,10 +216,10 @@ function WackerHCl() {
   document.getElementById("supplierWacker").style.display = "inline";
   ReadFileJson();
   async function ReadFileJson() {
-    const response1 = await fetch("sample.json");
-    //const response1 = await fetch("/sample.json");
-    const data = await response1.json();
-    //console.log("data in Wacker function", data);
+    //const response = await fetch("sample.json");
+    const res = await fetch("/jsonSampleFile");
+    const data = await res.json();
+    console.log("data in Wacker function", data);
     Counter();
     async function Counter() {
       //const alfa = 1;
