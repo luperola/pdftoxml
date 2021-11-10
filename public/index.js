@@ -216,10 +216,9 @@ function WackerHCl() {
   document.getElementById("supplierWacker").style.display = "inline";
   ReadFileJson();
   async function ReadFileJson() {
-    //const response = await fetch("sample.json");
     const res = await fetch("/jsonSampleFile");
     const data = await res.json();
-    console.log("data in Wacker function", data);
+    console.log("data from fetch", data);
     Counter();
     async function Counter() {
       //const alfa = 1;
@@ -254,8 +253,10 @@ function WackerHCl() {
         alert("reset counter.txt file");
       }
       window.localStorage.setItem("shipment", shipmentNumber);
+      console.log("shipment number in Counter", shipmentNumber);
     }
     const shipmentNumber1 = window.localStorage.getItem("shipment");
+    console.log("shipment number just out of Counter", shipmentNumber1);
     var wackerData = {
       shipmentNumber: shipmentNumber1,
       shipmentdate: data.formImage.Pages[0].Texts[22].R[0].T,
@@ -271,6 +272,10 @@ function WackerHCl() {
       H2Ovalue: data.formImage.Pages[0].Texts[121].R[0].T,
       Fevalue: data.formImage.Pages[0].Texts[128].R[0].T,
     };
+    console.log(
+      "Fevalue: data.formImage.Pages[0].Texts[128].R[0].T=>",
+      wackerData.Fevalue
+    );
     wackerData.shipmentdate = wackerData.shipmentdate.replace(
       "date%20of%20issue%3A%20",
       ""
@@ -371,6 +376,7 @@ function WackerHCl() {
       Fevalue: wackerData.Fevalue,
     };
     console.log(wData);
+    console.log("Fevalue prima del post", wData.Fevalue);
     // contatore per
     Counter2();
     async function Counter2() {
