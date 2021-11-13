@@ -15,7 +15,6 @@ const path = require("path");
 var XMLWriter = require("xml-writer");
 
 var fileOriginale;
-
 // Uso multer per caricare file a scelta dalla mia directory. Solo pdf
 const storageMultiple = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -91,14 +90,16 @@ try {
             console.error(errData.parserError)
           );
           pdfParser.on("pdfParser_dataReady", (pdfData) => {
-            fs.writeFile(
-              //"D:/VS Code files/Module_pdf2json/public/sample.json",
-              "D:/VS Code files/Module_pdf2json/sample.json",
-              JSON.stringify(pdfData),
-              (err) => console.error(err)
+            const test = fileOriginale.substring(0, fileOriginale.length - 4);
+            //const id = __dirname + "/" + test + ".json";
+            const id = __dirname + "/sample.json";
+            //console.log("filetofetch in pdfParser", id);
+            fs.writeFile(id, JSON.stringify(pdfData), (err) =>
+              console.error(err)
             );
+
+            //res.json(pdfData);
           });
-          //pdfParser.loadPDF("./public/" + fileOriginale.toString());
           pdfParser.loadPDF(__dirname + "/" + fileOriginale.toString());
           res.redirect("index.html");
           res.end();
@@ -111,7 +112,6 @@ try {
   console.log(err);
   return;
 }
-
 // Alimenta il contatore per 'shipmentNumber'
 app.post("/api", (request, response) => {
   //const data = request.body;
@@ -128,23 +128,7 @@ app.post("/api", (request, response) => {
   response.json(afterCounter);
 });
 
-/* try {
-  const path = "./public/";
-  // Read the directory given in `path`
-  fs.readdirSync(path).forEach((file) => {
-    // Check if the file is with a PDF extension, remove it
-    if (file.split(".").pop().toLowerCase() === "pdf") {
-      console.log(`Deleting file: ${file}`);
-      fs.unlinkSync(path + file);
-    }
-  });
-  console.log("Deleted all the pdf files");
-  return true;
-} catch (err) {
-  console.error("Error in deleting files", err);
-} */
-
-// Wacker data
+// Wacker data generator to populate xml
 app.post("/apitwo", (req, res) => {
   const dataWacker = req.body;
   //console.log(dataWacker);
@@ -209,10 +193,12 @@ app.post("/apitwo", (req, res) => {
   xw.endDocument();
 
   try {
-    //const wacker = JSON.stringify(dataWacker);
-    //console.log(wacker);
+    var numeroFileSample = fs.readFileSync("counter.txt", "utf-8");
+    numeroFileSample = parseInt(numeroFileSample) - 1;
+    fileToBeDownloaded = "sample" + numeroFileSample.toString() + ".xml";
     res.json(xw.toString());
-    fs.writeFileSync("sample.xml", xw.toString());
+    //fs.writeFileSync("sample.xml", xw.toString());
+    fs.writeFileSync(fileToBeDownloaded, xw.toString());
   } catch (e) {
     console.log("Error:", e.stack);
   }
@@ -220,9 +206,13 @@ app.post("/apitwo", (req, res) => {
 
 // controlla il download e lo salva in sample.xml
 app.get("/download", function (req, res) {
-  res.download("sample.xml", function (err) {
+  var numeroFileSample = fs.readFileSync("counter.txt", "utf-8");
+  numeroFileSample = parseInt(numeroFileSample) - 1;
+  fileToBeDownloaded = "sample" + numeroFileSample.toString() + ".xml";
+  //res.download("sample.xml", function (err) {
+  res.download(fileToBeDownloaded, function (err) {
     if (err) {
-      error;
+      console.log("file not downloaded");
     } else {
       console.log("Download succesfull");
     }
@@ -230,6 +220,7 @@ app.get("/download", function (req, res) {
 });
 
 // legge il file sample.json e lo manda a public/index.js
+
 app.get("/jsonSampleFile", (req, res) => {
   let jsonData = fs.readFileSync("sample.json");
   let jsonFile = JSON.parse(jsonData);

@@ -210,6 +210,7 @@ function FillingDateFormatOne() {
 }
 console.log("cyl No", cylinderNumberArray[0]);
  */
+
 // Wacker
 function WackerHCl() {
   document.getElementById("btndropdown").style.display = "none";
@@ -218,7 +219,7 @@ function WackerHCl() {
   async function ReadFileJson() {
     const res = await fetch("/jsonSampleFile");
     const data = await res.json();
-    console.log("data from fetch", data.formImage.Pages[0].Texts[128].R[0].T);
+    //console.log("data from fetch", data.formImage.Pages[0].Texts[128].R[0].T);
     Counter();
     async function Counter() {
       //const alfa = 1;
@@ -253,7 +254,7 @@ function WackerHCl() {
         alert("reset counter.txt file");
       }
       window.localStorage.setItem("shipment", shipmentNumber);
-      console.log("shipment number in Counter", shipmentNumber);
+      //console.log("shipment number in Counter", shipmentNumber);
     }
     const shipmentNumber1 = window.localStorage.getItem("shipment");
     console.log("shipment number just out of Counter", shipmentNumber1);
@@ -272,10 +273,10 @@ function WackerHCl() {
       H2Ovalue: data.formImage.Pages[0].Texts[121].R[0].T,
       Fevalue: data.formImage.Pages[0].Texts[128].R[0].T,
     };
-    console.log(
-      "Fevalue: data.formImage.Pages[0].Texts[128].R[0].T=>",
-      wackerData.Fevalue
-    );
+    //console.log(
+    //"Fevalue: data.formImage.Pages[0].Texts[128].R[0].T=>",
+    // wackerData.Fevalue
+    //);
     wackerData.shipmentdate = wackerData.shipmentdate.replace(
       "date%20of%20issue%3A%20",
       ""
@@ -375,8 +376,8 @@ function WackerHCl() {
       H2Ovalue: wackerData.H2Ovalue,
       Fevalue: wackerData.Fevalue,
     };
-    console.log(wData);
-    console.log("Fevalue prima del post", wData.Fevalue);
+    //console.log(wData);
+    //console.log("Fevalue prima del post", wData.Fevalue);
     // contatore per
     Counter2();
     async function Counter2() {
@@ -396,23 +397,3 @@ function WackerHCl() {
     return;
   }
 }
-/* Conta();
-function Conta() {
-  localStorage.setItem("Contatore", 1);
-  const cat = localStorage.getItem("Contatore");
-  cat = parseInt(cat) + 1;
-  console.log("contatore", cat);
-
-  //localStorage.removeItem('myCat');
-} */
-
-/* function toArray(list) {
-  return Array.prototype.slice.call(list);
-}
-
-var albums = toArray(document.getElementsById(btnMatrix[index]));
-albums.forEach(function (album) {
-  document.getElementById(album.id).addEventListener("click", function () {
-      goAlbum(album.id);
-  }, false);
-}); */
