@@ -36,7 +36,7 @@
     </form>
     <br />
     <!-- dropdown menu -->
-    <div></div>
+    <div>
       <p
         id="instructions"
         style="
@@ -48,15 +48,17 @@
       >
         <span>Prima fai upload del file poi scegli il supplier</span>
         <br />
-        <span style="margin-left: 20px;"> Per Chlorgas o NO Tavlov clicca il relativo button </span>
+        <span style="margin-left: 20px">
+          Per Chlorgas o NO Tavlov clicca il relativo button
+        </span>
         <br />
-        <span style="margin-left: 20px;">
+        <span style="margin-left: 20px">
           Per HF Gerling clicca direttamente 'Supplier List' poi 'HF Gerling
           Holz'</span
         >
       </p>
     </div>
-    <br /><br />
+    <br />
     <div
       id="btndropdown"
       class="btn-group"
@@ -162,7 +164,6 @@
                 ><span>HF Medford Bombola Piccola 1.8 Kg</span></a
               >
             </li>
-            
           </ul>
         </div>
       </div>
@@ -180,72 +181,9 @@
     >
       Chlorgas / NO Tavlov instructions
     </button>
-    <br /><br />
-    <!-- Inserisci data spedizione HF Gerling Holz-->
-    <div id="dataHF" style="margin-left: 20px; display: none">
-      <label for="start" style="color: blue"
-        >Data spedizione HF Gerling Holz</label
-      ><br />
-      <div class="input-group">
-        <input
-          type="date"
-          id="start"
-          name="trip-start"
-          required="required"
-          style="
-            color: blue;
-            height: 40px;
-            border-radius: 5px;
-            border-color: lightblue;
-            padding-left: 15px;
-            margin-left: 20px;
-          "
-        />
-        <span class="input-group-btn">
-          <button
-            class="btn btn-primary"
-            onclick="miadataHF()"
-            style="margin-left: 5px"
-          >
-            Invia
-          </button></span
-        >
-      </div>
-    </div>
-
-    <!-- Inserisci data spedizione HF Medford kg 1.8 Bombola Piccola-->
-    <div id="dataHFSmall" style="margin-left: 20px; display: none">
-      <label for="start" style="color: blue"
-        >Data spedizione HF Medford 1.8 kg Bombola Piccola</label
-      ><br />
-      <div class="input-group">
-        <input
-          type="date"
-          id="startHFSmall"
-          name="trip-start"
-          required="required"
-          style="
-            color: blue;
-            height: 40px;
-            border-radius: 5px;
-            border-color: lightblue;
-            padding-left: 15px;
-            margin-left: 20px;
-          "
-        />
-        <span class="input-group-btn">
-          <button
-            class="btn btn-primary"
-            onclick="miadataHFSmall()"
-            style="margin-left: 5px"
-          >
-            Invia
-          </button></span
-        >
-      </div>
-    </div>
 
     <!-- Modal -->
+
     <div
       class="modal fade"
       id="ModalCS"
@@ -294,7 +232,344 @@
       </div>
     </div>
     <!-- end of modal -->
+    <br /><br />
+
+    <!-- HF manufacturing date, delivery date e #cylinder da spedire-->
+    <div id="dataHF" style="margin-left: 20px; display: none">
+      <label for="start" style="color: blue"
+        >Data manufacturing HF Gerling Holz</label
+      ><br />
+      <div class="input-group">
+        <input
+          type="date"
+          id="start"
+          name="trip-start"
+          required="required"
+          style="
+            color: blue;
+            height: 40px;
+            border-radius: 5px;
+            border-color: lightblue;
+            padding-left: 15px;
+            margin-left: 20px;
+          "
+        />
+        <span class="input-group-btn">
+          <button
+            class="btn btn-primary"
+            onclick="manDateHF()"
+            style="margin-left: 5px"
+          >
+            Invia
+          </button></span
+        >
+      </div>
+    </div>
+    <div id="deliveryDate" style="margin-left: 20px; display: none">
+      <label for="delivery" style="color: blue"
+        >Data consegna HF Gerling Holz</label
+      ><br />
+      <div class="input-group">
+        <input
+          type="date"
+          id="delivery"
+          name="trip-start"
+          required="required"
+          style="
+            color: blue;
+            height: 40px;
+            border-radius: 5px;
+            border-color: lightblue;
+            padding-left: 15px;
+            margin-left: 20px;
+          "
+        />
+        <span class="input-group-btn">
+          <button
+            class="btn btn-primary"
+            onclick="delDateHF()"
+            style="margin-left: 5px"
+          >
+            Invia
+          </button></span
+        >
+      </div>
+    </div>
+    <div id="cylDelivered" style="margin-left: 20px; display: none">
+      <label for="nbrCyl" style="color: blue">Numero BB HF da spedire</label
+      ><br />
+      <div class="input-group">
+        <input
+          type="number"
+          id="nbrCyl"
+          name="nbrCylHF"
+          required="required"
+          style="
+            color: blue;
+            height: 40px;
+            width: 180px;
+            border-radius: 5px;
+            border-color: lightblue;
+            padding-left: 15px;
+            margin-left: 20px;
+          "
+        />
+        <span class="input-group-btn">
+          <button
+            class="btn btn-primary"
+            onclick="cylQtyHF()"
+            style="margin-left: 5px"
+          >
+            Invia
+          </button></span
+        >
+      </div>
+    </div>
+
+    <!-- input for containers # -->
+    <div id="container">
+      <div id="cyl1" style="display: none; margin-left: 20px">
+        <label for="cylOne" style="color: blue">Bombola #1</label><br />
+        <div class="input-group">
+          <input
+            type="text"
+            id="cylOne"
+            name="nbrCylHF"
+            required="required"
+            style="
+              color: blue;
+              height: 40px;
+              width: 90px;
+              border-radius: 5px;
+              border-color: lightblue;
+              padding-left: 15px;
+              margin-left: 20px;
+            "
+          />
+          <span class="input-group-btn">
+            <button
+              class="btn btn-primary"
+              onclick="cylOneHF()"
+              style="margin-left: 5px"
+            >
+              Invia
+            </button></span
+          >
+        </div>
+      </div>
+      <div id="cyl2" style="display: none; margin-left: 20px">
+        <label for="cylTwo" style="color: blue">Bombola #2</label><br />
+        <div class="input-group">
+          <input
+            type="text"
+            id="cylTwo"
+            name="nbrCylHF"
+            required="required"
+            style="
+              color: blue;
+              height: 40px;
+              width: 90px;
+              border-radius: 5px;
+              border-color: lightblue;
+              padding-left: 15px;
+              margin-left: 20px;
+            "
+          />
+          <span class="input-group-btn">
+            <button
+              class="btn btn-primary"
+              onclick="cylTwoHF()"
+              style="margin-left: 5px"
+            >
+              Invia
+            </button></span
+          >
+        </div>
+      </div>
+      <div id="cyl3" style="display: none; margin-left: 20px">
+        <label for="cylThree" style="color: blue">Bombola #3</label><br />
+        <div class="input-group">
+          <input
+            type="text"
+            id="cylThree"
+            name="nbrCylHF"
+            required="required"
+            style="
+              color: blue;
+              height: 40px;
+              width: 90px;
+              border-radius: 5px;
+              border-color: lightblue;
+              padding-left: 15px;
+              margin-left: 20px;
+            "
+          />
+          <span class="input-group-btn">
+            <button
+              class="btn btn-primary"
+              onclick="cylThreeHF()"
+              style="margin-left: 5px"
+            >
+              Invia
+            </button></span
+          >
+        </div>
+      </div>
+      <div id="cyl4" style="display: none; margin-left: 20px">
+        <label for="cylFour" style="color: blue">Bombola #4</label><br />
+        <div class="input-group">
+          <input
+            type="text"
+            id="cylFour"
+            name="nbrCylHF"
+            required="required"
+            style="
+              color: blue;
+              height: 40px;
+              width: 90px;
+              border-radius: 5px;
+              border-color: lightblue;
+              padding-left: 15px;
+              margin-left: 20px;
+            "
+          />
+          <span class="input-group-btn">
+            <button
+              class="btn btn-primary"
+              onclick="cylFourHF()"
+              style="margin-left: 5px"
+            >
+              Invia
+            </button></span
+          >
+        </div>
+      </div>
+    </div>
+    <div id="cyl5" style="display: none; margin-left: 20px">
+      <label for="cylFive" style="color: blue">Bombola #5</label><br />
+      <div class="input-group">
+        <input
+          type="text"
+          id="cylFive"
+          name="nbrCylHF"
+          required="required"
+          style="
+            color: blue;
+            height: 40px;
+            width: 90px;
+            border-radius: 5px;
+            border-color: lightblue;
+            padding-left: 15px;
+            margin-left: 20px;
+          "
+        />
+        <span class="input-group-btn">
+          <button
+            class="btn btn-primary"
+            onclick="cylFiveHF()"
+            style="margin-left: 5px"
+          >
+            Invia
+          </button></span
+        >
+      </div>
+    </div>
+    <div id="cyl6" style="display: none; margin-left: 20px">
+      <label for="cylSix" style="color: blue">Bombola #6</label><br />
+      <div class="input-group">
+        <input
+          type="text"
+          id="cylSix"
+          name="nbrCylHF"
+          required="required"
+          style="
+            color: blue;
+            height: 40px;
+            width: 90px;
+            border-radius: 5px;
+            border-color: lightblue;
+            padding-left: 15px;
+            margin-left: 20px;
+          "
+        />
+        <span class="input-group-btn">
+          <button
+            class="btn btn-primary"
+            onclick="cylSixHF()"
+            style="margin-left: 5px"
+          >
+            Invia
+          </button></span
+        >
+      </div>
+    </div>
+    <div id="cyl7" style="display: none; margin-left: 20px">
+      <label for="cylSeven" style="color: blue">Bombola #7</label><br />
+      <div class="input-group">
+        <input
+          type="text"
+          id="cylSeven"
+          name="nbrCylHF"
+          required="required"
+          style="
+            color: blue;
+            height: 40px;
+            width: 90px;
+            border-radius: 5px;
+            border-color: lightblue;
+            padding-left: 15px;
+            margin-left: 20px;
+          "
+        />
+        <span class="input-group-btn">
+          <button
+            class="btn btn-primary"
+            onclick="cylSevenHF()"
+            style="margin-left: 5px"
+          >
+            Invia
+          </button></span
+        >
+      </div>
+    </div>
+    <div id="cyl8" style="display: none; margin-left: 20px">
+      <label for="cylEight" style="color: blue">Bombola #8</label><br />
+      <div class="input-group">
+        <input
+          type="text"
+          id="cylEight"
+          name="nbrCylHF"
+          required="required"
+          style="
+            color: blue;
+            height: 40px;
+            width: 90px;
+            border-radius: 5px;
+            border-color: lightblue;
+            padding-left: 15px;
+            margin-left: 20px;
+          "
+        />
+        <span class="input-group-btn">
+          <button
+            class="btn btn-primary"
+            onclick="cylEightHF()"
+            style="margin-left: 5px"
+          >
+            Invia
+          </button></span
+        >
+      </div>
+    </div>
     <br />
+    <div id="HF" style="margin-left: 20px; display: none">
+      <input
+        type="button"
+        onclick="HFData()"
+        value="Procedi"
+        class="btn btn-primary"
+      />
+    </div>
 
     <!-- ------------------------------------- -->
     <!-- Chlorgas # of lines in ecOA -->

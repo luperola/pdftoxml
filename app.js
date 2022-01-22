@@ -15,6 +15,7 @@ const path = require("path");
 var XMLWriter = require("xml-writer");
 var AdmZip = require("adm-zip");
 var pdf2table = require("pdf2table");
+const hummus = require("hummus");
 var fileOriginale;
 
 // Uso multer per caricare file a scelta dalla mia directory. Solo pdf
@@ -80,22 +81,38 @@ try {
         res.redirect("index.html");
       } else {
         fileOriginale = req.file.originalname;
+        // per i files con HF
+        const found = fileOriginale.match("HF");
+        if (found != null) {
+          let pdfReader = hummus.createReader(fileOriginale);
+          let pages = pdfReader.getPagesCount();
+          pages = pages.toString();
+          fs.writeFileSync("PagesHFSmall.txt", pages);
+          for (let i = 0; i < pages; i++) {
+            pdfWriter = hummus.createWriter("HFoutput" + i + ".pdf");
+            pdfWriter
+              .createPDFCopyingContext(pdfReader)
+              .appendPDFPageFromPDF(i);
+            pdfWriter.end();
+          }
+        }
         var test = fileOriginale
           .substring(fileOriginale.length - 4)
           .toLowerCase();
-        if (test === ".pdf") {
-          /* const pdfParser = new PDFParser();
-          pdfParser.on("pdfParser_dataError", (errData) =>
-            console.error(errData.parserError)
-          );
-          pdfParser.on("pdfParser_dataReady", (pdfData) => {
-            const id = __dirname + "/sample.json";
-            fs.writeFile(id, JSON.stringify(pdfData), (err) =>
-              console.error(err)
-            );
-            //res.json(pdfData);
-          });
-          pdfParser.loadPDF(__dirname + "/" + fileOriginale.toString()); */
+        if (test === ".pdf" && found === null) {
+          // const pdfParser = new PDFParser();
+          // pdfParser.on("pdfParser_dataError", (errData) =>
+          //   console.error(errData.parserError)
+          // );
+          // pdfParser.on("pdfParser_dataReady", (pdfData) => {
+          //   const id = __dirname + "/sample.json";
+          //   fs.writeFile(id, JSON.stringify(pdfData), (err) =>
+          //     console.error(err)
+          //   );
+          //   //res.json(pdfData);
+          // });
+          // pdfParser.loadPDF(__dirname + "/" + fileOriginale.toString());
+
           // -----------------pdf2table-----------------
           fs.readFile(
             __dirname + "/" + fileOriginale.toString(),
@@ -110,6 +127,7 @@ try {
           );
           //-----------------end pdf2table-------------------------
         }
+
         if (test === ".txt") {
           const readTxtFile = fs.readFileSync(fileOriginale, "utf-8");
           //console.log("readTxtFile", readTxtFile);
@@ -785,70 +803,85 @@ app.post("/NOTavlov", (req, res) => {
 //-----------POST from HF Gerling Holz----------------
 app.post("/apiHFGerling", (req, res) => {
   const dataHF = req.body;
-  //console.log(dataHF);
-  xw = new XMLWriter(true);
-  xw.startDocument("1.0", "UTF-8");
-  xw.startElement("GasesShipment");
-  xw.writeAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
-  xw.writeAttribute(
-    "xsi:noNamespaceSchemaLocation",
-    "3GASCC21_DM00318670_06.xsd"
-  );
-  xw.writeAttribute("MaterialCode", "3GASCC21");
-  xw.writeAttribute("SupplierHoldingDesc", "LINDE PLC");
-  xw.writeAttribute("ReceivingStPlant", "Agrate");
-  xw.writeAttribute("MpsSpecNo", "DM00318670_06");
-  xw.writeAttribute("MpsSpecRev", "3.0");
-  xw.writeAttribute("ShipmentDate", dataHF.shipmentdate);
-  xw.writeAttribute("ShipmentNumber", dataHF.shipmentNumber);
-  xw.writeAttribute("ShipQty", 1);
-  xw.startElement("Lot");
-  xw.writeAttribute(
-    "SupplierSupplyChainSeqCode",
-    "LINDE PLC-S/ GERLING HOLZ -  Dormagen-1679"
-  );
-  xw.writeAttribute("ShipLotNo", dataHF.shipmentNumber);
-  xw.writeAttribute("ExpiryDate", dataHF.expiryDate);
-  xw.writeAttribute("MfgDate", dataHF.manDate);
-  xw.writeAttribute("LotQty", 1);
+  console.log(dataHF);
+  var zipHF = new AdmZip();
+  for (let i = 0; i < dataHF.qty; i++) {
+    xw = new XMLWriter(true);
+    xw.startDocument("1.0", "UTF-8");
+    xw.startElement("GasesShipment");
+    xw.writeAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+    xw.writeAttribute(
+      "xsi:noNamespaceSchemaLocation",
+      "3GASCC21_DM00318670_06.xsd"
+    );
+    xw.writeAttribute("MaterialCode", "3GASCC21");
+    xw.writeAttribute("SupplierHoldingDesc", "LINDE PLC");
+    xw.writeAttribute("ReceivingStPlant", "Agrate");
+    xw.writeAttribute("MpsSpecNo", "DM00318670_06");
+    xw.writeAttribute("MpsSpecRev", "3.0");
+    xw.writeAttribute("ShipmentDate", dataHF.shipmentdate[i]);
+    xw.writeAttribute("ShipmentNumber", dataHF.shipmentNumber[i]);
+    xw.writeAttribute("ShipQty", 1);
+    xw.startElement("Lot");
+    xw.writeAttribute(
+      "SupplierSupplyChainSeqCode",
+      "LINDE PLC-S/ GERLING HOLZ -  Dormagen-1679"
+    );
+    xw.writeAttribute("ShipLotNo", dataHF.lotNumber[i]);
+    xw.writeAttribute("ExpiryDate", dataHF.expiryDate[i]);
+    xw.writeAttribute("MfgDate", dataHF.manDate[i]);
+    xw.writeAttribute("LotQty", 1);
+    xw.startElement("DIM_X_Assay ");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", "99.96");
+    xw.endElement();
+    xw.endElement("DIM_X_Assay");
+    xw.startElement("DIM_Hexafluorosilic_acid_H2SIF6");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHF.H2SiF6value[i]);
+    xw.endElement();
+    xw.endElement("DIM_Hexafluorosilic_acid_H2SIF6");
+    xw.startElement("DIM_Sulfur_dioxide_SO2");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHF.SO2value[i]);
+    xw.endElement();
+    xw.endElement("DIM_Sulfur_dioxide_SO2");
+    xw.startElement("DIM_Sulfuric_acid_H2SO4");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHF.H2SO4value[i]);
+    xw.endElement();
+    xw.endElement("DIM_Moisture_H2ODIM_Sulfuric_acid_H2SO4");
+    xw.startElement("DIM_Water_H2O");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHF.H2Ovalue[i]);
+    xw.endElement();
+    xw.endElement("DIM_Water_H2O");
+    xw.endDocument();
+    console.log("xw", xw.toString());
+    // try {
+    //   fs.writeFileSync("sourcename.txt", "HFGerling");
+    //   fileToBeDownloaded = dataHF.lotNumber.toString() + ".xml";
+    //   fileToBeDownloaded = fileToBeDownloaded.replace("/", "-").replace("/", "-");
+    //   res.json(xw.toString());
+    //   fs.writeFileSync(fileToBeDownloaded, xw.toString());
+    //   fs.writeFileSync("HFfilename.txt", fileToBeDownloaded);
+    // } catch (e) {
+    //   console.log("Error:", e.stack);
+    // }
 
-  xw.startElement("DIM_X_Assay ");
-  xw.startElement("RAW");
-  xw.writeAttribute("VALUE", "99.96");
-  xw.endElement();
-  xw.endElement("DIM_X_Assay");
-  xw.startElement("DIM_Hexafluorosilic_acid_H2SIF6");
-  xw.startElement("RAW");
-  xw.writeAttribute("VALUE", dataHF.H2SiF6value);
-  xw.endElement();
-  xw.endElement("DIM_Hexafluorosilic_acid_H2SIF6");
-  xw.startElement("DIM_Sulfur_dioxide_SO2");
-  xw.startElement("RAW");
-  xw.writeAttribute("VALUE", dataHF.SO2value);
-  xw.endElement();
-  xw.endElement("DIM_Sulfur_dioxide_SO2");
-  xw.startElement("DIM_Sulfuric_acid_H2SO4");
-  xw.startElement("RAW");
-  xw.writeAttribute("VALUE", dataHF.H2SO4value);
-  xw.endElement();
-  xw.endElement("DIM_Moisture_H2ODIM_Sulfuric_acid_H2SO4");
-  xw.startElement("DIM_Water_H2O");
-  xw.startElement("RAW");
-  xw.writeAttribute("VALUE", dataHF.H2Ovalue);
-  xw.endElement();
-  xw.endElement("DIM_Water_H2O");
-  xw.endDocument();
-
-  try {
-    fs.writeFileSync("sourcename.txt", "HFGerling");
-    fileToBeDownloaded = dataHF.lotNumber.toString() + ".xml";
-    fileToBeDownloaded = fileToBeDownloaded.replace("/", "-").replace("/", "-");
-    res.json(xw.toString());
-    fs.writeFileSync(fileToBeDownloaded, xw.toString());
-    fs.writeFileSync("HFfilename.txt", fileToBeDownloaded);
-  } catch (e) {
-    console.log("Error:", e.stack);
+    try {
+      var fileToBeDownloaded = dataHF.lotNumber[i];
+      fileToBeDownloaded = fileToBeDownloaded.replace("/", "-");
+      fileToBeDownloaded = fileToBeDownloaded + ".xml";
+      //console.log("file to be dw", fileToBeDownloaded);
+      fs.writeFileSync(fileToBeDownloaded, xw.toString());
+      zipHF.addLocalFile(fileToBeDownloaded);
+    } catch (e) {
+      console.log("Error:", e.stack);
+    }
   }
+  fs.writeFileSync("sourcename.txt", "HFGerling");
+  zipHF.writeZip(/*target file name*/ "filesHF.zip");
 });
 
 //-----------END POST HF Gerling Holz----------------
@@ -1366,8 +1399,7 @@ app.get("/download", function (req, res) {
     });
   }
   if (sourceName === "HFGerling") {
-    var HFfileName = fs.readFileSync("HFfilename.txt", "utf-8");
-    res.download(HFfileName, function (err) {
+    res.download("filesHF.zip", function (err) {
       if (err) {
         console.log("file not downloaded");
       } else {
@@ -1446,4 +1478,9 @@ app.get("/txt", (req, res) => {
   const readTxtFile1 = fs.readFileSync("sample.txt", "utf-8");
   //console.log("writeTxtFile", readTxtFile1);
   res.send(readTxtFile1);
+});
+
+app.get("/arrayHFSmall", (req, res) => {
+  const pageNumbers = fs.readFileSync("PagesHFSmall.txt", "utf-8");
+  res.send(pageNumbers);
 });
