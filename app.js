@@ -1314,11 +1314,11 @@ app.post("/apiHBr", (req, res) => {
   xw.writeAttribute("VALUE", dataHBr.COvalue);
   xw.endElement();
   xw.endElement("DIM_Carbon_monoxide_CO");
-  xw.startElement("DIM_Hydrogen_chloride_HCI");
+  xw.startElement("DIM_Hydrogen_chloride_HCl");
   xw.startElement("RAW");
   xw.writeAttribute("VALUE", dataHBr.HClvalue);
   xw.endElement();
-  xw.endElement("DIM_Hydrogen_chloride_HCI");
+  xw.endElement("DIM_Hydrogen_chloride_HCl");
   xw.startElement("DIM_Moisture_H2O");
   xw.startElement("RAW");
   xw.writeAttribute("VALUE", dataHBr.H2Ovalue);
