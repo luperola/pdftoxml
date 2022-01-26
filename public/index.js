@@ -2307,7 +2307,7 @@ function HBr() {
   async function ReadFileJson() {
     const res = await fetch("/jsonSampleFile2");
     const data = await res.json();
-    //console.log("data", data);
+    console.log("data", data);
 
     //Counter alimenta e salva il contatore di counter.txt
     const testResponse = await fetch("/apicounter");
@@ -2386,18 +2386,19 @@ function HBr() {
       expHBr =
         manHBr.substring(0, 2) + "-" + monthNameMan[monthExp] + "-" + yearExp;
     }
-    var lotNumberHBr = data[17][1];
-
-    var FevalueHBr = "0.8";
-    var CO2valueHBr = "3.0";
-    var COvalueHBr = "0.8";
-    var HClvalueHBr = "500";
-    var H2OvalueHBr = "0.8";
-    var N2valueHBr = "1.5";
-    var O2valueHBr = "0.8";
-    var THCvalueHBr = "0.8";
+    var lotNumberHBr = data[16][1];
+    var filenameHBr = data[17][1];
+    var FevalueHBr = data[10][2];
+    var CO2valueHBr = data[8][2];
+    var COvalueHBr = data[7][2];
+    var HClvalueHBr = "0.2";
+    var H2OvalueHBr = data[4][2];
+    var N2valueHBr = data[6][2];
+    var O2valueHBr = data[5][2];
+    var THCvalueHBr = "0.02";
 
     var HBrData = {
+      filename: filenameHBr,
       shipmentNumber: shipmentNumberHBr,
       shipmentdate: shipDateHBr,
       lotNumber: lotNumberHBr,
@@ -2434,141 +2435,215 @@ function HBr() {
 // ---------------- HF Medford 1.8Kg - Bombola Piccola --------------
 
 function HFSmall() {
-  alert("under construction");
-  // document.getElementById("btndropdown").style.display = "none";
-  // document.getElementById("modalCS").style.display = "none";
-  // document.getElementById("btndown").style.display = "inline";
-  // document.getElementById("btnHome").style.display = "inline";
-  // ReadHFPages();
-  // async function ReadHFPages() {
-  //   const arrayHFSmallDimension = await fetch("/arrayHFSmall");
-  //   const dimension = await arrayHFSmallDimension.text();
-  //   console.log("lungh array HF", dimension);
-  // }
-  // ReadHFText();
-  // async function ReadHFText() {
-  //   const res = await fetch("/jsonSampleFile2");
-  //   const data = await res.json();
-  //   //console.log("data", data);
+  (cylPerPage0 = []),
+    (cylPerPage1 = []),
+    (cylPerPage2 = []),
+    (cylPerPage3 = []),
+    (cylPerPage4 = []),
+    //alert("under construction");
+    (document.getElementById("btndropdown").style.display = "none");
+  document.getElementById("modalCS").style.display = "none";
+  document.getElementById("btndown").style.display = "inline";
+  document.getElementById("btnHome").style.display = "inline";
+  ReadHFPages();
+  async function ReadHFPages() {
+    const arrayHFSmallDimension = await fetch("/arrayHFSmall");
+    var dimension = await arrayHFSmallDimension.text();
+    dimension = parseInt(dimension);
+    console.log("dimension", dimension);
+    if (dimension > 5) {
+      alert("Max 5 pagine. Si deve 'splittare' il file pdf");
+    }
+    for (let i = 0; i < dimension; i++) {
+      ReadHFFiles();
+      async function ReadHFFiles() {
+        var nameFetch = "/HFoutput" + i.toString();
+        const res = await fetch(nameFetch);
+        const data = await res.json();
+        console.log("data", data);
 
-  //   //Counter alimenta e salva il contatore di counter.txt
-  //   const testResponse = await fetch("/apicounter");
-  //   var dataTest = await testResponse.text();
-  //   //console.log("dataTest1", dataTest);
-  //   dataTest = parseInt(dataTest);
-  //   dataTest++;
-  //   var dt = new Date();
-  //   var anno = dt.getFullYear().toString();
-  //   anno = anno.substring(2, 4);
-  //   if (dataTest < 10) {
-  //     shipmentNumberHBr = "IT/000" + dataTest.toString() + "/" + anno;
-  //   }
-  //   if (dataTest >= 10 && dataTest < 100) {
-  //     shipmentNumberHBr = "IT/00" + dataTest.toString() + "/" + anno;
-  //   }
-  //   if (dataTest >= 100 && dataTest < 1000) {
-  //     shipmentNumberHBr = "IT/0" + dataTest.toString() + "/" + anno;
-  //   }
-  //   if (dataTest >= 1000) {
-  //     shipmentNumberHBr = "IT/" + dataTest.toString() + "/" + anno;
-  //   }
-  //   if (dataTest > 10000) {
-  //     alert("reset counter.txt file");
-  //   }
-  //   datacounter = { dataTest };
-  //   const optionCounter = {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(datacounter),
-  //   };
-  //   const myresponse = await fetch("/newcounter", optionCounter);
-  //   var myjson = await myresponse.text();
-  //   //console.log("myJson", myjson);
+        if (i === 0) {
+          cylPerPage0.push(data[0]);
+          cylPerPage0.push(data[29][1]);
+          const stringa = cylPerPage0.join();
+          cylPerPage0 = stringa.split(",");
+          cylPerPage0.shift();
+          console.log("# bb stessa pagina 0", cylPerPage0);
+          makeHFData(cylPerPage0);
+        }
+        if (i === 1) {
+          cylPerPage1.push(data[0]);
+          cylPerPage1.push(data[29][1]);
+          const stringa = cylPerPage1.join();
+          cylPerPage1 = stringa.split(",");
+          cylPerPage1.shift();
+          console.log("# bb stessa pagina1", cylPerPage1);
+          makeHFData(cylPerPage1);
+        }
+        if (i === 2) {
+          cylPerPage2.push(data[0]);
+          cylPerPage2.push(data[29][1]);
+          const stringa = cylPerPage2.join();
+          cylPerPage2 = stringa.split(",");
+          cylPerPage2.shift();
+          console.log("# bb stessa pagina 2", cylPerPage2);
+          makeHFData(cylPerPage2);
+        }
+        if (i === 3) {
+          cylPerPage3.push(data[0]);
+          cylPerPage3.push(data[29][1]);
+          const stringa = cylPerPage3.join();
+          cylPerPage3 = stringa.split(",");
+          cylPerPage3.shift();
+          console.log("# bb stessa pagina 3", cylPerPage3);
+          makeHFData(cylPerPage3);
+        }
+        if (i === 4) {
+          cylPerPage4.push(data[0]);
+          cylPerPage4.push(data[29][1]);
+          const stringa = cylPerPage4.join();
+          cylPerPage4 = stringa.split(",");
+          cylPerPage4.shift();
+          console.log("# bb stessa pagina 4", cylPerPage4);
+          makeHFData(cylPerPage4);
+        }
+      }
+    }
+    async function makeHFData(
+      cylPerPage0,
+      cylPerPage1,
+      cylPerPage2,
+      cylPerPage3,
+      cylPerPage4
+    ) {
+      // for (let i = 0; i < cylPerPage0.length; i++) {
+      //   console.log("cylPage", cylPerPage0.length);
+      // }
+      console.log(
+        cylPerPage0.length,
+        cylPerPage1.length,
+        cylPerPage2.length,
+        cylPerPage3.length,
+        cylPerPage4.length
+      );
+    }
 
-  //   var manHBr = data[2][2];
-  //   manHBr = manHBr.replaceAll(".", "-");
-  //   const monthMan = parseInt(manHBr.substring(3, 5)) - 1;
-  //   const monthNameMan = [
-  //     "Jan",
-  //     "Feb",
-  //     "Mar",
-  //     "Apr",
-  //     "May",
-  //     "Jun",
-  //     "Jul",
-  //     "Aug",
-  //     "Sep",
-  //     "Oct",
-  //     "Nov",
-  //     "Dec",
-  //   ];
-  //   manHBr =
-  //     manHBr.substring(0, 2) +
-  //     "-" +
-  //     monthNameMan[monthMan] +
-  //     "-" +
-  //     manHBr.substring(6, 11);
-  //   var shipDateHBr = manHBr;
-  //   var yearExp = parseInt(manHBr.substring(7, 11));
-  //   var monthExp = monthMan + 6;
-  //   let expHBr;
-  //   if (monthExp <= 12) {
-  //     expHBr =
-  //       manHBr.substring(0, 2) +
-  //       "-" +
-  //       monthNameMan[monthExp] +
-  //       "-" +
-  //       manHBr.substring(7, 11);
-  //   }
-  //   if (monthExp > 12) {
-  //     monthExp = monthExp - 12;
-  //     yearExp = yearExp + 1;
-  //     expHBr =
-  //       manHBr.substring(0, 2) + "-" + monthNameMan[monthExp] + "-" + yearExp;
-  //   }
-  //   var lotNumberHBr = data[17][1];
+    //   //Counter alimenta e salva il contatore di counter.txt
+    //   const testResponse = await fetch("/apicounter");
+    //   var dataTest = await testResponse.text();
+    //   //console.log("dataTest1", dataTest);
+    //   dataTest = parseInt(dataTest);
+    //   dataTest++;
+    //   var dt = new Date();
+    //   var anno = dt.getFullYear().toString();
+    //   anno = anno.substring(2, 4);
+    //   if (dataTest < 10) {
+    //     shipmentNumberHBr = "IT/000" + dataTest.toString() + "/" + anno;
+    //   }
+    //   if (dataTest >= 10 && dataTest < 100) {
+    //     shipmentNumberHBr = "IT/00" + dataTest.toString() + "/" + anno;
+    //   }
+    //   if (dataTest >= 100 && dataTest < 1000) {
+    //     shipmentNumberHBr = "IT/0" + dataTest.toString() + "/" + anno;
+    //   }
+    //   if (dataTest >= 1000) {
+    //     shipmentNumberHBr = "IT/" + dataTest.toString() + "/" + anno;
+    //   }
+    //   if (dataTest > 10000) {
+    //     alert("reset counter.txt file");
+    //   }
+    //   datacounter = { dataTest };
+    //   const optionCounter = {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(datacounter),
+    //   };
+    //   const myresponse = await fetch("/newcounter", optionCounter);
+    //   var myjson = await myresponse.text();
+    //   //console.log("myJson", myjson);
+    //   var manHBr = data[2][2];
+    //   manHBr = manHBr.replaceAll(".", "-");
+    //   const monthMan = parseInt(manHBr.substring(3, 5)) - 1;
+    //   const monthNameMan = [
+    //     "Jan",
+    //     "Feb",
+    //     "Mar",
+    //     "Apr",
+    //     "May",
+    //     "Jun",
+    //     "Jul",
+    //     "Aug",
+    //     "Sep",
+    //     "Oct",
+    //     "Nov",
+    //     "Dec",
+    //   ];
+    //   manHBr =
+    //     manHBr.substring(0, 2) +
+    //     "-" +
+    //     monthNameMan[monthMan] +
+    //     "-" +
+    //     manHBr.substring(6, 11);
+    //   var shipDateHBr = manHBr;
+    //   var yearExp = parseInt(manHBr.substring(7, 11));
+    //   var monthExp = monthMan + 6;
+    //   let expHBr;
+    //   if (monthExp <= 12) {
+    //     expHBr =
+    //       manHBr.substring(0, 2) +
+    //       "-" +
+    //       monthNameMan[monthExp] +
+    //       "-" +
+    //       manHBr.substring(7, 11);
+    //   }
+    //   if (monthExp > 12) {
+    //     monthExp = monthExp - 12;
+    //     yearExp = yearExp + 1;
+    //     expHBr =
+    //       manHBr.substring(0, 2) + "-" + monthNameMan[monthExp] + "-" + yearExp;
+    //   }
+    //   var lotNumberHBr = data[17][1];
+    //   var FevalueHBr = "0.8";
+    //   var CO2valueHBr = "3.0";
+    //   var COvalueHBr = "0.8";
+    //   var HClvalueHBr = "500";
+    //   var H2OvalueHBr = "0.8";
+    //   var N2valueHBr = "1.5";
+    //   var O2valueHBr = "0.8";
+    //   var THCvalueHBr = "0.8";
+    //   var HBrData = {
+    //     shipmentNumber: shipmentNumberHBr,
+    //     shipmentdate: shipDateHBr,
+    //     lotNumber: lotNumberHBr,
+    //     expiryDate: expHBr,
+    //     manDate: manHBr,
+    //     Fevalue: FevalueHBr,
+    //     CO2value: CO2valueHBr,
+    //     COvalue: COvalueHBr,
+    //     HClvalue: HClvalueHBr,
+    //     H2Ovalue: H2OvalueHBr,
+    //     N2value: N2valueHBr,
+    //     O2value: O2valueHBr,
+    //     THCvalue: THCvalueHBr,
+    //   };
+    //   console.log("all data", HBrData);
+    //}
 
-  //   var FevalueHBr = "0.8";
-  //   var CO2valueHBr = "3.0";
-  //   var COvalueHBr = "0.8";
-  //   var HClvalueHBr = "500";
-  //   var H2OvalueHBr = "0.8";
-  //   var N2valueHBr = "1.5";
-  //   var O2valueHBr = "0.8";
-  //   var THCvalueHBr = "0.8";
+    //   // posto i dati per compilare file xlm
 
-  //   var HBrData = {
-  //     shipmentNumber: shipmentNumberHBr,
-  //     shipmentdate: shipDateHBr,
-  //     lotNumber: lotNumberHBr,
-  //     expiryDate: expHBr,
-  //     manDate: manHBr,
-  //     Fevalue: FevalueHBr,
-  //     CO2value: CO2valueHBr,
-  //     COvalue: COvalueHBr,
-  //     HClvalue: HClvalueHBr,
-  //     H2Ovalue: H2OvalueHBr,
-  //     N2value: N2valueHBr,
-  //     O2value: O2valueHBr,
-  //     THCvalue: THCvalueHBr,
-  //   };
-  //   console.log("all data", HBrData);
-
-  //   // posto i dati per compilare file xlm
-
-  //   const HBroptions = {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(HBrData),
-  //   };
-  //   const myresponseHBr = await fetch("/apiHBr", HBroptions);
-  //   var myjsonHBr = await myresponseHBr.json();
-  //   //console.log(myjsonHBr);
-  // }
+    //   const HBroptions = {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(HBrData),
+    //   };
+    //   const myresponseHBr = await fetch("/apiHBr", HBroptions);
+    //   var myjsonHBr = await myresponseHBr.json();
+    //   //console.log(myjsonHBr);
+  }
 }
 
 // ---------------- END HF Medford 1.8Kg - Bombola Piccola --------------

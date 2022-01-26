@@ -95,10 +95,26 @@ try {
               .appendPDFPageFromPDF(i);
             pdfWriter.end();
           }
+          newPages = parseInt(pages);
+          for (let i = 0; i < newPages; i++) {
+            fs.readFile(
+              __dirname + "/HFoutput" + i.toString() + ".pdf",
+              function (err, buffer) {
+                if (err) return console.log(err);
+                pdf2table.parse(buffer, function (err, rows, rowsdebug) {
+                  if (err) return console.log(err);
+                  var jsonFileName = "HFoutput" + i.toString() + ".json";
+                  fs.writeFileSync(jsonFileName, JSON.stringify(rows));
+                });
+              }
+            );
+          }
         }
+
         var test = fileOriginale
           .substring(fileOriginale.length - 4)
           .toLowerCase();
+
         if (test === ".pdf" && found === null) {
           // const pdfParser = new PDFParser();
           // pdfParser.on("pdfParser_dataError", (errData) =>
@@ -118,7 +134,6 @@ try {
             __dirname + "/" + fileOriginale.toString(),
             function (err, buffer) {
               if (err) return console.log(err);
-
               pdf2table.parse(buffer, function (err, rows, rowsdebug) {
                 if (err) return console.log(err);
                 fs.writeFileSync("sample2.json", JSON.stringify(rows));
@@ -1269,18 +1284,17 @@ app.post("/apiHBr", (req, res) => {
   xw.writeAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
   xw.writeAttribute(
     "xsi:noNamespaceSchemaLocation",
-    "3GASCB43_DM00394443_06.xsd"
+    "3GASCD07_DM00598023_06.xsd"
   );
-  xw.writeAttribute("MaterialCode", "3GASCB43");
-  xw.writeAttribute("SupplierHoldingDesc", "LINDE PLC");
+  xw.writeAttribute("MaterialCode", "3GASCD07");
+  xw.writeAttribute("SupplierHoldingDesc", "LINDE PLC-UNTERSCHLEISSHEIM-290");
   xw.writeAttribute("ReceivingStPlant", "Catania");
-  xw.writeAttribute("MpsSpecNo", "DM00394443_06");
+  xw.writeAttribute("MpsSpecNo", "DM00598023_06");
   xw.writeAttribute("MpsSpecRev", "1.0");
   xw.writeAttribute("ShipmentDate", dataHBr.shipmentdate);
   xw.writeAttribute("ShipmentNumber", dataHBr.shipmentNumber);
   xw.writeAttribute("ShipQty", 1);
   xw.startElement("Lot");
-  xw.writeAttribute("SupplierSupplyChainSeqCode", "LINDE PLC-ALPHA-282");
   xw.writeAttribute("ShipLotNo", dataHBr.lotNumber);
   xw.writeAttribute("ExpiryDate", dataHBr.expiryDate);
   xw.writeAttribute("MfgDate", dataHBr.manDate);
@@ -1329,7 +1343,7 @@ app.post("/apiHBr", (req, res) => {
 
   try {
     fs.writeFileSync("sourcename.txt", "HBr");
-    fileToBeDownloaded = dataHBr.lotNumber.toString() + ".xml";
+    fileToBeDownloaded = dataHBr.filename.toString() + ".xml";
     //res.json(xw.toString());
     fs.writeFileSync(fileToBeDownloaded, xw.toString());
     fs.writeFileSync("HBrfilename.txt", fileToBeDownloaded);
@@ -1467,6 +1481,7 @@ app.get("/jsonSampleFile", (req, res) => {
   res.send(jsonFile);
 });
 
+// get dei file da pdf to json
 app.get("/jsonSampleFile2", (req, res) => {
   let jsonData2 = fs.readFileSync("sample2.json");
   let jsonFile2 = JSON.parse(jsonData2);
@@ -1474,13 +1489,47 @@ app.get("/jsonSampleFile2", (req, res) => {
   res.send(jsonFile2);
 });
 
+//get the files da txt (Tavlov / Chrlorgas )
 app.get("/txt", (req, res) => {
   const readTxtFile1 = fs.readFileSync("sample.txt", "utf-8");
   //console.log("writeTxtFile", readTxtFile1);
   res.send(readTxtFile1);
 });
 
+//get del numero pagine del file HF 1.8Kg da npm hummus
 app.get("/arrayHFSmall", (req, res) => {
   const pageNumbers = fs.readFileSync("PagesHFSmall.txt", "utf-8");
   res.send(pageNumbers);
+});
+
+//get dei file HF 1.8kg
+app.get("/HFoutput0", (req, res) => {
+  let HFFile0 = fs.readFileSync("HFoutput0.json");
+  let jsonHFFile0 = JSON.parse(HFFile0);
+  //console.log(jsonHFFile0);
+  res.send(jsonHFFile0);
+});
+app.get("/HFoutput1", (req, res) => {
+  let HFFile1 = fs.readFileSync("HFoutput1.json");
+  let jsonHFFile1 = JSON.parse(HFFile1);
+  //console.log(jsonHFFile1);
+  res.send(jsonHFFile1);
+});
+app.get("/HFoutput2", (req, res) => {
+  let HFFile2 = fs.readFileSync("HFoutput2.json");
+  let jsonHFFile2 = JSON.parse(HFFile2);
+  //console.log(jsonHFFile2);
+  res.send(jsonHFFile2);
+});
+app.get("/HFoutput3", (req, res) => {
+  let HFFile3 = fs.readFileSync("HFoutput3.json");
+  let jsonHFFile3 = JSON.parse(HFFile3);
+  //console.log(jsonHFFile3);
+  res.send(jsonHFFile3);
+});
+app.get("/HFoutput4", (req, res) => {
+  let HFFile4 = fs.readFileSync("HFoutput4.json");
+  let jsonHFFile4 = JSON.parse(HFFile4);
+  //console.log(jsonHFFile4);
+  res.send(jsonHFFile4);
 });
