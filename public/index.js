@@ -2307,7 +2307,7 @@ function HBr() {
   async function ReadFileJson() {
     const res = await fetch("/jsonSampleFile2");
     const data = await res.json();
-    console.log("data", data);
+    //console.log("data", data);
 
     //Counter alimenta e salva il contatore di counter.txt
     const testResponse = await fetch("/apicounter");
@@ -2369,23 +2369,26 @@ function HBr() {
       "-" +
       manHBr.substring(6, 11);
     var shipDateHBr = manHBr;
-    var yearExp = parseInt(manHBr.substring(7, 11));
-    var monthExp = monthMan + 6;
+    var yearExp = parseInt(manHBr.substring(7, 11)) + 2;
+    //sostituito 6 momths shelflife con 24 months
+    //var monthExp = monthMan + 6;
     let expHBr;
-    if (monthExp <= 12) {
-      expHBr =
-        manHBr.substring(0, 2) +
-        "-" +
-        monthNameMan[monthExp] +
-        "-" +
-        manHBr.substring(7, 11);
-    }
-    if (monthExp > 12) {
-      monthExp = monthExp - 12;
-      yearExp = yearExp + 1;
-      expHBr =
-        manHBr.substring(0, 2) + "-" + monthNameMan[monthExp] + "-" + yearExp;
-    }
+    expHBr =
+      manHBr.substring(0, 2) + "-" + monthNameMan[monthMan] + "-" + yearExp;
+    // if (monthExp <= 12) {
+    //   expHBr =
+    //     manHBr.substring(0, 2) +
+    //     "-" +
+    //     monthNameMan[monthExp] +
+    //     "-" +
+    //     manHBr.substring(7, 11);
+    // }
+    // if (monthExp > 12) {
+    //   monthExp = monthExp - 12;
+    //   yearExp = yearExp + 1;
+    //   expHBr =
+    //     manHBr.substring(0, 2) + "-" + monthNameMan[monthExp] + "-" + yearExp;
+    // }
     var lotNumberHBr = data[16][1];
     var filenameHBr = data[17][1];
     var FevalueHBr = data[10][2];
@@ -2431,6 +2434,514 @@ function HBr() {
 }
 
 //---------------- END HBr CAT ----------------------
+
+//---------------- Kr/Ne 3GASN997 to AGR & CAT ----------------------
+function KrNeAGR() {
+  var receivingPlant = "Agrate";
+  KrNe(receivingPlant);
+}
+function KrNeCAT() {
+  var receivingPlant = "Catania";
+  KrNe(receivingPlant);
+}
+function KrNe(receivingPlant) {
+  document.getElementById("btndropdown").style.display = "none";
+  document.getElementById("modalCS").style.display = "none";
+  document.getElementById("btndown").style.display = "inline";
+  document.getElementById("btnHome").style.display = "inline";
+  ReadFileJson();
+  async function ReadFileJson() {
+    const res = await fetch("/jsonSampleFile2");
+    const data = await res.json();
+    //console.log("data", data);
+
+    //Counter alimenta e salva il contatore di counter.txt
+    const testResponse = await fetch("/apicounter");
+    var dataTest = await testResponse.text();
+    //console.log("dataTest1", dataTest);
+    dataTest = parseInt(dataTest);
+    dataTest++;
+    var dt = new Date();
+    var anno = dt.getFullYear().toString();
+    anno = anno.substring(2, 4);
+    if (dataTest < 10) {
+      shipmentNumberKrNe = "IT/000" + dataTest.toString() + "/" + anno;
+    }
+    if (dataTest >= 10 && dataTest < 100) {
+      shipmentNumberKrNe = "IT/00" + dataTest.toString() + "/" + anno;
+    }
+    if (dataTest >= 100 && dataTest < 1000) {
+      shipmentNumberKrNe = "IT/0" + dataTest.toString() + "/" + anno;
+    }
+    if (dataTest >= 1000) {
+      shipmentNumberKrNe = "IT/" + dataTest.toString() + "/" + anno;
+    }
+    if (dataTest > 10000) {
+      alert("reset counter.txt file");
+    }
+    datacounter = { dataTest };
+    const optionCounter = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(datacounter),
+    };
+    const myresponse = await fetch("/newcounter", optionCounter);
+    var myjson = await myresponse.text();
+    //console.log("myJson", myjson);
+
+    var manKrNe = data[27][1];
+    var expKrNe = data[28][1];
+    var shipDateKrNe = manKrNe;
+    var lotNumberKrNe = data[29][1];
+    var fileNameKr = data[32][1];
+    var CF4valueKrNe = data[6][2];
+    CF4valueKrNe = CF4valueKrNe.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    CF4valueKrNe = CF4valueKrNe.trim();
+    var CO2valueKrNe = data[12][2];
+    CO2valueKrNe = CO2valueKrNe.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    CO2valueKrNe = CO2valueKrNe.trim();
+    var COvalueKrNe = data[7][2];
+    COvalueKrNe = COvalueKrNe.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    COvalueKrNe = COvalueKrNe.trim();
+    var KrAssay = data[2][4];
+    KrAssay = KrAssay.replace("%", "");
+    KrAssay = KrAssay.trim();
+    var XevalueKrNe = data[10][2];
+    XevalueKrNe = XevalueKrNe.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    XevalueKrNe = XevalueKrNe.trim();
+    var O2valueKrNe = data[14][2];
+    O2valueKrNe = O2valueKrNe.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    O2valueKrNe = O2valueKrNe.trim();
+    var N2valueKrNe = data[9][2];
+    N2valueKrNe = N2valueKrNe.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    N2valueKrNe = N2valueKrNe.trim();
+    var HevalueKrNe = data[13][2];
+    HevalueKrNe = HevalueKrNe.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    HevalueKrNe = HevalueKrNe.trim();
+    var H2OvalueKrNe = data[8][2];
+    H2OvalueKrNe = H2OvalueKrNe.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    H2OvalueKrNe = H2OvalueKrNe.trim();
+    var CH4valueKrNe = data[11][2];
+    CH4valueKrNe = CH4valueKrNe.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    CH4valueKrNe = CH4valueKrNe.trim();
+
+    var KrNeData = {
+      filename: fileNameKr,
+      receivingPlant: receivingPlant,
+      shipmentNumber: shipmentNumberKrNe,
+      shipmentdate: shipDateKrNe,
+      lotNumber: lotNumberKrNe,
+      expiryDate: expKrNe,
+      manDate: manKrNe,
+      CO2value: CO2valueKrNe,
+      COvalue: COvalueKrNe,
+      Xevalue: XevalueKrNe,
+      O2value: O2valueKrNe,
+      H2Ovalue: H2OvalueKrNe,
+      CH4value: CH4valueKrNe,
+      Krpercentvalue: KrAssay,
+      N2value: N2valueKrNe,
+      Hevalue: HevalueKrNe,
+      CF4value: CF4valueKrNe,
+    };
+
+    console.log("all data", KrNeData);
+
+    // posto i dati per compilare file xlm
+
+    const KrNeoptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(KrNeData),
+    };
+    const myresponseKrNe = await fetch("/apiKrNe", KrNeoptions);
+    var myjsonKrNe = await myresponseKrNe.json();
+    //console.log(myjsonKrNe);
+  }
+}
+
+//---------------- END Kr/Ne 3GASN997 to AGR & CAT ----------------------
+
+//---------------- Ar/ Xe/ Ne 3GASN934 to CAT ----------------------
+
+function ArXeNe() {
+  alert("in costruzione");
+  // document.getElementById("btndropdown").style.display = "none";
+  // document.getElementById("modalCS").style.display = "none";
+  // document.getElementById("btndown").style.display = "inline";
+  // document.getElementById("btnHome").style.display = "inline";
+  // ReadFileJson();
+  // async function ReadFileJson() {
+  //   const res = await fetch("/jsonSampleFile2");
+  //   const data = await res.json();
+  //   console.log("data", data);
+
+  //   //Counter alimenta e salva il contatore di counter.txt
+  //   const testResponse = await fetch("/apicounter");
+  //   var dataTest = await testResponse.text();
+  //   //console.log("dataTest1", dataTest);
+  //   dataTest = parseInt(dataTest);
+  //   dataTest++;
+  //   var dt = new Date();
+  //   var anno = dt.getFullYear().toString();
+  //   anno = anno.substring(2, 4);
+  //   if (dataTest < 10) {
+  //     shipmentNumberArXeNe = "IT/000" + dataTest.toString() + "/" + anno;
+  //   }
+  //   if (dataTest >= 10 && dataTest < 100) {
+  //     shipmentNumberArXeNe = "IT/00" + dataTest.toString() + "/" + anno;
+  //   }
+  //   if (dataTest >= 100 && dataTest < 1000) {
+  //     shipmentNumberArXeNe = "IT/0" + dataTest.toString() + "/" + anno;
+  //   }
+  //   if (dataTest >= 1000) {
+  //     shipmentNumberArXeNe = "IT/" + dataTest.toString() + "/" + anno;
+  //   }
+  //   if (dataTest > 10000) {
+  //     alert("reset counter.txt file");
+  //   }
+  //   datacounter = { dataTest };
+  //   const optionCounter = {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(datacounter),
+  //   };
+  //   const myresponse = await fetch("/newcounter", optionCounter);
+  //   var myjson = await myresponse.text();
+  //console.log("myJson", myjson);
+
+  // var manArXeNe = data[27][1];
+  // var expArXeNe = data[28][1];
+  // var shipDateArXeNe = manArXeNe;
+  // var lotNumberArXeNe = data[29][1];
+  // var fileNameKr = data[32][1];
+  // var CF4valueArXeNe = data[6][2];
+  // CF4valueArXeNe = CF4valueArXeNe.replace("<", "")
+  //   .replace("ppm", "")
+  //   .replace("DL", "");
+  // CF4valueArXeNe = CF4valueArXeNe.trim();
+  // var CO2valueArXeNe = data[12][2];
+  // CO2valueArXeNe = CO2valueArXeNe.replace("<", "")
+  //   .replace("ppm", "")
+  //   .replace("DL", "");
+  // CO2valueArXeNe = CO2valueArXeNe.trim();
+  // var COvalueArXeNe = data[7][2];
+  // COvalueArXeNe = COvalueArXeNe.replace("<", "")
+  //   .replace("ppm", "")
+  //   .replace("DL", "");
+  // COvalueArXeNe = COvalueArXeNe.trim();
+  // var KrAssay = data[2][4];
+  // KrAssay = KrAssay.replace("%", "");
+  // KrAssay = KrAssay.trim();
+  // var XevalueArXeNe = data[10][2];
+  // XevalueArXeNe = XevalueArXeNe.replace("<", "")
+  //   .replace("ppm", "")
+  //   .replace("DL", "");
+  // XevalueArXeNe = XevalueArXeNe.trim();
+  // var O2valueArXeNe = data[14][2];
+  // O2valueArXeNe = O2valueArXeNe.replace("<", "")
+  //   .replace("ppm", "")
+  //   .replace("DL", "");
+  // O2valueArXeNe = O2valueArXeNe.trim();
+  // var N2valueArXeNe = data[9][2];
+  // N2valueArXeNe = N2valueArXeNe.replace("<", "")
+  //   .replace("ppm", "")
+  //   .replace("DL", "");
+  // N2valueArXeNe = N2valueArXeNe.trim();
+  // var HevalueArXeNe = data[13][2];
+  // HevalueArXeNe = HevalueArXeNe.replace("<", "")
+  //   .replace("ppm", "")
+  //   .replace("DL", "");
+  // HevalueArXeNe = HevalueArXeNe.trim();
+  // var H2OvalueArXeNe = data[8][2];
+  // H2OvalueArXeNe = H2OvalueArXeNe.replace("<", "")
+  //   .replace("ppm", "")
+  //   .replace("DL", "");
+  // H2OvalueArXeNe = H2OvalueArXeNe.trim();
+  // var CH4valueArXeNe = data[11][2];
+  // CH4valueArXeNe = CH4valueArXeNe.replace("<", "")
+  //   .replace("ppm", "")
+  //   .replace("DL", "");
+  // CH4valueArXeNe = CH4valueArXeNe.trim();
+
+  // var ArXeNeData = {
+  //   filename: fileNameKr,
+  //   receivingPlant: receivingPlant,
+  //   shipmentNumber: shipmentNumberArXeNe,
+  //   shipmentdate: shipDateArXeNe,
+  //   lotNumber: lotNumberArXeNe,
+  //   expiryDate: expArXeNe,
+  //   manDate: manArXeNe,
+  //   CO2value: CO2valueArXeNe,
+  //   COvalue: COvalueArXeNe,
+  //   Xevalue: XevalueArXeNe,
+  //   O2value: O2valueArXeNe,
+  //   H2Ovalue: H2OvalueArXeNe,
+  //   CH4value: CH4valueArXeNe,
+  //   Krpercentvalue: KrAssay,
+  //   N2value: N2valueArXeNe,
+  //   Hevalue: HevalueArXeNe,
+  //   CF4value: CF4valueArXeNe,
+  // };
+
+  // console.log("all data", ArXeNeData);
+
+  // // posto i dati per compilare file xlm
+
+  // const ArXeNeoptions = {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify(ArXeNeData),
+  // };
+  // const myresponseArXeNe = await fetch("/apiArXeNe", ArXeNeoptions);
+  // var myjsonArXeNe = await myresponseArXeNe.json();
+  // //console.log(myjsonArXeNe);
+  //}
+}
+//---------------- END Ar/ Xe/ Ne 3GASN934 to CAT ----------------------
+
+//---------------- SF6 3GASN906 from US to CAT ----------------------
+function SF6US() {
+  document.getElementById("btndropdown").style.display = "none";
+  document.getElementById("modalCS").style.display = "none";
+  document.getElementById("btndown").style.display = "inline";
+  document.getElementById("btnHome").style.display = "inline";
+  ReadFileJson();
+  async function ReadFileJson() {
+    const res = await fetch("/jsonSampleFile2");
+    const data = await res.json();
+    //console.log("data", data);
+
+    //Counter alimenta e salva il contatore di counter.txt
+    const testResponse = await fetch("/apicounter");
+    var dataTest = await testResponse.text();
+    dataTest = parseInt(dataTest);
+    dataTest++;
+    var dt = new Date();
+    var anno = dt.getFullYear().toString();
+    anno = anno.substring(2, 4);
+    if (dataTest < 10) {
+      shipmentNumberSF6US = "IT/000" + dataTest.toString() + "/" + anno;
+    }
+    if (dataTest >= 10 && dataTest < 100) {
+      shipmentNumberSF6US = "IT/00" + dataTest.toString() + "/" + anno;
+    }
+    if (dataTest >= 100 && dataTest < 1000) {
+      shipmentNumberSF6US = "IT/0" + dataTest.toString() + "/" + anno;
+    }
+    if (dataTest >= 1000) {
+      shipmentNumberSF6US = "IT/" + dataTest.toString() + "/" + anno;
+    }
+    if (dataTest > 10000) {
+      alert("reset counter.txt file");
+    }
+    datacounter = { dataTest };
+    const optionCounter = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(datacounter),
+    };
+    const myresponse = await fetch("/newcounter", optionCounter);
+    var myjson = await myresponse.text();
+    //console.log("myJson", myjson);
+
+    var manSF6US = data[23][1];
+    var manSF6US = manSF6US;
+
+    var expSF6US = data[24][1];
+    var shipDateSF6US = manSF6US;
+    var filenameSF6US = data[28][1];
+    var lotNumberSF6US = data[25][1];
+    var percentSF6US = data[2][2];
+    percentSF6US = percentSF6US.replace("%", "");
+    var CO2valueSF6US = data[5][2];
+    CO2valueSF6US = CO2valueSF6US.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    CO2valueSF6US = CO2valueSF6US.trim();
+    var COvalueSF6US = data[4][2];
+    COvalueSF6US = COvalueSF6US.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    COvalueSF6US = COvalueSF6US.trim();
+    var H2OvalueSF6US = data[3][2];
+    H2OvalueSF6US = H2OvalueSF6US.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    H2OvalueSF6US = H2OvalueSF6US.trim();
+    var N2valueSF6US = data[6][2];
+    N2valueSF6US = N2valueSF6US.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    N2valueSF6US = N2valueSF6US.trim();
+    var O2ArvalueSF6US = data[8][2];
+    O2ArvalueSF6US = O2ArvalueSF6US.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    O2ArvalueSF6US = O2ArvalueSF6US.trim();
+    var CF4valueSF6US = data[7][2];
+    CF4valueSF6US = CF4valueSF6US.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    CF4valueSF6US = CF4valueSF6US.trim();
+
+    var SF6USData = {
+      filename: filenameSF6US,
+      shipmentNumber: shipmentNumberSF6US,
+      shipmentdate: shipDateSF6US,
+      lotNumber: lotNumberSF6US,
+      expiryDate: expSF6US,
+      manDate: manSF6US,
+      SF6percentvalue: percentSF6US,
+      N2value: N2valueSF6US,
+      O2Arvalue: O2ArvalueSF6US,
+      CF4value: CF4valueSF6US,
+      H2Ovalue: H2OvalueSF6US,
+      CO2value: CO2valueSF6US,
+      COvalue: COvalueSF6US,
+    };
+    console.log("all data", SF6USData);
+
+    // posto i dati per compilare file xlm
+
+    const SF6USoptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(SF6USData),
+    };
+    const myresponseSF6US = await fetch("/apiSF6US", SF6USoptions);
+    var myjsonSF6US = await myresponseSF6US.json();
+    //console.log(myjsonSF6US);
+  }
+}
+//---------------- END SF6 3GASN906 from US to CAT ----------------------
+
+//---------------- SF6 3GASN326 from BOC to CAT ----------------------
+function SF6BOC() {
+  document.getElementById("btndropdown").style.display = "none";
+  document.getElementById("modalCS").style.display = "none";
+  document.getElementById("btndown").style.display = "inline";
+  document.getElementById("btnHome").style.display = "inline";
+  ReadFileJson();
+  async function ReadFileJson() {
+    const res = await fetch("/jsonSampleFile2");
+    const data = await res.json();
+    //console.log("data", data);
+
+    //Counter alimenta e salva il contatore di counter.txt
+    const testResponse = await fetch("/apicounter");
+    var dataTest = await testResponse.text();
+    dataTest = parseInt(dataTest);
+    dataTest++;
+    var dt = new Date();
+    var anno = dt.getFullYear().toString();
+    anno = anno.substring(2, 4);
+    if (dataTest < 10) {
+      shipmentNumberSF6BOC = "IT/000" + dataTest.toString() + "/" + anno;
+    }
+    if (dataTest >= 10 && dataTest < 100) {
+      shipmentNumberSF6BOC = "IT/00" + dataTest.toString() + "/" + anno;
+    }
+    if (dataTest >= 100 && dataTest < 1000) {
+      shipmentNumberSF6BOC = "IT/0" + dataTest.toString() + "/" + anno;
+    }
+    if (dataTest >= 1000) {
+      shipmentNumberSF6BOC = "IT/" + dataTest.toString() + "/" + anno;
+    }
+    if (dataTest > 10000) {
+      alert("reset counter.txt file");
+    }
+    datacounter = { dataTest };
+    const optionCounter = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(datacounter),
+    };
+    const myresponse = await fetch("/newcounter", optionCounter);
+    var myjson = await myresponse.text();
+    //console.log("myJson", myjson);
+
+    var manSF6BOC = data[14][1];
+    var manSF6BOC = manSF6BOC.trim();
+    var manSF6BOC = manSF6BOC.replaceAll(" ", "-");
+    var expSF6BOC = data[14][3];
+    expSF6BOC = expSF6BOC.trim();
+    expSF6BOC = expSF6BOC.replaceAll(" ", "-");
+    var shipDateSF6BOC = manSF6BOC;
+    var filenameSF6BOC = data[13][2];
+    var lotNumberSF6BOC = data[13][0];
+    var percentSF6BOC = data[3][4];
+    var CO2valueSF6BOC = data[8][11];
+    var COvalueSF6BOC = data[8][10];
+    var H2OvalueSF6BOC = data[7][10];
+    var N2valueSF6BOC = data[9][11];
+    var O2ArvalueSF6BOC = data[6][6];
+    var CF4valueSF6BOC = data[10][11];
+
+    var SF6BOCData = {
+      filename: filenameSF6BOC,
+      shipmentNumber: shipmentNumberSF6BOC,
+      shipmentdate: shipDateSF6BOC,
+      lotNumber: lotNumberSF6BOC,
+      expiryDate: expSF6BOC,
+      manDate: manSF6BOC,
+      SF6percentvalue: percentSF6BOC,
+      N2value: N2valueSF6BOC,
+      O2Arvalue: O2ArvalueSF6BOC,
+      CF4value: CF4valueSF6BOC,
+      H2Ovalue: H2OvalueSF6BOC,
+      CO2value: CO2valueSF6BOC,
+      COvalue: COvalueSF6BOC,
+    };
+    console.log("all data", SF6BOCData);
+
+    // posto i dati per compilare file xlm
+
+    const SF6BOCoptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(SF6BOCData),
+    };
+    const myresponseSF6BOC = await fetch("/apiSF6BOC", SF6BOCoptions);
+    var myjsonSF6BOC = await myresponseSF6BOC.json();
+    //console.log(myjsonSF6BOC);
+  }
+}
+//---------------- END SF6 3GASN326 from BOC to CAT ----------------------
 
 // ---------------- HF Medford 1.8Kg - Bombola Piccola --------------
 

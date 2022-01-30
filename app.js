@@ -1287,7 +1287,7 @@ app.post("/apiHBr", (req, res) => {
     "3GASCD07_DM00598023_06.xsd"
   );
   xw.writeAttribute("MaterialCode", "3GASCD07");
-  xw.writeAttribute("SupplierHoldingDesc", "LINDE PLC-UNTERSCHLEISSHEIM-290");
+  xw.writeAttribute("SupplierHoldingDesc", "LINDE PLC");
   xw.writeAttribute("ReceivingStPlant", "Catania");
   xw.writeAttribute("MpsSpecNo", "DM00598023_06");
   xw.writeAttribute("MpsSpecRev", "1.0");
@@ -1295,6 +1295,10 @@ app.post("/apiHBr", (req, res) => {
   xw.writeAttribute("ShipmentNumber", dataHBr.shipmentNumber);
   xw.writeAttribute("ShipQty", 1);
   xw.startElement("Lot");
+  xw.writeAttribute(
+    "SupplierSupplyChainSeqCode",
+    "LINDE PLC-UNTERSCHLEISSHEIM-290"
+  );
   xw.writeAttribute("ShipLotNo", dataHBr.lotNumber);
   xw.writeAttribute("ExpiryDate", dataHBr.expiryDate);
   xw.writeAttribute("MfgDate", dataHBr.manDate);
@@ -1352,6 +1356,248 @@ app.post("/apiHBr", (req, res) => {
   }
 });
 //------------ END HBr POST------------
+
+//------------ Kr/Ne POST------------
+
+app.post("/apiKrNe", (req, res) => {
+  const dataKrNe = req.body;
+  //console.log(dataKrNe);
+  xw = new XMLWriter(true);
+  xw.startDocument("1.0", "UTF-8");
+  xw.startElement("GasesShipment");
+  xw.writeAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+  xw.writeAttribute(
+    "xsi:noNamespaceSchemaLocation",
+    "3GASN997_DM00403479_09.xsd"
+  );
+  xw.writeAttribute("MaterialCode", "3GASN997");
+  xw.writeAttribute("SupplierHoldingDesc", "LINDE PLC");
+  xw.writeAttribute("ReceivingStPlant", dataKrNe.receivingPlant);
+  xw.writeAttribute("MpsSpecNo", "DM00403479_09");
+  xw.writeAttribute("MpsSpecRev", "3.0");
+  xw.writeAttribute("ShipmentDate", dataKrNe.shipmentdate);
+  xw.writeAttribute("ShipmentNumber", dataKrNe.shipmentNumber);
+  xw.writeAttribute("ShipQty", 1);
+  xw.startElement("Lot");
+  xw.writeAttribute("SupplierSupplyChainSeqCode", "LINDE PLC-ALPHA-282");
+  xw.writeAttribute("ShipLotNo", dataKrNe.lotNumber);
+  xw.writeAttribute("ExpiryDate", dataKrNe.expiryDate);
+  xw.writeAttribute("MfgDate", dataKrNe.manDate);
+  xw.writeAttribute("LotQty", 1);
+  xw.startElement("DIM_Carbon_tetrafluoride_CF4");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataKrNe.CF4value);
+  xw.endElement();
+  xw.endElement("DIM_Carbon_tetrafluoride_CF4");
+  xw.startElement("DIM_Carbon_dioxide_CO2");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataKrNe.CO2value);
+  xw.endElement();
+  xw.endElement("DIM_Carbon_dioxide_CO2");
+  xw.startElement("DIM_Carbon_monoxide_CO");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataKrNe.COvalue);
+  xw.endElement();
+  xw.endElement("DIM_Carbon_monoxide_CO");
+  xw.startElement("DIM_Krypton_Kr_Assay");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataKrNe.Krpercentvalue);
+  xw.endElement();
+  xw.endElement("DDIM_Krypton_Kr_Assay");
+  xw.startElement("DIM_Xenon_Xe");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataKrNe.Xevalue);
+  xw.endElement();
+  xw.endElement("DIM_Xenon_Xe");
+  xw.startElement("DIM_Oxygen_O2");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataKrNe.O2value);
+  xw.endElement();
+  xw.endElement("DIM_Oxygen_O2");
+  xw.startElement("DIM_Nitrogen_N2 ");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataKrNe.N2value);
+  xw.endElement();
+  xw.endElement("DIM_Nitrogen_N2 ");
+  xw.startElement("DIM_Helium_He");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataKrNe.Hevalue);
+  xw.endElement();
+  xw.endElement("DIM_Helium_He");
+  xw.startElement("DIM_Moisture_H20");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataKrNe.H2Ovalue);
+  xw.endElement();
+  xw.endElement("DIM_Moisture_H20");
+  xw.startElement("DIM_Methane_CH4");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataKrNe.CH4value);
+  xw.endElement();
+  xw.endElement("DIM_Methane_CH4");
+  xw.endDocument();
+
+  try {
+    fs.writeFileSync("sourcename.txt", "KrNe");
+    fileToBeDownloaded = dataKrNe.filename.toString() + ".xml";
+    res.json(xw.toString());
+    fs.writeFileSync(fileToBeDownloaded, xw.toString());
+    fs.writeFileSync("KrNefilename.txt", fileToBeDownloaded);
+  } catch (e) {
+    console.log("Error:", e.stack);
+  }
+});
+
+//------------ END Kr/Ne POST------------
+
+//------------SF6 LEL/US 3GASN906 CAT POST------------
+app.post("/apiSF6US", (req, res) => {
+  const dataSF6US = req.body;
+  //console.log(dataSF6US);
+  xw = new XMLWriter(true);
+  xw.startDocument("1.0", "UTF-8");
+  xw.startElement("GasesShipment");
+  xw.writeAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+  xw.writeAttribute(
+    "xsi:noNamespaceSchemaLocation",
+    "3GASN906_DM00599701_06.xsd"
+  );
+  xw.writeAttribute("MaterialCode", "3GASN906");
+  xw.writeAttribute("SupplierHoldingDesc", "LINDE PLC");
+  xw.writeAttribute("ReceivingStPlant", "Catania");
+  xw.writeAttribute("MpsSpecNo", "DM00599701_06");
+  xw.writeAttribute("MpsSpecRev", "1.0");
+  xw.writeAttribute("ShipmentDate", dataSF6US.shipmentdate);
+  xw.writeAttribute("ShipmentNumber", dataSF6US.shipmentNumber);
+  xw.writeAttribute("ShipQty", 1);
+  xw.startElement("Lot");
+  xw.writeAttribute("SupplierSupplyChainSeqCode", "LINDE PLC-ALPHA-282");
+  xw.writeAttribute("ShipLotNo", dataSF6US.lotNumber);
+  xw.writeAttribute("ExpiryDate", dataSF6US.expiryDate);
+  xw.writeAttribute("MfgDate", dataSF6US.manDate);
+  xw.writeAttribute("LotQty", 1);
+  xw.startElement("DIM_Sulfur_hexafluoride_SF6_Assay ");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataSF6US.SF6percentvalue);
+  xw.endElement();
+  xw.endElement("DIM_Sulfur_hexafluoride_SF6_Assay C");
+  xw.startElement("DIM_Carbon_dioxide_CO2");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataSF6US.CO2value);
+  xw.endElement();
+  xw.endElement("DIM_Carbon_dioxide_CO2");
+  xw.startElement("DIM_Carbon_monoxide_CO");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataSF6US.COvalue);
+  xw.endElement();
+  xw.endElement("DIM_Carbon_monoxide_CO");
+  xw.startElement("DIM_Moisture_H2O");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataSF6US.H2Ovalue);
+  xw.endElement();
+  xw.endElement("DIM_Moisture_H2O");
+  xw.startElement("DIM_Nitrogen_N2");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataSF6US.N2value);
+  xw.endElement();
+  xw.endElement("DIM_Nitrogen_N2");
+  xw.startElement("DIM_Oxygen_plus_argon_O2_plus_Ar");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataSF6US.O2Arvalue);
+  xw.endElement();
+  xw.endElement("DIM_Oxygen_plus_argon_O2_plus_Ar");
+  xw.startElement("DIM_Tetrafluoromethane_CF4 ");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataSF6US.CF4value);
+  xw.endElement();
+  xw.endElement("DIM_Tetrafluoromethane_CF4 ");
+  xw.endDocument();
+
+  try {
+    fs.writeFileSync("sourcename.txt", "SF6US");
+    fileToBeDownloaded = dataSF6US.filename.toString() + ".xml";
+    res.json(xw.toString());
+    fs.writeFileSync(fileToBeDownloaded, xw.toString());
+    fs.writeFileSync("SF6USfilename.txt", fileToBeDownloaded);
+  } catch (e) {
+    console.log("Error:", e.stack);
+  }
+});
+//------------END SF6 LEL/US 3GASN906 CAT POST------------
+
+//------------SF6 BOC 3GASN326 CAT POST------------
+app.post("/apiSF6BOC", (req, res) => {
+  const dataSF6BOC = req.body;
+  //console.log(dataSF6BOC);
+  xw = new XMLWriter(true);
+  xw.startDocument("1.0", "UTF-8");
+  xw.startElement("GasesShipment");
+  xw.writeAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+  xw.writeAttribute(
+    "xsi:noNamespaceSchemaLocation",
+    "3GASN326_DM00568217_06.xsd"
+  );
+  xw.writeAttribute("MaterialCode", "3GASN326");
+  xw.writeAttribute("SupplierHoldingDesc", "LINDE PLC");
+  xw.writeAttribute("ReceivingStPlant", "Catania");
+  xw.writeAttribute("MpsSpecNo", "DM00568217_06");
+  xw.writeAttribute("MpsSpecRev", "2.0");
+  xw.writeAttribute("ShipmentDate", dataSF6BOC.shipmentdate);
+  xw.writeAttribute("ShipmentNumber", dataSF6BOC.shipmentNumber);
+  xw.writeAttribute("ShipQty", 1);
+  xw.startElement("Lot");
+  xw.writeAttribute("SupplierSupplyChainSeqCode", "LINDE PLC-IMMINGHAM-285");
+  xw.writeAttribute("ShipLotNo", dataSF6BOC.lotNumber);
+  xw.writeAttribute("ExpiryDate", dataSF6BOC.expiryDate);
+  xw.writeAttribute("MfgDate", dataSF6BOC.manDate);
+  xw.writeAttribute("LotQty", 1);
+  xw.startElement("DIM_Carbon_dioxide_CO2");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataSF6BOC.CO2value);
+  xw.endElement();
+  xw.endElement("DIM_Carbon_dioxide_CO2");
+  xw.startElement("DIM_Carbon_monoxide_CO");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataSF6BOC.COvalue);
+  xw.endElement();
+  xw.endElement("DIM_Carbon_monoxide_CO");
+  xw.startElement("DIM_Tetrafluoromethane_CF4 ");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataSF6BOC.CF4value);
+  xw.endElement();
+  xw.endElement("DIM_Tetrafluoromethane_CF4 ");
+  xw.startElement("DIM_Moisture_H2O");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataSF6BOC.H2Ovalue);
+  xw.endElement();
+  xw.endElement("DIM_Moisture_H2O");
+  xw.startElement("DIM_Nitrogen_N2");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataSF6BOC.N2value);
+  xw.endElement();
+  xw.endElement("DIM_Nitrogen_N2");
+  xw.startElement("DIM_Oxygen_plus_argon_O2_plus_Ar");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataSF6BOC.O2Arvalue);
+  xw.endElement();
+  xw.endElement("DIM_Oxygen_plus_argon_O2_plus_Ar");
+  xw.startElement("DIM_Sulfur_hexafluoride_SF6_Assay ");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataSF6BOC.SF6percentvalue);
+  xw.endElement();
+  xw.endElement("DIM_Sulfur_hexafluoride_SF6_Assay C");
+  xw.endDocument();
+
+  try {
+    fs.writeFileSync("sourcename.txt", "SF6BOC");
+    fileToBeDownloaded = dataSF6BOC.filename.toString() + ".xml";
+    res.json(xw.toString());
+    fs.writeFileSync(fileToBeDownloaded, xw.toString());
+    fs.writeFileSync("SF6BOCfilename.txt", fileToBeDownloaded);
+  } catch (e) {
+    console.log("Error:", e.stack);
+  }
+});
+//------------END SF6 BOC 3GASN326 CAT POST------------
 
 app.get("/download", function (req, res) {
   var sourceName = fs.readFileSync("sourcename.txt", "utf-8");
@@ -1464,6 +1710,36 @@ app.get("/download", function (req, res) {
   if (sourceName === "HBr") {
     var HBrfileName = fs.readFileSync("HBrfilename.txt", "utf-8");
     res.download(HBrfileName, function (err) {
+      if (err) {
+        console.log("file not downloaded");
+      } else {
+        console.log("Download succesfull");
+      }
+    });
+  }
+  if (sourceName === "KrNe") {
+    var KrNefileName = fs.readFileSync("KrNefilename.txt", "utf-8");
+    res.download(KrNefileName, function (err) {
+      if (err) {
+        console.log("file not downloaded");
+      } else {
+        console.log("Download succesfull");
+      }
+    });
+  }
+  if (sourceName === "SF6US") {
+    var SF6USfileName = fs.readFileSync("SF6USfilename.txt", "utf-8");
+    res.download(SF6USfileName, function (err) {
+      if (err) {
+        console.log("file not downloaded");
+      } else {
+        console.log("Download succesfull");
+      }
+    });
+  }
+  if (sourceName === "SF6BOC") {
+    var SF6BOCfileName = fs.readFileSync("SF6BOCfilename.txt", "utf-8");
+    res.download(SF6BOCfileName, function (err) {
       if (err) {
         console.log("file not downloaded");
       } else {
