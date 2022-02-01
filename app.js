@@ -842,7 +842,7 @@ app.post("/apiHFGerling", (req, res) => {
       "SupplierSupplyChainSeqCode",
       "LINDE PLC-S/ GERLING HOLZ -  Dormagen-1679"
     );
-    xw.writeAttribute("ShipLotNo", dataHF.lotNumber[i]);
+    xw.writeAttribute("ShipLotNo", dataHF.lotNumber);
     xw.writeAttribute("ExpiryDate", dataHF.expiryDate[i]);
     xw.writeAttribute("MfgDate", dataHF.manDate[i]);
     xw.writeAttribute("LotQty", 1);
@@ -853,26 +853,26 @@ app.post("/apiHFGerling", (req, res) => {
     xw.endElement("DIM_X_Assay");
     xw.startElement("DIM_Hexafluorosilic_acid_H2SIF6");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", dataHF.H2SiF6value[i]);
+    xw.writeAttribute("VALUE", "20");
     xw.endElement();
     xw.endElement("DIM_Hexafluorosilic_acid_H2SIF6");
     xw.startElement("DIM_Sulfur_dioxide_SO2");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", dataHF.SO2value[i]);
+    xw.writeAttribute("VALUE", "10");
     xw.endElement();
     xw.endElement("DIM_Sulfur_dioxide_SO2");
     xw.startElement("DIM_Sulfuric_acid_H2SO4");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", dataHF.H2SO4value[i]);
+    xw.writeAttribute("VALUE", "100");
     xw.endElement();
     xw.endElement("DIM_Moisture_H2ODIM_Sulfuric_acid_H2SO4");
     xw.startElement("DIM_Water_H2O");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", dataHF.H2Ovalue[i]);
+    xw.writeAttribute("VALUE", "100");
     xw.endElement();
     xw.endElement("DIM_Water_H2O");
     xw.endDocument();
-    console.log("xw", xw.toString());
+    //console.log("xw", xw.toString());
     // try {
     //   fs.writeFileSync("sourcename.txt", "HFGerling");
     //   fileToBeDownloaded = dataHF.lotNumber.toString() + ".xml";
@@ -885,7 +885,7 @@ app.post("/apiHFGerling", (req, res) => {
     // }
 
     try {
-      var fileToBeDownloaded = dataHF.lotNumber[i];
+      var fileToBeDownloaded = dataHF.filename[i];
       fileToBeDownloaded = fileToBeDownloaded.replace("/", "-");
       fileToBeDownloaded = fileToBeDownloaded + ".xml";
       //console.log("file to be dw", fileToBeDownloaded);
