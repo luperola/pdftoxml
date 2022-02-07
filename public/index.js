@@ -2958,8 +2958,10 @@ function HFSmall() {
     (cylPerPage2 = []),
     (cylPerPage3 = []),
     (cylPerPage4 = []),
-    //alert("under construction");
-    (document.getElementById("btndropdown").style.display = "none");
+    (cylPerPage = []),
+    (shNbrHFSmall = []);
+  //alert("under construction");
+  document.getElementById("btndropdown").style.display = "none";
   document.getElementById("modalCS").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
@@ -2968,7 +2970,7 @@ function HFSmall() {
     const arrayHFSmallDimension = await fetch("/arrayHFSmall");
     var dimension = await arrayHFSmallDimension.text();
     dimension = parseInt(dimension);
-    console.log("dimension", dimension);
+    //console.log("dimension", dimension);
     if (dimension > 5) {
       alert("Max 5 pagine. Si deve 'splittare' il file pdf");
     }
@@ -2978,7 +2980,7 @@ function HFSmall() {
         var nameFetch = "/HFoutput" + i.toString();
         const res = await fetch(nameFetch);
         const data = await res.json();
-        console.log("data", data);
+        //console.log("data", data);
 
         if (i === 0) {
           cylPerPage0.push(data[0]);
@@ -2986,8 +2988,12 @@ function HFSmall() {
           const stringa = cylPerPage0.join();
           cylPerPage0 = stringa.split(",");
           cylPerPage0.shift();
-          console.log("# bb stessa pagina 0", cylPerPage0);
-          makeHFData(cylPerPage0);
+          for (let i = 0; i < cylPerPage0.length; i++) {
+            cylPerPage0[i] = cylPerPage0[i].trim();
+          }
+          cylPerPage.push(cylPerPage0);
+          const HFShNbr1 = ShNbr(cylPerPage0.length);
+          console.log("shipment Number", HFShNbr1);
         }
         if (i === 1) {
           cylPerPage1.push(data[0]);
@@ -2995,8 +3001,7 @@ function HFSmall() {
           const stringa = cylPerPage1.join();
           cylPerPage1 = stringa.split(",");
           cylPerPage1.shift();
-          console.log("# bb stessa pagina1", cylPerPage1);
-          makeHFData(cylPerPage1);
+          cylPerPage.push(cylPerPage1);
         }
         if (i === 2) {
           cylPerPage2.push(data[0]);
@@ -3004,8 +3009,7 @@ function HFSmall() {
           const stringa = cylPerPage2.join();
           cylPerPage2 = stringa.split(",");
           cylPerPage2.shift();
-          console.log("# bb stessa pagina 2", cylPerPage2);
-          makeHFData(cylPerPage2);
+          cylPerPage.push(cylPerPage2);
         }
         if (i === 3) {
           cylPerPage3.push(data[0]);
@@ -3013,8 +3017,7 @@ function HFSmall() {
           const stringa = cylPerPage3.join();
           cylPerPage3 = stringa.split(",");
           cylPerPage3.shift();
-          console.log("# bb stessa pagina 3", cylPerPage3);
-          makeHFData(cylPerPage3);
+          cylPerPage.push(cylPerPage3);
         }
         if (i === 4) {
           cylPerPage4.push(data[0]);
@@ -3022,65 +3025,54 @@ function HFSmall() {
           const stringa = cylPerPage4.join();
           cylPerPage4 = stringa.split(",");
           cylPerPage4.shift();
-          console.log("# bb stessa pagina 4", cylPerPage4);
-          makeHFData(cylPerPage4);
+          cylPerPage.push(cylPerPage4);
         }
       }
     }
-    async function makeHFData(
-      cylPerPage0,
-      cylPerPage1,
-      cylPerPage2,
-      cylPerPage3,
-      cylPerPage4
-    ) {
-      // for (let i = 0; i < cylPerPage0.length; i++) {
-      //   console.log("cylPage", cylPerPage0.length);
-      // }
-      console.log(
-        cylPerPage0.length,
-        cylPerPage1.length,
-        cylPerPage2.length,
-        cylPerPage3.length,
-        cylPerPage4.length
-      );
-    }
+    console.log("all data", cylPerPage);
 
-    //   //Counter alimenta e salva il contatore di counter.txt
-    //   const testResponse = await fetch("/apicounter");
-    //   var dataTest = await testResponse.text();
-    //   //console.log("dataTest1", dataTest);
-    //   dataTest = parseInt(dataTest);
-    //   dataTest++;
-    //   var dt = new Date();
-    //   var anno = dt.getFullYear().toString();
-    //   anno = anno.substring(2, 4);
-    //   if (dataTest < 10) {
-    //     shipmentNumberHBr = "IT/000" + dataTest.toString() + "/" + anno;
-    //   }
-    //   if (dataTest >= 10 && dataTest < 100) {
-    //     shipmentNumberHBr = "IT/00" + dataTest.toString() + "/" + anno;
-    //   }
-    //   if (dataTest >= 100 && dataTest < 1000) {
-    //     shipmentNumberHBr = "IT/0" + dataTest.toString() + "/" + anno;
-    //   }
-    //   if (dataTest >= 1000) {
-    //     shipmentNumberHBr = "IT/" + dataTest.toString() + "/" + anno;
-    //   }
-    //   if (dataTest > 10000) {
-    //     alert("reset counter.txt file");
-    //   }
-    //   datacounter = { dataTest };
-    //   const optionCounter = {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(datacounter),
-    //   };
-    //   const myresponse = await fetch("/newcounter", optionCounter);
-    //   var myjson = await myresponse.text();
-    //   //console.log("myJson", myjson);
+    async function ShNbr(dimension) {
+      for (let i = 0; i < dimension; i++) {
+        //Counter alimenta e salva il contatore di counter.txt
+        const testResponse = await fetch("/apicounter");
+        var dataTest = await testResponse.text();
+        //console.log("dataTest1", dataTest);
+        dataTest = parseInt(dataTest);
+        dataTest++;
+        var dt = new Date();
+        var anno = dt.getFullYear().toString();
+        anno = anno.substring(2, 4);
+        if (dataTest < 10) {
+          shipmentNumberHFSmall = "IT/000" + dataTest.toString() + "/" + anno;
+        }
+        if (dataTest >= 10 && dataTest < 100) {
+          shipmentNumberHFSmall = "IT/00" + dataTest.toString() + "/" + anno;
+        }
+        if (dataTest >= 100 && dataTest < 1000) {
+          shipmentNumberHFSmall = "IT/0" + dataTest.toString() + "/" + anno;
+        }
+        if (dataTest >= 1000) {
+          shipmentNumberHFSmall = "IT/" + dataTest.toString() + "/" + anno;
+        }
+        if (dataTest > 10000) {
+          alert("reset counter.txt file");
+        }
+        shNbrHFSmall.push(shipmentNumberHFSmall);
+
+        datacounter = { dataTest };
+        const optionCounter = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(datacounter),
+        };
+        const myresponse = await fetch("/newcounter", optionCounter);
+        var myjson = await myresponse.text();
+        //console.log("myJson", myjson);
+        return shNbrHFSmall;
+      }
+    }
     //   var manHBr = data[2][2];
     //   manHBr = manHBr.replaceAll(".", "-");
     //   const monthMan = parseInt(manHBr.substring(3, 5)) - 1;

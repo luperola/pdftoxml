@@ -111,6 +111,25 @@ try {
           }
         }
 
+        // const options = {
+        //   apikey: "K89311110788957",
+        //   filetype: "PDF",
+        //   verbose: true,
+        //   //url: `${__dirname}/loveText.jpg`,
+        //   //isTable:true
+        // };
+
+        // const getText = async () => {
+        //   try {
+        //     const result = await ocrSpaceApi(options);
+        //     console.log({ result });
+        //   } catch (error) {
+        //     console.error(error);
+        //   }
+        // };
+
+        // getText();
+
         var test = fileOriginale
           .substring(fileOriginale.length - 4)
           .toLowerCase();
