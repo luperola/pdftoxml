@@ -1132,53 +1132,54 @@ function ChlorgasPdftoTxt(coaCS) {
 function NitricOxideTavlov() {
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
+  let arrayNOTavlov = [],
+    pageNumbers = [],
+    productionDates1 = [],
+    productionDates2 = [],
+    productionDates3 = [],
+    deliveryDates1 = [],
+    deliveryDates2 = [],
+    deliveryDates3 = [],
+    drumNumbers1 = [],
+    drumNumbers2 = [],
+    drumNumbers3 = [],
+    drumQuantities = [],
+    expiryDate = [],
+    shNumberNOT = [],
+    N2parameters1 = [],
+    N2parameters2 = [],
+    N2parameters3 = [],
+    N2Oparameters1 = [],
+    N2Oparameters2 = [],
+    N2Oparameters3 = [],
+    H2Oparameters1 = [],
+    H2Oparameters2 = [],
+    H2Oparameters3 = [],
+    finalDrums = [],
+    finalProdDate = [],
+    finalDelDate = [],
+    finalN2 = [],
+    finalN2O = [],
+    finalH2O = [],
+    drumA,
+    drumB,
+    drumC,
+    prodDateA,
+    prodDateB,
+    delDateA,
+    delDateB,
+    N2parA,
+    N2parB,
+    N2OparA,
+    N2OparB,
+    H2OparA,
+    H2OparB,
+    myDrums,
+    manDateNOT,
+    expDataNOT;
+
   ReadNOText();
   async function ReadNOText() {
-    let arrayNOTavlov = [],
-      pageNumbers = [],
-      productionDates1 = [],
-      productionDates2 = [],
-      productionDates3 = [],
-      deliveryDates1 = [],
-      deliveryDates2 = [],
-      deliveryDates3 = [],
-      drumNumbers1 = [],
-      drumNumbers2 = [],
-      drumNumbers3 = [],
-      drumQuantities = [],
-      expiryDate = [],
-      shNumberNOT = [],
-      N2parameters1 = [],
-      N2parameters2 = [],
-      N2parameters3 = [],
-      N2Oparameters1 = [],
-      N2Oparameters2 = [],
-      N2Oparameters3 = [],
-      H2Oparameters1 = [],
-      H2Oparameters2 = [],
-      H2Oparameters3 = [],
-      finalDrums = [],
-      finalProdDate = [],
-      finalDelDate = [],
-      finalN2 = [],
-      finalN2O = [],
-      finalH2O = [],
-      NODrums = [],
-      drumA,
-      drumB,
-      drumC,
-      prodDateA,
-      prodDateB,
-      delDateA,
-      delDateB,
-      N2parA,
-      N2parB,
-      N2OparA,
-      N2OparB,
-      H2OparA,
-      H2OparB,
-      myDrums;
-
     const res = await fetch("/txt");
     var dataText = await res.text();
     arrayNOTavlov = dataText.split("\n");
@@ -1332,6 +1333,14 @@ function NitricOxideTavlov() {
       H2OparB = H2OparA.concat(H2Oparameters3);
     }
 
+    myDrums = drumA.toString();
+    finalDrums = myDrums.split(",");
+    finalDelDate = deliveryDates1;
+    finalProdDate = productionDates1;
+    finalN2 = N2parameters1;
+    finalN2O = N2Oparameters1;
+    finalH2O = H2Oparameters1;
+
     if (drumB != undefined) {
       myDrums = drumA.toString() + "," + drumB.toString();
       finalDrums = myDrums.split(",");
@@ -1446,6 +1455,17 @@ function NitricOxideTavlov() {
       //console.log("myjson", myjson);
     }
     //console.log("progressivo", shNumberNOT);
+
+    // Input data manufacturing se non è leggibile da OCR del pdf
+    var regex = RegExp("[0-9]{2}[-][a-zA-z]{3}[-][0-9]{4}", "g");
+    var str1 = finalDelDate;
+    var str2 = finalProdDate;
+
+    if (regex.test(str1) === false || regex.test(str2) === false) {
+      alert(
+        "ATTENZIONE! Le date di manufacturing / end of shelf life o la data di produzione non sono formattate in maniera corretta. Proseguire con il download del file e poi correggerle sul file"
+      );
+    }
 
     const dataNOT = {
       shipment: finalDelDate,
