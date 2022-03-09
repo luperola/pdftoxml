@@ -16,6 +16,8 @@ var XMLWriter = require("xml-writer");
 var AdmZip = require("adm-zip");
 var pdf2table = require("pdf2table");
 const hummus = require("hummus");
+var jsonConcat = require("json-concat");
+const { dirname } = require("path");
 var fileOriginale;
 
 // Uso multer per caricare file a scelta dalla mia directory. Solo pdf
@@ -84,6 +86,7 @@ try {
         // per i files con HF
         const found = fileOriginale.match("HF");
         if (found != null) {
+          var readHFFiles;
           let pdfReader = hummus.createReader(fileOriginale);
           let pages = pdfReader.getPagesCount();
           pages = pages.toString();
@@ -105,31 +108,18 @@ try {
                   if (err) return console.log(err);
                   var jsonFileName = "HFoutput" + i.toString() + ".json";
                   fs.writeFileSync(jsonFileName, JSON.stringify(rows));
+                  readHFFiles += fs.readFileSync(
+                    "HFoutput" + i.toString() + ".json",
+                    "utf-8"
+                  );
+                  //console.log("file", readHFFiles);
+                  //readHFFiles = readHFFiles.replace("undefined", "");
+                  //fs.writeFileSync("sample.txt", readHFFiles);
                 });
               }
             );
           }
         }
-
-        // const options = {
-        //   apikey: "K89311110788957",
-        //   filetype: "PDF",
-        //   verbose: true,
-        //   //url: `${__dirname}/loveText.jpg`,
-        //   //isTable:true
-        // };
-
-        // const getText = async () => {
-        //   try {
-        //     const result = await ocrSpaceApi(options);
-        //     console.log({ result });
-        //   } catch (error) {
-        //     console.error(error);
-        //   }
-        // };
-
-        // getText();
-
         var test = fileOriginale
           .substring(fileOriginale.length - 4)
           .toLowerCase();
@@ -177,6 +167,7 @@ try {
   console.log(err);
   return;
 }
+
 // Alimenta il contatore per 'shipmentNumber'
 
 app.get("/apicounter", (req, res) => {
@@ -1784,7 +1775,7 @@ app.get("/jsonSampleFile2", (req, res) => {
   res.send(jsonFile2);
 });
 
-//get the files da txt (Tavlov / Chrlorgas )
+//get the files da txt (Tavlov / Chlorgas )
 app.get("/txt", (req, res) => {
   const readTxtFile1 = fs.readFileSync("sample.txt", "utf-8");
   //console.log("writeTxtFile", readTxtFile1);

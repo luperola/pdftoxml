@@ -595,7 +595,7 @@ function WackerHCl(
   async function ReadFileJson() {
     const res = await fetch("/jsonSampleFile2");
     const data = await res.json();
-    //console.log("data", data);
+    console.log("data", data);
     //Counter alimenta e salva il contatore di counter.txt
     const testResponse = await fetch("/apicounter");
     var dataTest = await testResponse.text();
@@ -632,7 +632,9 @@ function WackerHCl(
     var myjson = await myresponse.text();
     //console.log("myJson", myjson);
 
-    var manWacker = data[20][7];
+    //var manWacker = data[20][7];
+    var manWacker = data[22][1];
+    console.log(manWacker);
     manWacker = manWacker.replaceAll(".", "-");
     const monthMan = parseInt(manWacker.substring(3, 5)) - 1;
     const monthNameMan = [
@@ -654,7 +656,8 @@ function WackerHCl(
       monthNameMan[monthMan] +
       manWacker.substring(5, 10);
 
-    var expWacker = data[20][9];
+    //var expWacker = data[20][9];
+    var expWacker = data[22][3];
     expWacker = expWacker.replaceAll(".", "-");
     const monthExpiry = parseInt(expWacker.substring(3, 5)) - 1;
     const monthNameExpiry = [
@@ -696,28 +699,29 @@ function WackerHCl(
     shipDateW =
       shipDateW.substring(0, 3) + monthName[month] + shipDateW.substring(5, 10);
     var lotNumber = data[24][2];
-    var N2valueW = data[26][3];
+    //var N2valueW = data[26][3];
+    var N2valueW = data[27][3];
     N2valueW = N2valueW.replace("< ", "");
     N2valueW = N2valueW.replace(",", ".");
-    var O2ArvalueW = data[27][3];
+    var O2ArvalueW = data[28][3];
     O2ArvalueW = O2ArvalueW.replace("< ", "");
     O2ArvalueW = O2ArvalueW.replace(",", ".");
-    var CO2valueW = data[28][3];
+    var CO2valueW = data[29][3];
     CO2valueW = CO2valueW.replace("< ", "");
     CO2valueW = CO2valueW.replace(",", ".");
-    var COvalueW = data[29][3];
+    var COvalueW = data[30][3];
     COvalueW = COvalueW.replace("< ", "");
     COvalueW = COvalueW.replace(",", ".");
-    var CH4valueW = data[30][3];
+    var CH4valueW = data[31][3];
     CH4valueW = CH4valueW.replace("< ", "");
     CH4valueW = CH4valueW.replace(",", ".");
-    var H2valueW = data[31][3];
+    var H2valueW = data[32][3];
     H2valueW = H2valueW.replace("< ", "");
     H2valueW = H2valueW.replace(",", ".");
-    var H2OvalueW = data[32][3];
+    var H2OvalueW = data[33][3];
     H2OvalueW = H2OvalueW.replace("< ", "");
     H2OvalueW = H2OvalueW.replace(",", ".");
-    var FevalueW = data[33][3];
+    var FevalueW = data[34][3];
     FevalueW = FevalueW.replace("< ", "");
     FevalueW = FevalueW.replace(",", ".");
 
@@ -2973,20 +2977,18 @@ function SF6BOC() {
 // ---------------- HF Medford 1.8Kg - Bombola Piccola --------------
 
 function HFSmall() {
-  (cylPerPage0 = []),
-    (cylPerPage1 = []),
-    (cylPerPage2 = []),
-    (cylPerPage3 = []),
-    (cylPerPage4 = []),
-    (cylPerPage = []),
-    (shNbrHFSmall = []);
+  matriceHF = [];
   //alert("under construction");
   document.getElementById("btndropdown").style.display = "none";
   document.getElementById("modalCS").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
+
   ReadHFPages();
   async function ReadHFPages() {
+    let HFarray = [],
+      matrice = [],
+      batchNbr = [];
     const arrayHFSmallDimension = await fetch("/arrayHFSmall");
     var dimension = await arrayHFSmallDimension.text();
     dimension = parseInt(dimension);
@@ -2995,186 +2997,146 @@ function HFSmall() {
       alert("Max 5 pagine. Si deve 'splittare' il file pdf");
     }
     for (let i = 0; i < dimension; i++) {
-      ReadHFFiles();
-      async function ReadHFFiles() {
-        var nameFetch = "/HFoutput" + i.toString();
-        const res = await fetch(nameFetch);
-        const data = await res.json();
-        //console.log("data", data);
-
-        if (i === 0) {
-          cylPerPage0.push(data[0]);
-          cylPerPage0.push(data[29][1]);
-          const stringa = cylPerPage0.join();
-          cylPerPage0 = stringa.split(",");
-          cylPerPage0.shift();
-          for (let i = 0; i < cylPerPage0.length; i++) {
-            cylPerPage0[i] = cylPerPage0[i].trim();
-          }
-          cylPerPage.push(cylPerPage0);
-          const HFShNbr1 = ShNbr(cylPerPage0.length);
-          console.log("shipment Number", HFShNbr1);
-        }
-        if (i === 1) {
-          cylPerPage1.push(data[0]);
-          cylPerPage1.push(data[29][1]);
-          const stringa = cylPerPage1.join();
-          cylPerPage1 = stringa.split(",");
-          cylPerPage1.shift();
-          cylPerPage.push(cylPerPage1);
-        }
-        if (i === 2) {
-          cylPerPage2.push(data[0]);
-          cylPerPage2.push(data[29][1]);
-          const stringa = cylPerPage2.join();
-          cylPerPage2 = stringa.split(",");
-          cylPerPage2.shift();
-          cylPerPage.push(cylPerPage2);
-        }
-        if (i === 3) {
-          cylPerPage3.push(data[0]);
-          cylPerPage3.push(data[29][1]);
-          const stringa = cylPerPage3.join();
-          cylPerPage3 = stringa.split(",");
-          cylPerPage3.shift();
-          cylPerPage.push(cylPerPage3);
-        }
-        if (i === 4) {
-          cylPerPage4.push(data[0]);
-          cylPerPage4.push(data[29][1]);
-          const stringa = cylPerPage4.join();
-          cylPerPage4 = stringa.split(",");
-          cylPerPage4.shift();
-          cylPerPage.push(cylPerPage4);
-        }
+      const fileToFetch = "/HFoutput" + i.toString();
+      const readHF = await fetch(fileToFetch);
+      var dataHF = await readHF.json();
+      matrice.push(dataHF);
+      var test = matrice[i][0][1];
+      HFarray = test.split(",");
+      batchNbr.push(HFarray);
+      for (let ind = 0; ind < batchNbr[i].length; ind++) {
+        console.log("ind", matrice[i][3]);
       }
     }
-    console.log("all data", cylPerPage);
-
-    async function ShNbr(dimension) {
-      for (let i = 0; i < dimension; i++) {
-        //Counter alimenta e salva il contatore di counter.txt
-        const testResponse = await fetch("/apicounter");
-        var dataTest = await testResponse.text();
-        //console.log("dataTest1", dataTest);
-        dataTest = parseInt(dataTest);
-        dataTest++;
-        var dt = new Date();
-        var anno = dt.getFullYear().toString();
-        anno = anno.substring(2, 4);
-        if (dataTest < 10) {
-          shipmentNumberHFSmall = "IT/000" + dataTest.toString() + "/" + anno;
-        }
-        if (dataTest >= 10 && dataTest < 100) {
-          shipmentNumberHFSmall = "IT/00" + dataTest.toString() + "/" + anno;
-        }
-        if (dataTest >= 100 && dataTest < 1000) {
-          shipmentNumberHFSmall = "IT/0" + dataTest.toString() + "/" + anno;
-        }
-        if (dataTest >= 1000) {
-          shipmentNumberHFSmall = "IT/" + dataTest.toString() + "/" + anno;
-        }
-        if (dataTest > 10000) {
-          alert("reset counter.txt file");
-        }
-        shNbrHFSmall.push(shipmentNumberHFSmall);
-
-        datacounter = { dataTest };
-        const optionCounter = {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(datacounter),
-        };
-        const myresponse = await fetch("/newcounter", optionCounter);
-        var myjson = await myresponse.text();
-        //console.log("myJson", myjson);
-        return shNbrHFSmall;
-      }
-    }
-    //   var manHBr = data[2][2];
-    //   manHBr = manHBr.replaceAll(".", "-");
-    //   const monthMan = parseInt(manHBr.substring(3, 5)) - 1;
-    //   const monthNameMan = [
-    //     "Jan",
-    //     "Feb",
-    //     "Mar",
-    //     "Apr",
-    //     "May",
-    //     "Jun",
-    //     "Jul",
-    //     "Aug",
-    //     "Sep",
-    //     "Oct",
-    //     "Nov",
-    //     "Dec",
-    //   ];
-    //   manHBr =
-    //     manHBr.substring(0, 2) +
-    //     "-" +
-    //     monthNameMan[monthMan] +
-    //     "-" +
-    //     manHBr.substring(6, 11);
-    //   var shipDateHBr = manHBr;
-    //   var yearExp = parseInt(manHBr.substring(7, 11));
-    //   var monthExp = monthMan + 6;
-    //   let expHBr;
-    //   if (monthExp <= 12) {
-    //     expHBr =
-    //       manHBr.substring(0, 2) +
-    //       "-" +
-    //       monthNameMan[monthExp] +
-    //       "-" +
-    //       manHBr.substring(7, 11);
-    //   }
-    //   if (monthExp > 12) {
-    //     monthExp = monthExp - 12;
-    //     yearExp = yearExp + 1;
-    //     expHBr =
-    //       manHBr.substring(0, 2) + "-" + monthNameMan[monthExp] + "-" + yearExp;
-    //   }
-    //   var lotNumberHBr = data[17][1];
-    //   var FevalueHBr = "0.8";
-    //   var CO2valueHBr = "3.0";
-    //   var COvalueHBr = "0.8";
-    //   var HClvalueHBr = "500";
-    //   var H2OvalueHBr = "0.8";
-    //   var N2valueHBr = "1.5";
-    //   var O2valueHBr = "0.8";
-    //   var THCvalueHBr = "0.8";
-    //   var HBrData = {
-    //     shipmentNumber: shipmentNumberHBr,
-    //     shipmentdate: shipDateHBr,
-    //     lotNumber: lotNumberHBr,
-    //     expiryDate: expHBr,
-    //     manDate: manHBr,
-    //     Fevalue: FevalueHBr,
-    //     CO2value: CO2valueHBr,
-    //     COvalue: COvalueHBr,
-    //     HClvalue: HClvalueHBr,
-    //     H2Ovalue: H2OvalueHBr,
-    //     N2value: N2valueHBr,
-    //     O2value: O2valueHBr,
-    //     THCvalue: THCvalueHBr,
-    //   };
-    //   console.log("all data", HBrData);
-    //}
-
-    //   // posto i dati per compilare file xlm
-
-    //   const HBroptions = {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(HBrData),
-    //   };
-    //   const myresponseHBr = await fetch("/apiHBr", HBroptions);
-    //   var myjsonHBr = await myresponseHBr.json();
-    //   //console.log(myjsonHBr);
+    console.log("test", matrice);
+    // console.log("HFarray", HFarray);
   }
 }
+
+// async function ShNbr(dimension) {
+//   for (let i = 0; i < dimension; i++) {
+//     //Counter alimenta e salva il contatore di counter.txt
+//     const testResponse = await fetch("/apicounter");
+//     var dataTest = await testResponse.text();
+//     //console.log("dataTest1", dataTest);
+//     dataTest = parseInt(dataTest);
+//     dataTest++;
+//     var dt = new Date();
+//     var anno = dt.getFullYear().toString();
+//     anno = anno.substring(2, 4);
+//     if (dataTest < 10) {
+//       shipmentNumberHFSmall = "IT/000" + dataTest.toString() + "/" + anno;
+//     }
+//     if (dataTest >= 10 && dataTest < 100) {
+//       shipmentNumberHFSmall = "IT/00" + dataTest.toString() + "/" + anno;
+//     }
+//     if (dataTest >= 100 && dataTest < 1000) {
+//       shipmentNumberHFSmall = "IT/0" + dataTest.toString() + "/" + anno;
+//     }
+//     if (dataTest >= 1000) {
+//       shipmentNumberHFSmall = "IT/" + dataTest.toString() + "/" + anno;
+//     }
+//     if (dataTest > 10000) {
+//       alert("reset counter.txt file");
+//     }
+//     shNbrHFSmall.push(shipmentNumberHFSmall);
+
+//     datacounter = { dataTest };
+//     const optionCounter = {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(datacounter),
+//     };
+//     const myresponse = await fetch("/newcounter", optionCounter);
+//     var myjson = await myresponse.text();
+//     //console.log("myJson", myjson);
+//     return shNbrHFSmall;
+//   }
+// }
+//   var manHBr = data[2][2];
+//   manHBr = manHBr.replaceAll(".", "-");
+//   const monthMan = parseInt(manHBr.substring(3, 5)) - 1;
+//   const monthNameMan = [
+//     "Jan",
+//     "Feb",
+//     "Mar",
+//     "Apr",
+//     "May",
+//     "Jun",
+//     "Jul",
+//     "Aug",
+//     "Sep",
+//     "Oct",
+//     "Nov",
+//     "Dec",
+//   ];
+//   manHBr =
+//     manHBr.substring(0, 2) +
+//     "-" +
+//     monthNameMan[monthMan] +
+//     "-" +
+//     manHBr.substring(6, 11);
+//   var shipDateHBr = manHBr;
+//   var yearExp = parseInt(manHBr.substring(7, 11));
+//   var monthExp = monthMan + 6;
+//   let expHBr;
+//   if (monthExp <= 12) {
+//     expHBr =
+//       manHBr.substring(0, 2) +
+//       "-" +
+//       monthNameMan[monthExp] +
+//       "-" +
+//       manHBr.substring(7, 11);
+//   }
+//   if (monthExp > 12) {
+//     monthExp = monthExp - 12;
+//     yearExp = yearExp + 1;
+//     expHBr =
+//       manHBr.substring(0, 2) + "-" + monthNameMan[monthExp] + "-" + yearExp;
+//   }
+//   var lotNumberHBr = data[17][1];
+//   var FevalueHBr = "0.8";
+//   var CO2valueHBr = "3.0";
+//   var COvalueHBr = "0.8";
+//   var HClvalueHBr = "500";
+//   var H2OvalueHBr = "0.8";
+//   var N2valueHBr = "1.5";
+//   var O2valueHBr = "0.8";
+//   var THCvalueHBr = "0.8";
+//   var HBrData = {
+//     shipmentNumber: shipmentNumberHBr,
+//     shipmentdate: shipDateHBr,
+//     lotNumber: lotNumberHBr,
+//     expiryDate: expHBr,
+//     manDate: manHBr,
+//     Fevalue: FevalueHBr,
+//     CO2value: CO2valueHBr,
+//     COvalue: COvalueHBr,
+//     HClvalue: HClvalueHBr,
+//     H2Ovalue: H2OvalueHBr,
+//     N2value: N2valueHBr,
+//     O2value: O2valueHBr,
+//     THCvalue: THCvalueHBr,
+//   };
+//   console.log("all data", HBrData);
+//}
+
+//   // posto i dati per compilare file xlm
+
+//   const HBroptions = {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(HBrData),
+//   };
+//   const myresponseHBr = await fetch("/apiHBr", HBroptions);
+//   var myjsonHBr = await myresponseHBr.json();
+//   //console.log(myjsonHBr);
+//   }
+// }
 
 // ---------------- END HF Medford 1.8Kg - Bombola Piccola --------------
 
