@@ -1147,7 +1147,7 @@ function NitricOxideTavlov() {
     drumNumbers1 = [],
     drumNumbers2 = [],
     drumNumbers3 = [],
-    drumQuantities = [],
+    //drumQuantities = [],
     expiryDate = [],
     shNumberNOT = [],
     N2parameters1 = [],
@@ -1179,15 +1179,16 @@ function NitricOxideTavlov() {
     H2OparA,
     H2OparB,
     myDrums,
-    manDateNOT,
-    expDataNOT;
+    //manDateNOT,
+    //expDataNOT;
+    wrongFormat;
 
   ReadNOText();
   async function ReadNOText() {
     const res = await fetch("/txt");
     var dataText = await res.text();
     arrayNOTavlov = dataText.split("\n");
-    //console.log("array", arrayNOTavlov);
+    console.log("array", arrayNOTavlov[56]);
 
     // formo prima gli indici del numero pagine
     for (let i = 0; i < arrayNOTavlov.length; i++) {
@@ -1345,7 +1346,20 @@ function NitricOxideTavlov() {
     finalN2O = N2Oparameters1;
     finalH2O = H2Oparameters1;
 
-    if (drumB != undefined) {
+    var regex = RegExp("[0-9]{2}[-][a-zA-z]{3}[-][0-9]{4}", "g");
+    var str1 = finalDelDate;
+    var str2 = finalProdDate;
+
+    if (regex.test(str1) === false || regex.test(str2) === false) {
+      wrongFormat = 1;
+      finalDelDate = ["to be specified", "to be specified", "to be specified"];
+      expiryDate = finalDelDate;
+      finalProdDate = finalDelDate;
+      alert(
+        "ATTENZIONE! Le date di manufacturing / end of shelf life o la data di produzione non sono formattate in maniera corretta. Proseguire con il download del file e poi correggerle sul file"
+      );
+    }
+    if (drumB != undefined && wrongFormat != 1) {
       myDrums = drumA.toString() + "," + drumB.toString();
       finalDrums = myDrums.split(",");
       finalDelDate = delDateA;
@@ -1355,7 +1369,7 @@ function NitricOxideTavlov() {
       finalH2O = H2OparA;
     }
 
-    if (drumC != undefined) {
+    if (drumC != undefined && wrongFormat != 1) {
       myDrums =
         drumA.toString() + "," + drumB.toString() + "," + drumC.toString();
       finalDrums = myDrums.split(",");
@@ -1366,59 +1380,60 @@ function NitricOxideTavlov() {
       finalH2O = H2OparB;
     }
 
-    // Cambio formato dei mesi di production date, expiry date and delivery dates
-    for (let index = 0; index < finalDrums.length; index++) {
-      expiryDate[index] = finalDelDate[index];
-      expiryDate[index] = expiryDate[index].replaceAll(".", "-");
-      //deliveryDates[index] = deliveryDates[index].replace("Date: ", "");
-      finalDelDate[index] = finalDelDate[index].replaceAll(".", "-");
-      var monthExp = parseInt(finalProdDate[index].substring(3, 5)) + 5;
-      finalProdDate[index] = finalProdDate[index].replaceAll(".", "-");
-      const monthMan = parseInt(finalProdDate[index].substring(3, 5)) - 1;
-      const monthDel = parseInt(finalDelDate[index].substring(3, 5)) - 1;
-      const monthNameMan = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ];
+    if (wrongFormat != 1) {
+      // Cambio formato dei mesi di production date, expiry date and delivery dates
+      for (let index = 0; index < finalDrums.length; index++) {
+        expiryDate[index] = finalDelDate[index];
+        expiryDate[index] = expiryDate[index].replaceAll(".", "-");
+        //deliveryDates[index] = deliveryDates[index].replace("Date: ", "");
+        finalDelDate[index] = finalDelDate[index].replaceAll(".", "-");
+        var monthExp = parseInt(finalProdDate[index].substring(3, 5)) + 5;
+        finalProdDate[index] = finalProdDate[index].replaceAll(".", "-");
+        const monthMan = parseInt(finalProdDate[index].substring(3, 5)) - 1;
+        const monthDel = parseInt(finalDelDate[index].substring(3, 5)) - 1;
+        const monthNameMan = [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ];
 
-      var yearExp = parseInt(finalDelDate[index].substring(6, 10));
-      if (monthExp <= 12) {
-        expiryDate[index] =
+        var yearExp = parseInt(finalDelDate[index].substring(6, 10));
+        if (monthExp <= 12) {
+          expiryDate[index] =
+            finalProdDate[index].substring(0, 3) +
+            monthNameMan[monthExp] +
+            finalProdDate[index].substring(5, 11);
+        }
+        if (monthExp > 12) {
+          monthExp = monthExp - 12;
+          yearExp = yearExp + 1;
+          expiryDate[index] =
+            finalProdDate[index].substring(0, 3) +
+            monthNameMan[monthExp] +
+            "-" +
+            yearExp;
+        }
+
+        finalProdDate[index] =
           finalProdDate[index].substring(0, 3) +
-          monthNameMan[monthExp] +
+          monthNameMan[monthMan] +
           finalProdDate[index].substring(5, 11);
-      }
-      if (monthExp > 12) {
-        monthExp = monthExp - 12;
-        yearExp = yearExp + 1;
-        expiryDate[index] =
-          finalProdDate[index].substring(0, 3) +
-          monthNameMan[monthExp] +
-          "-" +
-          yearExp;
-      }
 
-      finalProdDate[index] =
-        finalProdDate[index].substring(0, 3) +
-        monthNameMan[monthMan] +
-        finalProdDate[index].substring(5, 11);
-
-      finalDelDate[index] =
-        finalDelDate[index].substring(0, 3) +
-        monthNameMan[monthDel] +
-        finalDelDate[index].substring(5, 11);
+        finalDelDate[index] =
+          finalDelDate[index].substring(0, 3) +
+          monthNameMan[monthDel] +
+          finalDelDate[index].substring(5, 11);
+      }
     }
-
     //Counter per shipment Number progressivo
     for (let index = 0; index < finalDrums.length; index++) {
       const testResponse = await fetch("/apicounter");
@@ -1461,15 +1476,6 @@ function NitricOxideTavlov() {
     //console.log("progressivo", shNumberNOT);
 
     // Input data manufacturing se non è leggibile da OCR del pdf
-    var regex = RegExp("[0-9]{2}[-][a-zA-z]{3}[-][0-9]{4}", "g");
-    var str1 = finalDelDate;
-    var str2 = finalProdDate;
-
-    if (regex.test(str1) === false || regex.test(str2) === false) {
-      alert(
-        "ATTENZIONE! Le date di manufacturing / end of shelf life o la data di produzione non sono formattate in maniera corretta. Proseguire con il download del file e poi correggerle sul file"
-      );
-    }
 
     const dataNOT = {
       shipment: finalDelDate,
@@ -1483,7 +1489,7 @@ function NitricOxideTavlov() {
       H2Oparameters: finalH2O,
     };
 
-    //console.log("dataNOT", dataNOT);
+    console.log("dataNOT", dataNOT);
 
     const NOToptions = {
       method: "POST",

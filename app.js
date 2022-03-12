@@ -165,7 +165,7 @@ try {
   });
 } catch (err) {
   console.log(err);
-  return;
+  //return;
 }
 
 // Alimenta il contatore per 'shipmentNumber'
@@ -759,7 +759,7 @@ app.post("/TCS", (req, res) => {
 
 app.post("/NOTavlov", (req, res) => {
   const dataNOTPost = req.body;
-  //console.log("dataNOTPost", dataNOTPost);
+  console.log("dataNOTPost", dataNOTPost);
   var zipNOT = new AdmZip();
   for (let id = 0; id < dataNOTPost.filetext.length; id++) {
     xw = new XMLWriter(true);
