@@ -1168,6 +1168,7 @@ function NitricOxideTavlov() {
     drumA,
     drumB,
     drumC,
+    prodDate1,
     prodDateA,
     prodDateB,
     delDateA,
@@ -1179,16 +1180,18 @@ function NitricOxideTavlov() {
     H2OparA,
     H2OparB,
     myDrums,
+    delDate1,
+    N2OTav1,
+    H2OTav1,
     //manDateNOT,
     //expDataNOT;
     wrongFormat;
-
   ReadNOText();
   async function ReadNOText() {
     const res = await fetch("/txt");
     var dataText = await res.text();
     arrayNOTavlov = dataText.split("\n");
-    console.log("array", arrayNOTavlov[56]);
+    //console.log("array", arrayNOTavlov);
 
     // formo prima gli indici del numero pagine
     for (let i = 0; i < arrayNOTavlov.length; i++) {
@@ -1206,40 +1209,64 @@ function NitricOxideTavlov() {
     //------------- PAGINA 1 -------------
     for (let i = 0; i < element1; i++) {
       if (arrayNOTavlov[i].indexOf("Includes") != -1) {
-        drumNumbers1.push(arrayNOTavlov[i + 1]);
+        drumA = arrayNOTavlov[i + 1];
       }
       if (arrayNOTavlov[i].indexOf("Production date(s)") != -1) {
-        productionDates1.push(arrayNOTavlov[i + 8]);
+        prodDate1 = arrayNOTavlov[i + 8];
+        var regex = RegExp("[0-9]{2}[.][0-9]{2}[.][0-9]{4}", "g");
+        if (regex.test(prodDate1) === false) {
+          wrongFormat = 1;
+          alert("prod date incorrect");
+          var dt = new Date();
+          var cosa = dt.toDateString();
+          var dayT = cosa.substring(8, 10);
+          var monthT = cosa.substring(4, 7);
+          var yearT = cosa.substring(11, 15);
+          prodDate1 = dayT + "-" + monthT + "-" + yearT;
+          console.log("oggi: ", prodDate1);
+        }
       }
       if (arrayNOTavlov[i].indexOf("Date") != -1) {
-        deliveryDates1.push(arrayNOTavlov[i]);
+        delDate1 = arrayNOTavlov[i];
+        var regex = RegExp("[0-9]{2}[.][0-9]{2}[.][0-9]{4}", "g");
+        if (regex.test(delDate1) === false) {
+          wrongFormat = 1;
+          var dt = new Date();
+          var cosa = dt.toDateString();
+          var dayT = cosa.substring(8, 10);
+          var monthT = cosa.substring(4, 7);
+          var yearT = cosa.substring(11, 15);
+          delDate1 = dayT + "-" + monthT + "-" + yearT;
+          console.log("oggi: ", delDate1);
+        }
       }
       if (arrayNOTavlov[i].indexOf("filling") != -1) {
-        N2parameters1.push(arrayNOTavlov[i + 2]);
-        N2Oparameters1.push(arrayNOTavlov[i + 3]);
-        H2Oparameters1.push(arrayNOTavlov[i + 4]);
+        N2OTav1 = arrayNOTavlov[i + 3];
+        H2OTav1 = arrayNOTavlov[i + 4];
       }
     }
-
-    drumA = drumNumbers1.toString().split(";");
-    for (let i = 0; i < drumA.length - 1; i++) {
-      productionDates1.push(productionDates1[i]);
-      deliveryDates1.push(deliveryDates1[i]);
-      N2parameters1.push(N2parameters1[i]);
-      N2Oparameters1.push(N2Oparameters1[i]);
-      H2Oparameters1.push(H2Oparameters1[i]);
+    drumA = drumA
+      .replace("Bundle Id's: ", "")
+      .replace(".", "")
+      .replace(/[\n\r]/g, "");
+    drumNumbers1 = drumA.split(",");
+    for (let i = 0; i < drumNumbers1.length; i++) {
+      productionDates1.push(prodDate1);
+      deliveryDates1.push(delDate1);
+      N2Oparameters1.push(N2OTav1);
+      H2Oparameters1.push(H2OTav1);
     }
 
-    for (let i = 0; i < drumA.length; i++) {
-      drumA[i] = drumA[i].replace("Bundle Id's: ", "");
-      drumA[i] = drumA[i].replace(/[\n\r]/g, "");
+    for (let i = 0; i < drumNumbers1.length; i++) {
       productionDates1[i] = productionDates1[i].replace(/[\n\r]/g, "");
       deliveryDates1[i] = deliveryDates1[i].replace("Date: ", "");
       deliveryDates1[i] = deliveryDates1[i].replace(/[\n\r]/g, "");
-      N2parameters1[i] = N2parameters1[i].replace(/[\n\r]/g, "");
       N2Oparameters1[i] = N2Oparameters1[i].replace(/[\n\r]/g, "");
       H2Oparameters1[i] = H2Oparameters1[i].replace(/[\n\r]/g, "");
     }
+
+    console.log("prod", productionDates1, "del", deliveryDates1);
+    console.log("N2O", N2Oparameters1, "H2O", H2Oparameters1);
 
     //------------- PAGINA 2 -------------
     if (isNaN(element2)) {
@@ -1346,19 +1373,19 @@ function NitricOxideTavlov() {
     finalN2O = N2Oparameters1;
     finalH2O = H2Oparameters1;
 
-    var regex = RegExp("[0-9]{2}[-][a-zA-z]{3}[-][0-9]{4}", "g");
-    var str1 = finalDelDate;
-    var str2 = finalProdDate;
+    // var regex = RegExp("[0-9]{2}[-][a-zA-z]{3}[-][0-9]{4}", "g");
+    // var str1 = finalDelDate;
+    // var str2 = finalProdDate;
 
-    if (regex.test(str1) === false || regex.test(str2) === false) {
-      wrongFormat = 1;
-      finalDelDate = ["to be specified", "to be specified", "to be specified"];
-      expiryDate = finalDelDate;
-      finalProdDate = finalDelDate;
-      alert(
-        "ATTENZIONE! Le date di manufacturing / end of shelf life o la data di produzione non sono formattate in maniera corretta. Proseguire con il download del file e poi correggerle sul file"
-      );
-    }
+    // if (regex.test(str1) === false || regex.test(str2) === false) {
+    //   wrongFormat = 1;
+    //   finalDelDate = ["to be specified", "to be specified", "to be specified"];
+    //   expiryDate = finalDelDate;
+    //   finalProdDate = finalDelDate;
+    //   alert(
+    //     "ATTENZIONE! Le date di manufacturing / end of shelf life o la data di produzione non sono formattate in maniera corretta. Proseguire con il download del file e poi correggerle sul file"
+    //   );
+    // }
     if (drumB != undefined && wrongFormat != 1) {
       myDrums = drumA.toString() + "," + drumB.toString();
       finalDrums = myDrums.split(",");
