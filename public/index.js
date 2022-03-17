@@ -1173,7 +1173,7 @@ function ChlorgasPdftoTxt(coaCS) {
       filetext: shipmentLotNumberCS,
     };
 
-    //console.log("dataCS", dataCS);
+    console.log("dataCS", dataCS);
 
     const CSoptions = {
       method: "POST",
