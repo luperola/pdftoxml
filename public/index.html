@@ -115,7 +115,7 @@
               >
             </li>
             <li>
-              <a class="list-item" href="#" onclick="NitricOxideTavlov()"
+              <a class="list-item" href="#" onclick="mfgDateNOTavlov()"
                 ><span>Nitric Oxide Tavlov</span></a
               >
             </li>
@@ -673,7 +673,7 @@
           <button
             id="btnTav1"
             class="btn btn-primary"
-            onclick="mfg()"
+            onclick="delDateNOTavlov()"
             style="margin-left: 5px"
           >
             Invia
@@ -681,6 +681,39 @@
         >
       </div>
     </div>
+    <br />
+    <div id="delDateTav1" style="margin-left: 20px; display: none">
+      <label for="delTav1" style="color: blue"
+        >Data consegna Nitric Oxide Tavlov</label
+      ><br />
+      <div class="input-group">
+        <input
+          type="date"
+          id="delTav1"
+          name="newstart"
+          required="required"
+          style="
+            color: blue;
+            height: 40px;
+            border-radius: 5px;
+            border-color: lightblue;
+            padding-left: 15px;
+            margin-left: 20px;
+          "
+        />
+        <span class="input-group-btn">
+          <button
+            id="btnTav2"
+            class="btn btn-primary"
+            onclick="NitricOxideTavlov()"
+            style="margin-left: 5px"
+          >
+            Invia
+          </button></span
+        >
+      </div>
+    </div>
+    <br />
     <!-- ------Wacker------- -->
     <p
       id="supplierWacker"

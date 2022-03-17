@@ -759,7 +759,7 @@ app.post("/TCS", (req, res) => {
 
 app.post("/NOTavlov", (req, res) => {
   const dataNOTPost = req.body;
-  console.log("dataNOTPost", dataNOTPost);
+  //console.log("dataNOTPost", dataNOTPost);
   var zipNOT = new AdmZip();
   for (let id = 0; id < dataNOTPost.filetext.length; id++) {
     xw = new XMLWriter(true);
@@ -1434,11 +1434,11 @@ app.post("/apiKrNe", (req, res) => {
   xw.writeAttribute("VALUE", dataKrNe.Hevalue);
   xw.endElement();
   xw.endElement("DIM_Helium_He");
-  xw.startElement("DIM_Moisture_H20");
+  xw.startElement("DIM_Moisture_H2O");
   xw.startElement("RAW");
   xw.writeAttribute("VALUE", dataKrNe.H2Ovalue);
   xw.endElement();
-  xw.endElement("DIM_Moisture_H20");
+  xw.endElement("DIM_Moisture_H2O");
   xw.startElement("DIM_Methane_CH4");
   xw.startElement("RAW");
   xw.writeAttribute("VALUE", dataKrNe.CH4value);

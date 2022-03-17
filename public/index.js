@@ -25,6 +25,64 @@ let testMatrixCS1 = [],
   arrayIndecesMetal = [],
   arrayIndecesMetalRandom = [],
   arrayMetalDataHI = [];
+// NO Tavlov variables
+let arrayNOTavlov = [],
+  pageNumbers = [],
+  productionDates1 = [],
+  productionDates2 = [],
+  productionDates3 = [],
+  deliveryDates1 = [],
+  deliveryDates2 = [],
+  deliveryDates3 = [],
+  expDates1 = [],
+  expDates2 = [],
+  expDates3 = [],
+  drumNumbers1 = [],
+  drumNumbers2 = [],
+  drumNumbers3 = [],
+  //drumQuantities = [],
+  expiryDate = [],
+  shNumberNOT = [],
+  N2parameters1 = [],
+  N2parameters2 = [],
+  N2parameters3 = [],
+  N2Oparameters1 = [],
+  N2Oparameters2 = [],
+  N2Oparameters3 = [],
+  H2Oparameters1 = [],
+  H2Oparameters2 = [],
+  H2Oparameters3 = [],
+  finalDrums = [],
+  finalProdDate = [],
+  finalDelDate = [],
+  finalN2 = [],
+  finalN2O = [],
+  finalH2O = [],
+  finalExpDate = [],
+  drumA,
+  drumB,
+  drumC,
+  prodDate1,
+  prodDateA,
+  prodDateB,
+  delDateA,
+  delDateB,
+  N2parA,
+  N2parB,
+  N2OparA,
+  N2OparB,
+  H2OparA,
+  H2OparB,
+  myDrums,
+  delDate1,
+  N2OTav1,
+  H2OTav1,
+  //manDateNOT,
+  //expDataNOT;
+  mfgDateNewFormat,
+  delDateNewFormat,
+  expDateNewFormat,
+  wrongFormat;
 
 //---------------HONG IN AGRATE----------------
 
@@ -1132,60 +1190,87 @@ function ChlorgasPdftoTxt(coaCS) {
 // ---------------- END CHLORGAS ----------------------
 
 // ---------------- NITRIC OXIDE TAVLOV --------------
+function mfgDateNOTavlov() {
+  document.getElementById("MfgDateTav1").style.display = "inline";
+}
 
+function delDateNOTavlov() {
+  mfgDateNewFormat = document.getElementById("MfgTav1").value;
+  const monthMan = parseInt(mfgDateNewFormat.substring(5, 7)) - 1;
+  const monthNameMan = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  mfgDateNewFormat =
+    mfgDateNewFormat.substring(8, 11) +
+    "-" +
+    monthNameMan[monthMan] +
+    "-" +
+    mfgDateNewFormat.substring(0, 4);
+
+  expDateNewFormat = parseInt(mfgDateNewFormat.substring(7, 11));
+  var monthExp = monthMan + 6;
+
+  if (monthExp <= 12) {
+    expDateNewFormat =
+      mfgDateNewFormat.substring(0, 3) +
+      monthNameMan[monthExp] +
+      mfgDateNewFormat.substring(6, 11);
+  }
+  if (monthExp > 12) {
+    monthExp = monthExp - 12;
+    var yearExp = parseInt(mfgDateNewFormat.substring(7, 11)) + 1;
+    expDateNewFormat =
+      mfgDateNewFormat.substring(0, 3) + monthNameMan[monthExp] + yearExp;
+  }
+
+  document.getElementById("delDateTav1").style.display = "inline";
+  document.getElementById("MfgDateTav1").style.display = "none";
+}
 function NitricOxideTavlov() {
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
-  let arrayNOTavlov = [],
-    pageNumbers = [],
-    productionDates1 = [],
-    productionDates2 = [],
-    productionDates3 = [],
-    deliveryDates1 = [],
-    deliveryDates2 = [],
-    deliveryDates3 = [],
-    drumNumbers1 = [],
-    drumNumbers2 = [],
-    drumNumbers3 = [],
-    //drumQuantities = [],
-    expiryDate = [],
-    shNumberNOT = [],
-    N2parameters1 = [],
-    N2parameters2 = [],
-    N2parameters3 = [],
-    N2Oparameters1 = [],
-    N2Oparameters2 = [],
-    N2Oparameters3 = [],
-    H2Oparameters1 = [],
-    H2Oparameters2 = [],
-    H2Oparameters3 = [],
-    finalDrums = [],
-    finalProdDate = [],
-    finalDelDate = [],
-    finalN2 = [],
-    finalN2O = [],
-    finalH2O = [],
-    drumA,
-    drumB,
-    drumC,
-    prodDate1,
-    prodDateA,
-    prodDateB,
-    delDateA,
-    delDateB,
-    N2parA,
-    N2parB,
-    N2OparA,
-    N2OparB,
-    H2OparA,
-    H2OparB,
-    myDrums,
-    delDate1,
-    N2OTav1,
-    H2OTav1,
-    //manDateNOT,
-    //expDataNOT;
-    wrongFormat;
+  delDateNewFormat = document.getElementById("delTav1").value;
+  console.log("delDate", delDateNewFormat);
+  const monthMan = parseInt(delDateNewFormat.substring(5, 7)) - 1;
+  const monthNameMan = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  delDateNewFormat =
+    delDateNewFormat.substring(8, 11) +
+    "-" +
+    monthNameMan[monthMan] +
+    "-" +
+    delDateNewFormat.substring(0, 4);
+  document.getElementById("delDateTav1").style.display = "none";
+  console.log(
+    "mfg + exp dates+ del date",
+    mfgDateNewFormat,
+    expDateNewFormat,
+    delDateNewFormat
+  );
+
   ReadNOText();
   async function ReadNOText() {
     const res = await fetch("/txt");
@@ -1211,35 +1296,7 @@ function NitricOxideTavlov() {
       if (arrayNOTavlov[i].indexOf("Includes") != -1) {
         drumA = arrayNOTavlov[i + 1];
       }
-      if (arrayNOTavlov[i].indexOf("Production date(s)") != -1) {
-        prodDate1 = arrayNOTavlov[i + 8];
-        var regex = RegExp("[0-9]{2}[.][0-9]{2}[.][0-9]{4}", "g");
-        if (regex.test(prodDate1) === false) {
-          wrongFormat = 1;
-          alert("prod date incorrect");
-          var dt = new Date();
-          var cosa = dt.toDateString();
-          var dayT = cosa.substring(8, 10);
-          var monthT = cosa.substring(4, 7);
-          var yearT = cosa.substring(11, 15);
-          prodDate1 = dayT + "-" + monthT + "-" + yearT;
-          console.log("oggi: ", prodDate1);
-        }
-      }
-      if (arrayNOTavlov[i].indexOf("Date") != -1) {
-        delDate1 = arrayNOTavlov[i];
-        var regex = RegExp("[0-9]{2}[.][0-9]{2}[.][0-9]{4}", "g");
-        if (regex.test(delDate1) === false) {
-          wrongFormat = 1;
-          var dt = new Date();
-          var cosa = dt.toDateString();
-          var dayT = cosa.substring(8, 10);
-          var monthT = cosa.substring(4, 7);
-          var yearT = cosa.substring(11, 15);
-          delDate1 = dayT + "-" + monthT + "-" + yearT;
-          console.log("oggi: ", delDate1);
-        }
-      }
+
       if (arrayNOTavlov[i].indexOf("filling") != -1) {
         N2OTav1 = arrayNOTavlov[i + 3];
         H2OTav1 = arrayNOTavlov[i + 4];
@@ -1251,21 +1308,26 @@ function NitricOxideTavlov() {
       .replace(/[\n\r]/g, "");
     drumNumbers1 = drumA.split(",");
     for (let i = 0; i < drumNumbers1.length; i++) {
-      productionDates1.push(prodDate1);
-      deliveryDates1.push(delDate1);
+      productionDates1.push(mfgDateNewFormat);
+      deliveryDates1.push(delDateNewFormat);
+      expDates1.push(expDateNewFormat);
       N2Oparameters1.push(N2OTav1);
       H2Oparameters1.push(H2OTav1);
     }
 
     for (let i = 0; i < drumNumbers1.length; i++) {
-      productionDates1[i] = productionDates1[i].replace(/[\n\r]/g, "");
-      deliveryDates1[i] = deliveryDates1[i].replace("Date: ", "");
-      deliveryDates1[i] = deliveryDates1[i].replace(/[\n\r]/g, "");
       N2Oparameters1[i] = N2Oparameters1[i].replace(/[\n\r]/g, "");
       H2Oparameters1[i] = H2Oparameters1[i].replace(/[\n\r]/g, "");
     }
 
-    console.log("prod", productionDates1, "del", deliveryDates1);
+    console.log(
+      "prod",
+      productionDates1,
+      "del",
+      deliveryDates1,
+      "exp",
+      expDates1
+    );
     console.log("N2O", N2Oparameters1, "H2O", H2Oparameters1);
 
     //------------- PAGINA 2 -------------
@@ -1369,23 +1431,11 @@ function NitricOxideTavlov() {
     finalDrums = myDrums.split(",");
     finalDelDate = deliveryDates1;
     finalProdDate = productionDates1;
+    finalExpDate = expDates1;
     finalN2 = N2parameters1;
     finalN2O = N2Oparameters1;
     finalH2O = H2Oparameters1;
 
-    // var regex = RegExp("[0-9]{2}[-][a-zA-z]{3}[-][0-9]{4}", "g");
-    // var str1 = finalDelDate;
-    // var str2 = finalProdDate;
-
-    // if (regex.test(str1) === false || regex.test(str2) === false) {
-    //   wrongFormat = 1;
-    //   finalDelDate = ["to be specified", "to be specified", "to be specified"];
-    //   expiryDate = finalDelDate;
-    //   finalProdDate = finalDelDate;
-    //   alert(
-    //     "ATTENZIONE! Le date di manufacturing / end of shelf life o la data di produzione non sono formattate in maniera corretta. Proseguire con il download del file e poi correggerle sul file"
-    //   );
-    // }
     if (drumB != undefined && wrongFormat != 1) {
       myDrums = drumA.toString() + "," + drumB.toString();
       finalDrums = myDrums.split(",");
@@ -1407,60 +1457,6 @@ function NitricOxideTavlov() {
       finalH2O = H2OparB;
     }
 
-    if (wrongFormat != 1) {
-      // Cambio formato dei mesi di production date, expiry date and delivery dates
-      for (let index = 0; index < finalDrums.length; index++) {
-        expiryDate[index] = finalDelDate[index];
-        expiryDate[index] = expiryDate[index].replaceAll(".", "-");
-        //deliveryDates[index] = deliveryDates[index].replace("Date: ", "");
-        finalDelDate[index] = finalDelDate[index].replaceAll(".", "-");
-        var monthExp = parseInt(finalProdDate[index].substring(3, 5)) + 5;
-        finalProdDate[index] = finalProdDate[index].replaceAll(".", "-");
-        const monthMan = parseInt(finalProdDate[index].substring(3, 5)) - 1;
-        const monthDel = parseInt(finalDelDate[index].substring(3, 5)) - 1;
-        const monthNameMan = [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ];
-
-        var yearExp = parseInt(finalDelDate[index].substring(6, 10));
-        if (monthExp <= 12) {
-          expiryDate[index] =
-            finalProdDate[index].substring(0, 3) +
-            monthNameMan[monthExp] +
-            finalProdDate[index].substring(5, 11);
-        }
-        if (monthExp > 12) {
-          monthExp = monthExp - 12;
-          yearExp = yearExp + 1;
-          expiryDate[index] =
-            finalProdDate[index].substring(0, 3) +
-            monthNameMan[monthExp] +
-            "-" +
-            yearExp;
-        }
-
-        finalProdDate[index] =
-          finalProdDate[index].substring(0, 3) +
-          monthNameMan[monthMan] +
-          finalProdDate[index].substring(5, 11);
-
-        finalDelDate[index] =
-          finalDelDate[index].substring(0, 3) +
-          monthNameMan[monthDel] +
-          finalDelDate[index].substring(5, 11);
-      }
-    }
     //Counter per shipment Number progressivo
     for (let index = 0; index < finalDrums.length; index++) {
       const testResponse = await fetch("/apicounter");
@@ -1507,11 +1503,10 @@ function NitricOxideTavlov() {
     const dataNOT = {
       shipment: finalDelDate,
       lotNumber: finalDrums,
-      expiryDate: expiryDate,
+      expiryDate: finalExpDate,
       manDate: finalProdDate,
       progressivo: shNumberNOT,
       filetext: finalDrums,
-      N2parameters: finalN2,
       N2Oparameters: finalN2O,
       H2Oparameters: finalH2O,
     };
