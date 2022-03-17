@@ -311,7 +311,7 @@ app.post("/apithree", (req, res) => {
     xw.writeAttribute("MaterialCode", "3GASCD43");
     xw.writeAttribute("SupplierHoldingDesc", "LINDE PLC");
     xw.writeAttribute("ReceivingStPlant", "Agrate");
-    xw.writeAttribute("MpsSpecNo", "DM00848634_06");
+    xw.writeAttribute("MpsSpecNo", "DDM00848634_06");
     xw.writeAttribute("MpsSpecRev", "1.0");
     xw.writeAttribute("ShipmentDate", dataCSPost.shipment[i]);
     xw.writeAttribute("ShipmentNumber", dataCSPost.progressivoCS[i]);
@@ -340,7 +340,7 @@ app.post("/apithree", (req, res) => {
     xw.writeAttribute("VALUE", "1.0");
     xw.endElement();
     xw.endElement("DIM_Chlorine_CL2");
-    xw.startElement("DIM_Chlorinated_Hydrogencarbons_CXHYCL2");
+    xw.startElement("DIM_Chlorinated_Hydrogencarbons_CXHYCL22");
     xw.startElement("RAW");
     xw.writeAttribute("VALUE", "1.0");
     xw.endElement();
@@ -360,11 +360,11 @@ app.post("/apithree", (req, res) => {
     xw.writeAttribute("VALUE", "1.8");
     xw.endElement();
     xw.endElement("DIM_Moisture_H2O");
-    xw.startElement("DIM_Nitrogen_plus_Oxygen_plus_Argon_N2_plus_O2_plus_Ar");
+    xw.startElement("DIM_Nitrogen_plus_Oxygen_plus_Argon_N2_plus_O2_plus_Ar ");
     xw.startElement("RAW");
     xw.writeAttribute("VALUE", "4.0");
     xw.endElement();
-    xw.endElement("DIM_Nitrogen_plus_Oxygen_plus_Argon_N2_plus_O2_plus_Ar");
+    xw.endElement("DIM_Nitrogen_plus_Oxygen_plus_Argon_N2_plus_O2_plus_Ar ");
     xw.startElement("DIM_Nitrogen_N2 ");
     xw.startElement("RAW");
     xw.writeAttribute("VALUE", "2.0");
