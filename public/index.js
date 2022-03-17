@@ -1241,7 +1241,6 @@ function NitricOxideTavlov() {
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
   delDateNewFormat = document.getElementById("delTav1").value;
-  console.log("delDate", delDateNewFormat);
   const monthMan = parseInt(delDateNewFormat.substring(5, 7)) - 1;
   const monthNameMan = [
     "Jan",
@@ -1264,12 +1263,6 @@ function NitricOxideTavlov() {
     "-" +
     delDateNewFormat.substring(0, 4);
   document.getElementById("delDateTav1").style.display = "none";
-  console.log(
-    "mfg + exp dates+ del date",
-    mfgDateNewFormat,
-    expDateNewFormat,
-    delDateNewFormat
-  );
 
   ReadNOText();
   async function ReadNOText() {
@@ -1320,62 +1313,55 @@ function NitricOxideTavlov() {
       H2Oparameters1[i] = H2Oparameters1[i].replace(/[\n\r]/g, "");
     }
 
-    console.log(
-      "prod",
-      productionDates1,
-      "del",
-      deliveryDates1,
-      "exp",
-      expDates1
-    );
-    console.log("N2O", N2Oparameters1, "H2O", H2Oparameters1);
-
     //------------- PAGINA 2 -------------
     if (isNaN(element2)) {
       element2 = 0;
     }
 
     if (element2 != 0) {
-      for (let i = element1; i < element2; i++) {
-        if (arrayNOTavlov[i].indexOf("Includes") != -1) {
-          drumNumbers2.push(arrayNOTavlov[i + 1]);
-        }
-        if (arrayNOTavlov[i].indexOf("Production date(s)") != -1) {
-          productionDates2.push(arrayNOTavlov[i + 8]);
-        }
-        if (arrayNOTavlov[i].indexOf("Date") != -1) {
-          deliveryDates2.push(arrayNOTavlov[i]);
-        }
-        if (arrayNOTavlov[i].indexOf("filling") != -1) {
-          N2parameters2.push(arrayNOTavlov[i + 2]);
-          N2Oparameters2.push(arrayNOTavlov[i + 3]);
-          H2Oparameters2.push(arrayNOTavlov[i + 4]);
-        }
-      }
-      drumB = drumNumbers2.toString().split(";");
-      for (let i = 0; i < drumB.length - 1; i++) {
-        productionDates2.push(productionDates2[i]);
-        deliveryDates2.push(deliveryDates2[i]);
-        N2parameters2.push(N2parameters2[i]);
-        N2Oparameters2.push(N2Oparameters2[i]);
-        H2Oparameters2.push(H2Oparameters2[i]);
-      }
+      alert(
+        "se il COA di Nitic Oxide ha più di una pagina, inviatemi il file."
+      );
+      //   for (let i = element1; i < element2; i++) {
+      //     if (arrayNOTavlov[i].indexOf("Includes") != -1) {
+      //       drumNumbers2.push(arrayNOTavlov[i + 1]);
+      //     }
+      //     if (arrayNOTavlov[i].indexOf("Production date(s)") != -1) {
+      //       productionDates2.push(arrayNOTavlov[i + 8]);
+      //     }
+      //     if (arrayNOTavlov[i].indexOf("Date") != -1) {
+      //       deliveryDates2.push(arrayNOTavlov[i]);
+      //     }
+      //     if (arrayNOTavlov[i].indexOf("filling") != -1) {
+      //       N2parameters2.push(arrayNOTavlov[i + 2]);
+      //       N2Oparameters2.push(arrayNOTavlov[i + 3]);
+      //       H2Oparameters2.push(arrayNOTavlov[i + 4]);
+      //     }
+      //   }
+      //   drumB = drumNumbers2.toString().split(";");
+      //   for (let i = 0; i < drumB.length - 1; i++) {
+      //     productionDates2.push(productionDates2[i]);
+      //     deliveryDates2.push(deliveryDates2[i]);
+      //     N2parameters2.push(N2parameters2[i]);
+      //     N2Oparameters2.push(N2Oparameters2[i]);
+      //     H2Oparameters2.push(H2Oparameters2[i]);
+      //   }
 
-      for (let i = 0; i < drumB.length; i++) {
-        drumB[i] = drumB[i].replace("Bundle Id's: ", "");
-        drumB[i] = drumB[i].replace(/[\n\r]/g, "");
-        productionDates2[i] = productionDates2[i].replace(/[\n\r]/g, "");
-        deliveryDates2[i] = deliveryDates2[i].replace("Date: ", "");
-        deliveryDates2[i] = deliveryDates2[i].replace(/[\n\r]/g, "");
-        N2parameters2[i] = N2parameters2[i].replace(/[\n\r]/g, "");
-        N2Oparameters2[i] = N2Oparameters2[i].replace(/[\n\r]/g, "");
-        H2Oparameters2[i] = H2Oparameters2[i].replace(/[\n\r]/g, "");
-      }
-      prodDateA = productionDates1.concat(productionDates2);
-      delDateA = deliveryDates1.concat(deliveryDates2);
-      N2parA = N2Oparameters1.concat(N2Oparameters2);
-      N2OparA = N2Oparameters1.concat(N2Oparameters2);
-      H2OparA = H2Oparameters1.concat(H2Oparameters2);
+      //   for (let i = 0; i < drumB.length; i++) {
+      //     drumB[i] = drumB[i].replace("Bundle Id's: ", "");
+      //     drumB[i] = drumB[i].replace(/[\n\r]/g, "");
+      //     productionDates2[i] = productionDates2[i].replace(/[\n\r]/g, "");
+      //     deliveryDates2[i] = deliveryDates2[i].replace("Date: ", "");
+      //     deliveryDates2[i] = deliveryDates2[i].replace(/[\n\r]/g, "");
+      //     N2parameters2[i] = N2parameters2[i].replace(/[\n\r]/g, "");
+      //     N2Oparameters2[i] = N2Oparameters2[i].replace(/[\n\r]/g, "");
+      //     H2Oparameters2[i] = H2Oparameters2[i].replace(/[\n\r]/g, "");
+      //   }
+      //   prodDateA = productionDates1.concat(productionDates2);
+      //   delDateA = deliveryDates1.concat(deliveryDates2);
+      //   N2parA = N2Oparameters1.concat(N2Oparameters2);
+      //   N2OparA = N2Oparameters1.concat(N2Oparameters2);
+      //   H2OparA = H2Oparameters1.concat(H2Oparameters2);
     }
 
     //------------- PAGINA 3 -------------
@@ -1383,49 +1369,49 @@ function NitricOxideTavlov() {
     if (isNaN(element3)) {
       element3 = 0;
     }
-    if (element3 != 0) {
-      console.log("non dovrei essere qui");
-      for (let i = element2; i < element3; i++) {
-        if (arrayNOTavlov[i].indexOf("Includes") != -1) {
-          drumNumbers3.push(arrayNOTavlov[i + 1]);
-        }
-        if (arrayNOTavlov[i].indexOf("Production date(s)") != -1) {
-          productionDates3.push(arrayNOTavlov[i + 8]);
-        }
-        if (arrayNOTavlov[i].indexOf("Date") != -1) {
-          deliveryDates3.push(arrayNOTavlov[i]);
-        }
-        if (arrayNOTavlov[i].indexOf("filling") != -1) {
-          N2parameters3.push(arrayNOTavlov[i + 2]);
-          N2Oparameters3.push(arrayNOTavlov[i + 3]);
-          H2Oparameters3.push(arrayNOTavlov[i + 4]);
-        }
-      }
-      drumC = drumNumbers3.toString().split(";");
-      for (let i = 0; i < drumC.length - 1; i++) {
-        productionDates3.push(productionDates3[i]);
-        deliveryDates3.push(deliveryDates3[i]);
-        N2parameters3.push(N2parameters3[i]);
-        N2Oparameters3.push(N2Oparameters3[i]);
-        H2Oparameters3.push(H2Oparameters3[i]);
-      }
+    // if (element3 != 0) {
+    //   console.log("non dovrei essere qui");
+    //   for (let i = element2; i < element3; i++) {
+    //     if (arrayNOTavlov[i].indexOf("Includes") != -1) {
+    //       drumNumbers3.push(arrayNOTavlov[i + 1]);
+    //     }
+    //     if (arrayNOTavlov[i].indexOf("Production date(s)") != -1) {
+    //       productionDates3.push(arrayNOTavlov[i + 8]);
+    //     }
+    //     if (arrayNOTavlov[i].indexOf("Date") != -1) {
+    //       deliveryDates3.push(arrayNOTavlov[i]);
+    //     }
+    //     if (arrayNOTavlov[i].indexOf("filling") != -1) {
+    //       N2parameters3.push(arrayNOTavlov[i + 2]);
+    //       N2Oparameters3.push(arrayNOTavlov[i + 3]);
+    //       H2Oparameters3.push(arrayNOTavlov[i + 4]);
+    //     }
+    //   }
+    //   drumC = drumNumbers3.toString().split(";");
+    //   for (let i = 0; i < drumC.length - 1; i++) {
+    //     productionDates3.push(productionDates3[i]);
+    //     deliveryDates3.push(deliveryDates3[i]);
+    //     N2parameters3.push(N2parameters3[i]);
+    //     N2Oparameters3.push(N2Oparameters3[i]);
+    //     H2Oparameters3.push(H2Oparameters3[i]);
+    //   }
 
-      for (let i = 0; i < drumC.length; i++) {
-        drumC[i] = drumC[i].replace("Bundle Id's: ", "");
-        drumC[i] = drumC[i].replace(/[\n\r]/g, "");
-        productionDates3[i] = productionDates3[i].replace(/[\n\r]/g, "");
-        deliveryDates3[i] = deliveryDates3[i].replace("Date: ", "");
-        deliveryDates3[i] = deliveryDates3[i].replace(/[\n\r]/g, "");
-        N2parameters3[i] = N2parameters3[i].replace(/[\n\r]/g, "");
-        N2Oparameters3[i] = N2Oparameters3[i].replace(/[\n\r]/g, "");
-        H2Oparameters3[i] = H2Oparameters3[i].replace(/[\n\r]/g, "");
-      }
-      prodDateB = prodDateA.concat(productionDates3);
-      delDateB = delDateA.concat(deliveryDates3);
-      N2parB = N2OparA.concat(N2Oparameters3);
-      N2OparB = N2OparA.concat(N2Oparameters3);
-      H2OparB = H2OparA.concat(H2Oparameters3);
-    }
+    //   for (let i = 0; i < drumC.length; i++) {
+    //     drumC[i] = drumC[i].replace("Bundle Id's: ", "");
+    //     drumC[i] = drumC[i].replace(/[\n\r]/g, "");
+    //     productionDates3[i] = productionDates3[i].replace(/[\n\r]/g, "");
+    //     deliveryDates3[i] = deliveryDates3[i].replace("Date: ", "");
+    //     deliveryDates3[i] = deliveryDates3[i].replace(/[\n\r]/g, "");
+    //     N2parameters3[i] = N2parameters3[i].replace(/[\n\r]/g, "");
+    //     N2Oparameters3[i] = N2Oparameters3[i].replace(/[\n\r]/g, "");
+    //     H2Oparameters3[i] = H2Oparameters3[i].replace(/[\n\r]/g, "");
+    //   }
+    //   prodDateB = prodDateA.concat(productionDates3);
+    //   delDateB = delDateA.concat(deliveryDates3);
+    //   N2parB = N2OparA.concat(N2Oparameters3);
+    //   N2OparB = N2OparA.concat(N2Oparameters3);
+    //   H2OparB = H2OparA.concat(H2Oparameters3);
+    // }
 
     myDrums = drumA.toString();
     finalDrums = myDrums.split(",");
@@ -1436,26 +1422,26 @@ function NitricOxideTavlov() {
     finalN2O = N2Oparameters1;
     finalH2O = H2Oparameters1;
 
-    if (drumB != undefined && wrongFormat != 1) {
-      myDrums = drumA.toString() + "," + drumB.toString();
-      finalDrums = myDrums.split(",");
-      finalDelDate = delDateA;
-      finalProdDate = prodDateA;
-      finalN2 = N2parA;
-      finalN2O = N2OparA;
-      finalH2O = H2OparA;
-    }
+    // if (drumB != undefined && wrongFormat != 1) {
+    //   myDrums = drumA.toString() + "," + drumB.toString();
+    //   finalDrums = myDrums.split(",");
+    //   finalDelDate = delDateA;
+    //   finalProdDate = prodDateA;
+    //   finalN2 = N2parA;
+    //   finalN2O = N2OparA;
+    //   finalH2O = H2OparA;
+    // }
 
-    if (drumC != undefined && wrongFormat != 1) {
-      myDrums =
-        drumA.toString() + "," + drumB.toString() + "," + drumC.toString();
-      finalDrums = myDrums.split(",");
-      finalDelDate = delDateB;
-      finalProdDate = prodDateB;
-      finalN2 = N2parB;
-      finalN2O = N2OparB;
-      finalH2O = H2OparB;
-    }
+    // if (drumC != undefined && wrongFormat != 1) {
+    //   myDrums =
+    //     drumA.toString() + "," + drumB.toString() + "," + drumC.toString();
+    //   finalDrums = myDrums.split(",");
+    //   finalDelDate = delDateB;
+    //   finalProdDate = prodDateB;
+    //   finalN2 = N2parB;
+    //   finalN2O = N2OparB;
+    //   finalH2O = H2OparB;
+    // }
 
     //Counter per shipment Number progressivo
     for (let index = 0; index < finalDrums.length; index++) {
@@ -1511,7 +1497,7 @@ function NitricOxideTavlov() {
       H2Oparameters: finalH2O,
     };
 
-    console.log("dataNOT", dataNOT);
+    //console.log("dataNOT", dataNOT);
 
     const NOToptions = {
       method: "POST",

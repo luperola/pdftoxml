@@ -306,12 +306,12 @@ app.post("/apithree", (req, res) => {
     xw.writeAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
     xw.writeAttribute(
       "xsi:noNamespaceSchemaLocation",
-      "3GASCD26_DM00822093_09.xsd"
+      "3GASCD43_DM00848634_06.xsd"
     );
-    xw.writeAttribute("MaterialCode", "3GASCD26");
+    xw.writeAttribute("MaterialCode", "3GASCD43");
     xw.writeAttribute("SupplierHoldingDesc", "LINDE PLC");
     xw.writeAttribute("ReceivingStPlant", "Agrate");
-    xw.writeAttribute("MpsSpecNo", "DM00822093_09");
+    xw.writeAttribute("MpsSpecNo", "DM00848634_06");
     xw.writeAttribute("MpsSpecRev", "1.0");
     xw.writeAttribute("ShipmentDate", dataCSPost.shipment[i]);
     xw.writeAttribute("ShipmentNumber", dataCSPost.progressivoCS[i]);
@@ -335,6 +335,16 @@ app.post("/apithree", (req, res) => {
     xw.writeAttribute("VALUE", "6.0");
     xw.endElement();
     xw.endElement("DIM_Carbon_monoxide_CO");
+    xw.startElement("DIM_Chlorine_CL2");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", "1.0");
+    xw.endElement();
+    xw.endElement("DIM_Chlorine_CL2");
+    xw.startElement("DIM_Chlorinated_Hydrogencarbons_CXHYCL2");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", "1.0");
+    xw.endElement();
+    xw.endElement("DIM_Chlorinated_Hydrogencarbons_CXHYCL2");
     xw.startElement("DIM_Iron_Fe");
     xw.startElement("RAW");
     xw.writeAttribute("VALUE", "0.4");
@@ -350,16 +360,16 @@ app.post("/apithree", (req, res) => {
     xw.writeAttribute("VALUE", "1.8");
     xw.endElement();
     xw.endElement("DIM_Moisture_H2O");
+    xw.startElement("DIM_Nitrogen_plus_Oxygen_plus_Argon_N2_plus_O2_plus_Ar");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", "4.0");
+    xw.endElement();
+    xw.endElement("DIM_Nitrogen_plus_Oxygen_plus_Argon_N2_plus_O2_plus_Ar");
     xw.startElement("DIM_Nitrogen_N2 ");
     xw.startElement("RAW");
     xw.writeAttribute("VALUE", "2.0");
     xw.endElement();
     xw.endElement("DIM_Nitrogen_N2 ");
-    xw.startElement("DIM_Oxygen_plus_argon_O2_plus_Ar ");
-    xw.startElement("RAW");
-    xw.writeAttribute("VALUE", "2.0");
-    xw.endElement();
-    xw.endElement("DIM_Oxygen_plus_argon_O2_plus_Ar ");
     xw.startElement("DIM_Hydrogen_H2 ");
     xw.startElement("RAW");
     xw.writeAttribute("VALUE", "5.0");
