@@ -337,12 +337,12 @@ app.post("/apithree", (req, res) => {
     xw.endElement("DIM_Carbon_monoxide_CO");
     xw.startElement("DIM_Chlorine_CL2");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", "1.0");
+    xw.writeAttribute("VALUE", "0.8");
     xw.endElement();
     xw.endElement("DIM_Chlorine_CL2");
     xw.startElement("DIM_Chlorinated_Hydrogencarbons_CXHYCL22");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", "1.0");
+    xw.writeAttribute("VALUE", "0.8");
     xw.endElement();
     xw.endElement("DIM_Chlorinated_Hydrogencarbons_CXHYCL2");
     xw.startElement("DIM_Iron_Fe");
@@ -365,11 +365,6 @@ app.post("/apithree", (req, res) => {
     xw.writeAttribute("VALUE", "4.0");
     xw.endElement();
     xw.endElement("DIM_Nitrogen_plus_Oxygen_plus_Argon_N2_plus_O2_plus_Ar ");
-    xw.startElement("DIM_Nitrogen_N2 ");
-    xw.startElement("RAW");
-    xw.writeAttribute("VALUE", "2.0");
-    xw.endElement();
-    xw.endElement("DIM_Nitrogen_N2 ");
     xw.startElement("DIM_Hydrogen_H2 ");
     xw.startElement("RAW");
     xw.writeAttribute("VALUE", "5.0");
