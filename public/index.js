@@ -803,7 +803,7 @@ function WackerHCl(
       H2Ovalue: H2OvalueW,
       Fevalue: FevalueW,
     };
-    //console.log("manDate", wackerData);
+    console.log("manDate", wackerData);
 
     // posto i dati per compilare file xlm
 
@@ -1173,7 +1173,7 @@ function ChlorgasPdftoTxt(coaCS) {
       filetext: shipmentLotNumberCS,
     };
 
-    //console.log("dataCS", dataCS);
+    console.log("dataCS", dataCS);
 
     const CSoptions = {
       method: "POST",
@@ -1999,7 +1999,7 @@ function CF4() {
       COvalue: COvalueCF4,
       SF6value: SF6valueCF4,
     };
-    //console.log("all data", CF4Data);
+    console.log("all data", CF4Data);
 
     // posto i dati per compilare file xlm
 
@@ -2172,7 +2172,7 @@ function F2KrNe(receivingPlant) {
       COF2value: COF2valueF2KrNe,
       CF4value: CF4valueF2KrNe,
     };
-    //console.log("all data", F2KrNeData);
+    console.log("all data", F2KrNeData);
 
     // posto i dati per compilare file xlm
 
@@ -2405,7 +2405,8 @@ function HBr() {
     //console.log("myJson", myjson);
 
     var manHBr = data[2][2];
-    manHBr = manHBr.replaceAll(".", "-");
+    console.log("mfg HBr", manHBr);
+    manHBr = manHBr.replace(".", "-").replace(".", "-");
     const monthMan = parseInt(manHBr.substring(3, 5)) - 1;
     const monthNameMan = [
       "Jan",
