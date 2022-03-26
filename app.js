@@ -85,46 +85,46 @@ try {
         fileOriginale = req.file.originalname;
         // per i files con HF
         const found = fileOriginale.match("HF");
-        if (found != null) {
-          var readHFFiles;
-          let pdfReader = hummus.createReader(fileOriginale);
-          let pages = pdfReader.getPagesCount();
-          pages = pages.toString();
-          fs.writeFileSync("PagesHFSmall.txt", pages);
-          for (let i = 0; i < pages; i++) {
-            pdfWriter = hummus.createWriter("HFoutput" + i + ".pdf");
-            pdfWriter
-              .createPDFCopyingContext(pdfReader)
-              .appendPDFPageFromPDF(i);
-            pdfWriter.end();
-          }
-          newPages = parseInt(pages);
-          for (let i = 0; i < newPages; i++) {
-            fs.readFile(
-              __dirname + "/HFoutput" + i.toString() + ".pdf",
-              function (err, buffer) {
-                if (err) return console.log(err);
-                pdf2table.parse(buffer, function (err, rows, rowsdebug) {
-                  if (err) return console.log(err);
-                  var jsonFileName = "HFoutput" + i.toString() + ".json";
-                  fs.writeFileSync(jsonFileName, JSON.stringify(rows));
-                  readHFFiles += fs.readFileSync(
-                    "HFoutput" + i.toString() + ".json",
-                    "utf-8"
-                  );
-                  //console.log("file", readHFFiles);
-                  //readHFFiles = readHFFiles.replace("undefined", "");
-                  //fs.writeFileSync("sample.txt", readHFFiles);
-                });
-              }
-            );
-          }
-        }
+        // if (found != null) {
+        //   var readHFFiles;
+        //   let pdfReader = hummus.createReader(fileOriginale);
+        //   let pages = pdfReader.getPagesCount();
+        //   pages = pages.toString();
+        //   fs.writeFileSync("PagesHFSmall.txt", pages);
+        //   for (let i = 0; i < pages; i++) {
+        //     pdfWriter = hummus.createWriter("HFoutput" + i + ".pdf");
+        //     pdfWriter
+        //       .createPDFCopyingContext(pdfReader)
+        //       .appendPDFPageFromPDF(i);
+        //     pdfWriter.end();
+        //   }
+        //   newPages = parseInt(pages);
+        //   for (let i = 0; i < newPages; i++) {
+        //     fs.readFile(
+        //       __dirname + "/HFoutput" + i.toString() + ".pdf",
+        //       function (err, buffer) {
+        //         if (err) return console.log(err);
+        //         pdf2table.parse(buffer, function (err, rows, rowsdebug) {
+        //           if (err) return console.log(err);
+        //           var jsonFileName = "HFoutput" + i.toString() + ".json";
+        //           fs.writeFileSync(jsonFileName, JSON.stringify(rows));
+        //           readHFFiles += fs.readFileSync(
+        //             "HFoutput" + i.toString() + ".json",
+        //             "utf-8"
+        //           );
+        //           //console.log("file", readHFFiles);
+        //           //readHFFiles = readHFFiles.replace("undefined", "");
+        //           //fs.writeFileSync("sample.txt", readHFFiles);
+        //         });
+        //       }
+        //     );
+        //   }
+        // }
         var test = fileOriginale
           .substring(fileOriginale.length - 4)
           .toLowerCase();
-
-        if (test === ".pdf" && found === null) {
+        if (test === ".pdf") {
+          //if (test === ".pdf" && found === null) {
           // const pdfParser = new PDFParser();
           // pdfParser.on("pdfParser_dataError", (errData) =>
           //   console.error(errData.parserError)
