@@ -2366,7 +2366,7 @@ function HBr() {
   async function ReadFileJson() {
     const res = await fetch("/jsonSampleFile2");
     const data = await res.json();
-    //console.log("data", data);
+    console.log("data", data);
 
     //Counter alimenta e salva il contatore di counter.txt
     const testResponse = await fetch("/apicounter");
@@ -2489,7 +2489,7 @@ function HBr() {
     };
     const myresponseHBr = await fetch("/apiHBr", HBroptions);
     var myjsonHBr = await myresponseHBr.json();
-    //console.log(myjsonHBr);
+    console.log(myjsonHBr);
   }
 }
 

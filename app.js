@@ -84,7 +84,7 @@ try {
       } else {
         fileOriginale = req.file.originalname;
         // per i files con HF
-        const found = fileOriginale.match("HF");
+        //const found = fileOriginale.match("HF");
         // if (found != null) {
         //   var readHFFiles;
         //   let pdfReader = hummus.createReader(fileOriginale);
