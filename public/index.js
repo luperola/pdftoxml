@@ -2487,7 +2487,7 @@ function HBr() {
       },
       body: JSON.stringify(HBrData),
     };
-    const myresponseHBr = await fetch("/apiHBr", HBroptions);
+    const myresponseHBr = await fetch("/apiBromide", HBroptions);
     var myjsonHBr = await myresponseHBr.json();
     console.log(myjsonHBr);
   }

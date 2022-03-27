@@ -83,6 +83,7 @@ try {
         res.redirect("index.html");
       } else {
         fileOriginale = req.file.originalname;
+        console.log("file", fileOriginale);
         // per i files con HF
         //const found = fileOriginale.match("HF");
         // if (found != null) {
@@ -1290,7 +1291,7 @@ app.post("/apiF2ArNe", (req, res) => {
 //------------ END F2ArNe POST------------
 
 //------------ HBr POST------------
-app.post("/apiHBr", (req, res) => {
+app.post("/apiBromide", (req, res) => {
   const dataHBr = req.body;
   //console.log(dataHBr);
   xw = new XMLWriter(true);
