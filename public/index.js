@@ -1975,7 +1975,7 @@ function CF4() {
     expCF4 = expCF4.replaceAll(" ", "-");
     var shipDateCF4 = manCF4;
     var lotNumberCF4 = data[13][2];
-    var percentCF4 = data[3][4];
+    var HCvalueCF4 = data[17][5];
     var N2valueCF4 = data[6][6];
     var O2ArvalueCF4 = data[7][10];
     var CH4valueCF4 = data[10][11];
@@ -1990,7 +1990,7 @@ function CF4() {
       lotNumber: lotNumberCF4,
       expiryDate: expCF4,
       manDate: manCF4,
-      HCvalue: percentCF4,
+      HCvalue: HCvalueCF4,
       N2value: N2valueCF4,
       O2Arvalue: O2ArvalueCF4,
       CH4value: CH4valueCF4,

@@ -1003,11 +1003,6 @@ app.post("/apiCF4", (req, res) => {
   xw.writeAttribute("ExpiryDate", dataCF4.expiryDate);
   xw.writeAttribute("MfgDate", dataCF4.manDate);
   xw.writeAttribute("LotQty", 1);
-  xw.startElement("DIM_HC");
-  xw.startElement("RAW");
-  xw.writeAttribute("VALUE", dataCF4.HCvalue);
-  xw.endElement();
-  xw.endElement("DIM_HC");
   xw.startElement("DIM_O2_Ar");
   xw.startElement("RAW");
   xw.writeAttribute("VALUE", dataCF4.O2Arvalue);
@@ -1043,6 +1038,11 @@ app.post("/apiCF4", (req, res) => {
   xw.writeAttribute("VALUE", dataCF4.SF6value);
   xw.endElement();
   xw.endElement("DIM_SF6");
+  xw.startElement("DIM_HC");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataCF4.HCvalue);
+  xw.endElement();
+  xw.endElement("DIM_HC");
   xw.endDocument();
 
   try {
