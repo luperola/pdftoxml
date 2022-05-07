@@ -83,7 +83,7 @@ try {
         res.redirect("index.html");
       } else {
         fileOriginale = req.file.originalname;
-        console.log("file", fileOriginale);
+        // console.log("file", fileOriginale);
         // per i files con HF
         //const found = fileOriginale.match("HF");
         // if (found != null) {

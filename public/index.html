@@ -13,6 +13,7 @@
 
     <title>Read the pdf file</title>
     <script src="index.js"></script>
+    <script src="HCl.js"></script>
   </head>
 
   <body>
@@ -714,14 +715,40 @@
       </div>
     </div>
     <br />
-    <!-- ------Wacker------- -->
-    <p
-      id="supplierWacker"
-      style="display: none; font-size: large; padding-left: 20px; color: blue"
-    >
-      Product: Wacker drums
-    </p>
-    <br />
+
+    <!-- Input per le correzioni -->
+    <!-- Correzione Manufacturing Date HCl Wacker 
+    <div id="HClMfgDateCorrection" style="margin-left: 20px; display: none">
+      <label for="mfgDateCorrected" style="color: blue"
+        >Data manufacturing HCl Wacker</label
+      >
+      <div class="input-group">
+        <input
+          type="date"
+          id="mfgDateCorrected"
+          name="trip-start"
+          required="required"
+          style="
+            color: blue;
+            height: 40px;
+            border-radius: 5px;
+            border-color: lightblue;
+            padding-left: 15px;
+            margin-left: 20px;
+          "
+        />
+        <span class="input-group-btn">
+          <button
+            class="btn btn-primary"
+            onclick="MfgHClWackerCorrected()"
+            style="margin-left: 5px"
+          >
+            Invia
+          </button></span
+        >
+      </div>
+    </div>
+    <br />-->
     <!-- download button -->
     <div id="btndown" style="padding-left: 20px; display: none">
       <a href="\download" class="btn btn-primary">
