@@ -1827,7 +1827,7 @@ function C4F8(receivingPlant) {
   async function ReadFileJson() {
     const res = await fetch("/jsonSampleFile2");
     const data = await res.json();
-    //console.log("data", data);
+    console.log("data", data);
     //Counter alimenta e salva il contatore di counter.txt
     const testResponse = await fetch("/apicounter");
     var dataTest = await testResponse.text();
