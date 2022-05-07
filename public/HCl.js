@@ -591,12 +591,13 @@ function WackerHCl(
     var myjson = await myresponse.text();
     //console.log("myJson", myjson);
 
-    manWacker = data[22][1];
+    //manWacker = data[22][1];
+    manWacker = "qwerty";
     try {
       var regexManW = RegExp("[0-9]{2}[.][0-9]{2}[.][0-9]{4}", "g");
       if (!regexManW.test(manWacker)) {
         alert(
-          "Formato 'Manufacturing date' non corretto. Devi correggere la datamanualmente nel formato dd-mmm-year nel file xlm finale"
+          "Formato 'Manufacturing date' non corretto. Devi correggere la data manualmente nel formato dd-mmm-year nel file xlm finale"
         );
       }
       if (regexManW.test(manWacker)) {
