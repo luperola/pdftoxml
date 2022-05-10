@@ -72,7 +72,7 @@ function checkFileType(file, cb) {
   }
 }
 
-// carico files pdf & txt (da HongIn.html), per pdf lo trasformo in sample.json, per txt lo copio come sample.txt
+// carico files pdf & txt, per pdf lo trasformo in sample.json, per txt lo copio come sample.txt
 try {
   app.post("/upload", (req, res) => {
     upload(req, res, (err) => {

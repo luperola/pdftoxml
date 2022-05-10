@@ -1863,45 +1863,87 @@ function C4F8(receivingPlant) {
     const myresponse = await fetch("/newcounter", optionCounter);
     var myjson = await myresponse.text();
     //console.log("myJson", myjson);
+    if (data.length === 32) {
+      var manC4F8 = data[21][1];
+      var expC4F8 = data[22][1];
+      var shipDateC4F8 = manC4F8;
+      var lotNumberC4F8 = data[26][1];
+      var acidityC4F8 = data[4][2];
+      acidityC4F8 = acidityC4F8
+        .replace("<", "")
+        .replace("ppm", "")
+        .replace("DL", "")
+        .replace(" (w)", "");
+      acidityC4F8 = acidityC4F8.trim();
+      var H2OvalueC4F8 = data[3][2];
+      H2OvalueC4F8 = H2OvalueC4F8.replace("<", "")
+        .replace("ppm", "")
+        .replace("DL", "");
+      H2OvalueC4F8 = H2OvalueC4F8.trim();
+      var N2O2valueC4F8 = data[7][2];
+      N2O2valueC4F8 = N2O2valueC4F8.replace("< ", "")
+        .replace("ppm", "")
+        .replace("DL", "");
+      N2O2valueC4F8 = N2O2valueC4F8.trim();
+      var CFCvalueC4F8 = data[6][2];
+      CFCvalueC4F8 = CFCvalueC4F8.replace("<", "")
+        .replace("ppm", "")
+        .replace("DL", "");
+      CFCvalueC4F8 = CFCvalueC4F8.trim();
+      var C4F8Data = {
+        receivingPlant: receivingPlant,
+        shipmentNumber: shipmentNumberC4F8,
+        shipmentdate: shipDateC4F8,
+        lotNumber: lotNumberC4F8,
+        expiryDate: expC4F8,
+        manDate: manC4F8,
+        acidityvalue: acidityC4F8,
+        H2Ovalue: H2OvalueC4F8,
+        N2O2value: N2O2valueC4F8,
+        CFCvalue: CFCvalueC4F8,
+      };
+    }
+    if (data.length === 31) {
+      var manC4F8 = data[20][1];
+      var expC4F8 = data[21][1];
+      var shipDateC4F8 = manC4F8;
+      var lotNumberC4F8 = data[25][1];
+      var acidityC4F8 = data[7][2];
+      acidityC4F8 = acidityC4F8
+        .replace("<", "")
+        .replace("ppm", "")
+        .replace("DL", "")
+        .replace(" (w)", "");
+      acidityC4F8 = acidityC4F8.trim();
+      var H2OvalueC4F8 = data[6][2];
+      H2OvalueC4F8 = H2OvalueC4F8.replace("<", "")
+        .replace("ppm", "")
+        .replace("DL", "");
+      H2OvalueC4F8 = H2OvalueC4F8.trim();
+      var N2O2valueC4F8 = data[3][2];
+      N2O2valueC4F8 = N2O2valueC4F8.replace("< ", "")
+        .replace("ppm", "")
+        .replace("DL", "");
+      N2O2valueC4F8 = N2O2valueC4F8.trim();
+      var CFCvalueC4F8 = data[5][2];
+      CFCvalueC4F8 = CFCvalueC4F8.replace("<", "")
+        .replace("ppm", "")
+        .replace("DL", "");
+      CFCvalueC4F8 = CFCvalueC4F8.trim();
 
-    var manC4F8 = data[21][1];
-    var expC4F8 = data[22][1];
-    var shipDateC4F8 = manC4F8;
-    var lotNumberC4F8 = data[26][1];
-    var acidityC4F8 = data[4][2];
-    acidityC4F8 = acidityC4F8
-      .replace("<", "")
-      .replace("ppm", "")
-      .replace("DL", "");
-    acidityC4F8 = acidityC4F8.trim();
-    var H2OvalueC4F8 = data[3][2];
-    H2OvalueC4F8 = H2OvalueC4F8.replace("<", "")
-      .replace("ppm", "")
-      .replace("DL", "");
-    H2OvalueC4F8 = H2OvalueC4F8.trim();
-    var N2O2valueC4F8 = data[7][2];
-    N2O2valueC4F8 = N2O2valueC4F8.replace("< ", "")
-      .replace("ppm", "")
-      .replace("DL", "");
-    N2O2valueC4F8 = N2O2valueC4F8.trim();
-    var CFCvalueC4F8 = data[6][2];
-    CFCvalueC4F8 = CFCvalueC4F8.replace("<", "")
-      .replace("ppm", "")
-      .replace("DL", "");
-    CFCvalueC4F8 = CFCvalueC4F8.trim();
-
-    var C4F8Data = {
-      receivingPlant: receivingPlant,
-      shipmentNumber: shipmentNumberC4F8,
-      shipmentdate: shipDateC4F8,
-      lotNumber: lotNumberC4F8,
-      expiryDate: expC4F8,
-      manDate: manC4F8,
-      acidityvalue: acidityC4F8,
-      H2Ovalue: H2OvalueC4F8,
-      N2O2value: N2O2valueC4F8,
-      CFCvalue: CFCvalueC4F8,
-    };
+      var C4F8Data = {
+        receivingPlant: receivingPlant,
+        shipmentNumber: shipmentNumberC4F8,
+        shipmentdate: shipDateC4F8,
+        lotNumber: lotNumberC4F8,
+        expiryDate: expC4F8,
+        manDate: manC4F8,
+        acidityvalue: acidityC4F8,
+        H2Ovalue: H2OvalueC4F8,
+        N2O2value: N2O2valueC4F8,
+        CFCvalue: CFCvalueC4F8,
+      };
+    }
     console.log("all data", C4F8Data);
 
     // posto i dati per compilare file xlm
