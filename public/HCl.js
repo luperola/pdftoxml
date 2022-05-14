@@ -24,524 +24,524 @@
 //   arrayIndecesMetalRandom = [],
 //   arrayMetalDataHI = [];
 
-// function HongInAGR() {
-//   document.getElementById("btndown").style.display = "inline";
-//   document.getElementById("btnHome").style.display = "inline";
-//   ReadHIText();
-//   async function ReadHIText() {
-//     const response = await fetch("/jsonSampleFile2");
-//     var dataTextHI = await response.text();
-//     arraydataHI = dataTextHI.split("]");
-//     //console.log("all arrays", arraydataHI);
+function HongInAGR() {
+  document.getElementById("btndown").style.display = "inline";
+  document.getElementById("btnHome").style.display = "inline";
+  ReadHIText();
+  async function ReadHIText() {
+    const response = await fetch("/jsonSampleFile2");
+    var dataTextHI = await response.text();
+    arraydataHI = dataTextHI.split("]");
+    //console.log("all arrays", arraydataHI);
 
-//     //cerco HXHCL e rilevo gli indici di dove si trovano - lo stesso con Anlaytical Results per i metalli
-//     for (let index = 0; index < arraydataHI.length; index++) {
-//       if (arraydataHI[index].indexOf("HXHCL") != -1) {
-//         arrayIndeces.push(index);
-//       }
+    //cerco HXHCL e rilevo gli indici di dove si trovano - lo stesso con Anlaytical Results per i metalli
+    for (let index = 0; index < arraydataHI.length; index++) {
+      if (arraydataHI[index].indexOf("HXHCL") != -1) {
+        arrayIndeces.push(index);
+      }
 
-//       if (
-//         arraydataHI[index].substring(3, 13) === "Analytical" &&
-//         arraydataHI[index].substring(16, 23) === "Results"
-//       ) {
-//         arrayIndecesMetal.push(index);
-//       }
-//     }
+      if (
+        arraydataHI[index].substring(3, 13) === "Analytical" &&
+        arraydataHI[index].substring(16, 23) === "Results"
+      ) {
+        arrayIndecesMetal.push(index);
+      }
+    }
 
-//     // faccio array random con le Metal Impurities fino a farle = numero drums del CoA
-//     for (let index = 0; index < arrayIndeces.length; index++) {
-//       const random = Math.floor(Math.random() * arrayIndecesMetal.length);
-//       arrayIndecesMetalRandom.push(arrayIndecesMetal[random]);
-//     }
+    // faccio array random con le Metal Impurities fino a farle = numero drums del CoA
+    for (let index = 0; index < arrayIndeces.length; index++) {
+      const random = Math.floor(Math.random() * arrayIndecesMetal.length);
+      arrayIndecesMetalRandom.push(arrayIndecesMetal[random]);
+    }
 
-//     //uso gli indici di arrayIndeces per splittare le array dove si trova HXHCL e le impurità dei metals
-//     for (let index = 0; index < arrayIndeces.length; index++) {
-//       arrayFinalDataHI[index] = arraydataHI[arrayIndeces[index]];
-//       arrayFinalDataHI[index] = arrayFinalDataHI[index].split(",");
-//       arrayMetalDataHI[index] = arraydataHI[arrayIndecesMetalRandom[index]];
-//       arrayMetalDataHI[index] = arrayMetalDataHI[index].split(",");
-//     }
-//     //assegno i vari valori alle array dei dati HongIn
-//     //shipLotNumberHI è array con i drums /cylinders di HongIn. Dà anche i nomi dei files xml
-//     let shipLotNumberHI = [],
-//       //lotNumberHI è l'array HXHCL del lotto
-//       lotNumberHI = [],
-//       expirationDateHI = [],
-//       manufacturingDateHI = [],
-//       H2valueHI = [],
-//       O2ArvalueHI = [],
-//       N2valueHI = [],
-//       CH4valueHI = [],
-//       COvalueHI = [],
-//       CO2valueHI = [],
-//       H2OvalueHI = [],
-//       FevalueHI = [];
-//     for (let i = 0; i < arrayIndeces.length; i++) {
-//       arrayFinalDataHI[i][1] = arrayFinalDataHI[i][1].replace(
-//         /[^a-zA-Z0-9]/g,
-//         ""
-//       );
-//       lotNumberHI.push(arrayFinalDataHI[i][1]);
-//       arrayFinalDataHI[i][2] = arrayFinalDataHI[i][2]
-//         .replace('"', "")
-//         .replace('"', "");
-//       shipLotNumberHI.push(arrayFinalDataHI[i][2]);
-//       var changeDate = arrayFinalDataHI[i][7].substring(1, 9);
-//       ExpirationDateFormatOne(changeDate);
-//       var changeManufacturingDate = arrayFinalDataHI[i][5].substring(1, 9);
-//       shipmentDateFormat(changeManufacturingDate);
-//       H2valueHI[i] = arrayFinalDataHI[i][8]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       O2ArvalueHI[i] = arrayFinalDataHI[i][9]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       N2valueHI[i] = arrayFinalDataHI[i][10]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       CH4valueHI[i] = arrayFinalDataHI[i][11]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       COvalueHI[i] = arrayFinalDataHI[i][12]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       CO2valueHI[i] = arrayFinalDataHI[i][13]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       H2OvalueHI[i] = arrayFinalDataHI[i][14]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       FevalueHI[i] = arrayMetalDataHI[i][17]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
+    //uso gli indici di arrayIndeces per splittare le array dove si trova HXHCL e le impurità dei metals
+    for (let index = 0; index < arrayIndeces.length; index++) {
+      arrayFinalDataHI[index] = arraydataHI[arrayIndeces[index]];
+      arrayFinalDataHI[index] = arrayFinalDataHI[index].split(",");
+      arrayMetalDataHI[index] = arraydataHI[arrayIndecesMetalRandom[index]];
+      arrayMetalDataHI[index] = arrayMetalDataHI[index].split(",");
+    }
+    //assegno i vari valori alle array dei dati HongIn
+    //shipLotNumberHI è array con i drums /cylinders di HongIn. Dà anche i nomi dei files xml
+    let shipLotNumberHI = [],
+      //lotNumberHI è l'array HXHCL del lotto
+      lotNumberHI = [],
+      expirationDateHI = [],
+      manufacturingDateHI = [],
+      H2valueHI = [],
+      O2ArvalueHI = [],
+      N2valueHI = [],
+      CH4valueHI = [],
+      COvalueHI = [],
+      CO2valueHI = [],
+      H2OvalueHI = [],
+      FevalueHI = [];
+    for (let i = 0; i < arrayIndeces.length; i++) {
+      arrayFinalDataHI[i][1] = arrayFinalDataHI[i][1].replace(
+        /[^a-zA-Z0-9]/g,
+        ""
+      );
+      lotNumberHI.push(arrayFinalDataHI[i][1]);
+      arrayFinalDataHI[i][2] = arrayFinalDataHI[i][2]
+        .replace('"', "")
+        .replace('"', "");
+      shipLotNumberHI.push(arrayFinalDataHI[i][2]);
+      var changeDate = arrayFinalDataHI[i][7].substring(1, 9);
+      ExpirationDateFormatOne(changeDate);
+      var changeManufacturingDate = arrayFinalDataHI[i][5].substring(1, 9);
+      shipmentDateFormat(changeManufacturingDate);
+      H2valueHI[i] = arrayFinalDataHI[i][8]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      O2ArvalueHI[i] = arrayFinalDataHI[i][9]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      N2valueHI[i] = arrayFinalDataHI[i][10]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      CH4valueHI[i] = arrayFinalDataHI[i][11]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      COvalueHI[i] = arrayFinalDataHI[i][12]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      CO2valueHI[i] = arrayFinalDataHI[i][13]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      H2OvalueHI[i] = arrayFinalDataHI[i][14]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      FevalueHI[i] = arrayMetalDataHI[i][17]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
 
-//       //--------------HONG IN AGRATE COUNTER ------------
-//       const testResponse = await fetch("/apicounter");
-//       var dataTest = await testResponse.text();
-//       //console.log("dataTest1", dataTest);
-//       dataTest = parseInt(dataTest);
-//       dataTest++;
-//       var dt = new Date();
-//       var anno = dt.getFullYear().toString();
-//       anno = anno.substring(2, 4);
-//       if (dataTest < 10) {
-//         shipmentNumberHI = "IT/000" + dataTest.toString() + "/" + anno;
-//       }
-//       if (dataTest >= 10 && dataTest < 100) {
-//         shipmentNumberHI = "IT/00" + dataTest.toString() + "/" + anno;
-//       }
-//       if (dataTest >= 100 && dataTest < 1000) {
-//         shipmentNumberHI = "IT/0" + dataTest.toString() + "/" + anno;
-//       }
-//       if (dataTest >= 1000) {
-//         shipmentNumberHI = "IT/" + dataTest.toString() + "/" + anno;
-//       }
-//       if (dataTest > 10000) {
-//         alert("reset counter.txt file");
-//       }
-//       shNumberHI.push(shipmentNumberHI);
-//       datacounter = { dataTest };
-//       const optionCounter = {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(datacounter),
-//       };
-//       const myresponse = await fetch("/newcounter", optionCounter);
-//       var myjson = await myresponse.text();
-//       //console.log("myJson", myjson);
-//     }
-//     //--------------END HONG IN AGRATE COUNTER ------------
+      //--------------HONG IN AGRATE COUNTER ------------
+      const testResponse = await fetch("/apicounter");
+      var dataTest = await testResponse.text();
+      //console.log("dataTest1", dataTest);
+      dataTest = parseInt(dataTest);
+      dataTest++;
+      var dt = new Date();
+      var anno = dt.getFullYear().toString();
+      anno = anno.substring(2, 4);
+      if (dataTest < 10) {
+        shipmentNumberHI = "IT/000" + dataTest.toString() + "/" + anno;
+      }
+      if (dataTest >= 10 && dataTest < 100) {
+        shipmentNumberHI = "IT/00" + dataTest.toString() + "/" + anno;
+      }
+      if (dataTest >= 100 && dataTest < 1000) {
+        shipmentNumberHI = "IT/0" + dataTest.toString() + "/" + anno;
+      }
+      if (dataTest >= 1000) {
+        shipmentNumberHI = "IT/" + dataTest.toString() + "/" + anno;
+      }
+      if (dataTest > 10000) {
+        alert("reset counter.txt file");
+      }
+      shNumberHI.push(shipmentNumberHI);
+      datacounter = { dataTest };
+      const optionCounter = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(datacounter),
+      };
+      const myresponse = await fetch("/newcounter", optionCounter);
+      var myjson = await myresponse.text();
+      //console.log("myJson", myjson);
+    }
+    //--------------END HONG IN AGRATE COUNTER ------------
 
-//     function shipmentDateFormat(changeDate) {
-//       myDate = changeDate;
-//       const year = myDate.substring(0, 4);
-//       const month = parseInt(myDate.substring(4, 6)) - 1;
-//       const months = [
-//         "Jan",
-//         "Feb",
-//         "Mar",
-//         "Apr",
-//         "May",
-//         "Jun",
-//         "Jul",
-//         "Aug",
-//         "Sep",
-//         "Oct",
-//         "Nov",
-//         "Dec",
-//       ];
-//       const day = myDate.substring(6, 8);
-//       myDate = day + "-" + months[month] + "-" + year;
-//       manufacturingDateHI.push(myDate);
-//     }
+    function shipmentDateFormat(changeDate) {
+      myDate = changeDate;
+      const year = myDate.substring(0, 4);
+      const month = parseInt(myDate.substring(4, 6)) - 1;
+      const months = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+      const day = myDate.substring(6, 8);
+      myDate = day + "-" + months[month] + "-" + year;
+      manufacturingDateHI.push(myDate);
+    }
 
-//     function ExpirationDateFormatOne(changeDate) {
-//       expirationDateOne = changeDate;
-//       const yearOne = expirationDateOne.substring(0, 4);
-//       const monthOne = parseInt(expirationDateOne.substring(4, 6)) - 1;
-//       const monthsOne = [
-//         "Jan",
-//         "Feb",
-//         "Mar",
-//         "Apr",
-//         "May",
-//         "Jun",
-//         "Jul",
-//         "Aug",
-//         "Sep",
-//         "Oct",
-//         "Nov",
-//         "Dec",
-//       ];
-//       const dayOne = expirationDateOne.substring(6, 8);
-//       expirationDateOne = dayOne + "-" + monthsOne[monthOne] + "-" + yearOne;
-//       expirationDateHI.push(expirationDateOne);
-//     }
-//     // formo i dati da mandare poi per Hong In AGR & CAT
+    function ExpirationDateFormatOne(changeDate) {
+      expirationDateOne = changeDate;
+      const yearOne = expirationDateOne.substring(0, 4);
+      const monthOne = parseInt(expirationDateOne.substring(4, 6)) - 1;
+      const monthsOne = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+      const dayOne = expirationDateOne.substring(6, 8);
+      expirationDateOne = dayOne + "-" + monthsOne[monthOne] + "-" + yearOne;
+      expirationDateHI.push(expirationDateOne);
+    }
+    // formo i dati da mandare poi per Hong In AGR & CAT
 
-//     const dataHI = {
-//       lotNumberHI: lotNumberHI,
-//       filenamesHI: shipLotNumberHI,
-//       expiryDateHI: expirationDateHI,
-//       manDateHI: manufacturingDateHI,
-//       progressivoHI: shNumberHI,
-//       filetextHI: shipLotNumberHI,
-//       HIH2value: H2valueHI,
-//       HIO2Arvalue: O2ArvalueHI,
-//       HIN2value: N2valueHI,
-//       HICH4value: CH4valueHI,
-//       HICOvalue: COvalueHI,
-//       HICO2value: CO2valueHI,
-//       HIH2Ovalue: H2OvalueHI,
-//       HIFevalue: FevalueHI,
-//     };
-//     console.log("dataHIAGR", dataHI);
+    const dataHI = {
+      lotNumberHI: lotNumberHI,
+      filenamesHI: shipLotNumberHI,
+      expiryDateHI: expirationDateHI,
+      manDateHI: manufacturingDateHI,
+      progressivoHI: shNumberHI,
+      filetextHI: shipLotNumberHI,
+      HIH2value: H2valueHI,
+      HIO2Arvalue: O2ArvalueHI,
+      HIN2value: N2valueHI,
+      HICH4value: CH4valueHI,
+      HICOvalue: COvalueHI,
+      HICO2value: CO2valueHI,
+      HIH2Ovalue: H2OvalueHI,
+      HIFevalue: FevalueHI,
+    };
+    console.log("dataHIAGR", dataHI);
 
-//     const HIoptions = {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(dataHI),
-//     };
-//     const myresponseHI = await fetch("/apifour", HIoptions);
-//     var myjsonHI = await myresponseHI.json();
-//     console.log(myjsonHI);
-//   }
-// }
-// //---------------END HONG IN AGRATE----------------
+    const HIoptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataHI),
+    };
+    const myresponseHI = await fetch("/apifour", HIoptions);
+    var myjsonHI = await myresponseHI.json();
+    console.log(myjsonHI);
+  }
+}
+//---------------END HONG IN AGRATE----------------
 
-// //---------------HONG IN CATANIA ----------------
+//---------------HONG IN CATANIA ----------------
 
-// function HongInCAT() {
-//   document.getElementById("btndown").style.display = "inline";
-//   document.getElementById("btnHome").style.display = "inline";
-//   ReadHIText();
-//   async function ReadHIText() {
-//     const response = await fetch("/jsonSampleFile2");
-//     var dataTextHI = await response.text();
-//     arraydataHI = dataTextHI.split("]");
-//     //console.log("all arrays", arraydataHI);
+function HongInCAT() {
+  document.getElementById("btndown").style.display = "inline";
+  document.getElementById("btnHome").style.display = "inline";
+  ReadHIText();
+  async function ReadHIText() {
+    const response = await fetch("/jsonSampleFile2");
+    var dataTextHI = await response.text();
+    arraydataHI = dataTextHI.split("]");
+    //console.log("all arrays", arraydataHI);
 
-//     //cerco HXHCL e rilevo gli indici di dove si trovano - lo stesso con Anlaytical Results per i metalli
-//     for (let index = 0; index < arraydataHI.length; index++) {
-//       if (arraydataHI[index].indexOf("HXHCL") != -1) {
-//         arrayIndeces.push(index);
-//       }
+    //cerco HXHCL e rilevo gli indici di dove si trovano - lo stesso con Anlaytical Results per i metalli
+    for (let index = 0; index < arraydataHI.length; index++) {
+      if (arraydataHI[index].indexOf("HXHCL") != -1) {
+        arrayIndeces.push(index);
+      }
 
-//       if (
-//         arraydataHI[index].substring(3, 13) === "Analytical" &&
-//         arraydataHI[index].substring(16, 23) === "Results"
-//       ) {
-//         arrayIndecesMetal.push(index);
-//       }
-//     }
-//     //console.log(arrayIndeces);
-//     // faccio array random con le Metal Impurities fino a farle = numero drums del CoA
-//     for (let index = 0; index < arrayIndeces.length; index++) {
-//       const random = Math.floor(Math.random() * arrayIndecesMetal.length);
-//       arrayIndecesMetalRandom.push(arrayIndecesMetal[random]);
-//     }
+      if (
+        arraydataHI[index].substring(3, 13) === "Analytical" &&
+        arraydataHI[index].substring(16, 23) === "Results"
+      ) {
+        arrayIndecesMetal.push(index);
+      }
+    }
+    //console.log(arrayIndeces);
+    // faccio array random con le Metal Impurities fino a farle = numero drums del CoA
+    for (let index = 0; index < arrayIndeces.length; index++) {
+      const random = Math.floor(Math.random() * arrayIndecesMetal.length);
+      arrayIndecesMetalRandom.push(arrayIndecesMetal[random]);
+    }
 
-//     //uso gli indici di arrayIndeces per splittare le array dove si trova HXHCL e le impurità dei metals
-//     for (let index = 0; index < arrayIndeces.length; index++) {
-//       arrayFinalDataHI[index] = arraydataHI[arrayIndeces[index]];
-//       arrayFinalDataHI[index] = arrayFinalDataHI[index].split(",");
-//       arrayMetalDataHI[index] = arraydataHI[arrayIndecesMetalRandom[index]];
-//       arrayMetalDataHI[index] = arrayMetalDataHI[index].split(",");
-//     }
-//     //assegno i vari valori alle array dei dati HongIn
-//     //shipLotNumberHI è array con i drums /cylinders di HongIn. Dà anche i nomi dei files xml
-//     let shipLotNumberHI = [],
-//       //lotNumberHI è l'array HXHCL del lotto
-//       lotNumberHI = [],
-//       expirationDateHI = [],
-//       manufacturingDateHI = [],
-//       H2valueHI = [],
-//       O2ArvalueHI = [],
-//       N2valueHI = [],
-//       CH4valueHI = [],
-//       COvalueHI = [],
-//       CO2valueHI = [],
-//       H2OvalueHI = [],
-//       FevalueHI = [],
-//       AlvalueHI = [],
-//       SbvalueHI = [],
-//       AsvalueHI = [],
-//       BivalueHI = [],
-//       BvalueHI = [],
-//       CdvalueHI = [],
-//       CrvalueHI = [],
-//       CovalueHI = [],
-//       CuvalueHI = [],
-//       PbvalueHI = [],
-//       MovalueHI = [],
-//       NivalueHI = [],
-//       PvalueHI = [],
-//       NavalueHI = [];
-//     for (let i = 0; i < arrayIndeces.length; i++) {
-//       arrayFinalDataHI[i][1] = arrayFinalDataHI[i][1].replace(
-//         /[^a-zA-Z0-9]/g,
-//         ""
-//       );
+    //uso gli indici di arrayIndeces per splittare le array dove si trova HXHCL e le impurità dei metals
+    for (let index = 0; index < arrayIndeces.length; index++) {
+      arrayFinalDataHI[index] = arraydataHI[arrayIndeces[index]];
+      arrayFinalDataHI[index] = arrayFinalDataHI[index].split(",");
+      arrayMetalDataHI[index] = arraydataHI[arrayIndecesMetalRandom[index]];
+      arrayMetalDataHI[index] = arrayMetalDataHI[index].split(",");
+    }
+    //assegno i vari valori alle array dei dati HongIn
+    //shipLotNumberHI è array con i drums /cylinders di HongIn. Dà anche i nomi dei files xml
+    let shipLotNumberHI = [],
+      //lotNumberHI è l'array HXHCL del lotto
+      lotNumberHI = [],
+      expirationDateHI = [],
+      manufacturingDateHI = [],
+      H2valueHI = [],
+      O2ArvalueHI = [],
+      N2valueHI = [],
+      CH4valueHI = [],
+      COvalueHI = [],
+      CO2valueHI = [],
+      H2OvalueHI = [],
+      FevalueHI = [],
+      AlvalueHI = [],
+      SbvalueHI = [],
+      AsvalueHI = [],
+      BivalueHI = [],
+      BvalueHI = [],
+      CdvalueHI = [],
+      CrvalueHI = [],
+      CovalueHI = [],
+      CuvalueHI = [],
+      PbvalueHI = [],
+      MovalueHI = [],
+      NivalueHI = [],
+      PvalueHI = [],
+      NavalueHI = [];
+    for (let i = 0; i < arrayIndeces.length; i++) {
+      arrayFinalDataHI[i][1] = arrayFinalDataHI[i][1].replace(
+        /[^a-zA-Z0-9]/g,
+        ""
+      );
 
-//       lotNumberHI.push(arrayFinalDataHI[i][1]);
-//       arrayFinalDataHI[i][2] = arrayFinalDataHI[i][2]
-//         .replace('"', "")
-//         .replace('"', "");
-//       shipLotNumberHI.push(arrayFinalDataHI[i][2]);
-//       var changeDate = arrayFinalDataHI[i][7].substring(1, 9);
-//       ExpirationDateFormatOne(changeDate);
-//       var changeManufacturingDate = arrayFinalDataHI[i][5].substring(1, 9);
-//       shipmentDateFormat(changeManufacturingDate);
-//       H2valueHI[i] = arrayFinalDataHI[i][8]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       O2ArvalueHI[i] = arrayFinalDataHI[i][9]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       N2valueHI[i] = arrayFinalDataHI[i][10]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       CH4valueHI[i] = arrayFinalDataHI[i][11]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       COvalueHI[i] = arrayFinalDataHI[i][12]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       CO2valueHI[i] = arrayFinalDataHI[i][13]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       H2OvalueHI[i] = arrayFinalDataHI[i][14]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       FevalueHI[i] = arrayMetalDataHI[i][17]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       AlvalueHI[i] = arrayMetalDataHI[i][5]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       SbvalueHI[i] = arrayMetalDataHI[i][12]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       AsvalueHI[i] = arrayMetalDataHI[i][18]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       BivalueHI[i] = arrayMetalDataHI[i][14]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       BvalueHI[i] = arrayMetalDataHI[i][4]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       CdvalueHI[i] = arrayMetalDataHI[i][11]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       CrvalueHI[i] = arrayMetalDataHI[i][16]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       CovalueHI[i] = arrayMetalDataHI[i][6]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       CuvalueHI[i] = arrayMetalDataHI[i][8]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       PbvalueHI[i] = arrayMetalDataHI[i][13]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       MovalueHI[i] = arrayMetalDataHI[i][10]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       NivalueHI[i] = arrayMetalDataHI[i][7]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       PvalueHI[i] = arrayMetalDataHI[i][3]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
-//       NavalueHI[i] = arrayMetalDataHI[i][15]
-//         .replace("ND<", "")
-//         .replace('"', "")
-//         .replace('"', "");
+      lotNumberHI.push(arrayFinalDataHI[i][1]);
+      arrayFinalDataHI[i][2] = arrayFinalDataHI[i][2]
+        .replace('"', "")
+        .replace('"', "");
+      shipLotNumberHI.push(arrayFinalDataHI[i][2]);
+      var changeDate = arrayFinalDataHI[i][7].substring(1, 9);
+      ExpirationDateFormatOne(changeDate);
+      var changeManufacturingDate = arrayFinalDataHI[i][5].substring(1, 9);
+      shipmentDateFormat(changeManufacturingDate);
+      H2valueHI[i] = arrayFinalDataHI[i][8]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      O2ArvalueHI[i] = arrayFinalDataHI[i][9]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      N2valueHI[i] = arrayFinalDataHI[i][10]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      CH4valueHI[i] = arrayFinalDataHI[i][11]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      COvalueHI[i] = arrayFinalDataHI[i][12]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      CO2valueHI[i] = arrayFinalDataHI[i][13]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      H2OvalueHI[i] = arrayFinalDataHI[i][14]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      FevalueHI[i] = arrayMetalDataHI[i][17]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      AlvalueHI[i] = arrayMetalDataHI[i][5]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      SbvalueHI[i] = arrayMetalDataHI[i][12]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      AsvalueHI[i] = arrayMetalDataHI[i][18]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      BivalueHI[i] = arrayMetalDataHI[i][14]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      BvalueHI[i] = arrayMetalDataHI[i][4]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      CdvalueHI[i] = arrayMetalDataHI[i][11]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      CrvalueHI[i] = arrayMetalDataHI[i][16]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      CovalueHI[i] = arrayMetalDataHI[i][6]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      CuvalueHI[i] = arrayMetalDataHI[i][8]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      PbvalueHI[i] = arrayMetalDataHI[i][13]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      MovalueHI[i] = arrayMetalDataHI[i][10]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      NivalueHI[i] = arrayMetalDataHI[i][7]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      PvalueHI[i] = arrayMetalDataHI[i][3]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
+      NavalueHI[i] = arrayMetalDataHI[i][15]
+        .replace("ND<", "")
+        .replace('"', "")
+        .replace('"', "");
 
-//       //--------------HONG IN CATANIA COUNTER ------------
-//       const testResponse = await fetch("/apicounter");
-//       var dataTest = await testResponse.text();
-//       //console.log("dataTest1", dataTest);
-//       dataTest = parseInt(dataTest);
-//       dataTest++;
-//       var dt = new Date();
-//       var anno = dt.getFullYear().toString();
-//       anno = anno.substring(2, 4);
-//       if (dataTest < 10) {
-//         shipmentNumberHI = "IT/000" + dataTest.toString() + "/" + anno;
-//       }
-//       if (dataTest >= 10 && dataTest < 100) {
-//         shipmentNumberHI = "IT/00" + dataTest.toString() + "/" + anno;
-//       }
-//       if (dataTest >= 100 && dataTest < 1000) {
-//         shipmentNumberHI = "IT/0" + dataTest.toString() + "/" + anno;
-//       }
-//       if (dataTest >= 1000) {
-//         shipmentNumberHI = "IT/" + dataTest.toString() + "/" + anno;
-//       }
-//       if (dataTest > 10000) {
-//         alert("reset counter.txt file");
-//       }
-//       shNumberHICAT.push(shipmentNumberHI);
-//       //console.log("shNumberAgrarray", shNumberHICAT);
-//       datacounter = { dataTest };
-//       const optionCounter = {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(datacounter),
-//       };
-//       const myresponse = await fetch("/newcounter", optionCounter);
-//       var myjson = await myresponse.text();
-//     }
-//     //--------------END HONG IN CATANIA COUNTER ------------
+      //--------------HONG IN CATANIA COUNTER ------------
+      const testResponse = await fetch("/apicounter");
+      var dataTest = await testResponse.text();
+      //console.log("dataTest1", dataTest);
+      dataTest = parseInt(dataTest);
+      dataTest++;
+      var dt = new Date();
+      var anno = dt.getFullYear().toString();
+      anno = anno.substring(2, 4);
+      if (dataTest < 10) {
+        shipmentNumberHI = "IT/000" + dataTest.toString() + "/" + anno;
+      }
+      if (dataTest >= 10 && dataTest < 100) {
+        shipmentNumberHI = "IT/00" + dataTest.toString() + "/" + anno;
+      }
+      if (dataTest >= 100 && dataTest < 1000) {
+        shipmentNumberHI = "IT/0" + dataTest.toString() + "/" + anno;
+      }
+      if (dataTest >= 1000) {
+        shipmentNumberHI = "IT/" + dataTest.toString() + "/" + anno;
+      }
+      if (dataTest > 10000) {
+        alert("reset counter.txt file");
+      }
+      shNumberHICAT.push(shipmentNumberHI);
+      //console.log("shNumberAgrarray", shNumberHICAT);
+      datacounter = { dataTest };
+      const optionCounter = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(datacounter),
+      };
+      const myresponse = await fetch("/newcounter", optionCounter);
+      var myjson = await myresponse.text();
+    }
+    //--------------END HONG IN CATANIA COUNTER ------------
 
-//     function shipmentDateFormat(changeDate) {
-//       myDate = changeDate;
-//       const year = myDate.substring(0, 4);
-//       const month = parseInt(myDate.substring(4, 6)) - 1;
-//       const months = [
-//         "Jan",
-//         "Feb",
-//         "Mar",
-//         "Apr",
-//         "May",
-//         "Jun",
-//         "Jul",
-//         "Aug",
-//         "Sep",
-//         "Oct",
-//         "Nov",
-//         "Dec",
-//       ];
-//       const day = myDate.substring(6, 8);
-//       myDate = day + "-" + months[month] + "-" + year;
-//       manufacturingDateHI.push(myDate);
-//     }
+    function shipmentDateFormat(changeDate) {
+      myDate = changeDate;
+      const year = myDate.substring(0, 4);
+      const month = parseInt(myDate.substring(4, 6)) - 1;
+      const months = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+      const day = myDate.substring(6, 8);
+      myDate = day + "-" + months[month] + "-" + year;
+      manufacturingDateHI.push(myDate);
+    }
 
-//     function ExpirationDateFormatOne(changeDate) {
-//       expirationDateOne = changeDate;
-//       const yearOne = expirationDateOne.substring(0, 4);
-//       const monthOne = parseInt(expirationDateOne.substring(4, 6)) - 1;
-//       const monthsOne = [
-//         "Jan",
-//         "Feb",
-//         "Mar",
-//         "Apr",
-//         "May",
-//         "Jun",
-//         "Jul",
-//         "Aug",
-//         "Sep",
-//         "Oct",
-//         "Nov",
-//         "Dec",
-//       ];
-//       const dayOne = expirationDateOne.substring(6, 8);
-//       expirationDateOne = dayOne + "-" + monthsOne[monthOne] + "-" + yearOne;
-//       expirationDateHI.push(expirationDateOne);
-//     }
-//     // formo i dati in array da mandare poi per Hong In AGR & CAT
+    function ExpirationDateFormatOne(changeDate) {
+      expirationDateOne = changeDate;
+      const yearOne = expirationDateOne.substring(0, 4);
+      const monthOne = parseInt(expirationDateOne.substring(4, 6)) - 1;
+      const monthsOne = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+      const dayOne = expirationDateOne.substring(6, 8);
+      expirationDateOne = dayOne + "-" + monthsOne[monthOne] + "-" + yearOne;
+      expirationDateHI.push(expirationDateOne);
+    }
+    // formo i dati in array da mandare poi per Hong In AGR & CAT
 
-//     const dataHICAT = {
-//       lotNumberHI: lotNumberHI,
-//       filenamesHI: shipLotNumberHI,
-//       expiryDateHI: expirationDateHI,
-//       manDateHI: manufacturingDateHI,
-//       progressivoHI: shNumberHICAT,
-//       HIH2value: H2valueHI,
-//       HIO2Arvalue: O2ArvalueHI,
-//       HIN2value: N2valueHI,
-//       HICH4value: CH4valueHI,
-//       HICOvalue: COvalueHI,
-//       HICO2value: CO2valueHI,
-//       HIH2Ovalue: H2OvalueHI,
-//       HIFevalue: FevalueHI,
-//       HIAlvalue: AlvalueHI,
-//       HISbvalue: SbvalueHI,
-//       HIAsvalue: AsvalueHI,
-//       HIBivalue: BivalueHI,
-//       HIBvalue: BvalueHI,
-//       HICdvalue: CdvalueHI,
-//       HICrvalue: CrvalueHI,
-//       HICovalue: CovalueHI,
-//       HICuvalue: CuvalueHI,
-//       HIPbvalue: PbvalueHI,
-//       HIMovalue: MovalueHI,
-//       HINivalue: NivalueHI,
-//       HIPvalue: PvalueHI,
-//       HINavalue: NavalueHI,
-//     };
-//     console.log("dataHICAT", dataHICAT);
+    const dataHICAT = {
+      lotNumberHI: lotNumberHI,
+      filenamesHI: shipLotNumberHI,
+      expiryDateHI: expirationDateHI,
+      manDateHI: manufacturingDateHI,
+      progressivoHI: shNumberHICAT,
+      HIH2value: H2valueHI,
+      HIO2Arvalue: O2ArvalueHI,
+      HIN2value: N2valueHI,
+      HICH4value: CH4valueHI,
+      HICOvalue: COvalueHI,
+      HICO2value: CO2valueHI,
+      HIH2Ovalue: H2OvalueHI,
+      HIFevalue: FevalueHI,
+      HIAlvalue: AlvalueHI,
+      HISbvalue: SbvalueHI,
+      HIAsvalue: AsvalueHI,
+      HIBivalue: BivalueHI,
+      HIBvalue: BvalueHI,
+      HICdvalue: CdvalueHI,
+      HICrvalue: CrvalueHI,
+      HICovalue: CovalueHI,
+      HICuvalue: CuvalueHI,
+      HIPbvalue: PbvalueHI,
+      HIMovalue: MovalueHI,
+      HINivalue: NivalueHI,
+      HIPvalue: PvalueHI,
+      HINavalue: NavalueHI,
+    };
+    console.log("dataHICAT", dataHICAT);
 
-//     const HICAToptions = {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(dataHICAT),
-//     };
-//     const myresponseHI = await fetch("/apifive", HICAToptions);
-//     var myjsonHI = await myresponseHI.json();
-//     console.log(myjsonHI);
-//   }
-// }
+    const HICAToptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataHICAT),
+    };
+    const myresponseHI = await fetch("/apifive", HICAToptions);
+    var myjsonHI = await myresponseHI.json();
+    console.log(myjsonHI);
+  }
+}
 
 // //---------------END HONG IN CATANIA ----------------
 

@@ -12,10 +12,9 @@
   "dependencies": {
     "adm-zip": "^0.5.9",
     "express": "^4.17.1",
-    "hummus": "^1.0.110",
     "json-concat": "0.0.1",
     "multer": "^1.4.3",
-    "nodemon": "^2.0.15",
+    "nodemon": "^2.0.16",
     "path": "^0.12.7",
     "pdf2json": "^2.0.0",
     "pdf2table": "0.0.2",
