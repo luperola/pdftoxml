@@ -246,8 +246,9 @@ function HongInAGR() {
 function HongInCAT() {
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
-  ReadHIText();
+
   try {
+    ReadHIText();
     async function ReadHIText() {
       const response = await fetch("/jsonSampleFile2");
       var dataTextHI = await response.text();
