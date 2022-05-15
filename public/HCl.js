@@ -45,6 +45,8 @@ function HongInAGR() {
         arraydataHI[index].substring(16, 23) === "Results"
       ) {
         arrayIndecesMetal.push(index);
+      } else {
+        alert("Hong In Agrate file troppo grande. Invia pdf a Luigi");
       }
     }
 
@@ -265,6 +267,8 @@ function HongInCAT() {
         arraydataHI[index].substring(16, 23) === "Results"
       ) {
         arrayIndecesMetal.push(index);
+      } else {
+        alert("Hong In Catania file troppo grande. Invia pdf a Luigi");
       }
     }
     //console.log(arrayIndeces);
