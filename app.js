@@ -126,18 +126,18 @@ try {
           .toLowerCase();
         if (test === ".pdf") {
           //if (test === ".pdf" && found === null) {
-          const pdfParser = new PDFParser();
-          pdfParser.on("pdfParser_dataError", (errData) =>
-            console.error(errData.parserError)
-          );
-          pdfParser.on("pdfParser_dataReady", (pdfData) => {
-            const id = __dirname + "/sample.json";
-            fs.writeFile(id, JSON.stringify(pdfData), (err) =>
-              console.error(err)
-            );
-            //res.json(pdfData);
-          });
-          pdfParser.loadPDF(__dirname + "/" + fileOriginale.toString());
+          // const pdfParser = new PDFParser();
+          // pdfParser.on("pdfParser_dataError", (errData) =>
+          //   console.error(errData.parserError)
+          // );
+          // pdfParser.on("pdfParser_dataReady", (pdfData) => {
+          //   const id = __dirname + "/sample.json";
+          //   fs.writeFile(id, JSON.stringify(pdfData), (err) =>
+          //     console.error(err)
+          //   );
+          //   //res.json(pdfData);
+          // });
+          // pdfParser.loadPDF(__dirname + "/" + fileOriginale.toString());
           //}
           // -----------------pdf2table-----------------
           fs.readFile(
