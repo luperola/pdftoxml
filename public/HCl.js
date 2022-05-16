@@ -1,28 +1,4 @@
 //---------------HONG IN AGRATE----------------
-// var myDate,
-//   expirationDateOne,
-//   shipmentNumberW,
-//   shipmentNumberHI,
-//   shipmentNumberCS,
-//   shipmentNumberTCSB,
-//   lotNumberTCSB,
-//   manDateTCSB;
-// let mfgDateCS = [],
-//   expDateCS = [],
-//   shipmentLotNumberCS = [],
-//   yearChangeFormat = [],
-//   shNumberCS = [],
-//   shNumberHI = [],
-//   shNumberTCS = [],
-//   arrayHI = [],
-//   shNumberHICAT = [],
-//   arrayShN = [],
-//   arraydataHI = [],
-//   arrayIndeces = [],
-//   arrayFinalDataHI = [],
-//   arrayIndecesMetal = [],
-//   arrayIndecesMetalRandom = [],
-//   arrayMetalDataHI = [];
 
 function HongInAGR() {
   document.getElementById("btndown").style.display = "inline";
