@@ -25,7 +25,7 @@
           >Scrivi i 'Behalter Nr' che trovi sul pdf
           <u>separati da una virgola</u>
         </label>
-        <br />
+
         <div class="input-group">
           <input
             id="CSDrums"
@@ -33,11 +33,12 @@
             style="height: 40px; border-radius: 5px; border-color: lightblue"
           />
         </div>
-        <br />
+        <span></span>
+
         <label for="ManDateCS"
-          >Manufactruing Date in formato DD-MMM-YYYY (es. 15-Feb-2022)
+          >Manufacturing Date in formato DD-MMM-YYYY (es. 15-Feb-2022)
         </label>
-        <br />
+
         <div class="input-group">
           <input
             id="ManDateCS"
@@ -45,11 +46,9 @@
             style="height: 40px; border-radius: 5px; border-color: lightblue"
           />
         </div>
-        <br />
-        <label for="COCS"
-          >Valore Carbon Monoxide - CO in ppm (solo numero)
-        </label>
-        <br />
+
+        <label for="COCS">Valore CO in ppm (solo numero) </label>
+
         <div class="input-group">
           <input
             id="COCS"
@@ -57,11 +56,9 @@
             style="height: 40px; border-radius: 5px; border-color: lightblue"
           />
         </div>
-        <br />
-        <label for="CO2CS"
-          >Valore Carbon Dioxide - CO2 in ppm (solo numero)
-        </label>
-        <br />
+
+        <label for="CO2CS">Valore CO2 in ppm (solo numero) </label>
+
         <div class="input-group">
           <input
             id="CO2CS"
@@ -69,19 +66,9 @@
             style="height: 40px; border-radius: 5px; border-color: lightblue"
           />
         </div>
-        <br />
-        <label for="FeCS">Valore Iron - Fe in ppm (solo numero) </label>
-        <br />
-        <div class="input-group">
-          <input
-            id="FeCS"
-            required="required"
-            style="height: 40px; border-radius: 5px; border-color: lightblue"
-          />
-        </div>
-        <br />
-        <label for="Cl2CS">Valore Chlorine - Cl2 in ppm (solo numero) </label>
-        <br />
+
+        <label for="Cl2CS">Valore Cl2 in ppm (solo numero) </label>
+
         <div class="input-group">
           <input
             id="Cl2CS"
@@ -89,29 +76,46 @@
             style="height: 40px; border-radius: 5px; border-color: lightblue"
           />
         </div>
-        <br />
-        <label for="O2ArCS">Valore Oxygen + Argon in ppm (solo numero) </label>
-        <br />
+
+        <label for="CXHYCl2CS"
+          >Valore Chlorinated Hydrogencarbons - CxHyCl2 in ppm (solo numero)
+        </label>
+
         <div class="input-group">
           <input
-            id="O2ArCS"
+            id="CXHYCl2CS"
             required="required"
             style="height: 40px; border-radius: 5px; border-color: lightblue"
           />
         </div>
-        <br />
-        <label for="N2CS">Valore Nitrogen in ppm (solo numero) </label>
-        <br />
+        <!-- <label for="FeCS">Valore Fe in ppm (solo numero) </label>
         <div class="input-group">
           <input
-            id="N2CS"
+            id="FeCS"
             required="required"
             style="height: 40px; border-radius: 5px; border-color: lightblue"
           />
         </div>
-        <br />
-        <label for="H2CS">Valore Hydrogen - H2 in ppm (solo numero) </label>
-        <br />
+        <label for="CH4CS">Valore CH4 in ppm (solo numero) </label>
+
+        <div class="input-group">
+          <input
+            id="CH4CS"
+            required="required"
+            style="height: 40px; border-radius: 5px; border-color: lightblue"
+          />
+        </div> -->
+        <label for="O2ArN2CS">Valore N2 + O2 + Ar in ppm (solo numero) </label>
+        <div class="input-group">
+          <input
+            id="O2ArN2CS"
+            required="required"
+            style="height: 40px; border-radius: 5px; border-color: lightblue"
+          />
+        </div>
+
+        <label for="H2CS">Valore H2 in ppm (solo numero) </label>
+
         <div class="input-group">
           <input
             id="H2CS"
@@ -119,9 +123,9 @@
             style="height: 40px; border-radius: 5px; border-color: lightblue"
           />
         </div>
-        <br />
-        <label for="H2OCS">Valore Water - H2O in ppm (solo numero) </label>
-        <br />
+
+        <label for="H2OCS">Valore H2O in ppm (solo numero) </label>
+
         <div class="input-group">
           <input
             id="H2OCS"
@@ -130,17 +134,34 @@
           />
         </div>
         <br />
-        <button
-          class="btn btn-primary"
-          onclick="CSDrums()"
-          style="margin-left: 10px"
-        >
-          Invia tutto
-        </button>
       </div>
+      <p id="testoCorretto"></p>
+      <button
+        class="btn btn-primary"
+        onclick="CSDrums()"
+        style="margin-left: 10px"
+        id="btnInvia"
+      >
+        Invia tutto
+      </button>
+      <button
+        class="btn btn-primary"
+        onclick="ChlorgasLines()"
+        style="margin-left: 10px; display: none"
+        id="btnCorretto"
+      >
+        Clicca qui se corretto
+      </button>
+      <button
+        class="btn btn-primary"
+        onclick="window.open('CS.html', '_blank').focus();"
+        style="margin-left: 10px; display: none"
+        id="btnNonCorretto"
+      >
+        Clicca qui se c'è qualcosa di sbagliato
+      </button>
       <br /><br />
     </div>
-
     <div id="btndown" style="padding-left: 20px; display: none">
       <a href="\download" class="btn btn-primary">
         Click here to download the xml file

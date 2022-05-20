@@ -296,7 +296,7 @@ app.post("/apitwo", (req, res) => {
 //------------END WACKER POST------------
 
 //-----------CHLORGAS POST-------------
-app.post("/apithree", (req, res) => {
+app.post("/apiCS", (req, res) => {
   const dataCSPost = req.body;
   //console.log(dataCSPost);
   var zipCS = new AdmZip();
@@ -328,22 +328,22 @@ app.post("/apithree", (req, res) => {
     xw.writeAttribute("LotQty", 1);
     xw.startElement("DIM_Carbon_dioxide_CO2");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", "1.8");
+    xw.writeAttribute("VALUE", dataCSPost.CO2[i]);
     xw.endElement();
     xw.endElement("DIM_Carbon_dioxide_CO2");
     xw.startElement("DIM_Carbon_monoxide_CO");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", "6.0");
+    xw.writeAttribute("VALUE", dataCSPost.CO[i]);
     xw.endElement();
     xw.endElement("DIM_Carbon_monoxide_CO");
     xw.startElement("DIM_Chlorine_CL2");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", "0.8");
+    xw.writeAttribute("VALUE", dataCSPost.Cl2[i]);
     xw.endElement();
     xw.endElement("DIM_Chlorine_CL2");
     xw.startElement("DIM_Chlorinated_Hydrogencarbons_CXHYCL2");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", "0.8");
+    xw.writeAttribute("VALUE", dataCSPost.CHCl2[i]);
     xw.endElement();
     xw.endElement("DIM_Chlorinated_Hydrogencarbons_CXHYCL2");
     xw.startElement("DIM_Iron_Fe");
@@ -358,26 +358,26 @@ app.post("/apithree", (req, res) => {
     xw.endElement("DIM_Methane_CH4 ");
     xw.startElement("DIM_Moisture_H2O");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", "1.8");
+    xw.writeAttribute("VALUE", dataCSPost.H2O[i]);
     xw.endElement();
     xw.endElement("DIM_Moisture_H2O");
     xw.startElement("DIM_Nitrogen_plus_Oxygen_plus_Argon_N2_plus_O2_plus_Ar ");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", "4.0");
+    xw.writeAttribute("VALUE", dataCSPost.N2ArO2[i]);
     xw.endElement();
     xw.endElement("DIM_Nitrogen_plus_Oxygen_plus_Argon_N2_plus_O2_plus_Ar ");
     xw.startElement("DIM_Hydrogen_H2 ");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", "5.0");
+    xw.writeAttribute("VALUE", dataCSPost.H2CS[i]);
     xw.endElement();
     xw.endElement("DIM_Hydrogen_H2 ");
     xw.endDocument();
 
     try {
       var fileToBeDownloaded = dataCSPost.filetext[i];
-      fileToBeDownloaded = fileToBeDownloaded.replace("/", "-");
+      //fileToBeDownloaded = fileToBeDownloaded.replace("/", "-");
       fileToBeDownloaded = fileToBeDownloaded + ".xml";
-      //console.log("file to be dw", fileToBeDownloaded);
+      console.log("file to be dw", fileToBeDownloaded);
       fs.writeFileSync(fileToBeDownloaded, xw.toString());
       zipCS.addLocalFile(fileToBeDownloaded);
     } catch (e) {
@@ -993,7 +993,7 @@ app.post("/apiCF4", (req, res) => {
   xw.writeAttribute("SupplierHoldingDesc", "LINDE PLC");
   xw.writeAttribute("ReceivingStPlant", "Agrate");
   xw.writeAttribute("MpsSpecNo", "DM00215312_06");
-  xw.writeAttribute("MpsSpecRev", "2.0");
+  xw.writeAttribute("MpsSpecRev", "4.0");
   xw.writeAttribute("ShipmentDate", dataCF4.shipmentdate);
   xw.writeAttribute("ShipmentNumber", dataCF4.shipmentNumber);
   xw.writeAttribute("ShipQty", 1);
@@ -1003,36 +1003,36 @@ app.post("/apiCF4", (req, res) => {
   xw.writeAttribute("ExpiryDate", dataCF4.expiryDate);
   xw.writeAttribute("MfgDate", dataCF4.manDate);
   xw.writeAttribute("LotQty", 1);
-  xw.startElement("DIM_Oxygen_plus_argon_O2_plus_Ar");
+  xw.startElement("DIM_Carbon_monoxide_CO");
   xw.startElement("RAW");
-  xw.writeAttribute("VALUE", dataCF4.O2Arvalue);
+  xw.writeAttribute("VALUE", dataCF4.COvalue);
   xw.endElement();
-  xw.endElement("DIM_Oxygen_plus_argon_O2_plus_Ar");
+  xw.endElement("DIM_Carbon_monoxide_CO");
   xw.startElement("DIM_Nitrogen_N2");
   xw.startElement("RAW");
   xw.writeAttribute("VALUE", dataCF4.N2value);
   xw.endElement();
   xw.endElement("DIM_Nitrogen_N2");
-  xw.startElement("DIM_Methane_CH4");
+  xw.startElement("DIM_Oxygen_plus_argon_O2_plus_Ar");
   xw.startElement("RAW");
-  xw.writeAttribute("VALUE", dataCF4.CH4value);
+  xw.writeAttribute("VALUE", dataCF4.O2Arvalue);
   xw.endElement();
-  xw.endElement("DIM_Methane_CH4");
+  xw.endElement("DIM_Oxygen_plus_argon_O2_plus_Ar");
   xw.startElement("DIM_Moisture_H2O");
   xw.startElement("RAW");
   xw.writeAttribute("VALUE", dataCF4.H2Ovalue);
   xw.endElement();
   xw.endElement("DIM_Moisture_H2O");
-  xw.startElement("DIM_Carbon_monoxide_CO");
-  xw.startElement("RAW");
-  xw.writeAttribute("VALUE", "0.01");
-  xw.endElement();
-  xw.endElement("DIM_Carbon_monoxide_CO");
   xw.startElement("DIM_Carbon_dioxide_CO2");
   xw.startElement("RAW");
   xw.writeAttribute("VALUE", dataCF4.CO2value);
   xw.endElement();
   xw.endElement("DIM_Carbon_dioxide_CO2");
+  xw.startElement("DIM_Methane_CH4");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataCF4.CH4value);
+  xw.endElement();
+  xw.endElement("DIM_Methane_CH4");
   xw.startElement("DIM_Sulfur_hexafluoride_SF6");
   xw.startElement("RAW");
   xw.writeAttribute("VALUE", dataCF4.SF6value);
@@ -1040,12 +1040,12 @@ app.post("/apiCF4", (req, res) => {
   xw.endElement("DIM_Sulfur_hexafluoride_SF6");
   xw.startElement("DIM_Other_halocarbon_OHC");
   xw.startElement("RAW");
-  xw.writeAttribute("VALUE", dataCF4.HCvalue);
+  xw.writeAttribute("VALUE", dataCF4.otherHCvalue);
   xw.endElement();
   xw.endElement("DIM_Other_halocarbon_OHC");
   xw.startElement("DIM_Acidity");
   xw.startElement("RAW");
-  xw.writeAttribute("VALUE", "0.39");
+  xw.writeAttribute("VALUE", dataCF4.acidityvalue);
   xw.endElement();
   xw.endElement("DIM_Acidity");
   xw.endDocument();

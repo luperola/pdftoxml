@@ -95,6 +95,8 @@ function TCSBurghausenCAT() {
 }
 function TCSBurghausen(receivingPlant) {
   document.getElementById("btndropdown").style.display = "none";
+  document.getElementById("CSPage").style.display = "none";
+  document.getElementById("NOTaulovPage").style.display = "none";
   //document.getElementById("modalCS").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
@@ -288,174 +290,14 @@ function TCSBurghausen(receivingPlant) {
 }
 //--------------END TCS Burghausen-----------------------
 
-// ---------------- CHLORGAS ----------------------
-function ChlorgasStart() {
-  document.getElementById("btndropdown").style.display = "none";
-  document.getElementById("instructions").style.display = "none";
-  //document.getElementById("modalCS").style.display = "none";
-  document.getElementById("qtyinputCS").style.display = "inline";
-}
-
-function ChlorgasLines() {
-  document.getElementById("btndown").style.display = "inline";
-  document.getElementById("btnHome").style.display = "inline";
-  var coaLinesCS = document.getElementById("CoaLinesCS").value;
-  document.getElementById("qtyPagesCS").style.display = "inline";
-  document.getElementById("qtyPagesCS").innerHTML =
-    "eCOA Chlorgas lines =" + coaLinesCS.toString();
-  ChlorgasPdftoTxt(coaLinesCS);
-}
-function ChlorgasPdftoTxt(coaCS) {
-  ReadCSText();
-  async function ReadCSText() {
-    const res = await fetch("/txt");
-    var dataText = await res.text();
-    dataText = dataText.replace(/[\r\n]+/g, "\n\n");
-    //Counter per shipment Number progressivo
-    for (let index = 0; index < coaCS; index++) {
-      const testResponse = await fetch("/apicounter");
-      var dataTest = await testResponse.text();
-      //console.log("dataTest1", dataTest);
-      dataTest = parseInt(dataTest);
-      dataTest++;
-      var dt = new Date();
-      var anno = dt.getFullYear().toString();
-      anno = anno.substring(2, 4);
-      if (dataTest < 10) {
-        shipmentNumberCS = "IT/000" + dataTest.toString() + "/" + anno;
-      }
-      if (dataTest >= 10 && dataTest < 100) {
-        shipmentNumberCS = "IT/00" + dataTest.toString() + "/" + anno;
-      }
-      if (dataTest >= 100 && dataTest < 1000) {
-        shipmentNumberCS = "IT/0" + dataTest.toString() + "/" + anno;
-      }
-      if (dataTest >= 1000) {
-        shipmentNumberCS = "IT/" + dataTest.toString() + "/" + anno;
-      }
-      if (dataTest > 10000) {
-        alert("reset counter.txt file");
-      }
-      shNumberCS.push(shipmentNumberCS);
-
-      datacounter = { dataTest };
-      const optionCounter = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(datacounter),
-      };
-      const myresponse = await fetch("/newcounter", optionCounter);
-      var myjson = await myresponse.text();
-      //console.log("myjson", myjson);
-    }
-    //console.log("progressivo", shNumberCS);
-
-    //creo matrice di dataText - tutti gli elementi
-    for (let index = 0; index < dataText.length; index++) {
-      var element = dataText[index];
-      testMatrixCS1.push(element);
-    }
-    const test3 = testMatrixCS1.join("");
-
-    // creo matrice .match con i contenuti della matrice sopra
-    testMatrixCS2 = test3.match(/.{1,20}/g);
-    //console.log(testMatrixCS2);
-
-    //qualche volta è una o l'altra nel file text, allora verifico se esiste 'Nr.' o no
-    if (testMatrixCS2.indexOf("Nr.") === -1) {
-      for (let index = 0; index < testMatrixCS2.length; index++) {
-        if (testMatrixCS2[index] === "Behälter-") {
-          for (let i = 1; i < parseInt(coaCS) + 1; i++) {
-            shipmentLotNumberCS.push(testMatrixCS2[index + i]);
-          }
-        }
-      }
-    }
-    if (testMatrixCS2.indexOf("Nr.") != -1) {
-      for (let index = 0; index < testMatrixCS2.length; index++) {
-        if (testMatrixCS2[index] === "Nr.") {
-          for (let i = 1; i < parseInt(coaCS) + 1; i++) {
-            shipmentLotNumberCS.push(testMatrixCS2[index + i]);
-          }
-        }
-      }
-    }
-    for (let index = 0; index < testMatrixCS2.length; index++) {
-      if (testMatrixCS2[index] === "Datum") {
-        for (let i = 1; i < parseInt(coaCS) + 1; i++) {
-          mfgDateCS.push(testMatrixCS2[index + i]);
-        }
-      }
-    }
-    mfgMonthChange(mfgDateCS);
-
-    //cambio format mese per CS
-    function mfgMonthChange(monthChangeFormat) {
-      for (let index = 0; index < coaCS; index++) {
-        monthChangeFormat[index] = monthChangeFormat[index].replaceAll(
-          ".",
-          "-"
-        );
-        const monthMan = parseInt(monthChangeFormat[index].substring(3, 5)) - 1;
-        const monthNameMan = [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ];
-        monthChangeFormat[index] = monthChangeFormat[index].replace(
-          monthChangeFormat[index].substring(3, 5),
-          monthNameMan[monthMan]
-        );
-        monthChangeFormat[index] = monthChangeFormat[index].substring(0, 7);
-        const Anno = "2021";
-        const expAnno = "2023";
-        expDateCS[index] = monthChangeFormat[index] + expAnno;
-        monthChangeFormat[index] = monthChangeFormat[index] + Anno;
-      }
-    }
-
-    const dataCS = {
-      shipment: mfgDateCS,
-      lotNumber: shipmentLotNumberCS,
-      expiryDate: expDateCS,
-      manDate: mfgDateCS,
-      progressivoCS: shNumberCS,
-      filetext: shipmentLotNumberCS,
-    };
-
-    console.log("dataCS", dataCS);
-
-    const CSoptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataCS),
-    };
-    const myresponseCS = await fetch("/apithree", CSoptions);
-    var myjsonCS = await myresponseCS.json();
-    console.log(myjsonCS);
-  }
-}
-// ---------------- END CHLORGAS ----------------------
-
 // ---------------- NITRIC OXIDE TAVLOV --------------
 function mfgDateNOTavlov() {
   document.getElementById("MfgDateTav1").style.display = "inline";
 }
 
 function delDateNOTavlov() {
+  document.getElementById("CSPage").style.display = "none";
+  document.getElementById("NOTaulovPage").style.display = "none";
   mfgDateNewFormat = document.getElementById("MfgTav1").value;
   const monthMan = parseInt(mfgDateNewFormat.substring(5, 7)) - 1;
   const monthNameMan = [
@@ -832,6 +674,8 @@ let values = [],
 
 function HFGH() {
   document.getElementById("dataHF").style.display = "inline";
+  document.getElementById("CSPage").style.display = "none";
+  document.getElementById("NOTaulovPage").style.display = "none";
   document.getElementById("cylDelivered").style.display = "none";
   document.getElementById("btndropdown").style.display = "none";
   //document.getElementById("modalCS").style.display = "none";
@@ -1082,6 +926,8 @@ function C4F8CAT() {
   C4F8(receivingPlant);
 }
 function C4F8(receivingPlant) {
+  document.getElementById("CSPage").style.display = "none";
+  document.getElementById("NOTaulovPage").style.display = "none";
   document.getElementById("btndropdown").style.display = "none";
   //document.getElementById("modalCS").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
@@ -1225,100 +1071,102 @@ function C4F8(receivingPlant) {
 }
 //---------------- END C4F8 PERFLUOROCYCLOBUTANE ----------------------
 
-//---------------- CF4 TETRAFLUOROMETHANE ----------------------
-function CF4() {
-  document.getElementById("btndropdown").style.display = "none";
-  //document.getElementById("modalCS").style.display = "none";
-  document.getElementById("btndown").style.display = "inline";
-  document.getElementById("btnHome").style.display = "inline";
-  ReadFileJson();
-  async function ReadFileJson() {
-    const res = await fetch("/jsonSampleFile2");
-    const data = await res.json();
-    //console.log("data", data);
+// //---------------- CF4 TETRAFLUOROMETHANE ----------------------
+// function CF4() {
+//   document.getElementById("btndropdown").style.display = "none";
+//   document.getElementById("CSPage").style.display = "none";
+//   document.getElementById("NOTaulovPage").style.display = "none";
+//   //document.getElementById("modalCS").style.display = "none";
+//   document.getElementById("btndown").style.display = "inline";
+//   document.getElementById("btnHome").style.display = "inline";
+//   ReadFileJson();
+//   async function ReadFileJson() {
+//     const res = await fetch("/jsonSampleFile2");
+//     const data = await res.json();
+//     //console.log("data", data);
 
-    //Counter alimenta e salva il contatore di counter.txt
-    const testResponse = await fetch("/apicounter");
-    var dataTest = await testResponse.text();
-    dataTest = parseInt(dataTest);
-    dataTest++;
-    var dt = new Date();
-    var anno = dt.getFullYear().toString();
-    anno = anno.substring(2, 4);
-    if (dataTest < 10) {
-      shipmentNumberCF4 = "IT/000" + dataTest.toString() + "/" + anno;
-    }
-    if (dataTest >= 10 && dataTest < 100) {
-      shipmentNumberCF4 = "IT/00" + dataTest.toString() + "/" + anno;
-    }
-    if (dataTest >= 100 && dataTest < 1000) {
-      shipmentNumberCF4 = "IT/0" + dataTest.toString() + "/" + anno;
-    }
-    if (dataTest >= 1000) {
-      shipmentNumberCF4 = "IT/" + dataTest.toString() + "/" + anno;
-    }
-    if (dataTest > 10000) {
-      alert("reset counter.txt file");
-    }
-    datacounter = { dataTest };
-    const optionCounter = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(datacounter),
-    };
-    const myresponse = await fetch("/newcounter", optionCounter);
-    var myjson = await myresponse.text();
-    //console.log("myJson", myjson);
+//     //Counter alimenta e salva il contatore di counter.txt
+//     const testResponse = await fetch("/apicounter");
+//     var dataTest = await testResponse.text();
+//     dataTest = parseInt(dataTest);
+//     dataTest++;
+//     var dt = new Date();
+//     var anno = dt.getFullYear().toString();
+//     anno = anno.substring(2, 4);
+//     if (dataTest < 10) {
+//       shipmentNumberCF4 = "IT/000" + dataTest.toString() + "/" + anno;
+//     }
+//     if (dataTest >= 10 && dataTest < 100) {
+//       shipmentNumberCF4 = "IT/00" + dataTest.toString() + "/" + anno;
+//     }
+//     if (dataTest >= 100 && dataTest < 1000) {
+//       shipmentNumberCF4 = "IT/0" + dataTest.toString() + "/" + anno;
+//     }
+//     if (dataTest >= 1000) {
+//       shipmentNumberCF4 = "IT/" + dataTest.toString() + "/" + anno;
+//     }
+//     if (dataTest > 10000) {
+//       alert("reset counter.txt file");
+//     }
+//     datacounter = { dataTest };
+//     const optionCounter = {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(datacounter),
+//     };
+//     const myresponse = await fetch("/newcounter", optionCounter);
+//     var myjson = await myresponse.text();
+//     //console.log("myJson", myjson);
 
-    var manCF4 = data[14][1];
-    var expCF4 = data[14][3];
-    manCF4 = manCF4.replaceAll(" ", "-");
-    expCF4 = expCF4.replaceAll(" ", "-");
-    var shipDateCF4 = manCF4;
-    var lotNumberCF4 = data[13][2];
-    var HCvalueCF4 = data[17][5];
-    var N2valueCF4 = data[6][6];
-    var O2ArvalueCF4 = data[7][10];
-    var CH4valueCF4 = data[10][11];
-    var H2OvalueCF4 = data[7][11];
-    var CO2valueCF4 = data[10][10];
-    var COvalueCF4 = data[9][10];
-    var SF6valueCF4 = data[11][10];
+//     var manCF4 = data[14][1];
+//     var expCF4 = data[14][3];
+//     manCF4 = manCF4.replaceAll(" ", "-");
+//     expCF4 = expCF4.replaceAll(" ", "-");
+//     var shipDateCF4 = manCF4;
+//     var lotNumberCF4 = data[13][2];
+//     var HCvalueCF4 = data[17][5];
+//     var N2valueCF4 = data[6][6];
+//     var O2ArvalueCF4 = data[7][10];
+//     var CH4valueCF4 = data[10][11];
+//     var H2OvalueCF4 = data[7][11];
+//     var CO2valueCF4 = data[10][10];
+//     var COvalueCF4 = data[9][10];
+//     var SF6valueCF4 = data[11][10];
 
-    var CF4Data = {
-      shipmentNumber: shipmentNumberCF4,
-      shipmentdate: shipDateCF4,
-      lotNumber: lotNumberCF4,
-      expiryDate: expCF4,
-      manDate: manCF4,
-      HCvalue: HCvalueCF4,
-      N2value: N2valueCF4,
-      O2Arvalue: O2ArvalueCF4,
-      CH4value: CH4valueCF4,
-      H2Ovalue: H2OvalueCF4,
-      CO2value: CO2valueCF4,
-      COvalue: COvalueCF4,
-      SF6value: SF6valueCF4,
-    };
-    console.log("all data", CF4Data);
+//     var CF4Data = {
+//       shipmentNumber: shipmentNumberCF4,
+//       shipmentdate: shipDateCF4,
+//       lotNumber: lotNumberCF4,
+//       expiryDate: expCF4,
+//       manDate: manCF4,
+//       HCvalue: HCvalueCF4,
+//       N2value: N2valueCF4,
+//       O2Arvalue: O2ArvalueCF4,
+//       CH4value: CH4valueCF4,
+//       H2Ovalue: H2OvalueCF4,
+//       CO2value: CO2valueCF4,
+//       COvalue: COvalueCF4,
+//       SF6value: SF6valueCF4,
+//     };
+//     console.log("all data", CF4Data);
 
-    // posto i dati per compilare file xlm
+//     // posto i dati per compilare file xlm
 
-    const CF4options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(CF4Data),
-    };
-    const myresponseCF4 = await fetch("/apiCF4", CF4options);
-    var myjsonCF4 = await myresponseCF4.json();
-    //console.log(myjsonCF4);
-  }
-}
-//---------------- END CF4 TETRAFLUOROMETHANE ----------------------
+//     const CF4options = {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(CF4Data),
+//     };
+//     const myresponseCF4 = await fetch("/apiCF4", CF4options);
+//     var myjsonCF4 = await myresponseCF4.json();
+//     //console.log(myjsonCF4);
+//   }
+// }
+// //---------------- END CF4 TETRAFLUOROMETHANE ----------------------
 
 //---------------- F2KrNe 3GASC948 AGR + CAT ----------------------
 function F2KrNeAGR() {
@@ -1331,6 +1179,8 @@ function F2KrNeCAT() {
 }
 function F2KrNe(receivingPlant) {
   document.getElementById("btndropdown").style.display = "none";
+  document.getElementById("CSPage").style.display = "none";
+  document.getElementById("NOTaulovPage").style.display = "none";
   //document.getElementById("modalCS").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
@@ -1497,6 +1347,8 @@ function F2KrNe(receivingPlant) {
 
 function F2ArNe() {
   document.getElementById("btndropdown").style.display = "none";
+  document.getElementById("CSPage").style.display = "none";
+  document.getElementById("NOTaulovPage").style.display = "none";
   //document.getElementById("modalCS").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
@@ -1663,6 +1515,8 @@ function F2ArNe() {
 function HBr() {
   //alert("in costruzione. Spediscimi file pdf");
   document.getElementById("btndropdown").style.display = "none";
+  document.getElementById("CSPage").style.display = "none";
+  document.getElementById("NOTaulovPage").style.display = "none";
   //document.getElementById("modalCS").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
@@ -1810,6 +1664,8 @@ function KrNeCAT() {
 }
 function KrNe(receivingPlant) {
   document.getElementById("btndropdown").style.display = "none";
+  document.getElementById("CSPage").style.display = "none";
+  document.getElementById("NOTaulovPage").style.display = "none";
   //document.getElementById("modalCS").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
@@ -1953,6 +1809,8 @@ function KrNe(receivingPlant) {
 function ArXeNe() {
   alert("in costruzione");
   // document.getElementById("btndropdown").style.display = "none";
+  //   document.getElementById("CSPage").style.display = "none";
+  // document.getElementById("NOTaulovPage").style.display = "none";
   // //document.getElementById("modalCS").style.display = "none";
   // document.getElementById("btndown").style.display = "inline";
   // document.getElementById("btnHome").style.display = "inline";
@@ -2093,6 +1951,8 @@ function ArXeNe() {
 //---------------- SF6 3GASN906 from US to CAT ----------------------
 function SF6US() {
   document.getElementById("btndropdown").style.display = "none";
+  document.getElementById("CSPage").style.display = "none";
+  document.getElementById("NOTaulovPage").style.display = "none";
   //document.getElementById("modalCS").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
@@ -2213,6 +2073,8 @@ function SF6US() {
 //---------------- SF6 3GASN326 from BOC to CAT ----------------------
 function SF6BOC() {
   document.getElementById("btndropdown").style.display = "none";
+  document.getElementById("CSPage").style.display = "none";
+  document.getElementById("NOTaulovPage").style.display = "none";
   //document.getElementById("modalCS").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
@@ -2313,6 +2175,8 @@ function HFSmall() {
   matriceHF = [];
   //alert("under construction");
   document.getElementById("btndropdown").style.display = "none";
+  document.getElementById("CSPage").style.display = "none";
+  document.getElementById("NOTaulovPage").style.display = "none";
   //document.getElementById("modalCS").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";

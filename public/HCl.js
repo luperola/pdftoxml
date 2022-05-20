@@ -552,6 +552,8 @@ function WackerHCl(
   revisionSpec
 ) {
   document.getElementById("btndropdown").style.display = "none";
+  document.getElementById("CSPage").style.display = "none";
+  document.getElementById("NOTaulovPage").style.display = "none";
   //document.getElementById("modalCS").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
