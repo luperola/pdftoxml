@@ -124,7 +124,6 @@ try {
         var test = fileOriginale
           .substring(fileOriginale.length - 4)
           .toLowerCase();
-        fileOriginale = fileOriginale.replace("#", "");
         if (test === ".pdf") {
           //if (test === ".pdf" && found === null) {
           // const pdfParser = new PDFParser();
@@ -1299,83 +1298,83 @@ app.post("/apiF2ArNe", (req, res) => {
 //------------ HBr POST------------
 app.post("/apiHBr", (req, res) => {
   const dataHBr = req.body;
-  //console.log(dataHBr);
-  xw = new XMLWriter(true);
-  xw.startDocument("1.0", "UTF-8");
-  xw.startElement("GasesShipment");
-  xw.writeAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
-  xw.writeAttribute(
-    "xsi:noNamespaceSchemaLocation",
-    "3GASCD07_DM00598023_06.xsd"
-  );
-  xw.writeAttribute("MaterialCode", "3GASCD07");
-  xw.writeAttribute("SupplierHoldingDesc", "LINDE PLC");
-  xw.writeAttribute("ReceivingStPlant", "Catania");
-  xw.writeAttribute("MpsSpecNo", "DM00598023_06");
-  xw.writeAttribute("MpsSpecRev", "2.0");
-  xw.writeAttribute("ShipmentDate", dataHBr.shipmentdateB);
-  xw.writeAttribute("ShipmentNumber", dataHBr.shipmentNumberB);
-  xw.writeAttribute("ShipQty", 1);
-  xw.startElement("Lot");
-  xw.writeAttribute(
-    "SupplierSupplyChainSeqCode",
-    "LINDE PLC-UNTERSCHLEISSHEIM-290"
-  );
-  xw.writeAttribute("ShipLotNo", dataHBr.lotNumberB);
-  xw.writeAttribute("ExpiryDate", dataHBr.expiryDateB);
-  xw.writeAttribute("MfgDate", dataHBr.manDateB);
-  xw.writeAttribute("LotQty", 1);
-  xw.startElement("DIM_Iron_Fe");
-  xw.startElement("RAW");
-  xw.writeAttribute("VALUE", dataHBr.FevalueB);
-  xw.endElement();
-  xw.endElement("DIM_Iron_Fe");
-  xw.startElement("DIM_Carbon_dioxide_CO2");
-  xw.startElement("RAW");
-  xw.writeAttribute("VALUE", dataHBr.CO2valueB);
-  xw.endElement();
-  xw.endElement("DIM_Carbon_dioxide_CO2");
-  xw.startElement("DIM_Carbon_monoxide_CO");
-  xw.startElement("RAW");
-  xw.writeAttribute("VALUE", dataHBr.COvalueB);
-  xw.endElement();
-  xw.endElement("DIM_Carbon_monoxide_CO");
-  xw.startElement("DIM_Moisture_H2O");
-  xw.startElement("RAW");
-  xw.writeAttribute("VALUE", dataHBr.H2OvalueB);
-  xw.endElement();
-  xw.endElement("DIM_Moisture_H2O");
-  xw.startElement("DIM_Nitrogen_N2");
-  xw.startElement("RAW");
-  xw.writeAttribute("VALUE", dataHBr.N2valueB);
-  xw.endElement();
-  xw.endElement("DIM_Nitrogen_N2");
-  xw.startElement("DIM_Oxygen_O2");
-  xw.startElement("RAW");
-  xw.writeAttribute("VALUE", dataHBr.O2valueB);
-  xw.endElement();
-  xw.endElement("DIM_Oxygen_O2");
-  xw.startElement("DIM_Total_hydrocarbon_as_CH4");
-  xw.startElement("RAW");
-  xw.writeAttribute("VALUE", dataHBr.THCvalueB);
-  xw.endElement();
-  xw.endElement("DIM_Total_hydrocarbon_as_CH4");
-  xw.startElement("DIM_Hydrogen_chloride_HCl");
-  xw.startElement("RAW");
-  xw.writeAttribute("VALUE", dataHBr.HClvalueB);
-  xw.endElement();
-  xw.endElement("DIM_Hydrogen_chloride_HCl");
-  xw.endDocument();
+  console.log(dataHBr);
+  // xw = new XMLWriter(true);
+  // xw.startDocument("1.0", "UTF-8");
+  // xw.startElement("GasesShipment");
+  // xw.writeAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+  // xw.writeAttribute(
+  //   "xsi:noNamespaceSchemaLocation",
+  //   "3GASCD07_DM00598023_06.xsd"
+  // );
+  // xw.writeAttribute("MaterialCode", "3GASCD07");
+  // xw.writeAttribute("SupplierHoldingDesc", "LINDE PLC");
+  // xw.writeAttribute("ReceivingStPlant", "Catania");
+  // xw.writeAttribute("MpsSpecNo", "DM00598023_06");
+  // xw.writeAttribute("MpsSpecRev", "2.0");
+  // xw.writeAttribute("ShipmentDate", dataHBr.shipmentdateB);
+  // xw.writeAttribute("ShipmentNumber", dataHBr.shipmentNumberB);
+  // xw.writeAttribute("ShipQty", 1);
+  // xw.startElement("Lot");
+  // xw.writeAttribute(
+  //   "SupplierSupplyChainSeqCode",
+  //   "LINDE PLC-UNTERSCHLEISSHEIM-290"
+  // );
+  // xw.writeAttribute("ShipLotNo", dataHBr.lotNumberB);
+  // xw.writeAttribute("ExpiryDate", dataHBr.expiryDateB);
+  // xw.writeAttribute("MfgDate", dataHBr.manDateB);
+  // xw.writeAttribute("LotQty", 1);
+  // xw.startElement("DIM_Iron_Fe");
+  // xw.startElement("RAW");
+  // xw.writeAttribute("VALUE", dataHBr.FevalueB);
+  // xw.endElement();
+  // xw.endElement("DIM_Iron_Fe");
+  // xw.startElement("DIM_Carbon_dioxide_CO2");
+  // xw.startElement("RAW");
+  // xw.writeAttribute("VALUE", dataHBr.CO2valueB);
+  // xw.endElement();
+  // xw.endElement("DIM_Carbon_dioxide_CO2");
+  // xw.startElement("DIM_Carbon_monoxide_CO");
+  // xw.startElement("RAW");
+  // xw.writeAttribute("VALUE", dataHBr.COvalueB);
+  // xw.endElement();
+  // xw.endElement("DIM_Carbon_monoxide_CO");
+  // xw.startElement("DIM_Moisture_H2O");
+  // xw.startElement("RAW");
+  // xw.writeAttribute("VALUE", dataHBr.H2OvalueB);
+  // xw.endElement();
+  // xw.endElement("DIM_Moisture_H2O");
+  // xw.startElement("DIM_Nitrogen_N2");
+  // xw.startElement("RAW");
+  // xw.writeAttribute("VALUE", dataHBr.N2valueB);
+  // xw.endElement();
+  // xw.endElement("DIM_Nitrogen_N2");
+  // xw.startElement("DIM_Oxygen_O2");
+  // xw.startElement("RAW");
+  // xw.writeAttribute("VALUE", dataHBr.O2valueB);
+  // xw.endElement();
+  // xw.endElement("DIM_Oxygen_O2");
+  // xw.startElement("DIM_Total_hydrocarbon_as_CH4");
+  // xw.startElement("RAW");
+  // xw.writeAttribute("VALUE", dataHBr.THCvalueB);
+  // xw.endElement();
+  // xw.endElement("DIM_Total_hydrocarbon_as_CH4");
+  // xw.startElement("DIM_Hydrogen_chloride_HCl");
+  // xw.startElement("RAW");
+  // xw.writeAttribute("VALUE", dataHBr.HClvalueB);
+  // xw.endElement();
+  // xw.endElement("DIM_Hydrogen_chloride_HCl");
+  // xw.endDocument();
 
-  try {
-    fs.writeFileSync("sourcename.txt", "HBr");
-    fileToBeDownloaded = dataHBr.filenameB.toString() + ".xml";
-    //res.json(xw.toString());
-    fs.writeFileSync(fileToBeDownloaded, xw.toString());
-    fs.writeFileSync("HBrfilename.txt", fileToBeDownloaded);
-  } catch (e) {
-    console.log("Error:", e.stack);
-  }
+  // try {
+  //   fs.writeFileSync("sourcename.txt", "HBr");
+  //   fileToBeDownloaded = dataHBr.filenameB.toString() + ".xml";
+  //   //res.json(xw.toString());
+  //   fs.writeFileSync(fileToBeDownloaded, xw.toString());
+  //   fs.writeFileSync("HBrfilename.txt", fileToBeDownloaded);
+  // } catch (e) {
+  //   console.log("Error:", e.stack);
+  // }
 });
 //------------ END HBr POST------------
 

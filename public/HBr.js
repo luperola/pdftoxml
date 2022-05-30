@@ -7,8 +7,8 @@ function HBr() {
   document.getElementById("btnHome").style.display = "inline";
   ReadFileJson();
   async function ReadFileJson() {
-    const res = await fetch("/jsonSampleFile2");
-    const data = await res.json();
+    const resp = await fetch("/jsonSampleFile2");
+    const data = await resp.json();
     console.log("data", data);
 
     //Counter alimenta e salva il contatore di counter.txt
