@@ -102,20 +102,20 @@ function HBr() {
     var THCvalueHBr = "0.02";
 
     var HBrData = {
-      filename: filenameHBr,
+      filenameB: filenameHBr,
       //shipmentNumber: shipmentNumberHBr,
-      shipmentdate: today,
-      lotNumber: lotNumberHBr,
-      expiryDate: expHBr,
-      manDate: manHBr,
-      Fevalue: FevalueHBr,
-      CO2value: CO2valueHBr,
-      COvalue: COvalueHBr,
-      HClvalue: HClvalueHBr,
-      H2Ovalue: H2OvalueHBr,
-      N2value: N2valueHBr,
-      O2value: O2valueHBr,
-      THCvalue: THCvalueHBr,
+      shipmentdateB: today,
+      lotNumberB: lotNumberHBr,
+      expiryDateB: expHBr,
+      manDateB: manHBr,
+      FevalueB: FevalueHBr,
+      CO2valueB: CO2valueHBr,
+      COvalueB: COvalueHBr,
+      HClvalueB: HClvalueHBr,
+      H2OvalueB: H2OvalueHBr,
+      N2valueB: N2valueHBr,
+      O2valueB: O2valueHBr,
+      THCvalueB: THCvalueHBr,
     };
     console.log("all data", HBrData);
 
@@ -128,7 +128,7 @@ function HBr() {
       },
       body: JSON.stringify(HBrData),
     };
-    const myresponseHBr = await fetch("/apiBromide", HBroptions);
+    const myresponseHBr = await fetch("/apiHBr", HBroptions);
     var myjsonHBr = await myresponseHBr.json();
     //console.log(myjsonHBr);
   }
