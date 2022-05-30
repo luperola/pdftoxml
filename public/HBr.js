@@ -9,7 +9,7 @@ function HBr() {
   async function ReadFileJson() {
     const res = await fetch("/jsonSampleFile2");
     const data = await res.json();
-    //console.log("data", data);
+    console.log("data", data);
 
     //Counter alimenta e salva il contatore di counter.txt
     const testResponse = await fetch("/apicounter");
@@ -47,7 +47,8 @@ function HBr() {
     //console.log("myJson", myjson);
 
     var manHBr = data[2][2];
-    manHBr = manHBr.replace(".", "-").replace(".", "-");
+    manHBr = manHBr.replace(".", "-");
+    manHBr = manHBr.replace(".", "-");
     const monthMan = parseInt(manHBr.substring(3, 5)) - 1;
     const monthNameMan = [
       "Jan",
@@ -102,7 +103,7 @@ function HBr() {
 
     var HBrData = {
       filename: filenameHBr,
-      shipmentNumber: shipmentNumberHBr,
+      //shipmentNumber: shipmentNumberHBr,
       shipmentdate: today,
       lotNumber: lotNumberHBr,
       expiryDate: expHBr,
