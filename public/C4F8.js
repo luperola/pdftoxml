@@ -11,14 +11,14 @@ function C4F8(receivingPlant) {
   document.getElementById("CSPage").style.display = "none";
   document.getElementById("NOTaulovPage").style.display = "none";
   document.getElementById("btndropdown").style.display = "none";
-  //document.getElementById("modalCS").style.display = "none";
+  document.getElementById("TCSPage").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
   ReadFileJson();
   async function ReadFileJson() {
     const res = await fetch("/jsonSampleFile2");
     const data = await res.json();
-    console.log("data", data);
+    //console.log("data", data);
     //Counter alimenta e salva il contatore di counter.txt
     const testResponse = await fetch("/apicounter");
     var dataTest = await testResponse.text();
@@ -57,7 +57,6 @@ function C4F8(receivingPlant) {
     if (data.length === 32) {
       var manC4F8 = data[21][1];
       var expC4F8 = data[22][1];
-      var shipDateC4F8 = manC4F8;
       var lotNumberC4F8 = data[26][1];
       var acidityC4F8 = data[4][2];
       acidityC4F8 = acidityC4F8
@@ -84,7 +83,7 @@ function C4F8(receivingPlant) {
       var C4F8Data = {
         receivingPlant: receivingPlant,
         shipmentNumber: shipmentNumberC4F8,
-        shipmentdate: shipDateC4F8,
+        shipmentdate: today,
         lotNumber: lotNumberC4F8,
         expiryDate: expC4F8,
         manDate: manC4F8,
@@ -97,7 +96,6 @@ function C4F8(receivingPlant) {
     if (data.length === 31) {
       var manC4F8 = data[20][1];
       var expC4F8 = data[21][1];
-      var shipDateC4F8 = manC4F8;
       var lotNumberC4F8 = data[25][1];
       var acidityC4F8 = data[7][2];
       acidityC4F8 = acidityC4F8
@@ -125,7 +123,7 @@ function C4F8(receivingPlant) {
       var C4F8Data = {
         receivingPlant: receivingPlant,
         shipmentNumber: shipmentNumberC4F8,
-        shipmentdate: shipDateC4F8,
+        shipmentdate: today,
         lotNumber: lotNumberC4F8,
         expiryDate: expC4F8,
         manDate: manC4F8,

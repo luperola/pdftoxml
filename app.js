@@ -377,7 +377,7 @@ app.post("/apiCS", (req, res) => {
       var fileToBeDownloaded = dataCSPost.filetext[i];
       //fileToBeDownloaded = fileToBeDownloaded.replace("/", "-");
       fileToBeDownloaded = fileToBeDownloaded + ".xml";
-      console.log("file to be dw", fileToBeDownloaded);
+      //console.log("file to be dw", fileToBeDownloaded);
       fs.writeFileSync(fileToBeDownloaded, xw.toString());
       zipCS.addLocalFile(fileToBeDownloaded);
     } catch (e) {
@@ -390,7 +390,7 @@ app.post("/apiCS", (req, res) => {
 //-----------END CHLORGAS POST-------------
 
 //-----------POST from Hongin AGR-------------
-app.post("/apifour", (req, res) => {
+app.post("/apiHIAGR", (req, res) => {
   const dataHIPost = req.body;
   //console.log(dataHIPost);
   var zipHI = new AdmZip();
@@ -408,7 +408,7 @@ app.post("/apifour", (req, res) => {
     xw.writeAttribute("ReceivingStPlant", "Agrate");
     xw.writeAttribute("MpsSpecNo", "DM0000775807_06");
     xw.writeAttribute("MpsSpecRev", "2.0");
-    xw.writeAttribute("ShipmentDate", dataHIPost.manDateHI[i]);
+    xw.writeAttribute("ShipmentDate", dataHIPost.shipmentDate[i]);
     xw.writeAttribute("ShipmentNumber", dataHIPost.progressivoHI[i]);
     xw.writeAttribute("ShipQty", 1);
     xw.startElement("Lot");
@@ -417,7 +417,7 @@ app.post("/apifour", (req, res) => {
       "LINDE PLC-HONG-IN CHEMICAL / Ulsan-1684"
     );
     xw.writeAttribute("ShipLotNo", dataHIPost.lotNumberHI[i]);
-    xw.writeAttribute("ExpiryDate", dataHIPost.expiryDateHI[i]);
+    xw.writeAttribute("ExpiryDate", dataHIPost.expDateHI[i]);
     xw.writeAttribute("MfgDate", dataHIPost.manDateHI[i]);
     xw.writeAttribute("LotQty", 1);
     xw.startElement("DIM_Carbon_dioxide_CO2");
@@ -481,7 +481,7 @@ app.post("/apifour", (req, res) => {
 
 //-----------POST from Hongin CAT-------------
 
-app.post("/apifive", (req, res) => {
+app.post("/apiHICAT", (req, res) => {
   const dataHIPostCAT = req.body;
   //console.log(dataHIPostCAT);
   var zipHI = new AdmZip();
@@ -492,14 +492,14 @@ app.post("/apifive", (req, res) => {
     xw.writeAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
     xw.writeAttribute(
       "xsi:noNamespaceSchemaLocation",
-      "3GASCD35_DM000811559_06.xsd"
+      "3GASCD35_DM00811559_06.xsd"
     );
     xw.writeAttribute("MaterialCode", "3GASCD35");
     xw.writeAttribute("SupplierHoldingDesc", "LINDE PLC");
     xw.writeAttribute("ReceivingStPlant", "Catania");
-    xw.writeAttribute("MpsSpecNo", "DM000811559_06");
+    xw.writeAttribute("MpsSpecNo", "DM00811559_06");
     xw.writeAttribute("MpsSpecRev", "1.0");
-    xw.writeAttribute("ShipmentDate", dataHIPostCAT.manDateHI[i]);
+    xw.writeAttribute("ShipmentDate", dataHIPostCAT.shipmentDate[i]);
     xw.writeAttribute("ShipmentNumber", dataHIPostCAT.progressivoHI[i]);
     xw.writeAttribute("ShipQty", 1);
     xw.startElement("Lot");
@@ -508,7 +508,7 @@ app.post("/apifive", (req, res) => {
       "LINDE PLC-HONG-IN CHEMICAL / Ulsan-1684"
     );
     xw.writeAttribute("ShipLotNo", dataHIPostCAT.lotNumberHI[i]);
-    xw.writeAttribute("ExpiryDate", dataHIPostCAT.expiryDateHI[i]);
+    xw.writeAttribute("ExpiryDate", dataHIPostCAT.expDateHI[i]);
     xw.writeAttribute("MfgDate", dataHIPostCAT.manDateHI[i]);
     xw.writeAttribute("LotQty", 1);
     xw.startElement("DIM_Aluminum_Al");
@@ -634,23 +634,23 @@ app.post("/apifive", (req, res) => {
     xw.endElement();
     xw.endElement("DIM_Oxygen_plus_argon_O2_plus_Ar ");
 
-    xw.startElement("DIM_Phosphorous_P");
+    xw.startElement("DIM_Phosphorus_P");
     xw.startElement("RAW");
     xw.writeAttribute("VALUE", dataHIPostCAT.HIPvalue[i]);
     xw.endElement();
-    xw.endElement("DIM_Phosphorous_P");
+    xw.endElement("DIM_Phosphorus_P");
 
     xw.startElement("DIM_Sodium_Na");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", dataHIPostCAT.HIAsvalue[i]);
+    xw.writeAttribute("VALUE", dataHIPostCAT.HINavalue[i]);
     xw.endElement();
     xw.endElement("DIM_Sodium_Na");
 
-    xw.startElement("DIM_Methane_CH4 ");
+    xw.startElement("DIM_Total_hydrocarbon_as_CH4");
     xw.startElement("RAW");
     xw.writeAttribute("VALUE", dataHIPostCAT.HICH4value[i]);
     xw.endElement();
-    xw.endElement("DIM_Methane_CH4 ");
+    xw.endElement("DIM_Total_hydrocarbon_as_CH4");
     xw.endDocument();
 
     //console.log("CAT eCOA", xw.toString());
@@ -674,11 +674,11 @@ app.post("/apifive", (req, res) => {
 
 //-----------POST from TCS BURGHUASEN-------------
 
-app.post("/TCS", (req, res) => {
+app.post("/apiTCS", (req, res) => {
   const dataTCSPost = req.body;
   //console.log(dataTCSPost);
   var zipTCS = new AdmZip();
-  for (let i = 0; i < dataTCSPost.filenamesTCSB.length; i++) {
+  for (let i = 0; i < dataTCSPost.lotNumber.length; i++) {
     xw = new XMLWriter(true);
     xw.startDocument("1.0", "UTF-8");
     xw.startElement("GasesShipment");
@@ -689,55 +689,55 @@ app.post("/TCS", (req, res) => {
     );
     xw.writeAttribute("MaterialCode", "2CAG1211");
     xw.writeAttribute("SupplierHoldingDesc", "LINDE PLC");
-    xw.writeAttribute("ReceivingStPlant", dataTCSPost.plant);
+    xw.writeAttribute("ReceivingStPlant", dataTCSPost.delivery[i]);
     xw.writeAttribute("MpsSpecNo", "DM00423514_09");
     xw.writeAttribute("MpsSpecRev", "3.0");
-    xw.writeAttribute("ShipmentDate", dataTCSPost.shipmentDateTCSB);
-    xw.writeAttribute("ShipmentNumber", dataTCSPost.progressivoTCSB[i]);
+    xw.writeAttribute("ShipmentDate", dataTCSPost.shipment[i]);
+    xw.writeAttribute("ShipmentNumber", dataTCSPost.progressivoTCS[i]);
     xw.writeAttribute("ShipQty", 1);
     xw.startElement("Lot");
     xw.writeAttribute(
       "SupplierSupplyChainSeqCode",
       "LINDE PLC-BURGHAUSEN-1282"
     );
-    xw.writeAttribute("ShipLotNo", dataTCSPost.filenamesTCSB[i]);
-    xw.writeAttribute("ExpiryDate", dataTCSPost.expiryDateTCSB);
-    xw.writeAttribute("MfgDate", dataTCSPost.manDateTCSB);
+    xw.writeAttribute("ShipLotNo", dataTCSPost.filetext[i]);
+    xw.writeAttribute("ExpiryDate", dataTCSPost.expiryDate[i]);
+    xw.writeAttribute("MfgDate", dataTCSPost.manDate[i]);
     xw.writeAttribute("LotQty", 1);
 
     xw.startElement("DIM_Acceptors_B");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", dataTCSPost.TCSBvalue);
+    xw.writeAttribute("VALUE", dataTCSPost.B[i]);
     xw.endElement();
     xw.endElement("DIM_Acceptors_B");
 
     xw.startElement("DIM_Aluminum_Al");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", dataTCSPost.TCSAlvalue);
+    xw.writeAttribute("VALUE", dataTCSPost.Al[i]);
     xw.endElement();
     xw.endElement("DIM_Aluminum_Al");
 
     xw.startElement("DIM_Donors_P_As_Sb");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", dataTCSPost.TCSPAsSbvalue);
+    xw.writeAttribute("VALUE", dataTCSPost.PAsSb[i]);
     xw.endElement();
     xw.endElement("DIM_Donors_P_As_Sb");
 
     xw.startElement("DIM_Iron_Fe_Liquid_phase");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", dataTCSPost.TCSFevalue);
+    xw.writeAttribute("VALUE", dataTCSPost.Fe[i]);
     xw.endElement();
     xw.endElement("DIM_Iron_Fe_Liquid_phase");
 
     xw.startElement("DIM_Carbon_C");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", dataTCSPost.TCSCvalue);
+    xw.writeAttribute("VALUE", dataTCSPost.C[i]);
     xw.endElement();
     xw.endElement("DIM_Carbon_C");
 
     xw.startElement("DIM_Trichlorosilane_HSiCl3_Assay");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", dataTCSPost.TCSAssay);
+    xw.writeAttribute("VALUE", dataTCSPost.TCSTCS[i]);
     xw.endElement();
     xw.endElement("DIM_Trichlorosilane_HSiCl3_Assay");
     xw.endDocument();
@@ -745,7 +745,7 @@ app.post("/TCS", (req, res) => {
     //console.log("TCS eCOA", xw.toString());
 
     try {
-      var TCSfileToBeDownloaded = dataTCSPost.filenamesTCSB[i];
+      var TCSfileToBeDownloaded = dataTCSPost.filetext[i];
       TCSfileToBeDownloaded = TCSfileToBeDownloaded.replace("/", "-");
       TCSfileToBeDownloaded = TCSfileToBeDownloaded + ".xml";
       //console.log("file to be dw", HIfileToBeDownloaded);
@@ -1311,7 +1311,7 @@ app.post("/apiBromide", (req, res) => {
   xw.writeAttribute("SupplierHoldingDesc", "LINDE PLC");
   xw.writeAttribute("ReceivingStPlant", "Catania");
   xw.writeAttribute("MpsSpecNo", "DM00598023_06");
-  xw.writeAttribute("MpsSpecRev", "1.0");
+  xw.writeAttribute("MpsSpecRev", "2.0");
   xw.writeAttribute("ShipmentDate", dataHBr.shipmentdate);
   xw.writeAttribute("ShipmentNumber", dataHBr.shipmentNumber);
   xw.writeAttribute("ShipQty", 1);
@@ -1339,11 +1339,6 @@ app.post("/apiBromide", (req, res) => {
   xw.writeAttribute("VALUE", dataHBr.COvalue);
   xw.endElement();
   xw.endElement("DIM_Carbon_monoxide_CO");
-  xw.startElement("DIM_Hydrogen_chloride_HCl");
-  xw.startElement("RAW");
-  xw.writeAttribute("VALUE", dataHBr.HClvalue);
-  xw.endElement();
-  xw.endElement("DIM_Hydrogen_chloride_HCl");
   xw.startElement("DIM_Moisture_H2O");
   xw.startElement("RAW");
   xw.writeAttribute("VALUE", dataHBr.H2Ovalue);
@@ -1364,6 +1359,11 @@ app.post("/apiBromide", (req, res) => {
   xw.writeAttribute("VALUE", dataHBr.THCvalue);
   xw.endElement();
   xw.endElement("DIM_Total_hydrocarbon_as_CH4");
+  xw.startElement("DIM_Hydrogen_chloride_HCl");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataHBr.HClvalue);
+  xw.endElement();
+  xw.endElement("DIM_Hydrogen_chloride_HCl");
   xw.endDocument();
 
   try {

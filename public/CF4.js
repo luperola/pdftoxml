@@ -2,6 +2,7 @@ function CF4() {
   document.getElementById("btndropdown").style.display = "none";
   document.getElementById("CSPage").style.display = "none";
   document.getElementById("NOTaulovPage").style.display = "none";
+  document.getElementById("TCSPage").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
   ReadFileJson();
@@ -49,7 +50,6 @@ function CF4() {
     var expCF4 = data[14][3];
     manCF4 = manCF4.replaceAll(" ", "-");
     expCF4 = expCF4.replaceAll(" ", "-");
-    var shipDateCF4 = manCF4;
     var lotNumberCF4 = data[13][2];
     var HCvalueCF4 = data[17][5];
     var N2valueCF4 = data[6][6];
@@ -63,7 +63,7 @@ function CF4() {
 
     var CF4Data = {
       shipmentNumber: shipmentNumberCF4,
-      shipmentdate: shipDateCF4,
+      shipmentdate: today,
       lotNumber: lotNumberCF4,
       expiryDate: expCF4,
       manDate: manCF4,

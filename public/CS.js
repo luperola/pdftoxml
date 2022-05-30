@@ -19,7 +19,8 @@ let drumsListCS,
   //CH4CSArray = [],
   H2OCSArray = [],
   N2ArO2CSArray = [],
-  H2CSArray = [];
+  H2CSArray = [],
+  oggi = [];
 
 function CSDrums() {
   drumsListCS = document.getElementById("CSDrums").value;
@@ -73,8 +74,8 @@ function CSDrums() {
 function ChlorgasLines() {
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
-  document.getElementById("CSPage").style.display = "none";
-  document.getElementById("NOTaulovPage").style.display = "none";
+  // document.getElementById("CSPage").style.display = "none";
+  //document.getElementById("NOTaulovPage").style.display = "none";
   document.getElementById("btnCorretto").style.display = "none";
   document.getElementById("btnNonCorretto").style.display = "none";
 
@@ -138,15 +139,15 @@ function ChlorgasLines() {
       H2OCSArray.push(H2OCS);
       N2ArO2CSArray.push(N2ArO2CS);
       H2CSArray.push(H2CS);
+      oggi.push(today);
     }
 
     const dataCS = {
-      shipment: mfgDateCS,
+      shipment: oggi,
       lotNumber: drumsCSArray,
       expiryDate: expDateCS,
       manDate: mfgDateCS,
       progressivoCS: shNumberCS,
-      //filetext: shipmentLotNumberCS,
       filetext: drumsCSArray,
       CO2: CO2CSArray,
       CO: COCSArray,
