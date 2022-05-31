@@ -230,6 +230,7 @@ function HongInCAT() {
       NivalueHI = [],
       PvalueHI = [],
       NavalueHI = [],
+      ZnvalueHI = [],
       manufacturinDateRightFormat = [],
       year = [],
       month = [],
@@ -265,6 +266,7 @@ function HongInCAT() {
       PvalueHI.push(data[arrayIndecesMetalRandom[i]][2]);
       NavalueHI.push(data[arrayIndecesMetalRandom[i]][14]);
       BvalueHI.push(data[arrayIndecesMetalRandom[i]][3]);
+      ZnvalueHI.push(data[arrayIndecesMetalRandom[i]][8]);
       oggi.push(today);
 
       //--------------HONG IN CATANIA COUNTER ------------
@@ -354,6 +356,8 @@ function HongInCAT() {
       NavalueHI[i] = NavalueHI[i].replace("<", "").replace("ND", "");
       BvalueHI[i] = BvalueHI[i].trim();
       BvalueHI[i] = BvalueHI[i].replace("<", "").replace("ND", "");
+      ZnvalueHI[i] = ZnvalueHI[i].trim();
+      ZnvalueHI[i] = ZnvalueHI[i].replace("<", "").replace("ND", "");
     }
 
     for (let i = 0; i < arrayIndeces.length; i++) {
@@ -409,6 +413,7 @@ function HongInCAT() {
       HINivalue: NivalueHI,
       HIPvalue: PvalueHI,
       HINavalue: NavalueHI,
+      HiZnvalue: ZnvalueHI,
     };
     console.log("dataHICAT", dataHI);
     const HIoptions = {

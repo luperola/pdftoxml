@@ -126,18 +126,18 @@ try {
           .toLowerCase();
         if (test === ".pdf") {
           //if (test === ".pdf" && found === null) {
-          const pdfParser = new PDFParser();
-          pdfParser.on("pdfParser_dataError", (errData) =>
-            console.error(errData.parserError)
-          );
-          pdfParser.on("pdfParser_dataReady", (pdfData) => {
-            const id = __dirname + "/sample.json";
-            fs.writeFile(id, JSON.stringify(pdfData), (err) =>
-              console.error(err)
-            );
-            //res.json(pdfData);
-          });
-          pdfParser.loadPDF(__dirname + "/" + fileOriginale.toString());
+          // const pdfParser = new PDFParser();
+          // pdfParser.on("pdfParser_dataError", (errData) =>
+          //   console.error(errData.parserError)
+          // );
+          // pdfParser.on("pdfParser_dataReady", (pdfData) => {
+          //   const id = __dirname + "/sample.json";
+          //   fs.writeFile(id, JSON.stringify(pdfData), (err) =>
+          //     console.error(err)
+          //   );
+          //   //res.json(pdfData);
+          // });
+          // pdfParser.loadPDF(__dirname + "/" + fileOriginale.toString());
           //}
           // -----------------pdf2table-----------------
           fs.readFile(
@@ -547,17 +547,12 @@ app.post("/apiHICAT", (req, res) => {
     xw.endElement();
     xw.endElement("DIM_Cadmium_Cd");
 
-    xw.startElement("DIM_Arsenic_As");
-    xw.startElement("RAW");
-    xw.writeAttribute("VALUE", dataHIPostCAT.HIAsvalue[i]);
-    xw.endElement();
-    xw.endElement("DIM_Arsenic_As");
-
     xw.startElement("DIM_Carbon_dioxide_CO2");
     xw.startElement("RAW");
     xw.writeAttribute("VALUE", dataHIPostCAT.HICO2value[i]);
     xw.endElement();
     xw.endElement("DIM_Carbon_dioxide_CO2");
+
     xw.startElement("DIM_Carbon_monoxide_CO");
     xw.startElement("RAW");
     xw.writeAttribute("VALUE", dataHIPostCAT.HICOvalue[i]);
@@ -587,6 +582,7 @@ app.post("/apiHICAT", (req, res) => {
     xw.writeAttribute("VALUE", dataHIPostCAT.HIH2value[i]);
     xw.endElement();
     xw.endElement("DIM_Hydrogen_H2 ");
+
     xw.startElement("DIM_Iron_Fe");
     xw.startElement("RAW");
     xw.writeAttribute("VALUE", dataHIPostCAT.HIFevalue[i]);
@@ -598,12 +594,6 @@ app.post("/apiHICAT", (req, res) => {
     xw.writeAttribute("VALUE", dataHIPostCAT.HIPbvalue[i]);
     xw.endElement();
     xw.endElement("DIM_Lead_Pb");
-
-    xw.startElement("DIM_Arsenic_As");
-    xw.startElement("RAW");
-    xw.writeAttribute("VALUE", dataHIPostCAT.HIAsvalue[i]);
-    xw.endElement();
-    xw.endElement("DIM_Arsenic_As");
 
     xw.startElement("DIM_Moisture_H2O");
     xw.startElement("RAW");
@@ -628,6 +618,7 @@ app.post("/apiHICAT", (req, res) => {
     xw.writeAttribute("VALUE", dataHIPostCAT.HIN2value[i]);
     xw.endElement();
     xw.endElement("DIM_Nitrogen_N2 ");
+
     xw.startElement("DIM_Oxygen_plus_argon_O2_plus_Ar ");
     xw.startElement("RAW");
     xw.writeAttribute("VALUE", dataHIPostCAT.HIO2Arvalue[i]);
@@ -651,6 +642,12 @@ app.post("/apiHICAT", (req, res) => {
     xw.writeAttribute("VALUE", dataHIPostCAT.HICH4value[i]);
     xw.endElement();
     xw.endElement("DIM_Total_hydrocarbon_as_CH4");
+
+    xw.startElement("DIM_Zinc_Zn");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHIPostCAT.HiZnvalue[i]);
+    xw.endElement();
+    xw.endElement("DIM_Zinc_Zn");
     xw.endDocument();
 
     //console.log("CAT eCOA", xw.toString());
