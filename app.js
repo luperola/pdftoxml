@@ -9,7 +9,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(express.json({ limit: "10mb" }));
 
 const fs = require("fs");
-const PDFParser = require("pdf2json");
+//const PDFParser = require("pdf2json");
 const multer = require("multer");
 const path = require("path");
 var XMLWriter = require("xml-writer");

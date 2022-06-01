@@ -78,12 +78,12 @@ let arrayNOTavlov = [],
   N2OTav1,
   H2OTav1,
   //manDateNOT,
-  //expDataNOT;
+  expDataNOT,
   mfgDateNewFormat,
   delDateNewFormat,
   expDateNewFormat,
   wrongFormat;
-// Shipment date = oggi
+//Shipment date = oggi
 var today = new Date();
 var yyyy = today.getFullYear();
 //let mm = today.getMonth() + 1; // Months start at 0!
