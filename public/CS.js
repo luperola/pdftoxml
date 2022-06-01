@@ -74,8 +74,6 @@ function CSDrums() {
 function ChlorgasLines() {
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
-  // document.getElementById("CSPage").style.display = "none";
-  //document.getElementById("NOTaulovPage").style.display = "none";
   document.getElementById("btnCorretto").style.display = "none";
   document.getElementById("btnNonCorretto").style.display = "none";
 

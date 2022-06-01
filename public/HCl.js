@@ -460,6 +460,7 @@ function WackerHCl(
   document.getElementById("CSPage").style.display = "none";
   document.getElementById("NOTaulovPage").style.display = "none";
   document.getElementById("TCSPage").style.display = "none";
+  document.getElementById("HBrPage").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
   ReadFileJson();
