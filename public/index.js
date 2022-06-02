@@ -1091,7 +1091,8 @@ function KrNe(receivingPlant) {
   document.getElementById("btndropdown").style.display = "none";
   document.getElementById("CSPage").style.display = "none";
   document.getElementById("NOTaulovPage").style.display = "none";
-  //document.getElementById("modalCS").style.display = "none";
+  document.getElementById("TCSPage").style.display = "none";
+  document.getElementById("HBrPage").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
   ReadFileJson();
@@ -1194,7 +1195,7 @@ function KrNe(receivingPlant) {
       filename: fileNameKr,
       receivingPlant: receivingPlant,
       shipmentNumber: shipmentNumberKrNe,
-      shipmentdate: shipDateKrNe,
+      shipmentdate: today,
       lotNumber: lotNumberKrNe,
       expiryDate: expKrNe,
       manDate: manKrNe,
