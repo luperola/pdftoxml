@@ -1378,7 +1378,8 @@ function SF6US() {
   document.getElementById("btndropdown").style.display = "none";
   document.getElementById("CSPage").style.display = "none";
   document.getElementById("NOTaulovPage").style.display = "none";
-  //document.getElementById("modalCS").style.display = "none";
+  document.getElementById("TCSPage").style.display = "none";
+  document.getElementById("HBrPage").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
   ReadFileJson();
@@ -1465,7 +1466,7 @@ function SF6US() {
     var SF6USData = {
       filename: filenameSF6US,
       shipmentNumber: shipmentNumberSF6US,
-      shipmentdate: shipDateSF6US,
+      shipmentdate: today,
       lotNumber: lotNumberSF6US,
       expiryDate: expSF6US,
       manDate: manSF6US,
