@@ -140,7 +140,7 @@ try {
           // pdfParser.loadPDF(__dirname + "/" + fileOriginale.toString());
           //}
           // -----------------pdf2table-----------------
-          console.log("file", __dirname + "/" + fileOriginale.toString());
+          //console.log("file", __dirname + "/" + fileOriginale.toString());
           fs.readFile(
             __dirname + "/" + fileOriginale.toString(),
             function (err, buffer) {
