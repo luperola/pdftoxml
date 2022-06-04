@@ -11,171 +11,150 @@
       crossorigin="anonymous"
     />
 
-    <title>Chlorgas eCOA Page</title>
+    <title>Nitric Oxide Taulov eCOA Page</title>
     <script src="index.js"></script>
-    <script src="CS.js"></script>
+    <script src="NO.js"></script>
   </head>
 
   <body>
     <div style="padding-left: 20px; padding-top: 15px">
-      <h2>Chlorgas eCOA page</h2>
+      <h2>Nitric Oxide Taulov eCOA page</h2>
       <br />
-      <div id="dataCS" style="margin-left: 20px; color: blue">
-        <label for="CSDrums"
-          >Scrivi i 'Behalter Nr' che trovi sul pdf
-          <u>separati da una virgola</u>
+      <div id="NONumeroPagine">
+        <label for="NOPages" style="color: blue"
+          ><u>Numero di pagine del CoC - NO Taulov</u>
         </label>
-
         <div class="input-group">
           <input
-            id="CSDrums"
+            type="number"
+            id="NOPages"
             required="required"
             style="height: 40px; border-radius: 5px; border-color: lightblue"
           />
-        </div>
-        <span></span>
 
-        <label for="ManDateCS"
-          >Manufacturing Date in formato DD-MMM-YYYY (es. 15-Feb-2022)
+          <button
+            class="btn btn-primary"
+            onclick="NONumberOfPages()"
+            style="margin-left: 10px"
+            id="btnNOPages"
+          >
+            Invia
+          </button>
+        </div>
+      </div>
+    </div>
+    <br />
+
+    <div id="pagina1" style="display: none">
+      <div style="margin-left: 20px; color: blue">
+        <label for="NODrums"
+          >Scrivi i Bundle Id's <u>separati da una virgola</u>
         </label>
 
         <div class="input-group">
           <input
-            id="ManDateCS"
-            required="required"
-            style="height: 40px; border-radius: 5px; border-color: lightblue"
-          />
-        </div>
-
-        <label for="COCS"
-          >Valore CO in ppm (solo numero. Punto e non virgola per i decimali)
-        </label>
-
-        <div class="input-group">
-          <input
-            id="COCS"
-            required="required"
-            style="height: 40px; border-radius: 5px; border-color: lightblue"
-          />
-        </div>
-
-        <label for="CO2CS"
-          >Valore CO2 in ppm (solo numero. Punto e non virgola per i decimali)
-        </label>
-
-        <div class="input-group">
-          <input
-            id="CO2CS"
+            id="NODrums"
             required="required"
             style="height: 40px; border-radius: 5px; border-color: lightblue"
           />
         </div>
 
-        <label for="Cl2CS"
-          >Valore Cl2 in ppm (solo numero. Punto e non virgola per i decimali)
+        <label for="ManDateNO">
+          Manufacturing Date in formato DD-MMM-YYYY (es. 15-Feb-2022)
         </label>
 
         <div class="input-group">
           <input
-            id="Cl2CS"
+            id="ManDateNO"
             required="required"
             style="height: 40px; border-radius: 5px; border-color: lightblue"
           />
         </div>
 
-        <label for="CXHYCl2CS"
-          >Valore Chlorinated Hydrogencarbons - CxHyCl2 in ppm (solo numero.
-          Punto e non virgola per i decimali)
-        </label>
+        <label for="CO2NO"> Valore CO2 in ppm (solo numero) </label>
 
         <div class="input-group">
           <input
-            id="CXHYCl2CS"
-            required="required"
-            style="height: 40px; border-radius: 5px; border-color: lightblue"
-          />
-        </div>
-        <!-- <label for="FeCS">Valore Fe in ppm (solo numero) </label>
-        <div class="input-group">
-          <input
-            id="FeCS"
-            required="required"
-            style="height: 40px; border-radius: 5px; border-color: lightblue"
-          />
-        </div>
-        <label for="CH4CS">Valore CH4 in ppm (solo numero) </label>
-
-        <div class="input-group">
-          <input
-            id="CH4CS"
-            required="required"
-            style="height: 40px; border-radius: 5px; border-color: lightblue"
-          />
-        </div> -->
-        <label for="O2ArN2CS"
-          >Valore N2 + O2 + Ar in ppm (solo numero. Punto e non virgola per i
-          decimali)
-        </label>
-        <div class="input-group">
-          <input
-            id="O2ArN2CS"
+            id="CO2NO"
             required="required"
             style="height: 40px; border-radius: 5px; border-color: lightblue"
           />
         </div>
 
-        <label for="H2CS"
-          >Valore H2 in ppm (solo numero. Punto e non virgola per i decimali)
+        <label for="N2ONO"
+          >Valore N2O (Dinitrogenmonoxide) in ppm (solo numero)
         </label>
 
         <div class="input-group">
           <input
-            id="H2CS"
+            id="N2ONO"
             required="required"
             style="height: 40px; border-radius: 5px; border-color: lightblue"
           />
         </div>
 
-        <label for="H2OCS"
-          >Valore H2O in ppm (solo numero. Punto e non virgola per i decimali)
+        <label for="NO2NO"
+          >Valore NO2 (Nitrogen dioxide) in ppm (solo numero)
         </label>
 
         <div class="input-group">
           <input
-            id="H2OCS"
+            id="NO2NO"
+            required="required"
+            style="height: 40px; border-radius: 5px; border-color: lightblue"
+          />
+        </div>
+
+        <label for="H2ONO">Valore H2O in ppm (solo numero) </label>
+
+        <div class="input-group">
+          <input
+            id="H2ONO"
+            required="required"
+            style="height: 40px; border-radius: 5px; border-color: lightblue"
+          />
+        </div>
+
+        <label for="N2NO">Valore N2 in ppm (solo numero) </label>
+
+        <div class="input-group">
+          <input
+            id="N2NO"
             required="required"
             style="height: 40px; border-radius: 5px; border-color: lightblue"
           />
         </div>
         <br />
+
+        <button
+          class="btn btn-primary"
+          onclick="NODrumsPag1()"
+          style="margin-left: 10px"
+          id="btnInvia"
+        >
+          Invia tutto
+        </button>
       </div>
-      <p id="testoCorretto"></p>
-      <button
-        class="btn btn-primary"
-        onclick="CSDrums()"
-        style="margin-left: 10px"
-        id="btnInvia"
-      >
-        Invia tutto
-      </button>
-      <button
-        class="btn btn-primary"
-        onclick="ChlorgasLines()"
-        style="margin-left: 10px; display: none"
-        id="btnCorretto"
-      >
-        Clicca qui se corretto
-      </button>
-      <button
-        class="btn btn-primary"
-        onclick="window.open('CS.html', '_blank').focus();"
-        style="margin-left: 10px; display: none"
-        id="btnNonCorretto"
-      >
-        Clicca qui se c'è qualcosa di sbagliato
-      </button>
-      <br /><br />
     </div>
+    <p id="testoCorretto" style="margin-left: 20px; color: blue"></p>
+    <button
+      class="btn btn-primary"
+      onclick="nitricOxideLines()"
+      style="margin-left: 10px; display: none"
+      id="btnCorretto"
+    >
+      Clicca qui se corretto
+    </button>
+    <button
+      class="btn btn-primary"
+      onclick="window.open('NO.html', '_blank').focus();"
+      style="margin-left: 10px; display: none"
+      id="btnNonCorretto"
+    >
+      Clicca qui se c'è qualcosa di sbagliato
+    </button>
+    <br /><br />
+
     <div id="btndown" style="padding-left: 20px; display: none">
       <a href="\download" class="btn btn-primary">
         Click here to download the xml file

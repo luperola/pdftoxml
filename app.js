@@ -759,9 +759,9 @@ app.post("/apiTCS", (req, res) => {
 
 //-----------END POST from TCS BURGHAUSEN-------------
 
-//-----------POST from NO Tavlov----------------
+//-----------POST from NO Taulov----------------
 
-app.post("/NOTavlov", (req, res) => {
+app.post("/apiNOTaulov", (req, res) => {
   const dataNOTPost = req.body;
   //console.log("dataNOTPost", dataNOTPost);
   var zipNOT = new AdmZip();
@@ -780,7 +780,7 @@ app.post("/NOTavlov", (req, res) => {
     xw.writeAttribute("MpsSpecNo", "DM00798836_06");
     xw.writeAttribute("MpsSpecRev", "2.0");
     xw.writeAttribute("ShipmentDate", dataNOTPost.shipment[id]);
-    xw.writeAttribute("ShipmentNumber", dataNOTPost.progressivo[id]);
+    xw.writeAttribute("ShipmentNumber", dataNOTPost.progressivoNO[id]);
     xw.writeAttribute("ShipQty", 1);
     xw.startElement("Lot");
     xw.writeAttribute("SupplierSupplyChainSeqCode", "LINDE PLC-TAULOV-1604");
@@ -790,24 +790,29 @@ app.post("/NOTavlov", (req, res) => {
     xw.writeAttribute("LotQty", 1);
     xw.startElement("DIM_Carbon_dioxide_CO2");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", "10");
+    xw.writeAttribute("VALUE", dataNOTPost.CO2[id]);
     xw.endElement();
     xw.endElement("DIM_Carbon_dioxide_CO2");
     xw.startElement("DIM_Moisture_H2O");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", dataNOTPost.H2Oparameters[id]);
+    xw.writeAttribute("VALUE", dataNOTPost.H2O[id]);
     xw.endElement();
     xw.endElement("DIM_Moisture_H2O");
     xw.startElement("DIM_Nitrous_oxide_N2O");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", dataNOTPost.N2Oparameters[id]);
+    xw.writeAttribute("VALUE", dataNOTPost.N2O[id]);
     xw.endElement();
     xw.endElement("DIM_Nitrous_oxide_N2O");
     xw.startElement("DIM_Nitrogen_dioxide_NO2");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", "10");
+    xw.writeAttribute("VALUE", dataNOTPost.NO2[id]);
     xw.endElement();
-    xw.endElement("DIM_DIM_Nitrogen_dioxide_NO2");
+    xw.endElement("DIM_Nitrogen_dioxide_NO2");
+    // xw.startElement("DIM_Nitrogen_N2");
+    // xw.startElement("RAW");
+    // xw.writeAttribute("VALUE", dataNOTPost.N2[id]);
+    // xw.endElement();
+    // xw.endElement("DIM_Nitrogen_N2");
     xw.endDocument();
 
     //console.log("xw", xw.toString());
@@ -823,11 +828,11 @@ app.post("/NOTavlov", (req, res) => {
       console.log("Error:", e.stack);
     }
   }
-  fs.writeFileSync("sourcename.txt", "Tavlov");
+  fs.writeFileSync("sourcename.txt", "Taulov");
   zipNOT.writeZip(/*target file name*/ "filesNOT.zip");
 });
 
-//-----------END POST from NO Tavlov----------------
+//-----------END POST from NO Taulov----------------
 
 //-----------POST from HF Gerling Holz----------------
 app.post("/apiHFGerling", (req, res) => {
@@ -1668,7 +1673,7 @@ app.get("/download", function (req, res) {
       }
     });
   }
-  if (sourceName === "Tavlov") {
+  if (sourceName === "Taulov") {
     res.download("filesNOT.zip", function (err) {
       if (err) {
         console.log("file not downloaded");
@@ -1784,7 +1789,7 @@ app.get("/jsonSampleFile2", (req, res) => {
   res.send(jsonFile2);
 });
 
-//get the files da txt (Tavlov / Chlorgas )
+//get the files da txt (Taulov / Chlorgas )
 app.get("/txt", (req, res) => {
   const readTxtFile1 = fs.readFileSync("sample.txt", "utf-8");
   //console.log("writeTxtFile", readTxtFile1);
