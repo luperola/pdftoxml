@@ -125,9 +125,30 @@ function hydrogenBromide() {
     var myjson = await myresponse.text();
     //console.log("myjson", myjson);
 
-    var expHBr = parseInt(manDateHBr.substring(7, 11));
-    expHBr = expHBr + 2;
-    expDateHBr = manDateHBr.substring(0, 7) + expHBr.toString();
+    const monthNameMan = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    var year = manDateHBr.substring(0, 4);
+    var month = manDateHBr.substring(5, 7);
+    var day = manDateHBr.substring(8, 10);
+    manDateHBr = day + "-" + monthNameMan[parseInt(month) - 1] + "-" + year;
+    expDateHBr =
+      day +
+      "-" +
+      monthNameMan[parseInt(month) - 1] +
+      "-" +
+      (parseInt(year) + 2).toString();
 
     const dataHBr = {
       shipment: today,

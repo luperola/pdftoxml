@@ -119,15 +119,35 @@ function ChlorgasLines() {
       var myjson = await myresponse.text();
       //console.log("myjson", myjson);
     }
-    expiryDateforCS = parseInt(manDateCS.substring(7, 11));
-    expiryDateforCS = expiryDateforCS + 2;
-    var newexpiryDateforCS =
-      manDateCS.substring(0, 7) + expiryDateforCS.toString();
+    const monthNameMan = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    var year = manDateCS.substring(0, 4);
+    var month = manDateCS.substring(5, 7);
+    var day = manDateCS.substring(8, 10);
+    manDateCS = day + "-" + monthNameMan[parseInt(month) - 1] + "-" + year;
+    expiryDateforCS =
+      day +
+      "-" +
+      monthNameMan[parseInt(month) - 1] +
+      "-" +
+      (parseInt(year) + 2).toString();
 
     for (let index = 0; index < drumsCSArray.length; index++) {
       drumsCSArray[index] = drumsCSArray[index].replace(/\//g, "-");
       mfgDateCS.push(manDateCS);
-      expDateCS.push(newexpiryDateforCS);
+      expDateCS.push(expiryDateforCS);
       CO2CSArray.push(CO2CS);
       COCSArray.push(COCS);
       Cl2CSArray.push(Cl2CS);

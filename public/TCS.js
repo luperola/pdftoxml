@@ -113,14 +113,35 @@ function TCSLines() {
       var myjson = await myresponse.text();
       //console.log("myjson", myjson);
     }
-    expiryDateforTCS = parseInt(manDateTCS.substring(7, 11));
-    expiryDateforTCS = expiryDateforTCS + 2;
-    var newexpiryDateforTCS =
-      manDateTCS.substring(0, 7) + expiryDateforTCS.toString();
+
+    const monthNameMan = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    var year = manDateTCS.substring(0, 4);
+    var month = manDateTCS.substring(5, 7);
+    var day = manDateTCS.substring(8, 10);
+    manDateTCS = day + "-" + monthNameMan[parseInt(month) - 1] + "-" + year;
+    expiryDateforTCS =
+      day +
+      "-" +
+      monthNameMan[parseInt(month) - 1] +
+      "-" +
+      (parseInt(year) + 2).toString();
 
     for (let index = 0; index < drumsTCSArray.length; index++) {
       mfgDateTCS.push(manDateTCS);
-      expDateTCS.push(newexpiryDateforTCS);
+      expDateTCS.push(expiryDateforTCS);
       BTCSArray.push(BTCS);
       AlTCSArray.push(AlTCS);
       PAsSbTCSArray.push(PAsSbTCS);

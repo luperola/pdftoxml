@@ -29,11 +29,12 @@ function NONumberOfPages() {
     //window.location.href = "NOPage2.html";
     window.open("NOPage2.html", "_blank").focus();
   }
-  if (nbrPages != "1" || nbrPages != "2") {
+  if (parseInt(nbrPages) > 2) {
     alert(
       "Si possono fare due pagine alla volta. Fai le prime due e poi ricomincia"
     );
-    window.open("NO.html", "_blank").focus();
+    window.location.href("NO.html");
+    //window.open("NO.html", "_blank").focus();
   }
 }
 
@@ -124,56 +125,7 @@ function nitricOxideLines() {
       var myjson = await myresponse.text();
       //console.log("myjson", myjson);
     }
-    // expiryDateforNO = parseInt(manDateNO.substring(7, 11));
-    // expiryDateforNO = expiryDateforNO + 2;
-    // var newexpiryDateforNO =
-    //   manDateNO.substring(0, 7) + expiryDateforNO.toString();
-    var expiryMonth = manDateNO.substring(3, 6);
-    switch (expiryMonth) {
-      case "Jan":
-        expiryDateforNO = 0;
-        break;
-      case "Feb":
-        expiryDateforNO = 1;
-        break;
-      case "Mar":
-        expiryDateforNO = 2;
-        break;
-      case "Apr":
-        expiryDateforNO = 3;
-        break;
-      case "May":
-        expiryDateforNO = 4;
-        break;
-      case "Jun":
-        expiryDateforNO = 5;
-        break;
-      case "Jul":
-        expiryDateforNO = 6;
-        break;
-      case "Aug":
-        expiryDateforNO = 7;
-        break;
-      case "Sep":
-        expiryDateforNO = 8;
-        break;
-      case "Oct":
-        expiryDateforNO = 9;
-        break;
-      case "Nov":
-        expiryDateforNO = 10;
-        break;
-      case "Dec":
-        expiryDateforNO = 11;
-        break;
 
-      default:
-        alert(
-          "Formato data non corretto - Deve essere gg-Mmm-yyyy, tipo 06-Jun-2022"
-        );
-        window.location.href = "NO.html";
-    }
-    //console.log("expiryDateforNo", expiryDateforNO);
     const monthNameMan = [
       "Jan",
       "Feb",
@@ -189,29 +141,28 @@ function nitricOxideLines() {
       "Dec",
     ];
 
-    var dataMonths = expiryDateforNO + 6;
+    var year = manDateNO.substring(0, 4);
+    var month = manDateNO.substring(5, 7);
+    var day = manDateNO.substring(8, 10);
+    manDateNO = day + "-" + monthNameMan[parseInt(month) - 1] + "-" + year;
 
-    if (dataMonths >= 11) {
-      var realDataMonths = dataMonths - 12;
-      var yearNO = parseInt(manDateNO.substring(7, 11));
-      var newexpiryDateforNO =
-        manDateNO.substring(0, 3) +
-        monthNameMan[realDataMonths] +
-        "-" +
-        (yearNO + 1).toString();
-      console.log("exp", newexpiryDateforNO);
+    var dataMonths = parseInt(month) + 6;
+
+    if (dataMonths > 12) {
+      var realDataMonths = dataMonths - 13;
+      expiryDateforNO =
+        day + "-" + monthNameMan[realDataMonths] + "-" + (parseInt(year) + 1);
     }
 
-    if (dataMonths < 11) {
-      var yearNO = parseInt(manDateNO.substring(7, 11));
-      var newexpiryDateforNO =
-        manDateNO.substring(0, 3) + monthNameMan[dataMonths] + "-" + yearNO;
+    if (dataMonths <= 12) {
+      expiryDateforNO =
+        day + "-" + monthNameMan[parseInt(dataMonths) - 1] + "-" + year;
     }
 
     for (let index = 0; index < drumsNOArray.length; index++) {
       //drumsNOArray[index] = drumsNOArray[index].replace(/\//g, "-");
       mfgDateNO.push(manDateNO);
-      expDateNO.push(newexpiryDateforNO);
+      expDateNO.push(expiryDateforNO);
       CO2NOArray.push(CO2NO);
       N2ONOArray.push(N2ONO);
       NO2NOArray.push(NO2NO);
