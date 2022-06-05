@@ -1623,6 +1623,82 @@ app.post("/apiSF6BOC", (req, res) => {
 });
 //------------END SF6 BOC 3GASN326 CAT POST------------
 
+//------------HF Medford 1.8Kg 3GASC254 AGR  POST------------
+
+app.post("/apiHF18US", (req, res) => {
+  const dataHFUSPost = req.body;
+  //console.log("dataHFUSPost", dataHFUSPost);
+  var zipHFUS = new AdmZip();
+  for (let id = 0; id < dataHFUSPost.filetext.length; id++) {
+    xw = new XMLWriter(true);
+    xw.startDocument("1.0", "UTF-8");
+    xw.startElement("GasesShipment");
+    xw.writeAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+    xw.writeAttribute(
+      "xsi:noNamespaceSchemaLocation",
+      "3GASC254_DM00403787_06.xsd"
+    );
+    xw.writeAttribute("MaterialCode", "3GASC254");
+    xw.writeAttribute("SupplierHoldingDesc", "LINDE PLC");
+    xw.writeAttribute("ReceivingStPlant", "Agrate");
+    xw.writeAttribute("MpsSpecNo", "DM00403787_06");
+    xw.writeAttribute("MpsSpecRev", "3.0");
+    xw.writeAttribute("ShipmentDate", dataHFUSPost.shipment[id]);
+    xw.writeAttribute("ShipmentNumber", dataHFUSPost.progressivoNO[id]);
+    xw.writeAttribute("ShipQty", 1);
+    xw.startElement("Lot");
+    xw.writeAttribute(
+      "SupplierSupplyChainSeqCode",
+      "LINDE PLC-WHITE CITY (MEDFORD)-291"
+    );
+    xw.writeAttribute("ShipLotNo", dataHFUSPost.lotNumber[id]);
+    xw.writeAttribute("ExpiryDate", dataHFUSPost.expiryDate[id]);
+    xw.writeAttribute("MfgDate", dataHFUSPost.manDate[id]);
+    xw.writeAttribute("LotQty", 1);
+    xw.startElement("DIM_Carbon_dioxide_CO2");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.CO2[id]);
+    xw.endElement();
+    xw.endElement("DIM_Carbon_dioxide_CO2");
+    xw.startElement("DIM_Moisture_H2O");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.H2O[id]);
+    xw.endElement();
+    xw.endElement("DIM_Moisture_H2O");
+    xw.startElement("DIM_Nitrous_oxide_N2O");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.N2O[id]);
+    xw.endElement();
+    xw.endElement("DIM_Nitrous_oxide_N2O");
+    xw.startElement("DIM_Nitrogen_dioxide_NO2");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.NO2[id]);
+    xw.endElement();
+    xw.endElement("DIM_Nitrogen_dioxide_NO2");
+    // xw.startElement("DIM_Nitrogen_N2");
+    // xw.startElement("RAW");
+    // xw.writeAttribute("VALUE", dataHFUSPost.N2[id]);
+    // xw.endElement();
+    // xw.endElement("DIM_Nitrogen_N2");
+    xw.endDocument();
+
+    //console.log("xw", xw.toString());
+
+    try {
+      var fileToBeDownloaded = dataHFUSPost.filetext[id];
+      fileToBeDownloaded = fileToBeDownloaded.replace("/", "-");
+      fileToBeDownloaded = fileToBeDownloaded + ".xml";
+      //console.log("file to be dw", fileToBeDownloaded);
+      fs.writeFileSync(fileToBeDownloaded, xw.toString());
+      zipHFUS.addLocalFile(fileToBeDownloaded);
+    } catch (e) {
+      console.log("Error:", e.stack);
+    }
+  }
+  fs.writeFileSync("sourcename.txt", "HF18US");
+  zipHFUS.writeZip(/*target file name*/ "filesHFUS.zip");
+});
+
 app.get("/download", function (req, res) {
   var sourceName = fs.readFileSync("sourcename.txt", "utf-8");
   //console.log("sourcename", sourceName);
@@ -1764,6 +1840,15 @@ app.get("/download", function (req, res) {
   if (sourceName === "SF6BOC") {
     var SF6BOCfileName = fs.readFileSync("SF6BOCfilename.txt", "utf-8");
     res.download(SF6BOCfileName, function (err) {
+      if (err) {
+        console.log("file not downloaded");
+      } else {
+        console.log("Download succesfull");
+      }
+    });
+  }
+  if (sourceName === "HF18US") {
+    res.download("filesHFUS.zip", function (err) {
       if (err) {
         console.log("file not downloaded");
       } else {
