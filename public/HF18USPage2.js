@@ -41,7 +41,7 @@ function HFDrumsPag2() {
   AsHF = document.getElementById("AsHF").value;
   H2OHF = document.getElementById("H2OHF").value;
 
-  drumsListHFP2 = document.getElementById("HFP2Drums").value;
+  drumsListHFP2 = document.getElementById("HFDrumsP2").value;
   manDateHFUSP2 = document.getElementById("ManDateHFP2").value;
   Cl2HFP2 = document.getElementById("Cl2HFP2").value;
   KHFP2 = document.getElementById("KHFP2").value;
@@ -147,7 +147,11 @@ function HFLines() {
   ReadHFText();
   async function ReadHFText() {
     //Counter per shipment Number progressivo
-    for (let index = 0; index < drumsHFArray.length + drumsHFP2Array; index++) {
+    for (
+      let index = 0;
+      index < drumsHFArray.length + drumsHFP2Array.length;
+      index++
+    ) {
       const testResponse = await fetch("/apicounter");
       var dataTest = await testResponse.text();
       //console.log("dataTest1", dataTest);
