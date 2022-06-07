@@ -37,13 +37,13 @@ function HFNumberOfPages() {
   }
   if (nbrPages === "2") {
     //window.location.href = "HFPage2.html";
-    window.open("HFPage2.html", "_blank").focus();
+    window.open("HF18USPage2.html", "_blank").focus();
   }
   if (parseInt(nbrPages) > 2) {
     alert(
       "Si possono fare due pagine alla volta. Fai le prime due e poi ricomincia"
     );
-    window.location.href("HF.html");
+    window.location.href("HF18US.html");
     //window.open("HF.html", "_blank").focus();
   }
 }
@@ -217,15 +217,15 @@ function HFLines() {
 
     console.log("dataHF", dataHF);
 
-    // const HFoptions = {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(dataHF),
-    // };
-    // const myresponseHF = await fetch("/apiHF18US", HFoptions);
-    // var myjsonHF = await myresponseHF.json();
-    // // console.log(myjsonHF);
+    const HFoptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataHF),
+    };
+    const myresponseHF = await fetch("/apiHF18US", HFoptions);
+    var myjsonHF = await myresponseHF.json();
+    // console.log(myjsonHF);
   }
 }

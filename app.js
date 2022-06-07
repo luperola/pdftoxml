@@ -83,44 +83,6 @@ try {
         res.redirect("index.html");
       } else {
         fileOriginale = req.file.originalname;
-        // console.log("file", fileOriginale);
-        // per i files con HF
-        //const found = fileOriginale.match("HF");
-        // if (found != null) {
-        //   var readHFFiles;
-        //   let pdfReader = hummus.createReader(fileOriginale);
-        //   let pages = pdfReader.getPagesCount();
-        //   pages = pages.toString();
-        //   fs.writeFileSync("PagesHFSmall.txt", pages);
-        //   for (let i = 0; i < pages; i++) {
-        //     pdfWriter = hummus.createWriter("HFoutput" + i + ".pdf");
-        //     pdfWriter
-        //       .createPDFCopyingContext(pdfReader)
-        //       .appendPDFPageFromPDF(i);
-        //     pdfWriter.end();
-        //   }
-        //   newPages = parseInt(pages);
-        //   for (let i = 0; i < newPages; i++) {
-        //     fs.readFile(
-        //       __dirname + "/HFoutput" + i.toString() + ".pdf",
-        //       function (err, buffer) {
-        //         if (err) return console.log(err);
-        //         pdf2table.parse(buffer, function (err, rows, rowsdebug) {
-        //           if (err) return console.log(err);
-        //           var jsonFileName = "HFoutput" + i.toString() + ".json";
-        //           fs.writeFileSync(jsonFileName, JSON.stringify(rows));
-        //           readHFFiles += fs.readFileSync(
-        //             "HFoutput" + i.toString() + ".json",
-        //             "utf-8"
-        //           );
-        //           //console.log("file", readHFFiles);
-        //           //readHFFiles = readHFFiles.replace("undefined", "");
-        //           //fs.writeFileSync("sample.txt", readHFFiles);
-        //         });
-        //       }
-        //     );
-        //   }
-        // }
         var test = fileOriginale
           .substring(fileOriginale.length - 4)
           .toLowerCase();
@@ -1644,7 +1606,7 @@ app.post("/apiHF18US", (req, res) => {
     xw.writeAttribute("MpsSpecNo", "DM00403787_06");
     xw.writeAttribute("MpsSpecRev", "3.0");
     xw.writeAttribute("ShipmentDate", dataHFUSPost.shipment[id]);
-    xw.writeAttribute("ShipmentNumber", dataHFUSPost.progressivoNO[id]);
+    xw.writeAttribute("ShipmentNumber", dataHFUSPost.progressivoHF[id]);
     xw.writeAttribute("ShipQty", 1);
     xw.startElement("Lot");
     xw.writeAttribute(
@@ -1655,31 +1617,80 @@ app.post("/apiHF18US", (req, res) => {
     xw.writeAttribute("ExpiryDate", dataHFUSPost.expiryDate[id]);
     xw.writeAttribute("MfgDate", dataHFUSPost.manDate[id]);
     xw.writeAttribute("LotQty", 1);
-    xw.startElement("DIM_Carbon_dioxide_CO2");
+    xw.startElement("DIM_Chloride_CL");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", dataHFUSPost.CO2[id]);
+    xw.writeAttribute("VALUE", dataHFUSPost.Cl2HF[id]);
     xw.endElement();
-    xw.endElement("DIM_Carbon_dioxide_CO2");
+    xw.endElement("DIM_Chloride_CL");
+
+    xw.startElement("DIM_Phosphate_PO4");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", "0.04");
+    xw.endElement();
+    xw.endElement("DIM_Phosphate_PO4");
+    xw.startElement("DIM_Potassium_K");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.KHF[id]);
+    xw.endElement();
+    xw.endElement("DIM_Potassium_K");
+    xw.startElement("DIM_Copper_Cu");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.CuHF[id]);
+    xw.endElement();
+    xw.endElement("DIM_Copper_Cu");
+    xw.startElement("DIM_Nitrate_NO3");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", "0.03");
+    xw.endElement();
+    xw.endElement("DIM_Nitrate_NO3");
+
+    xw.startElement("DIM_Iron_Fe");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.FeHF[id]);
+    xw.endElement();
+    xw.endElement("DIM_Iron_Fe");
+
+    xw.startElement("DIM_Fluorosilicic_Acid_H2Si2F6");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.FHF[id]);
+    xw.endElement();
+    xw.endElement("DIM_Fluorosilicic_Acid_H2Si2F6");
+
+    xw.startElement("DIM_Sulfate_SO4");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", "0.016");
+    xw.endElement();
+    xw.endElement("DIM_Sulfate_SO4");
+
+    xw.startElement("DIM_Nickel_Ni");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.NiHF[id]);
+    xw.endElement();
+    xw.endElement("DIM_Nickel_Ni");
+
+    xw.startElement("DIM_Sodium_Na");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.NaHF[id]);
+    xw.endElement();
+    xw.endElement("DIM_Sodium_Na");
+
+    xw.startElement("DIM_Lead_Pb");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.PbHF[id]);
+    xw.endElement();
+    xw.endElement("DIM_Lead_Pb");
+
+    xw.startElement("DIM_Arsenic_As");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.AsHF[id]);
+    xw.endElement();
+    xw.endElement("DIM_Arsenic_As");
+
     xw.startElement("DIM_Moisture_H2O");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", dataHFUSPost.H2O[id]);
+    xw.writeAttribute("VALUE", dataHFUSPost.H2OHF[id]);
     xw.endElement();
     xw.endElement("DIM_Moisture_H2O");
-    xw.startElement("DIM_Nitrous_oxide_N2O");
-    xw.startElement("RAW");
-    xw.writeAttribute("VALUE", dataHFUSPost.N2O[id]);
-    xw.endElement();
-    xw.endElement("DIM_Nitrous_oxide_N2O");
-    xw.startElement("DIM_Nitrogen_dioxide_NO2");
-    xw.startElement("RAW");
-    xw.writeAttribute("VALUE", dataHFUSPost.NO2[id]);
-    xw.endElement();
-    xw.endElement("DIM_Nitrogen_dioxide_NO2");
-    // xw.startElement("DIM_Nitrogen_N2");
-    // xw.startElement("RAW");
-    // xw.writeAttribute("VALUE", dataHFUSPost.N2[id]);
-    // xw.endElement();
-    // xw.endElement("DIM_Nitrogen_N2");
     xw.endDocument();
 
     //console.log("xw", xw.toString());
@@ -1879,42 +1890,4 @@ app.get("/txt", (req, res) => {
   const readTxtFile1 = fs.readFileSync("sample.txt", "utf-8");
   //console.log("writeTxtFile", readTxtFile1);
   res.send(readTxtFile1);
-});
-
-//get del numero pagine del file HF 1.8Kg da npm hummus
-app.get("/arrayHFSmall", (req, res) => {
-  const pageNumbers = fs.readFileSync("PagesHFSmall.txt", "utf-8");
-  res.send(pageNumbers);
-});
-
-//get dei file HF 1.8kg
-app.get("/HFoutput0", (req, res) => {
-  let HFFile0 = fs.readFileSync("HFoutput0.json");
-  let jsonHFFile0 = JSON.parse(HFFile0);
-  //console.log(jsonHFFile0);
-  res.send(jsonHFFile0);
-});
-app.get("/HFoutput1", (req, res) => {
-  let HFFile1 = fs.readFileSync("HFoutput1.json");
-  let jsonHFFile1 = JSON.parse(HFFile1);
-  //console.log(jsonHFFile1);
-  res.send(jsonHFFile1);
-});
-app.get("/HFoutput2", (req, res) => {
-  let HFFile2 = fs.readFileSync("HFoutput2.json");
-  let jsonHFFile2 = JSON.parse(HFFile2);
-  //console.log(jsonHFFile2);
-  res.send(jsonHFFile2);
-});
-app.get("/HFoutput3", (req, res) => {
-  let HFFile3 = fs.readFileSync("HFoutput3.json");
-  let jsonHFFile3 = JSON.parse(HFFile3);
-  //console.log(jsonHFFile3);
-  res.send(jsonHFFile3);
-});
-app.get("/HFoutput4", (req, res) => {
-  let HFFile4 = fs.readFileSync("HFoutput4.json");
-  let jsonHFFile4 = JSON.parse(HFFile4);
-  //console.log(jsonHFFile4);
-  res.send(jsonHFFile4);
 });

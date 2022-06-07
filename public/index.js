@@ -110,6 +110,262 @@ if (dd < 10) dd = "0" + dd;
 today = dd + "-" + monthNameMan[mm] + "-" + yyyy;
 //console.log("Oggi", today);
 
+// //---------------HONG IN CATANIA ----------------
+
+// function HongInCAT() {
+//   document.getElementById("btndown").style.display = "inline";
+//   document.getElementById("btnHome").style.display = "inline";
+
+//   ReadHIText();
+//   async function ReadHIText() {
+//     const response = await fetch("/jsonSampleFile2");
+//     const data = await response.json();
+//     //console.log("Hong In data", data);
+
+//     for (let index = 0; index < data.length; index++) {
+//       if (data[index][0].indexOf("HXHCL") != -1) {
+//         arrayIndeces.push(index);
+//       }
+//     }
+
+//     for (let index = 0; index < data.length; index++) {
+//       if (data[index][0] === "Analytical" && data[index][1] === "Results") {
+//         arrayIndecesMetal.push(index);
+//       }
+//     }
+
+//     for (let index = 0; index < arrayIndeces.length; index++) {
+//       const random = Math.floor(Math.random() * arrayIndecesMetal.length);
+//       arrayIndecesMetalRandom.push(arrayIndecesMetal[random]);
+//     }
+
+//     //shipLotNumberHI è array con i drums /cylinders di HongIn. Dà anche i nomi dei files xml
+//     let shipLotNumberHI = [],
+//       lotNumberHI = [],
+//       manufacturingDateHI = [],
+//       H2valueHI = [],
+//       O2ArvalueHI = [],
+//       N2valueHI = [],
+//       CH4valueHI = [],
+//       COvalueHI = [],
+//       CO2valueHI = [],
+//       H2OvalueHI = [],
+//       FevalueHI = [],
+//       AlvalueHI = [],
+//       SbvalueHI = [],
+//       AsvalueHI = [],
+//       BivalueHI = [],
+//       BvalueHI = [],
+//       CdvalueHI = [],
+//       CrvalueHI = [],
+//       CovalueHI = [],
+//       CuvalueHI = [],
+//       PbvalueHI = [],
+//       MovalueHI = [],
+//       NivalueHI = [],
+//       PvalueHI = [],
+//       NavalueHI = [],
+//       ZnvalueHI = [],
+//       manufacturinDateRightFormat = [],
+//       year = [],
+//       month = [],
+//       day = [],
+//       myDate = [],
+//       myExpDate = [],
+//       months = [],
+//       oggi = [];
+
+//     for (let i = 0; i < arrayIndeces.length; i++) {
+//       shipLotNumberHI.push(data[arrayIndeces[i]][1]);
+//       lotNumberHI.push(data[arrayIndeces[i]][0]);
+//       manufacturingDateHI.push(data[arrayIndeces[i]][4]);
+//       H2valueHI.push(data[arrayIndeces[i]][7]);
+//       O2ArvalueHI.push(data[arrayIndeces[i]][8]);
+//       N2valueHI.push(data[arrayIndeces[i]][9]);
+//       CH4valueHI.push(data[arrayIndeces[i]][10]);
+//       COvalueHI.push(data[arrayIndeces[i]][11]);
+//       CO2valueHI.push(data[arrayIndeces[i]][12]);
+//       H2OvalueHI.push(data[arrayIndeces[i]][13]);
+//       FevalueHI.push(data[arrayIndecesMetalRandom[i]][16]);
+//       AlvalueHI.push(data[arrayIndecesMetalRandom[i]][4]);
+//       SbvalueHI.push(data[arrayIndecesMetalRandom[i]][11]);
+//       AsvalueHI.push(data[arrayIndecesMetalRandom[i]][17]);
+//       BivalueHI.push(data[arrayIndecesMetalRandom[i]][13]);
+//       CdvalueHI.push(data[arrayIndecesMetalRandom[i]][10]);
+//       CrvalueHI.push(data[arrayIndecesMetalRandom[i]][15]);
+//       CovalueHI.push(data[arrayIndecesMetalRandom[i]][5]);
+//       CuvalueHI.push(data[arrayIndecesMetalRandom[i]][7]);
+//       PbvalueHI.push(data[arrayIndecesMetalRandom[i]][12]);
+//       MovalueHI.push(data[arrayIndecesMetalRandom[i]][9]);
+//       NivalueHI.push(data[arrayIndecesMetalRandom[i]][6]);
+//       PvalueHI.push(data[arrayIndecesMetalRandom[i]][2]);
+//       NavalueHI.push(data[arrayIndecesMetalRandom[i]][14]);
+//       BvalueHI.push(data[arrayIndecesMetalRandom[i]][3]);
+//       ZnvalueHI.push(data[arrayIndecesMetalRandom[i]][8]);
+//       oggi.push(today);
+
+//       //--------------HONG IN CATANIA COUNTER ------------
+//       const testResponse = await fetch("/apicounter");
+//       var dataTest = await testResponse.text();
+//       //console.log("dataTest1", dataTest);
+//       dataTest = parseInt(dataTest);
+//       dataTest++;
+//       var dt = new Date();
+//       var anno = dt.getFullYear().toString();
+//       anno = anno.substring(2, 4);
+//       if (dataTest < 10) {
+//         shipmentNumberHI = "IT/000" + dataTest.toString() + "/" + anno;
+//       }
+//       if (dataTest >= 10 && dataTest < 100) {
+//         shipmentNumberHI = "IT/00" + dataTest.toString() + "/" + anno;
+//       }
+//       if (dataTest >= 100 && dataTest < 1000) {
+//         shipmentNumberHI = "IT/0" + dataTest.toString() + "/" + anno;
+//       }
+//       if (dataTest >= 1000) {
+//         shipmentNumberHI = "IT/" + dataTest.toString() + "/" + anno;
+//       }
+//       if (dataTest > 10000) {
+//         alert("reset counter.txt file");
+//       }
+//       shNumberHI.push(shipmentNumberHI);
+//       datacounter = { dataTest };
+//       const optionCounter = {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(datacounter),
+//       };
+//       const myresponse = await fetch("/newcounter", optionCounter);
+//       var myjson = await myresponse.text();
+//       //console.log("myJson", myjson);
+//     }
+
+//     // //--------------END HONG IN CATANIA COUNTER ------------
+
+//     for (let i = 0; i < arrayIndeces.length; i++) {
+//       H2valueHI[i] = H2valueHI[i].trim();
+//       H2valueHI[i] = H2valueHI[i].replace("<", "").replace("ND", "");
+//       O2ArvalueHI[i] = O2ArvalueHI[i].trim();
+//       O2ArvalueHI[i] = O2ArvalueHI[i].replace("<", "").replace("ND", "");
+//       N2valueHI[i] = N2valueHI[i].trim();
+//       N2valueHI[i] = N2valueHI[i].replace("<", "").replace("ND", "");
+//       CH4valueHI[i] = CH4valueHI[i].trim();
+//       CH4valueHI[i] = CH4valueHI[i].replace("<", "").replace("ND", "");
+//       COvalueHI[i] = COvalueHI[i].trim();
+//       COvalueHI[i] = COvalueHI[i].replace("<", "").replace("ND", "");
+//       CO2valueHI[i] = CO2valueHI[i].trim();
+//       CO2valueHI[i] = CO2valueHI[i].replace("<", "").replace("ND", "");
+//       H2OvalueHI[i] = H2OvalueHI[i].trim();
+//       H2OvalueHI[i] = H2OvalueHI[i].replace("<", "").replace("ND", "");
+//       FevalueHI[i] = FevalueHI[i].trim();
+//       FevalueHI[i] = FevalueHI[i].replace("<", "").replace("ND", "");
+//       AlvalueHI[i] = AlvalueHI[i].trim();
+//       AlvalueHI[i] = AlvalueHI[i].replace("<", "").replace("ND", "");
+//       SbvalueHI[i] = SbvalueHI[i].trim();
+//       SbvalueHI[i] = SbvalueHI[i].replace("<", "").replace("ND", "");
+//       AsvalueHI[i] = AsvalueHI[i].trim();
+//       AsvalueHI[i] = AsvalueHI[i].replace("<", "").replace("ND", "");
+//       BivalueHI[i] = BivalueHI[i].trim();
+//       BivalueHI[i] = BivalueHI[i].replace("<", "").replace("ND", "");
+//       CdvalueHI[i] = CdvalueHI[i].trim();
+//       CdvalueHI[i] = CdvalueHI[i].replace("<", "").replace("ND", "");
+//       CrvalueHI[i] = CrvalueHI[i].trim();
+//       CrvalueHI[i] = CrvalueHI[i].replace("<", "").replace("ND", "");
+//       CovalueHI[i] = CovalueHI[i].trim();
+//       CovalueHI[i] = CovalueHI[i].replace("<", "").replace("ND", "");
+//       CrvalueHI[i] = CrvalueHI[i].trim();
+//       CrvalueHI[i] = CrvalueHI[i].replace("<", "").replace("ND", "");
+//       CuvalueHI[i] = CuvalueHI[i].trim();
+//       CuvalueHI[i] = CuvalueHI[i].replace("<", "").replace("ND", "");
+//       PbvalueHI[i] = PbvalueHI[i].trim();
+//       PbvalueHI[i] = PbvalueHI[i].replace("<", "").replace("ND", "");
+//       MovalueHI[i] = MovalueHI[i].trim();
+//       MovalueHI[i] = MovalueHI[i].replace("<", "").replace("ND", "");
+//       NivalueHI[i] = NivalueHI[i].trim();
+//       NivalueHI[i] = NivalueHI[i].replace("<", "").replace("ND", "");
+//       PvalueHI[i] = PvalueHI[i].trim();
+//       PvalueHI[i] = PvalueHI[i].replace("<", "").replace("ND", "");
+//       NavalueHI[i] = NavalueHI[i].trim();
+//       NavalueHI[i] = NavalueHI[i].replace("<", "").replace("ND", "");
+//       BvalueHI[i] = BvalueHI[i].trim();
+//       BvalueHI[i] = BvalueHI[i].replace("<", "").replace("ND", "");
+//       ZnvalueHI[i] = ZnvalueHI[i].trim();
+//       ZnvalueHI[i] = ZnvalueHI[i].replace("<", "").replace("ND", "");
+//     }
+
+//     for (let i = 0; i < arrayIndeces.length; i++) {
+//       year[i] = manufacturingDateHI[i].substring(0, 4);
+//       month[i] = parseInt(manufacturingDateHI[i].substring(4, 6)) - 1;
+//       months = [
+//         "Jan",
+//         "Feb",
+//         "Mar",
+//         "Apr",
+//         "May",
+//         "Jun",
+//         "Jul",
+//         "Aug",
+//         "Sep",
+//         "Oct",
+//         "Nov",
+//         "Dec",
+//       ];
+//       day[i] = manufacturingDateHI[i].substring(6, 8);
+//       myDate[i] = day[i] + "-" + months[month[i]] + "-" + year[i];
+//       manufacturinDateRightFormat.push(myDate[i]);
+//       var newExp = parseInt(year[i]) + 2;
+//       myExpDate[i] = day[i] + "-" + months[month[i]] + "-" + newExp;
+//     }
+
+//     const dataHI = {
+//       lotNumberHI: lotNumberHI,
+//       filenamesHI: shipLotNumberHI,
+//       manDateHI: manufacturinDateRightFormat,
+//       expDateHI: myExpDate,
+//       shipmentDate: oggi,
+//       progressivoHI: shNumberHI,
+//       HIH2value: H2valueHI,
+//       HIO2Arvalue: O2ArvalueHI,
+//       HIN2value: N2valueHI,
+//       HICH4value: CH4valueHI,
+//       HICOvalue: COvalueHI,
+//       HICO2value: CO2valueHI,
+//       HIH2Ovalue: H2OvalueHI,
+//       HIFevalue: FevalueHI,
+//       HIAlvalue: AlvalueHI,
+//       HISbvalue: SbvalueHI,
+//       HIAsvalue: AsvalueHI,
+//       HIBivalue: BivalueHI,
+//       HIBvalue: BvalueHI,
+//       HICdvalue: CdvalueHI,
+//       HICrvalue: CrvalueHI,
+//       HICovalue: CovalueHI,
+//       HICuvalue: CuvalueHI,
+//       HIPbvalue: PbvalueHI,
+//       HIMovalue: MovalueHI,
+//       HINivalue: NivalueHI,
+//       HIPvalue: PvalueHI,
+//       HINavalue: NavalueHI,
+//       HiZnvalue: ZnvalueHI,
+//     };
+//     console.log("dataHICAT", dataHI);
+//     const HIoptions = {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(dataHI),
+//     };
+//     const myresponseHI = await fetch("/apiHICAT", HIoptions);
+//     var myjsonHI = await myresponseHI.json();
+//     //console.log(myjsonHI);
+//   }
+// }
+
+// // //---------------END HONG IN CATANIA ----------------
+
 // ---------------- HF GERLING HOLZ -----------------
 let values = [],
   H2SiF6array = [],

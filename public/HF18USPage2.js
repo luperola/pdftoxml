@@ -1,65 +1,96 @@
-let drumsListNOP2,
-  manDateNOP2,
-  CO2NOP2,
-  N2ONOP2,
-  NO2NOP2,
-  H2ONOP2,
-  N2NOP2,
-  expiryDateforNOP2,
-  drumsNOP2Array = [],
-  mfgDateNOP2 = [],
-  expDateNOP2 = [],
-  CO2NOP2Array = [],
-  N2ONOP2Array = [],
-  NONOP2Array = [],
-  H2ONOP2Array = [],
-  N2NOP2Array = [],
-  shNumberNOP2 = [];
-//oggiNOP2 = [];
+let drumsListHFP2,
+  manDateHFUSP2,
+  Cl2HFP2,
+  KHFP2,
+  CuHFP2,
+  FeHFP2,
+  FHFP2,
+  NiHFP2,
+  NaHFP2,
+  PbHFP2,
+  AsHFP2,
+  H2OHFP2,
+  expiryDateforHFP2,
+  shipmentNumberHFP2,
+  drumsHFP2Array = [],
+  mfgDateHFP2 = [],
+  expDateHFP2 = [],
+  Cl2HFP2Array = [],
+  KHFP2Array = [],
+  CuHFP2Array = [],
+  FeHFP2Array = [],
+  FHFP2Array = [],
+  NiHFP2Array = [],
+  NaHFP2Array = [],
+  PbHFP2Array = [],
+  AsHFP2Array = [],
+  H2OHFP2Array = [],
+  shNumberHFP2 = [];
 
-function NODrumsPag2() {
-  drumsListNO = document.getElementById("NODrums").value;
-  manDateNO = document.getElementById("ManDateNO").value;
-  CO2NO = document.getElementById("CO2NO").value;
-  N2ONO = document.getElementById("N2ONO").value;
-  NO2NO = document.getElementById("NO2NO").value;
-  H2ONO = document.getElementById("H2ONO").value;
-  N2NO = document.getElementById("N2NO").value;
+function HFDrumsPag2() {
+  drumsListHF = document.getElementById("HFDrums").value;
+  manDateHFUS = document.getElementById("ManDateHF").value;
+  Cl2HF = document.getElementById("Cl2HF").value;
+  KHF = document.getElementById("KHF").value;
+  CuHF = document.getElementById("CuHF").value;
+  FeHF = document.getElementById("FeHF").value;
+  FHF = document.getElementById("FHF").value;
+  NiHF = document.getElementById("NiHF").value;
+  NaHF = document.getElementById("NaHF").value;
+  PbHF = document.getElementById("PbHF").value;
+  AsHF = document.getElementById("AsHF").value;
+  H2OHF = document.getElementById("H2OHF").value;
 
-  drumsListNOP2 = document.getElementById("NODrumsP2").value;
-  manDateNOP2 = document.getElementById("ManDateNOP2").value;
-  CO2NOP2 = document.getElementById("CO2NOP2").value;
-  N2ONOP2 = document.getElementById("N2ONOP2").value;
-  NO2NOP2 = document.getElementById("NO2NOP2").value;
-  H2ONOP2 = document.getElementById("H2ONOP2").value;
-  N2NOP2 = document.getElementById("N2NOP2").value;
+  drumsListHFP2 = document.getElementById("HFP2Drums").value;
+  manDateHFUSP2 = document.getElementById("ManDateHFP2").value;
+  Cl2HFP2 = document.getElementById("Cl2HFP2").value;
+  KHFP2 = document.getElementById("KHFP2").value;
+  CuHFP2 = document.getElementById("CuHFP2").value;
+  FeHFP2 = document.getElementById("FeHFP2").value;
+  FHFP2 = document.getElementById("FHFP2").value;
+  NiHFP2 = document.getElementById("NiHFP2").value;
+  NaHFP2 = document.getElementById("NaHFP2").value;
+  PbHFP2 = document.getElementById("PbHFP2").value;
+  AsHFP2 = document.getElementById("AsHFP2").value;
+  H2OHFP2 = document.getElementById("H2OHFP2").value;
 
   document.getElementById("btnInvia").style.display = "none";
   document.getElementById("contenitore").style.display = "none";
 
   document.getElementById("testoCorretto").innerHTML =
     "DATI PAGINA 1 " +
-    "<br/>" +
     "Lista # drums: " +
-    drumsListNO +
+    drumsListHF +
     "<br/>" +
     "Manufacturing date: " +
-    manDateNO +
+    manDateHFUS +
     "<br/>" +
-    "valore CO2: " +
-    CO2NO +
+    "valore Chloride: " +
+    Cl2HF +
     "<br/>" +
-    "Valore N2O: " +
-    N2ONO +
+    "Valore Potassium: " +
+    KHF +
     "<br/>" +
-    "Valore NO2: " +
-    NO2NO +
+    "Valore Iron: " +
+    FeHF +
     "<br/>" +
-    "Valore H2O: " +
-    H2ONO +
+    "Valore Fluorisilic acid: " +
+    FHF +
     "<br/>" +
-    "Valore N2: " +
-    N2NO +
+    "Valore Nickel: " +
+    NiHF +
+    "<br/>" +
+    "Valore Sodium: " +
+    NaHF +
+    "<br/>" +
+    "Valore Lead: " +
+    PbHF +
+    "<br/>" +
+    "Valore Arsenic: " +
+    AsHF +
+    "<br/>" +
+    "Valore Moisture: " +
+    H2OHF +
     "<br/>" +
     "------------" +
     "<br/>" +
@@ -67,48 +98,56 @@ function NODrumsPag2() {
     "DATI PAGINA 2 " +
     "<br/>" +
     "Lista # drums: " +
-    drumsListNOP2 +
+    drumsListHFP2 +
     "<br/>" +
     "Manufacturing date: " +
-    manDateNOP2 +
+    manDateHFUSP2 +
     "<br/>" +
-    "valore CO2: " +
-    CO2NOP2 +
+    "valore Chloride: " +
+    Cl2HFP2 +
     "<br/>" +
-    "Valore N2O: " +
-    N2ONOP2 +
+    "Valore Potassium: " +
+    KHFP2 +
     "<br/>" +
-    "Valore NO2: " +
-    NO2NOP2 +
+    "Valore Iron: " +
+    FeHFP2 +
     "<br/>" +
-    "Valore H2O: " +
-    H2ONOP2 +
+    "Valore Fluorisilic acid: " +
+    FHFP2 +
     "<br/>" +
-    "Valore N2: " +
-    N2NOP2 +
+    "Valore Nickel: " +
+    NiHFP2 +
+    "<br/>" +
+    "Valore Sodium: " +
+    NaHFP2 +
+    "<br/>" +
+    "Valore Lead: " +
+    PbHFP2 +
+    "<br/>" +
+    "Valore Arsenic: " +
+    AsHFP2 +
+    "<br/>" +
+    "Valore Moisture: " +
+    H2OHFP2 +
     "<br/>";
 
   document.getElementById("btnCorretto").style.display = "inline";
   document.getElementById("btnNonCorretto").style.display = "inline";
 }
 
-function nitricOxideLines() {
+function HFLines() {
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
   document.getElementById("btnCorretto").style.display = "none";
   document.getElementById("btnNonCorretto").style.display = "none";
 
-  drumsNOArray = drumsListNO.split(",");
-  drumsNOP2Array = drumsListNOP2.split(",");
+  drumsHFArray = drumsListHF.split(",");
+  drumsHFP2Array = drumsListHFP2.split(",");
 
-  ReadNOText();
-  async function ReadNOText() {
+  ReadHFText();
+  async function ReadHFText() {
     //Counter per shipment Number progressivo
-    for (
-      let index = 0;
-      index < drumsNOArray.length + drumsNOP2Array.length;
-      index++
-    ) {
+    for (let index = 0; index < drumsHFArray.length + drumsHFP2Array; index++) {
       const testResponse = await fetch("/apicounter");
       var dataTest = await testResponse.text();
       //console.log("dataTest1", dataTest);
@@ -118,21 +157,21 @@ function nitricOxideLines() {
       var anno = dt.getFullYear().toString();
       anno = anno.substring(2, 4);
       if (dataTest < 10) {
-        shipmentNumberNO = "IT/000" + dataTest.toString() + "/" + anno;
+        shipmentNumberHF = "IT/000" + dataTest.toString() + "/" + anno;
       }
       if (dataTest >= 10 && dataTest < 100) {
-        shipmentNumberNO = "IT/00" + dataTest.toString() + "/" + anno;
+        shipmentNumberHF = "IT/00" + dataTest.toString() + "/" + anno;
       }
       if (dataTest >= 100 && dataTest < 1000) {
-        shipmentNumberNO = "IT/0" + dataTest.toString() + "/" + anno;
+        shipmentNumberHF = "IT/0" + dataTest.toString() + "/" + anno;
       }
       if (dataTest >= 1000) {
-        shipmentNumberNO = "IT/" + dataTest.toString() + "/" + anno;
+        shipmentNumberHF = "IT/" + dataTest.toString() + "/" + anno;
       }
       if (dataTest > 10000) {
         alert("reset counter.txt file");
       }
-      shNumberNO.push(shipmentNumberNO);
+      shNumberHF.push(shipmentNumberHF);
 
       datacounter = { dataTest };
       const optionCounter = {
@@ -162,23 +201,16 @@ function nitricOxideLines() {
       "Dec",
     ];
 
-    var year = manDateNO.substring(0, 4);
-    var month = manDateNO.substring(5, 7);
-    var day = manDateNO.substring(8, 10);
-    manDateNO = day + "-" + monthNameMan[parseInt(month) - 1] + "-" + year;
-
-    var dataMonths = parseInt(month) + 6;
-
-    if (dataMonths > 12) {
-      var realDataMonths = dataMonths - 13;
-      expiryDateforNO =
-        day + "-" + monthNameMan[realDataMonths] + "-" + (parseInt(year) + 1);
-    }
-
-    if (dataMonths <= 12) {
-      expiryDateforNO =
-        day + "-" + monthNameMan[parseInt(dataMonths) - 1] + "-" + year;
-    }
+    var year = manDateHFUS.substring(0, 4);
+    var month = manDateHFUS.substring(5, 7);
+    var day = manDateHFUS.substring(8, 10);
+    manDateHFUS = day + "-" + monthNameMan[parseInt(month) - 1] + "-" + year;
+    expiryDateforHF =
+      day +
+      "-" +
+      monthNameMan[parseInt(month) - 1] +
+      "-" +
+      (parseInt(year) + 2);
 
     const monthNameManP2 = [
       "Jan",
@@ -195,73 +227,83 @@ function nitricOxideLines() {
       "Dec",
     ];
 
-    var year = manDateNOP2.substring(0, 4);
-    var month = manDateNOP2.substring(5, 7);
-    var day = manDateNOP2.substring(8, 10);
-    manDateNOP2 = day + "-" + monthNameMan[parseInt(month) - 1] + "-" + year;
+    var year = manDateHFUSP2.substring(0, 4);
+    var month = manDateHFUSP2.substring(5, 7);
+    var day = manDateHFUSP2.substring(8, 10);
+    manDateHFUSP2 =
+      day + "-" + monthNameManP2[parseInt(month) - 1] + "-" + year;
+    expiryDateforHFP2 =
+      day +
+      "-" +
+      monthNameManP2[parseInt(month) - 1] +
+      "-" +
+      (parseInt(year) + 2);
 
-    var dataMonthsP2 = parseInt(month) + 6;
-
-    if (dataMonthsP2 > 12) {
-      var realDataMonthsP2 = dataMonthsP2 - 13;
-      expiryDateforNOP2 =
-        day + "-" + monthNameMan[realDataMonthsP2] + "-" + (parseInt(year) + 1);
+    for (let index = 0; index < drumsHFArray.length; index++) {
+      //drumsHFArray[index] = drumsHFArray[index].replace(/\//g, "-");
+      mfgDateHF.push(manDateHFUS);
+      expDateHF.push(expiryDateforHF);
+      Cl2HFArray.push(Cl2HF);
+      KHFArray.push(KHF);
+      CuHFArray.push(CuHF);
+      FeHFArray.push(FeHF);
+      FHFArray.push(FHF);
+      NiHFArray.push(NiHF);
+      NaHFArray.push(NaHF);
+      PbHFArray.push(PbHF);
+      AsHFArray.push(AsHF);
+      H2OHFArray.push(H2OHF);
+      oggiHF.push(today);
     }
 
-    if (dataMonthsP2 <= 12) {
-      expiryDateforNOP2 =
-        day + "-" + monthNameMan[parseInt(dataMonthsP2) - 1] + "-" + year;
+    for (let index = 0; index < drumsHFP2Array.length; index++) {
+      //drumsHFArray[index] = drumsHFArray[index].replace(/\//g, "-");
+      mfgDateHF.push(manDateHFUSP2);
+      expDateHF.push(expiryDateforHFP2);
+      Cl2HFArray.push(Cl2HFP2);
+      KHFArray.push(KHFP2);
+      CuHFArray.push(CuHFP2);
+      FeHFArray.push(FeHFP2);
+      FHFArray.push(FHFP2);
+      NiHFArray.push(NiHFP2);
+      NaHFArray.push(NaHFP2);
+      PbHFArray.push(PbHFP2);
+      AsHFArray.push(AsHFP2);
+      H2OHFArray.push(H2OHFP2);
+      oggiHF.push(today);
+      drumsHFArray.push(drumsHFP2Array[index]);
     }
 
-    for (let index = 0; index < drumsNOArray.length; index++) {
-      //drumsNOArray[index] = drumsNOArray[index].replace(/\//g, "-");
-      mfgDateNO.push(manDateNO);
-      expDateNO.push(expiryDateforNO);
-      CO2NOArray.push(CO2NO);
-      N2ONOArray.push(N2ONO);
-      NO2NOArray.push(NO2NO);
-      H2ONOArray.push(H2ONO);
-      N2NOArray.push(N2NO);
-      oggiNO.push(today);
-    }
-
-    for (let index = 0; index < drumsNOP2Array.length; index++) {
-      mfgDateNO.push(manDateNOP2);
-      expDateNO.push(expiryDateforNOP2);
-      CO2NOArray.push(CO2NOP2);
-      N2ONOArray.push(N2ONOP2);
-      NO2NOArray.push(NO2NOP2);
-      H2ONOArray.push(H2ONOP2);
-      N2NOArray.push(N2NOP2);
-      oggiNO.push(today);
-      drumsNOArray.push(drumsNOP2Array[index]);
-    }
-
-    const dataNO = {
-      shipment: oggiNO,
-      lotNumber: drumsNOArray,
-      expiryDate: expDateNO,
-      manDate: mfgDateNO,
-      progressivoNO: shNumberNO,
-      filetext: drumsNOArray,
-      CO2: CO2NOArray,
-      N2O: N2ONOArray,
-      NO2: NO2NOArray,
-      H2O: H2ONOArray,
-      N2: N2NOArray,
+    const dataHF = {
+      shipment: oggiHF,
+      lotNumber: drumsHFArray,
+      expiryDate: expDateHF,
+      manDate: mfgDateHF,
+      progressivoHF: shNumberHF,
+      filetext: drumsHFArray,
+      Cl2HF: Cl2HFArray,
+      KHF: KHFArray,
+      CuHF: CuHFArray,
+      FeHF: FeHFArray,
+      FHF: FHFArray,
+      NiHF: NiHFArray,
+      NaHF: NaHFArray,
+      PbHF: PbHFArray,
+      AsHF: AsHFArray,
+      H2OHF: H2OHFArray,
     };
 
-    console.log("dataNO", dataNO);
+    console.log("dataHF", dataHF);
 
-    const NOoptions = {
+    const HFoptions = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(dataNO),
+      body: JSON.stringify(dataHF),
     };
-    const myresponseNO = await fetch("/apiNOTaulov", NOoptions);
-    var myjsonNO = await myresponseNO.json();
-    // console.log(myjsonNO);
+    const myresponseHF = await fetch("/apiHF18US", HFoptions);
+    var myjsonHF = await myresponseHF.json();
+    // console.log(myjsonHF);
   }
 }
