@@ -740,7 +740,7 @@ app.post("/apiNOTaulov", (req, res) => {
     xw.writeAttribute("SupplierHoldingDesc", "LINDE PLC");
     xw.writeAttribute("ReceivingStPlant", "Catania");
     xw.writeAttribute("MpsSpecNo", "DM00798836_06");
-    xw.writeAttribute("MpsSpecRev", "2.0");
+    xw.writeAttribute("MpsSpecRev", "3.0");
     xw.writeAttribute("ShipmentDate", dataNOTPost.shipment[id]);
     xw.writeAttribute("ShipmentNumber", dataNOTPost.progressivoNO[id]);
     xw.writeAttribute("ShipQty", 1);
@@ -770,11 +770,11 @@ app.post("/apiNOTaulov", (req, res) => {
     xw.writeAttribute("VALUE", dataNOTPost.NO2[id]);
     xw.endElement();
     xw.endElement("DIM_Nitrogen_dioxide_NO2");
-    // xw.startElement("DIM_Nitrogen_N2");
-    // xw.startElement("RAW");
-    // xw.writeAttribute("VALUE", dataNOTPost.N2[id]);
-    // xw.endElement();
-    // xw.endElement("DIM_Nitrogen_N2");
+    xw.startElement("DIM_Nitrogen_N2");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataNOTPost.N2[id]);
+    xw.endElement();
+    xw.endElement("DIM_Nitrogen_N2");
     xw.endDocument();
 
     //console.log("xw", xw.toString());
@@ -1147,7 +1147,7 @@ app.post("/apiF2KrNe", (req, res) => {
 
 app.post("/apiF2ArNe", (req, res) => {
   const dataF2ArNe = req.body;
-  console.log(dataF2ArNe);
+  //console.log(dataF2ArNe);
   xw = new XMLWriter(true);
   xw.startDocument("1.0", "UTF-8");
   xw.startElement("GasesShipment");
