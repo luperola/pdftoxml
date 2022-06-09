@@ -1546,11 +1546,11 @@ app.post("/apiSF6BOC", (req, res) => {
   xw.writeAttribute("VALUE", dataSF6BOC.COvalue);
   xw.endElement();
   xw.endElement("DIM_Carbon_monoxide_CO");
-  xw.startElement("DIM_Tetrafluoromethane_CF4 ");
+  xw.startElement("DIM_Carbon_tetrafluoride_CF4");
   xw.startElement("RAW");
   xw.writeAttribute("VALUE", dataSF6BOC.CF4value);
   xw.endElement();
-  xw.endElement("DIM_Tetrafluoromethane_CF4 ");
+  xw.endElement("DIM_Carbon_tetrafluoride_CF4");
   xw.startElement("DIM_Moisture_H2O");
   xw.startElement("RAW");
   xw.writeAttribute("VALUE", dataSF6BOC.H2Ovalue);
@@ -1566,11 +1566,11 @@ app.post("/apiSF6BOC", (req, res) => {
   xw.writeAttribute("VALUE", dataSF6BOC.O2Arvalue);
   xw.endElement();
   xw.endElement("DIM_Oxygen_plus_argon_O2_plus_Ar");
-  xw.startElement("DIM_Sulfur_hexafluoride_SF6_Assay ");
+  xw.startElement("DIM_Sulfur_hexafluoride_SF6");
   xw.startElement("RAW");
   xw.writeAttribute("VALUE", dataSF6BOC.SF6percentvalue);
   xw.endElement();
-  xw.endElement("DIM_Sulfur_hexafluoride_SF6_Assay C");
+  xw.endElement("DIM_Sulfur_hexafluoride_SF6");
   xw.endDocument();
 
   try {
