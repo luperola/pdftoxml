@@ -1,92 +1,18 @@
-var myDate,
-  expirationDateOne,
-  shipmentNumberW,
-  shipmentNumberHI,
-  shipmentNumberCS,
-  shipmentNumberTCSB,
-  lotNumberTCSB,
-  manDateTCSB;
-let testMatrixCS1 = [],
-  testMatrixCS2 = [],
-  mfgDateCS = [],
+var myDate, shipmentNumberW, shipmentNumberHI, shipmentNumberCS;
+let mfgDateCS = [],
   expDateCS = [],
-  shipmentLotNumberCS = [],
-  yearChangeFormat = [],
-  shNumberW = [],
   shNumberCS = [],
   shNumberHI = [],
   shNumberTCS = [],
-  arrayHI = [],
-  shNumberHICAT = [],
-  arrayShN = [],
-  arraydataHI = [],
   arrayIndeces = [],
-  arrayFinalDataHI = [],
-  arrayIndecesMetal = [],
-  arrayIndecesMetalRandom = [],
-  arrayMetalDataHI = [];
+  arrayIndecesMetal = [];
 // NO Tavlov variables
-let arrayNOTavlov = [],
-  pageNumbers = [],
-  productionDates1 = [],
-  productionDates2 = [],
-  productionDates3 = [],
-  deliveryDates1 = [],
-  deliveryDates2 = [],
-  deliveryDates3 = [],
-  expDates1 = [],
-  expDates2 = [],
-  expDates3 = [],
-  drumNumbers1 = [],
-  drumNumbers2 = [],
-  drumNumbers3 = [],
-  //drumQuantities = [],
-  expiryDate = [],
-  shNumberNOT = [],
-  N2parameters1 = [],
-  N2parameters2 = [],
-  N2parameters3 = [],
-  N2Oparameters1 = [],
-  N2Oparameters2 = [],
-  N2Oparameters3 = [],
-  H2Oparameters1 = [],
-  H2Oparameters2 = [],
-  H2Oparameters3 = [],
-  finalDrums = [],
-  finalProdDate = [],
-  finalDelDate = [],
-  finalN2 = [],
-  finalN2O = [],
-  finalH2O = [],
-  finalExpDate = [],
-  drumA,
-  drumB,
-  drumC,
-  prodDate1,
-  prodDateA,
-  prodDateB,
-  delDateA,
-  delDateB,
-  N2parA,
-  N2parB,
-  N2OparA,
-  N2OparB,
-  H2OparA,
-  H2OparB,
-  myDrums,
-  delDate1,
-  N2OTav1,
-  H2OTav1,
-  //manDateNOT,
-  expDataNOT,
-  mfgDateNewFormat,
-  delDateNewFormat,
-  expDateNewFormat,
-  wrongFormat;
+let expiryDate = [],
+  myDrums;
+
 //Shipment date = oggi
 var today = new Date();
 var yyyy = today.getFullYear();
-//let mm = today.getMonth() + 1; // Months start at 0!
 let mm = today.getMonth();
 const monthNameMan = [
   "Jan",
@@ -103,10 +29,7 @@ const monthNameMan = [
   "Dec",
 ];
 let dd = today.getDate();
-
 if (dd < 10) dd = "0" + dd;
-//if (mm < 10) mm = "0" + mm;
-
 today = dd + "-" + monthNameMan[mm] + "-" + yyyy;
 //console.log("Oggi", today);
 
@@ -155,9 +78,12 @@ function HFGH() {
   document.getElementById("dataHF").style.display = "inline";
   document.getElementById("CSPage").style.display = "none";
   document.getElementById("NOTaulovPage").style.display = "none";
+  document.getElementById("TCSPage").style.display = "none";
+  document.getElementById("HBrPage").style.display = "none";
+  document.getElementById("HF18USPage").style.display = "none";
+  document.getElementById("HF36USPage").style.display = "none";
   document.getElementById("cylDelivered").style.display = "none";
   document.getElementById("btndropdown").style.display = "none";
-  //document.getElementById("modalCS").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
 }
@@ -409,6 +335,9 @@ function F2KrNe(receivingPlant) {
   document.getElementById("CSPage").style.display = "none";
   document.getElementById("NOTaulovPage").style.display = "none";
   document.getElementById("TCSPage").style.display = "none";
+  document.getElementById("HBrPage").style.display = "none";
+  document.getElementById("HF18USPage").style.display = "none";
+  document.getElementById("HF36USPage").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
   ReadFileJson();
@@ -579,6 +508,7 @@ function F2ArNe() {
   document.getElementById("TCSPage").style.display = "none";
   document.getElementById("HBrPage").style.display = "none";
   document.getElementById("HF18USPage").style.display = "none";
+  document.getElementById("HF36USPage").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
   ReadFileJson();
@@ -754,6 +684,8 @@ function KrNe(receivingPlant) {
   document.getElementById("NOTaulovPage").style.display = "none";
   document.getElementById("TCSPage").style.display = "none";
   document.getElementById("HBrPage").style.display = "none";
+  document.getElementById("HF18USPage").style.display = "none";
+  document.getElementById("HF36USPage").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
   ReadFileJson();
@@ -896,8 +828,12 @@ function KrNe(receivingPlant) {
 function ArXeNe() {
   alert("in costruzione");
   // document.getElementById("btndropdown").style.display = "none";
-  //   document.getElementById("CSPage").style.display = "none";
+  // document.getElementById("CSPage").style.display = "none";
   // document.getElementById("NOTaulovPage").style.display = "none";
+  // document.getElementById("TCSPage").style.display = "none";
+  // document.getElementById("HBrPage").style.display = "none";
+  // document.getElementById("HF18USPage").style.display = "none";
+  //document.getElementById("HF36USPage").style.display = "none";
   // //document.getElementById("modalCS").style.display = "none";
   // document.getElementById("btndown").style.display = "inline";
   // document.getElementById("btnHome").style.display = "inline";
@@ -1042,6 +978,8 @@ function SF6US() {
   document.getElementById("NOTaulovPage").style.display = "none";
   document.getElementById("TCSPage").style.display = "none";
   document.getElementById("HBrPage").style.display = "none";
+  document.getElementById("HF18USPage").style.display = "none";
+  document.getElementById("HF36USPage").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
   ReadFileJson();
@@ -1165,6 +1103,8 @@ function SF6BOC() {
   document.getElementById("NOTaulovPage").style.display = "none";
   document.getElementById("TCSPage").style.display = "none";
   document.getElementById("HBrPage").style.display = "none";
+  document.getElementById("HF18USPage").style.display = "none";
+  document.getElementById("HF36USPage").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
   ReadFileJson();
@@ -1257,204 +1197,3 @@ function SF6BOC() {
   }
 }
 //---------------- END SF6 3GASN326 from BOC to CAT ----------------------
-
-// ---------------- HF Medford 1.8Kg - Bombola Piccola --------------
-
-function HFSmall() {
-  matriceHF = [];
-  //alert("under construction");
-  document.getElementById("btndropdown").style.display = "none";
-  document.getElementById("CSPage").style.display = "none";
-  document.getElementById("NOTaulovPage").style.display = "none";
-  //document.getElementById("modalCS").style.display = "none";
-  document.getElementById("btndown").style.display = "inline";
-  document.getElementById("btnHome").style.display = "inline";
-
-  ReadHFPages();
-  async function ReadHFPages() {
-    const res = await fetch("/jsonSampleFile2");
-    const data = await res.json();
-    console.log("data", data);
-    // let HFarray = [],
-    //   matrice = [],
-    //   batchNbr = [];
-    // const arrayHFSmallDimension = await fetch("/arrayHFSmall");
-    // var dimension = await arrayHFSmallDimension.text();
-    // dimension = parseInt(dimension);
-    // //console.log("dimension", dimension);
-    // if (dimension > 5) {
-    //   alert("Max 5 pagine. Si deve 'splittare' il file pdf");
-    // }
-    // for (let i = 0; i < dimension; i++) {
-    //   const fileToFetch = "/HFoutput" + i.toString();
-    //   const readHF = await fetch(fileToFetch);
-    //   var dataHF = await readHF.json();
-    //   matrice.push(dataHF);
-    //   var test = matrice[i][0][1];
-    //   HFarray = test.split(",");
-    //   batchNbr.push(HFarray);
-    //   for (let ind = 0; ind < batchNbr[i].length; ind++) {
-    //     console.log("ind", matrice[i][3]);
-    //   }
-    // }
-    // console.log("test", matrice);
-    // console.log("HFarray", HFarray);
-  }
-}
-
-// async function ShNbr(dimension) {
-//   for (let i = 0; i < dimension; i++) {
-//     //Counter alimenta e salva il contatore di counter.txt
-//     const testResponse = await fetch("/apicounter");
-//     var dataTest = await testResponse.text();
-//     //console.log("dataTest1", dataTest);
-//     dataTest = parseInt(dataTest);
-//     dataTest++;
-//     var dt = new Date();
-//     var anno = dt.getFullYear().toString();
-//     anno = anno.substring(2, 4);
-//     if (dataTest < 10) {
-//       shipmentNumberHFSmall = "IT/000" + dataTest.toString() + "/" + anno;
-//     }
-//     if (dataTest >= 10 && dataTest < 100) {
-//       shipmentNumberHFSmall = "IT/00" + dataTest.toString() + "/" + anno;
-//     }
-//     if (dataTest >= 100 && dataTest < 1000) {
-//       shipmentNumberHFSmall = "IT/0" + dataTest.toString() + "/" + anno;
-//     }
-//     if (dataTest >= 1000) {
-//       shipmentNumberHFSmall = "IT/" + dataTest.toString() + "/" + anno;
-//     }
-//     if (dataTest > 10000) {
-//       alert("reset counter.txt file");
-//     }
-//     shNbrHFSmall.push(shipmentNumberHFSmall);
-
-//     datacounter = { dataTest };
-//     const optionCounter = {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(datacounter),
-//     };
-//     const myresponse = await fetch("/newcounter", optionCounter);
-//     var myjson = await myresponse.text();
-//     //console.log("myJson", myjson);
-//     return shNbrHFSmall;
-//   }
-// }
-//   var manHBr = data[2][2];
-//   manHBr = manHBr.replaceAll(".", "-");
-//   const monthMan = parseInt(manHBr.substring(3, 5)) - 1;
-//   const monthNameMan = [
-//     "Jan",
-//     "Feb",
-//     "Mar",
-//     "Apr",
-//     "May",
-//     "Jun",
-//     "Jul",
-//     "Aug",
-//     "Sep",
-//     "Oct",
-//     "Nov",
-//     "Dec",
-//   ];
-//   manHBr =
-//     manHBr.substring(0, 2) +
-//     "-" +
-//     monthNameMan[monthMan] +
-//     "-" +
-//     manHBr.substring(6, 11);
-//   var shipDateHBr = manHBr;
-//   var yearExp = parseInt(manHBr.substring(7, 11));
-//   var monthExp = monthMan + 6;
-//   let expHBr;
-//   if (monthExp <= 12) {
-//     expHBr =
-//       manHBr.substring(0, 2) +
-//       "-" +
-//       monthNameMan[monthExp] +
-//       "-" +
-//       manHBr.substring(7, 11);
-//   }
-//   if (monthExp > 12) {
-//     monthExp = monthExp - 12;
-//     yearExp = yearExp + 1;
-//     expHBr =
-//       manHBr.substring(0, 2) + "-" + monthNameMan[monthExp] + "-" + yearExp;
-//   }
-//   var lotNumberHBr = data[17][1];
-//   var FevalueHBr = "0.8";
-//   var CO2valueHBr = "3.0";
-//   var COvalueHBr = "0.8";
-//   var HClvalueHBr = "500";
-//   var H2OvalueHBr = "0.8";
-//   var N2valueHBr = "1.5";
-//   var O2valueHBr = "0.8";
-//   var THCvalueHBr = "0.8";
-//   var HBrData = {
-//     shipmentNumber: shipmentNumberHBr,
-//     shipmentdate: shipDateHBr,
-//     lotNumber: lotNumberHBr,
-//     expiryDate: expHBr,
-//     manDate: manHBr,
-//     Fevalue: FevalueHBr,
-//     CO2value: CO2valueHBr,
-//     COvalue: COvalueHBr,
-//     HClvalue: HClvalueHBr,
-//     H2Ovalue: H2OvalueHBr,
-//     N2value: N2valueHBr,
-//     O2value: O2valueHBr,
-//     THCvalue: THCvalueHBr,
-//   };
-//   console.log("all data", HBrData);
-//}
-
-//   // posto i dati per compilare file xlm
-
-//   const HBroptions = {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(HBrData),
-//   };
-//   const myresponseHBr = await fetch("/apiHBr", HBroptions);
-//   var myjsonHBr = await myresponseHBr.json();
-//   //console.log(myjsonHBr);
-//   }
-// }
-
-// ---------------- END HF Medford 1.8Kg - Bombola Piccola --------------
-
-// Exercise for checkbox
-// var list = ["Car", "Bike", "Scooter"];
-// for (var value of list) {
-//   checkbox = document.createElement("input");
-//   checkbox.type = "checkbox";
-//   //checkbox.id = `${value}`;
-//   checkbox.id = value;
-//   checkbox.name = "cylinderNumber";
-//   checkbox.value = value;
-//   checkbox.style = "margin-left:20px; margin-right:10px";
-//   label = document.createElement("label");
-//   label.htmlFor = value;
-//   label.appendChild(document.createTextNode(`${value}`));
-//   var br = document.createElement("br");
-//   var container = document.getElementById("container");
-//   container.appendChild(checkbox);
-//   container.appendChild(label);
-//   container.appendChild(br);
-// }
-
-// function getCheckedCheckboxesFor(checkboxName) {
-//   var checkboxes = document.querySelectorAll(
-//     'input[name="' + checkboxName + '"]:checked'
-//   );
-//   Array.prototype.forEach.call(checkboxes, function (el) {
-//     values.push(el.value);
-//   });
-//   console.log("Cyl selected", values);
-// }

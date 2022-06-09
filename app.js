@@ -1710,6 +1710,134 @@ app.post("/apiHF18US", (req, res) => {
   zipHFUS.writeZip(/*target file name*/ "filesHFUS.zip");
 });
 
+app.post("/apiHF36US", (req, res) => {
+  const dataHFUSPost = req.body;
+  //console.log("dataHFUSPost", dataHFUSPost);
+  var zipHFUS = new AdmZip();
+  for (let id = 0; id < dataHFUSPost.filetext.length; id++) {
+    xw = new XMLWriter(true);
+    xw.startDocument("1.0", "UTF-8");
+    xw.startElement("GasesShipment");
+    xw.writeAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+    xw.writeAttribute(
+      "xsi:noNamespaceSchemaLocation",
+      "3GASCB78_DM00650121_06.xsd"
+    );
+    xw.writeAttribute("MaterialCode", "3GASCB78");
+    xw.writeAttribute("SupplierHoldingDesc", "LINDE PLC");
+    xw.writeAttribute("ReceivingStPlant", "Agrate");
+    xw.writeAttribute("MpsSpecNo", "DM00650121_06");
+    xw.writeAttribute("MpsSpecRev", "1.0");
+    xw.writeAttribute("ShipmentDate", dataHFUSPost.shipment[id]);
+    xw.writeAttribute("ShipmentNumber", dataHFUSPost.progressivoHF[id]);
+    xw.writeAttribute("ShipQty", 1);
+    xw.startElement("Lot");
+    xw.writeAttribute(
+      "SupplierSupplyChainSeqCode",
+      "LINDE PLC-WHITE CITY (MEDFORD)-291"
+    );
+    xw.writeAttribute("ShipLotNo", dataHFUSPost.lotNumber[id]);
+    xw.writeAttribute("ExpiryDate", dataHFUSPost.expiryDate[id]);
+    xw.writeAttribute("MfgDate", dataHFUSPost.manDate[id]);
+    xw.writeAttribute("LotQty", 1);
+
+    xw.startElement("DIM_DIM_Acidity_as_HF");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.acid2HF[id]);
+    xw.endElement();
+    xw.endElement("DIM_Acidity_as_HF ");
+
+    xw.startElement("DIM_Arsenic_As");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.AsHF[id]);
+    xw.endElement();
+    xw.endElement("DIM_Arsenic_As");
+
+    xw.startElement("DIM_Chloride_CL");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.Cl2HF[id]);
+    xw.endElement();
+    xw.endElement("DIM_Chloride_CL");
+
+    xw.startElement("DIM_Copper_Cu");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.CuHF[id]);
+    xw.endElement();
+    xw.endElement("DIM_Copper_Cu");
+
+    xw.startElement("DIM_Fluorosilicic_Acid_H2Si2F6");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.FHF[id]);
+    xw.endElement();
+    xw.endElement("DIM_Fluorosilicic_Acid_H2Si2F6");
+
+    xw.startElement("DIM_Hydrogen_fluoride_HF");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.HFHF[id]);
+    xw.endElement();
+    xw.endElement("DIM_Hydrogen_fluoride_HF");
+
+    xw.startElement("DIM_Iron_Fe");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.FeHF[id]);
+    xw.endElement();
+    xw.endElement("DIM_Iron_Fe");
+
+    xw.startElement("DIM_Lead_Pb");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.PbHF[id]);
+    xw.endElement();
+    xw.endElement("DIM_Lead_Pb");
+
+    xw.startElement("DIM_Moisture_H2O");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.H2OHF[id]);
+    xw.endElement();
+    xw.endElement("DIM_Moisture_H2O");
+
+    xw.startElement("DIM_Nickel_Ni");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.NiHF[id]);
+    xw.endElement();
+    xw.endElement("DIM_Nickel_Ni");
+
+    xw.startElement("DIM_Potassium_K");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.KHF[id]);
+    xw.endElement();
+    xw.endElement("DIM_Potassium_K");
+
+    xw.startElement("DIM_Sodium_Na");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.NaHF[id]);
+    xw.endElement();
+    xw.endElement("DIM_Sodium_Na");
+
+    xw.startElement("DIM_Sulfur_dioxide_SO2");
+    xw.startElement("RAW");
+    xw.writeAttribute("VALUE", dataHFUSPost.SO2HF[id]);
+    xw.endElement();
+    xw.endElement("DIM_Sulfur_dioxide_SO2");
+
+    xw.endDocument();
+
+    //console.log("xw", xw.toString());
+
+    try {
+      var fileToBeDownloaded = dataHFUSPost.filetext[id];
+      fileToBeDownloaded = fileToBeDownloaded.replace("/", "-");
+      fileToBeDownloaded = fileToBeDownloaded + ".xml";
+      //console.log("file to be dw", fileToBeDownloaded);
+      fs.writeFileSync(fileToBeDownloaded, xw.toString());
+      zipHFUS.addLocalFile(fileToBeDownloaded);
+    } catch (e) {
+      console.log("Error:", e.stack);
+    }
+  }
+  fs.writeFileSync("sourcename.txt", "HF36US");
+  zipHFUS.writeZip(/*target file name*/ "filesHFUS.zip");
+});
+
 app.get("/download", function (req, res) {
   var sourceName = fs.readFileSync("sourcename.txt", "utf-8");
   //console.log("sourcename", sourceName);
@@ -1859,6 +1987,16 @@ app.get("/download", function (req, res) {
     });
   }
   if (sourceName === "HF18US") {
+    res.download("filesHFUS.zip", function (err) {
+      if (err) {
+        console.log("file not downloaded");
+      } else {
+        console.log("Download succesfull");
+      }
+    });
+  }
+
+  if (sourceName === "HF36US") {
     res.download("filesHFUS.zip", function (err) {
       if (err) {
         console.log("file not downloaded");
