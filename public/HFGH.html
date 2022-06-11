@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-eclsquiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+
+    <title>Hydrogen Fluoride Gerling Holz eCOA Page</title>
+    <script src="index.js"></script>
+    <script src="HFGH.js"></script>
+  </head>
+
+  <body>
+    <div style="padding-left: 20px; padding-top: 15px">
+      <h2>HF 3GASCC21 Gerling Holz eCOA Page</h2>
+      <br />
+    </div>
+    <br />
+
+    <div style="margin-left: 20px; color: blue">
+      <label for="HFHGCylinders"
+        >Scrivi i Cylinders # <u>separati da una virgola</u>
+      </label>
+
+      <div class="input-group">
+        <input
+          id="HFHGCylinders"
+          required="required"
+          style="height: 40px; border-radius: 5px; border-color: lightblue"
+        />
+      </div>
+
+      <label for="ManDateHFGH"> Manufacturing Date </label>
+
+      <div class="input-group">
+        <input
+          type="date"
+          id="ManDateHFGH"
+          required="required"
+          style="
+            height: 40px;
+            width: 187px;
+            border-radius: 5px;
+            border-color: lightblue;
+          "
+        />
+      </div>
+      <br />
+
+      <button
+        class="btn btn-primary"
+        onclick="HFHGCylinders()"
+        style="margin-left: 10px"
+        id="btnInvia"
+      >
+        Invia tutto
+      </button>
+    </div>
+    <br />
+    <p id="testoCorretto" style="margin-left: 20px; color: blue"></p>
+    <button
+      class="btn btn-primary"
+      onclick="HFGHLines()"
+      style="margin-left: 10px; display: none"
+      id="btnCorretto"
+    >
+      Clicca qui se corretto
+    </button>
+    <button
+      class="btn btn-primary"
+      onclick="window.open('HFGH.html', '_blank').focus();"
+      style="margin-left: 10px; display: none"
+      id="btnNonCorretto"
+    >
+      Clicca qui se c'è qualcosa di sbagliato
+    </button>
+    <br /><br />
+
+    <div id="btndown" style="padding-left: 20px; display: none">
+      <a href="\download" class="btn btn-primary">
+        Click here to download the xml file
+      </a>
+      <br /><br />
+    </div>
+
+    <!-- End download button -->
+    <!-- Home button -->
+    <button
+      id="btnHome"
+      onclick="goHome()"
+      style="margin-left: 20px; display: none"
+      class="btn btn-primary"
+    >
+      Reset and upload another file
+    </button>
+    <!-- end home button -->
+
+    <script>
+      function goHome() {
+        window.location.href = "index.html";
+      }
+    </script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

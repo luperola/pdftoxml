@@ -11,8 +11,13 @@ function C4F8(receivingPlant) {
   document.getElementById("CSPage").style.display = "none";
   document.getElementById("NOTaulovPage").style.display = "none";
   document.getElementById("btndropdown").style.display = "none";
+  document.getElementById("CSPage").style.display = "none";
+  document.getElementById("NOTaulovPage").style.display = "none";
   document.getElementById("TCSPage").style.display = "none";
   document.getElementById("HBrPage").style.display = "none";
+  document.getElementById("HF18USPage").style.display = "none";
+  document.getElementById("HF36USPage").style.display = "none";
+  document.getElementById("HFGHPage").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
   ReadFileJson();

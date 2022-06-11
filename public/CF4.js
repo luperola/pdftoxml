@@ -4,6 +4,9 @@ function CF4() {
   document.getElementById("NOTaulovPage").style.display = "none";
   document.getElementById("TCSPage").style.display = "none";
   document.getElementById("HBrPage").style.display = "none";
+  document.getElementById("HF18USPage").style.display = "none";
+  document.getElementById("HF36USPage").style.display = "none";
+  document.getElementById("HFGHPage").style.display = "none";
   document.getElementById("btndown").style.display = "inline";
   document.getElementById("btnHome").style.display = "inline";
   ReadFileJson();
