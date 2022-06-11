@@ -1733,7 +1733,7 @@ app.post("/apiHF36US", (req, res) => {
 
     xw.startElement("DIM_DIM_Acidity_as_HF");
     xw.startElement("RAW");
-    xw.writeAttribute("VALUE", dataHFUSPost.acid2HF[id]);
+    xw.writeAttribute("VALUE", dataHFUSPost.acidHF[id]);
     xw.endElement();
     xw.endElement("DIM_Acidity_as_HF ");
 
