@@ -799,7 +799,7 @@ app.post("/apiNOTaulov", (req, res) => {
 //-----------POST from HF Gerling Holz----------------
 app.post("/apiHFGerling", (req, res) => {
   const dataHF = req.body;
-  console.log(dataHF);
+  //console.log(dataHF);
   var zipHF = new AdmZip();
   for (let i = 0; i < dataHF.lotNumber.length; i++) {
     xw = new XMLWriter(true);

@@ -99,7 +99,7 @@ function HFGHLines() {
     var year = manDateHFGH.substring(0, 4);
     var month = manDateHFGH.substring(5, 7);
     var day = manDateHFGH.substring(8, 10);
-    console.log("day", day, " month", month, " year", year);
+
     manDateHFGH = day + "-" + monthNameMan[parseInt(month) - 1] + "-" + year;
     expDataHF =
       day +

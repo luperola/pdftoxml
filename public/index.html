@@ -25,6 +25,117 @@
   <body>
     <!-- post the file -->
     <h1 style="padding-left: 20px">From .pdf file to .xml file</h1>
+    <br />
+
+    <div>
+      <p
+        id="instructions"
+        style="
+          color: blue;
+          margin-left: 20px;
+          font-style: italic;
+          display: inline;
+        "
+      >
+        <span
+          >I PNs sotto hanno eCOA dedicato - Clicca sul relativo button per
+          proseguire
+        </span>
+        <br />
+        <span style="margin-left: 20px">
+          <u
+            >Per tutti gli altri prodotti clicca 'Scegli file', fai upload del
+            file .pdf e poi scegli il PN dalla 'Supplier List'</u
+          >
+        </span>
+        <br />
+      </p>
+    </div>
+    <div
+      class="container"
+      id="contenitore"
+      style="padding-top: 30px; padding-left: 20px"
+    >
+      <div class="row">
+        <div class="col-sm">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            id="CSPage"
+            onclick="window.open('CS.html', '_blank').focus();"
+          >
+            Chlorgas eCOA Page
+          </button>
+          <br />
+          <br />
+          <button
+            type="button"
+            class="btn btn-secondary"
+            id="TCSPage"
+            style="margin-left: 20px"
+            onclick="window.open('TCS.html', '_blank').focus();"
+          >
+            TCS eCOA Page
+          </button>
+        </div>
+        <div class="col-sm">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            id="NOTaulovPage"
+            style="margin-left: 20px"
+            onclick="window.open('NO.html', '_blank').focus();"
+          >
+            NO eCOA Page
+          </button>
+          <br />
+          <br />
+          <button
+            type="button"
+            class="btn btn-secondary"
+            id="HBrPage"
+            style="margin-left: 20px"
+            onclick="window.open('HBr.html', '_blank').focus();"
+          >
+            HBr eCOA Page
+          </button>
+        </div>
+        <div class="col-sm">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            id="HF18USPage"
+            style="margin-left: 20px"
+            onclick="window.open('HF18US.html', '_blank').focus();"
+          >
+            HF 1.8Kg 3GASC254 eCOA Page
+          </button>
+          <br />
+          <br />
+          <button
+            type="button"
+            class="btn btn-secondary"
+            id="HF36USPage"
+            style="margin-left: 20px"
+            onclick="window.open('HF36US.html', '_blank').focus();"
+          >
+            HF 3.6Kg 3GASCB78 eCOA Page
+          </button>
+          <br />
+          <br />
+          <button
+            type="button"
+            class="btn btn-secondary"
+            id="HFGHPage"
+            style="margin-left: 20px"
+            onclick="window.open('HFGH.html', '_blank').focus();"
+          >
+            HF 3GASCC21 Gerling Holz eCOA Page
+          </button>
+        </div>
+      </div>
+    </div>
+
     <form
       method="POST"
       action="/upload"
@@ -43,28 +154,7 @@
     </form>
     <br />
     <!-- dropdown menu -->
-    <div>
-      <p
-        id="instructions"
-        style="
-          color: blue;
-          margin-left: 20px;
-          font-style: italic;
-          display: inline;
-        "
-      >
-        <span>Prima fai upload del file poi scegli il supplier</span>
-        <br />
-        <span style="margin-left: 20px">
-          <u
-            >Per Chlorgas, TCS Burghausen, NO Taulov e HBr clicca il relativo
-            button (sotto)</u
-          >
-        </span>
-        <br />
-      </p>
-    </div>
-    <br />
+
     <div
       id="btndropdown"
       class="btn-group"
@@ -165,7 +255,7 @@
               >
             </li>
             <li>
-              <a class="list-item" href="#" onclick="HFGH()"
+              <a class="list-item" href="HFGH.html"
                 ><span>HF Gerling Holz</span></a
               >
             </li>
@@ -201,74 +291,6 @@
     <!-- end dropdown -->
 
     <!-- button to open Chlorgas Instruction modal -->
-    <button
-      type="button"
-      class="btn btn-secondary"
-      id="CSPage"
-      onclick="window.open('CS.html', '_blank').focus();"
-    >
-      Chlorgas eCOA Page
-    </button>
-
-    <button
-      type="button"
-      class="btn btn-secondary"
-      id="TCSPage"
-      style="margin-left: 20px"
-      onclick="window.open('TCS.html', '_blank').focus();"
-    >
-      TCS eCOA Page
-    </button>
-
-    <button
-      type="button"
-      class="btn btn-secondary"
-      id="NOTaulovPage"
-      style="margin-left: 20px"
-      onclick="window.open('NO.html', '_blank').focus();"
-    >
-      NO eCOA Page
-    </button>
-
-    <button
-      type="button"
-      class="btn btn-secondary"
-      id="HBrPage"
-      style="margin-left: 20px"
-      onclick="window.open('HBr.html', '_blank').focus();"
-    >
-      HBr eCOA Page
-    </button>
-
-    <button
-      type="button"
-      class="btn btn-secondary"
-      id="HF18USPage"
-      style="margin-left: 20px"
-      onclick="window.open('HF18US.html', '_blank').focus();"
-    >
-      HF 1.8Kg 3GASC254 eCOA Page
-    </button>
-
-    <button
-      type="button"
-      class="btn btn-secondary"
-      id="HF36USPage"
-      style="margin-left: 20px"
-      onclick="window.open('HF18US.html', '_blank').focus();"
-    >
-      HF 3.6Kg 3GASCB78 eCOA Page
-    </button>
-
-    <button
-      type="button"
-      class="btn btn-secondary"
-      id="HFGHPage"
-      style="margin-left: 20px"
-      onclick="window.open('HFGH.html', '_blank').focus();"
-    >
-      HF 3GASCC21 Gerling Holz eCOA Page
-    </button>
 
     <!-- <button
       type="button"
