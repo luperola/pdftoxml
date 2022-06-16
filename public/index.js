@@ -33,295 +33,6 @@ if (dd < 10) dd = "0" + dd;
 today = dd + "-" + monthNameMan[mm] + "-" + yyyy;
 //console.log("Oggi", today);
 
-// // ---------------- HF GERLING HOLZ -----------------
-// let values = [],
-//   H2SiF6array = [],
-//   SO2array = [],
-//   H2SO4array = [],
-//   H2Oarray = [],
-//   arrayCasual = [],
-//   cylNumbers = [],
-//   mfgDate = [],
-//   expDate = [],
-//   delDate = [],
-//   shNumHF = [],
-//   H2SiF6param = [],
-//   SO2param = [],
-//   H2SO4param = [],
-//   H2Oparam = [],
-//   shipmentNumberHFGH,
-//   manDateHFGH,
-//   expDataHF,
-//   cylQty,
-//   batchNbr,
-//   delDateHFGH,
-//   cylOne,
-//   cyltwo,
-//   cylThree,
-//   cylFour,
-//   cylFive,
-//   cylSix,
-//   cylSeven,
-//   cylEight;
-
-// // async function getCheckedCheckboxesFor(checkboxName) {
-// //   var checkboxes = document.querySelectorAll(
-// //     'input[name="' + checkboxName + '"]:checked'
-// //   );
-// //   Array.prototype.forEach.call(checkboxes, function (el) {
-// //     values.push(el.value);
-// //   });
-// //   console.log("Cyl selected", values);
-// // }
-
-// function HFGH() {
-//   document.getElementById("dataHF").style.display = "inline";
-//   document.getElementById("CSPage").style.display = "none";
-//   document.getElementById("NOTaulovPage").style.display = "none";
-//   document.getElementById("TCSPage").style.display = "none";
-//   document.getElementById("HBrPage").style.display = "none";
-//   document.getElementById("HF18USPage").style.display = "none";
-//   document.getElementById("HF36USPage").style.display = "none";
-//   document.getElementById("HFGHPage").style.display = "none";
-//   document.getElementById("cylDelivered").style.display = "none";
-//   document.getElementById("btndropdown").style.display = "none";
-//   document.getElementById("btndown").style.display = "inline";
-//   document.getElementById("btnHome").style.display = "inline";
-// }
-// function manDateHF() {
-//   manDateHFGH = document.getElementById("start").value;
-//   const monthMan = parseInt(manDateHFGH.substring(5, 7)) - 1;
-//   const monthNameMan = [
-//     "Jan",
-//     "Feb",
-//     "Mar",
-//     "Apr",
-//     "May",
-//     "Jun",
-//     "Jul",
-//     "Aug",
-//     "Sep",
-//     "Oct",
-//     "Nov",
-//     "Dec",
-//   ];
-//   manDateHFGH =
-//     manDateHFGH.substring(8, 11) +
-//     "-" +
-//     monthNameMan[monthMan] +
-//     "-" +
-//     manDateHFGH.substring(0, 4);
-
-//   expDataHF = parseInt(manDateHFGH.substring(7, 11)) + 1;
-//   expDataHF =
-//     manDateHFGH.substring(0, 2) +
-//     "-" +
-//     monthNameMan[monthMan] +
-//     "-" +
-//     expDataHF;
-//   document.getElementById("dataHF").style.display = "none";
-//   document.getElementById("deliveryDate").style.display = "inline";
-// }
-// function delDateHF() {
-//   delDateHFGH = document.getElementById("delivery").value;
-//   const monthMan1 = parseInt(delDateHFGH.substring(5, 7)) - 1;
-//   const monthNameMan1 = [
-//     "Jan",
-//     "Feb",
-//     "Mar",
-//     "Apr",
-//     "May",
-//     "Jun",
-//     "Jul",
-//     "Aug",
-//     "Sep",
-//     "Oct",
-//     "Nov",
-//     "Dec",
-//   ];
-//   delDateHFGH =
-//     delDateHFGH.substring(8, 11) +
-//     "-" +
-//     monthNameMan1[monthMan1] +
-//     "-" +
-//     delDateHFGH.substring(0, 4);
-//   document.getElementById("deliveryDate").style.display = "none";
-//   document.getElementById("cylDelivered").style.display = "inline";
-// }
-
-// function cylQtyHF() {
-//   cylQty = document.getElementById("nbrCyl").value;
-//   document.getElementById("cylDelivered").style.display = "none";
-//   document.getElementById("nbrCyl").style.display = "none";
-//   document.getElementById("batch").style.display = "inline";
-// }
-// function batchHF() {
-//   batchNbr = document.getElementById("batchNbr").value;
-//   document.getElementById("cyl1").style.display = "inline";
-//   document.getElementById("batch").style.display = "none";
-// }
-// function cylOneHF() {
-//   cylOne = document.getElementById("cylOne").value;
-//   cylNumbers.push(cylOne);
-//   document.getElementById("cyl1").style.display = "none";
-//   document.getElementById("cyl2").style.display = "inline";
-//   document.getElementById("HF").style.display = "inline";
-// }
-// function cylTwoHF() {
-//   cylTwo = document.getElementById("cylTwo").value;
-//   cylNumbers.push(cylTwo);
-//   document.getElementById("cyl2").style.display = "none";
-//   document.getElementById("cyl3").style.display = "inline";
-// }
-// function cylThreeHF() {
-//   cylThree = document.getElementById("cylThree").value;
-//   cylNumbers.push(cylThree);
-//   document.getElementById("cyl3").style.display = "none";
-//   document.getElementById("cyl4").style.display = "inline";
-// }
-// function cylFourHF() {
-//   cylFour = document.getElementById("cylFour").value;
-//   cylNumbers.push(cylFour);
-//   document.getElementById("cyl4").style.display = "none";
-//   document.getElementById("cyl5").style.display = "inline";
-// }
-// function cylFiveHF() {
-//   cylFive = document.getElementById("cylFive").value;
-//   cylNumbers.push(cylFive);
-//   document.getElementById("cyl5").style.display = "none";
-//   document.getElementById("cyl6").style.display = "inline";
-// }
-// function cylSixHF() {
-//   cylSix = document.getElementById("cylSix").value;
-//   cylNumbers.push(cylSix);
-//   document.getElementById("cyl6").style.display = "none";
-//   document.getElementById("cyl7").style.display = "inline";
-// }
-// function cylSevenHF() {
-//   cylSeven = document.getElementById("cylSeven").value;
-//   cylNumbers.push(cylSeven);
-//   document.getElementById("cyl7").style.display = "none";
-//   document.getElementById("cyl8").style.display = "inline";
-// }
-// function cylEightHF() {
-//   cylEight = document.getElementById("cylEight").value;
-//   cylNumbers.push(cylEight);
-//   document.getElementById("cyl8").style.display = "none";
-// }
-
-// async function HFData() {
-//   for (let i = 1; i < 8; i++) {
-//     document.getElementById("cyl" + i.toString()).style.display = "none";
-//   }
-//   document.getElementById("HF").style.display = "none";
-//   //Counter alimenta e salva il contatore di counter.txt
-//   for (let i = 0; i < cylNumbers.length; i++) {
-//     mfgDate.push(manDateHFGH);
-//     expDate.push(expDataHF);
-//     delDate.push(delDateHFGH);
-//     const testResponse = await fetch("/apicounter");
-//     var dataTest = await testResponse.text();
-//     //console.log("dataTest1", dataTest);
-//     dataTest = parseInt(dataTest);
-//     dataTest++;
-//     var dt = new Date();
-//     var anno = dt.getFullYear().toString();
-//     anno = anno.substring(2, 4);
-
-//     if (dataTest < 10) {
-//       shipmentNumberHFGH = "IT/000" + dataTest.toString() + "/" + anno;
-//     }
-//     if (dataTest >= 10 && dataTest < 100) {
-//       shipmentNumberHFGH = "IT/00" + dataTest.toString() + "/" + anno;
-//     }
-//     if (dataTest >= 100 && dataTest < 1000) {
-//       shipmentNumberHFGH = "IT/0" + dataTest.toString() + "/" + anno;
-//     }
-//     if (dataTest >= 1000) {
-//       shipmentNumberHFGH = "IT/" + dataTest.toString() + "/" + anno;
-//     }
-//     if (dataTest > 10000) {
-//       alert("reset counter.txt file");
-//     }
-//     shNumHF.push(shipmentNumberHFGH);
-//     datacounter = { dataTest };
-//     const optionCounter = {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(datacounter),
-//     };
-//     const myresponse = await fetch("/newcounter", optionCounter);
-//     var myjson = await myresponse.text();
-//     //console.log("myJson", myjson);
-
-//     //console.log("mfg", mfgDate, "exp", expDate, "del", delDate, "sh#", shNumHF);
-//     // let H2SiF6array = [
-//     //   6.8, 5.6, 8.8, 6, 7.6, 9.6, 5.6, 7.2, 7.6, 8.8, 7.2, 6.4, 5.6, 6, 9.2, 6,
-//     //   6, 9.6, 7.6, 5.2, 7.2, 9.6, 6, 10.4, 9.6, 6.8, 7.2, 9.2, 6, 7.6, 10, 8,
-//     //   7.6, 6, 9.6, 6, 6.8, 7.6, 8.8, 6.8, 10, 7.6, 7.6, 6.4, 9.2, 6.8, 9.6, 8.4,
-//     //   7.6, 10.4, 8.8, 5.6, 5.6, 7.2, 9.6, 7.2, 6,
-//     // ];
-//     // SO2array = [
-//     //   6, 4, 3.5, 3, 3, 4, 4.5, 2.5, 3, 6, 4, 2.5, 3, 3.5, 6, 4, 2.5, 3.5, 2.5,
-//     //   3.5, 3, 4.5, 6, 4.5, 3.5, 4.5, 6, 3.5, 2.5, 2.5, 3.5, 4, 6.5, 5.5, 3.5,
-//     //   2.5, 6, 3.5, 4.5, 5, 4.5, 2.5, 4, 5.5, 4.5, 3.5, 5, 6.5, 4.5, 3.5, 2.5, 3,
-//     //   4.5, 3.5, 3, 6.5, 5,
-//     // ];
-//     // (H2SO4array = [
-//     //   61.25, 41.25, 35, 23.75, 32.5, 38.75, 46.25, 18.75, 26.25, 60, 42.5, 20,
-//     //   31.25, 33.75, 61.25, 40, 23.75, 35, 21.25, 35, 27.5, 45, 57.5, 47.5,
-//     //   26.25, 48.75, 58.75, 31.25, 22.5, 18.75, 36.25, 42.5, 65, 53.75, 30,
-//     //   21.25, 61.25, 27.5, 43.75, 51.25, 43.75, 23.75, 41.25, 57.5, 47.5, 32.5,
-//     //   48.75, 65, 43.75, 32.5, 20, 27.5, 47.5, 35, 26.25, 63.75, 50,
-//     // ]),
-//     //   (H2Oarray = [
-//     //     27, 30.6, 44.2, 26.4, 25.6, 43, 23.4, 28.2, 42.4, 36.2, 23, 30.4, 35,
-//     //     39.8, 42, 37.2, 20.4, 36, 40, 29.8, 44.2, 34.8, 25, 37, 45, 38.6, 25.8,
-//     //     43, 44.6, 41.6, 37.2, 21, 24.4, 30.4, 21.6, 44.2, 20, 25.8, 39.6, 42.2,
-//     //     35.2, 24.6, 31.2, 42.4, 28.6, 24, 45.2, 36.2, 40.4, 49.6, 34, 24.4,
-//     //     36.4, 41.2, 38.4, 35.6, 29,
-//     //   ]);
-//     // // random choise of the parameter
-//     // const random = Math.floor(Math.random() * 57);
-//     // H2SiF6param.push(H2SiF6array[random]);
-//     // SO2param.push(SO2array[random]);
-//     // H2SO4param.push(H2SO4array[random]);
-//     // H2Oparam.push(H2Oarray[random]);
-//   }
-
-//   var HFGerlingData = {
-//     lotNumber: batchNbr,
-//     qty: cylQty,
-//     shipmentNumber: shNumHF,
-//     shipmentdate: delDate,
-//     expiryDate: expDate,
-//     filename: cylNumbers,
-//     manDate: mfgDate,
-//     // H2SiF6value: H2SiF6param,
-//     // SO2value: SO2param,
-//     // H2SO4value: H2SO4param,
-//     // H2Ovalue: H2Oparam,
-//   };
-//   console.log("DatiHF", HFGerlingData);
-
-//   //  posto i dati per compilare file xlm
-
-//   const HFoptions = {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(HFGerlingData),
-//   };
-//   const myresponseHF = await fetch("/apiHFGerling", HFoptions);
-//   var myjsonHF = await myresponseHF.json();
-//   //console.log(myjsonHF);
-// }
-
-// // ---------------- END HF GERLING HOLZ -----------------
-
 //---------------- F2KrNe 3GASC948 AGR + CAT ----------------------
 function F2KrNeAGR() {
   var receivingPlant = "Agrate";
@@ -827,153 +538,179 @@ function KrNe(receivingPlant) {
 
 //---------------- END Kr/Ne 3GASN997 to AGR & CAT ----------------------
 
-//---------------- Ar/ Xe/ Ne 3GASN934 to CAT ----------------------
+//---------------- Ar/ Xe/ Ne 3GASN934 to AGR ----------------------
 
 function ArXeNe() {
-  alert("in costruzione");
-  // document.getElementById("btndropdown").style.display = "none";
-  // document.getElementById("CSPage").style.display = "none";
-  // document.getElementById("NOTaulovPage").style.display = "none";
-  // document.getElementById("TCSPage").style.display = "none";
-  // document.getElementById("HBrPage").style.display = "none";
-  // document.getElementById("HF18USPage").style.display = "none";
-  //document.getElementById("HF36USPage").style.display = "none";
-  // //document.getElementById("modalCS").style.display = "none";
-  // document.getElementById("btndown").style.display = "inline";
-  // document.getElementById("btnHome").style.display = "inline";
-  // ReadFileJson();
-  // async function ReadFileJson() {
-  //   const res = await fetch("/jsonSampleFile2");
-  //   const data = await res.json();
-  //   console.log("data", data);
+  document.getElementById("btndropdown").style.display = "none";
+  document.getElementById("CSPage").style.display = "none";
+  document.getElementById("NOTaulovPage").style.display = "none";
+  document.getElementById("TCSPage").style.display = "none";
+  document.getElementById("HBrPage").style.display = "none";
+  document.getElementById("HF18USPage").style.display = "none";
+  document.getElementById("HF36USPage").style.display = "none";
+  document.getElementById("HFGHPage").style.display = "none";
+  document.getElementById("btndown").style.display = "inline";
+  document.getElementById("btnHome").style.display = "inline";
+  ReadFileJson();
+  async function ReadFileJson() {
+    const res = await fetch("/jsonSampleFile2");
+    const data = await res.json();
+    console.log("data", data);
 
-  //   //Counter alimenta e salva il contatore di counter.txt
-  //   const testResponse = await fetch("/apicounter");
-  //   var dataTest = await testResponse.text();
-  //   //console.log("dataTest1", dataTest);
-  //   dataTest = parseInt(dataTest);
-  //   dataTest++;
-  //   var dt = new Date();
-  //   var anno = dt.getFullYear().toString();
-  //   anno = anno.substring(2, 4);
-  //   if (dataTest < 10) {
-  //     shipmentNumberArXeNe = "IT/000" + dataTest.toString() + "/" + anno;
-  //   }
-  //   if (dataTest >= 10 && dataTest < 100) {
-  //     shipmentNumberArXeNe = "IT/00" + dataTest.toString() + "/" + anno;
-  //   }
-  //   if (dataTest >= 100 && dataTest < 1000) {
-  //     shipmentNumberArXeNe = "IT/0" + dataTest.toString() + "/" + anno;
-  //   }
-  //   if (dataTest >= 1000) {
-  //     shipmentNumberArXeNe = "IT/" + dataTest.toString() + "/" + anno;
-  //   }
-  //   if (dataTest > 10000) {
-  //     alert("reset counter.txt file");
-  //   }
-  //   datacounter = { dataTest };
-  //   const optionCounter = {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(datacounter),
-  //   };
-  //   const myresponse = await fetch("/newcounter", optionCounter);
-  //   var myjson = await myresponse.text();
-  //console.log("myJson", myjson);
+    //Counter alimenta e salva il contatore di counter.txt
+    const testResponse = await fetch("/apicounter");
+    var dataTest = await testResponse.text();
+    //console.log("dataTest1", dataTest);
+    dataTest = parseInt(dataTest);
+    dataTest++;
+    var dt = new Date();
+    var anno = dt.getFullYear().toString();
+    anno = anno.substring(2, 4);
+    if (dataTest < 10) {
+      shipmentNumberArXeNe = "IT/000" + dataTest.toString() + "/" + anno;
+    }
+    if (dataTest >= 10 && dataTest < 100) {
+      shipmentNumberArXeNe = "IT/00" + dataTest.toString() + "/" + anno;
+    }
+    if (dataTest >= 100 && dataTest < 1000) {
+      shipmentNumberArXeNe = "IT/0" + dataTest.toString() + "/" + anno;
+    }
+    if (dataTest >= 1000) {
+      shipmentNumberArXeNe = "IT/" + dataTest.toString() + "/" + anno;
+    }
+    if (dataTest > 10000) {
+      alert("reset counter.txt file");
+    }
+    datacounter = { dataTest };
+    const optionCounter = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(datacounter),
+    };
+    const myresponse = await fetch("/newcounter", optionCounter);
+    var myjson = await myresponse.text();
+    //console.log("myJson", myjson);
 
-  // var manArXeNe = data[27][1];
-  // var expArXeNe = data[28][1];
-  // var shipDateArXeNe = manArXeNe;
-  // var lotNumberArXeNe = data[29][1];
-  // var fileNameKr = data[32][1];
-  // var CF4valueArXeNe = data[6][2];
-  // CF4valueArXeNe = CF4valueArXeNe.replace("<", "")
-  //   .replace("ppm", "")
-  //   .replace("DL", "");
-  // CF4valueArXeNe = CF4valueArXeNe.trim();
-  // var CO2valueArXeNe = data[12][2];
-  // CO2valueArXeNe = CO2valueArXeNe.replace("<", "")
-  //   .replace("ppm", "")
-  //   .replace("DL", "");
-  // CO2valueArXeNe = CO2valueArXeNe.trim();
-  // var COvalueArXeNe = data[7][2];
-  // COvalueArXeNe = COvalueArXeNe.replace("<", "")
-  //   .replace("ppm", "")
-  //   .replace("DL", "");
-  // COvalueArXeNe = COvalueArXeNe.trim();
-  // var KrAssay = data[2][4];
-  // KrAssay = KrAssay.replace("%", "");
-  // KrAssay = KrAssay.trim();
-  // var XevalueArXeNe = data[10][2];
-  // XevalueArXeNe = XevalueArXeNe.replace("<", "")
-  //   .replace("ppm", "")
-  //   .replace("DL", "");
-  // XevalueArXeNe = XevalueArXeNe.trim();
-  // var O2valueArXeNe = data[14][2];
-  // O2valueArXeNe = O2valueArXeNe.replace("<", "")
-  //   .replace("ppm", "")
-  //   .replace("DL", "");
-  // O2valueArXeNe = O2valueArXeNe.trim();
-  // var N2valueArXeNe = data[9][2];
-  // N2valueArXeNe = N2valueArXeNe.replace("<", "")
-  //   .replace("ppm", "")
-  //   .replace("DL", "");
-  // N2valueArXeNe = N2valueArXeNe.trim();
-  // var HevalueArXeNe = data[13][2];
-  // HevalueArXeNe = HevalueArXeNe.replace("<", "")
-  //   .replace("ppm", "")
-  //   .replace("DL", "");
-  // HevalueArXeNe = HevalueArXeNe.trim();
-  // var H2OvalueArXeNe = data[8][2];
-  // H2OvalueArXeNe = H2OvalueArXeNe.replace("<", "")
-  //   .replace("ppm", "")
-  //   .replace("DL", "");
-  // H2OvalueArXeNe = H2OvalueArXeNe.trim();
-  // var CH4valueArXeNe = data[11][2];
-  // CH4valueArXeNe = CH4valueArXeNe.replace("<", "")
-  //   .replace("ppm", "")
-  //   .replace("DL", "");
-  // CH4valueArXeNe = CH4valueArXeNe.trim();
+    var manArXeNe = data[31][1];
+    var expArXeNe = data[32][1];
+    var lotNumberArXeNe = data[33][1];
+    var fileNameArXeNe = data[36][1];
+    var CO2valueArXeNe = data[16][2];
+    CO2valueArXeNe = CO2valueArXeNe.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    CO2valueArXeNe = CO2valueArXeNe.trim();
 
-  // var ArXeNeData = {
-  //   filename: fileNameKr,
-  //   receivingPlant: receivingPlant,
-  //   shipmentNumber: shipmentNumberArXeNe,
-  //   shipmentdate: shipDateArXeNe,
-  //   lotNumber: lotNumberArXeNe,
-  //   expiryDate: expArXeNe,
-  //   manDate: manArXeNe,
-  //   CO2value: CO2valueArXeNe,
-  //   COvalue: COvalueArXeNe,
-  //   Xevalue: XevalueArXeNe,
-  //   O2value: O2valueArXeNe,
-  //   H2Ovalue: H2OvalueArXeNe,
-  //   CH4value: CH4valueArXeNe,
-  //   Krpercentvalue: KrAssay,
-  //   N2value: N2valueArXeNe,
-  //   Hevalue: HevalueArXeNe,
-  //   CF4value: CF4valueArXeNe,
-  // };
+    var COvalueArXeNe = data[11][2];
+    COvalueArXeNe = COvalueArXeNe.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    COvalueArXeNe = COvalueArXeNe.trim();
 
-  // console.log("all data", ArXeNeData);
+    var O2valueArXeNe = data[18][2];
+    O2valueArXeNe = O2valueArXeNe.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    O2valueArXeNe = O2valueArXeNe.trim();
 
-  // // posto i dati per compilare file xlm
+    var CH4valueArXeNe = data[15][2];
+    CH4valueArXeNe = CH4valueArXeNe.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    CH4valueArXeNe = CH4valueArXeNe.trim();
 
-  // const ArXeNeoptions = {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(ArXeNeData),
-  // };
-  // const myresponseArXeNe = await fetch("/apiArXeNe", ArXeNeoptions);
-  // var myjsonArXeNe = await myresponseArXeNe.json();
-  // //console.log(myjsonArXeNe);
-  //}
+    var totCH4valueArXeNe = data[14][2];
+    totCH4valueArXeNe = totCH4valueArXeNe
+      .replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    totCH4valueArXeNe = totCH4valueArXeNe.trim();
+
+    var NF3valueArXeNe = data[17][2];
+    NF3valueArXeNe = NF3valueArXeNe.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    NF3valueArXeNe = NF3valueArXeNe.trim();
+
+    var CF4valueArXeNe = data[10][2];
+    CF4valueArXeNe = CF4valueArXeNe.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    CF4valueArXeNe = CF4valueArXeNe.trim();
+
+    var N2valueArXeNe = data[13][2];
+    N2valueArXeNe = N2valueArXeNe.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    N2valueArXeNe = N2valueArXeNe.trim();
+
+    var ArAssay = data[2][4];
+    ArAssay = ArAssay.replace("%", "");
+    ArAssay = ArAssay.trim();
+
+    var HevalueArXeNe = data[9][2];
+    HevalueArXeNe = HevalueArXeNe.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    HevalueArXeNe = HevalueArXeNe.trim();
+
+    var H2OvalueArXeNe = data[8][2];
+    H2OvalueArXeNe = H2OvalueArXeNe.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    H2OvalueArXeNe = H2OvalueArXeNe.trim();
+
+    var COF2valueArXeNe = data[12][2];
+    COF2valueArXeNe = COF2valueArXeNe.replace("<", "")
+      .replace("ppm", "")
+      .replace("DL", "");
+    COF2valueArXeNe = COF2valueArXeNe.trim();
+
+    var XeAssay = data[3][4];
+    XeAssay = XeAssay.replace("ppm", "");
+    XeAssay = XeAssay.trim();
+
+    var ArXeNeData = {
+      filename: fileNameArXeNe,
+      shipmentNumber: shipmentNumberArXeNe,
+      shipmentdate: today,
+      lotNumber: lotNumberArXeNe,
+      expiryDate: expArXeNe,
+      manDate: manArXeNe,
+      CO2value: CO2valueArXeNe,
+      COvalue: COvalueArXeNe,
+      O2value: O2valueArXeNe,
+      H2Ovalue: H2OvalueArXeNe,
+      THCvalue: totCH4valueArXeNe,
+      CH4value: CH4valueArXeNe,
+      NF3value: NF3valueArXeNe,
+      Arpercentvalue: ArAssay,
+      N2value: N2valueArXeNe,
+      Hevalue: HevalueArXeNe,
+      CF4value: CF4valueArXeNe,
+      COF2value: COF2valueArXeNe,
+      Xepercentvalue: XeAssay,
+    };
+
+    console.log("all data", ArXeNeData);
+
+    // posto i dati per compilare file xlm
+
+    const ArXeNeoptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(ArXeNeData),
+    };
+    const myresponseArXeNe = await fetch("/apiArXeNe", ArXeNeoptions);
+    var myjsonArXeNe = await myresponseArXeNe.json();
+    //console.log(myjsonArXeNe);
+  }
 }
-//---------------- END Ar/ Xe/ Ne 3GASN934 to CAT ----------------------
+//---------------- END Ar/ Xe/ Ne 3GASN934 to AGR ----------------------
 
 //---------------- SF6 3GASN906 from US to CAT ----------------------
 function SF6US() {

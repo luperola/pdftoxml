@@ -651,7 +651,7 @@ app.post("/apiTCS", (req, res) => {
     xw.writeAttribute("SupplierHoldingDesc", "LINDE PLC");
     xw.writeAttribute("ReceivingStPlant", dataTCSPost.delivery[i]);
     xw.writeAttribute("MpsSpecNo", "DM00423514_09");
-    xw.writeAttribute("MpsSpecRev", "3.0");
+    xw.writeAttribute("MpsSpecRev", "4.0");
     xw.writeAttribute("ShipmentDate", dataTCSPost.shipment[i]);
     xw.writeAttribute("ShipmentNumber", dataTCSPost.progressivoTCS[i]);
     xw.writeAttribute("ShipQty", 1);
@@ -1828,6 +1828,127 @@ app.post("/apiHF36US", (req, res) => {
   zipHFUS.writeZip(/*target file name*/ "filesHFUS.zip");
 });
 
+//------------ ArXeNe POST------------
+
+app.post("/apiArXeNe", (req, res) => {
+  const dataArXeNe = req.body;
+  //console.log(dataArXeNe);
+  xw = new XMLWriter(true);
+  xw.startDocument("1.0", "UTF-8");
+  xw.startElement("GasesShipment");
+  xw.writeAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+  xw.writeAttribute(
+    "xsi:noNamespaceSchemaLocation",
+    "3GASN934_DM00443847_09.xsd"
+  );
+  xw.writeAttribute("MaterialCode", "3GASN934");
+  xw.writeAttribute("SupplierHoldingDesc", "LINDE PLC");
+  xw.writeAttribute("ReceivingStPlant", "Agrate");
+  xw.writeAttribute("MpsSpecNo", "DM00443847_09");
+  xw.writeAttribute("MpsSpecRev", "3.0");
+  xw.writeAttribute("ShipmentDate", dataArXeNe.today);
+  xw.writeAttribute("ShipmentNumber", dataArXeNe.shipmentNumber);
+  xw.writeAttribute("ShipQty", 1);
+  xw.startElement("Lot");
+  xw.writeAttribute("SupplierSupplyChainSeqCode", "LINDE PLC-ALPHA-282");
+  xw.writeAttribute("ShipLotNo", dataArXeNe.lotNumber);
+  xw.writeAttribute("ExpiryDate", dataArXeNe.expiryDate);
+  xw.writeAttribute("MfgDate", dataArXeNe.manDate);
+  xw.writeAttribute("LotQty", 1);
+
+  xw.startElement("DIM_Carbon_dioxide_CO2");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataArXeNe.CO2value);
+  xw.endElement();
+  xw.endElement("DIM_Carbon_dioxide_CO2");
+
+  xw.startElement("DIM_Carbon_monoxide_CO");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataArXeNe.COvalue);
+  xw.endElement();
+  xw.endElement("DIM_Carbon_monoxide_CO");
+
+  xw.startElement("DIM_Oxygen_O2");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataArXeNe.O2value);
+  xw.endElement();
+  xw.endElement("DIM_Oxygen_O2");
+
+  xw.startElement("DIM_Total_hydrocarbon_as_CH4");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataArXeNe.THCvalue);
+  xw.endElement();
+  xw.endElement("DIM_Total_hydrocarbon_as_CH4");
+
+  xw.startElement("DIM_Methane_CH4");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataArXeNe.CH4value);
+  xw.endElement();
+  xw.endElement("DIM_Methane_CH4");
+
+  xw.startElement("DIM_Nitrogen_trifluoride_NF3");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataArXeNe.NF3value);
+  xw.endElement();
+  xw.endElement("DIM_Nitrogen_trifluoride_NF3");
+
+  xw.startElement("DIM_Carbon_tetrafluoride_CF4");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataArXeNe.CF4value);
+  xw.endElement();
+  xw.endElement("DIM_Carbon_tetrafluoride_CF4");
+
+  xw.startElement("DIM_Nitrogen_N2");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataArXeNe.N2value);
+  xw.endElement();
+  xw.endElement("DIM_Nitrogen_N2");
+
+  xw.startElement("DIM_Argon_Ar_Assay");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataArXeNe.Arpercentvalue);
+  xw.endElement();
+  xw.endElement("DIM_Argon_Ar_Assay");
+
+  xw.startElement("DIM_Helium_He");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataArXeNe.Hevalue);
+  xw.endElement();
+  xw.endElement("DIM_Helium_He");
+
+  xw.startElement("DIM_Moisture_H2O");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataArXeNe.H2Ovalue);
+  xw.endElement();
+  xw.endElement("DIM_Moisture_H2O");
+
+  xw.startElement("DIM_Carbonyl_fluoride_COF2");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataArXeNe.COF2value);
+  xw.endElement();
+  xw.endElement("DIM_Carbonyl_fluoride_COF2");
+
+  xw.startElement("DIM_Xenon_Xe_Assay");
+  xw.startElement("RAW");
+  xw.writeAttribute("VALUE", dataArXeNe.Xepercentvalue);
+  xw.endElement();
+  xw.endElement("DIM_Xenon_Xe_Assay");
+
+  xw.endDocument();
+
+  try {
+    fs.writeFileSync("sourcename.txt", "ArXeNe");
+    fileToBeDownloaded = dataArXeNe.filename.toString() + ".xml";
+    res.json(xw.toString());
+    fs.writeFileSync(fileToBeDownloaded, xw.toString());
+    fs.writeFileSync("ArXeNefilename.txt", fileToBeDownloaded);
+  } catch (e) {
+    console.log("Error:", e.stack);
+  }
+});
+
+//------------ END ArXeNe POST------------
+
 app.get("/download", function (req, res) {
   var sourceName = fs.readFileSync("sourcename.txt", "utf-8");
   //console.log("sourcename", sourceName);
@@ -1929,6 +2050,17 @@ app.get("/download", function (req, res) {
   if (sourceName === "F2ArNe") {
     var F2ArNefileName = fs.readFileSync("F2ArNefilename.txt", "utf-8");
     res.download(F2ArNefileName, function (err) {
+      if (err) {
+        console.log("file not downloaded");
+      } else {
+        console.log("Download succesfull");
+      }
+    });
+  }
+
+  if (sourceName === "ArXeNe") {
+    var ArXeNefileName = fs.readFileSync("ArXeNefilename.txt", "utf-8");
+    res.download(ArXeNefileName, function (err) {
       if (err) {
         console.log("file not downloaded");
       } else {
