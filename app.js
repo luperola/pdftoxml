@@ -1832,7 +1832,7 @@ app.post("/apiHF36US", (req, res) => {
 
 app.post("/apiArXeNe", (req, res) => {
   const dataArXeNe = req.body;
-  //console.log(dataArXeNe);
+  console.log(dataArXeNe);
   xw = new XMLWriter(true);
   xw.startDocument("1.0", "UTF-8");
   xw.startElement("GasesShipment");
@@ -1846,7 +1846,7 @@ app.post("/apiArXeNe", (req, res) => {
   xw.writeAttribute("ReceivingStPlant", "Agrate");
   xw.writeAttribute("MpsSpecNo", "DM00443847_09");
   xw.writeAttribute("MpsSpecRev", "3.0");
-  xw.writeAttribute("ShipmentDate", dataArXeNe.today);
+  xw.writeAttribute("ShipmentDate", dataArXeNe.shipmentDate);
   xw.writeAttribute("ShipmentNumber", dataArXeNe.shipmentNumber);
   xw.writeAttribute("ShipQty", 1);
   xw.startElement("Lot");
