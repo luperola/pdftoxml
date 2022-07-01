@@ -1275,7 +1275,7 @@ app.post("/apiHBr", (req, res) => {
     "SupplierSupplyChainSeqCode",
     "LINDE PLC-UNTERSCHLEISSHEIM-290"
   );
-  xw.writeAttribute("ShipLotNo", dataHBr.HBrCylinderNumber);
+  xw.writeAttribute("ShipLotNo", dataHBr.lotNumber);
   xw.writeAttribute("ExpiryDate", dataHBr.expiryDate);
   xw.writeAttribute("MfgDate", dataHBr.manDate);
   xw.writeAttribute("LotQty", 1);
