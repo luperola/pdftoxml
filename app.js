@@ -1731,11 +1731,11 @@ app.post("/apiHF36US", (req, res) => {
     xw.writeAttribute("MfgDate", dataHFUSPost.manDate[id]);
     xw.writeAttribute("LotQty", 1);
 
-    xw.startElement("DIM_DIM_Acidity_as_HF");
+    xw.startElement("DIM_Acidity_as_HF");
     xw.startElement("RAW");
     xw.writeAttribute("VALUE", dataHFUSPost.acidHF[id]);
     xw.endElement();
-    xw.endElement("DIM_Acidity_as_HF ");
+    xw.endElement("DIM_Acidity_as_HF");
 
     xw.startElement("DIM_Arsenic_As");
     xw.startElement("RAW");
@@ -1743,11 +1743,11 @@ app.post("/apiHF36US", (req, res) => {
     xw.endElement();
     xw.endElement("DIM_Arsenic_As");
 
-    xw.startElement("DIM_Chloride_CL");
+    xw.startElement("DIM_Chloride_Cl");
     xw.startElement("RAW");
     xw.writeAttribute("VALUE", dataHFUSPost.Cl2HF[id]);
     xw.endElement();
-    xw.endElement("DIM_Chloride_CL");
+    xw.endElement("DIM_Chloride_Cl");
 
     xw.startElement("DIM_Copper_Cu");
     xw.startElement("RAW");
@@ -1779,11 +1779,11 @@ app.post("/apiHF36US", (req, res) => {
     xw.endElement();
     xw.endElement("DIM_Lead_Pb");
 
-    xw.startElement("DIM_Moisture_H2O");
+    xw.startElement("DIM_Moisture_as_HF");
     xw.startElement("RAW");
     xw.writeAttribute("VALUE", dataHFUSPost.H2OHF[id]);
     xw.endElement();
-    xw.endElement("DIM_Moisture_H2O");
+    xw.endElement("DIM_Moisture_as_HF");
 
     xw.startElement("DIM_Nickel_Ni");
     xw.startElement("RAW");
