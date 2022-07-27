@@ -92,6 +92,7 @@ function HFDrumsPag1() {
     "<br/>" +
     "Valore Copper: " +
     CuHF +
+    "<br/>" +
     "Valore Fluorisilic acid: " +
     FHF +
     "<br/>" +
@@ -104,14 +105,13 @@ function HFDrumsPag1() {
     "Valore Lead: " +
     PbHF +
     "<br/>" +
-    "Valore Moisture: " +
+    "Valore Moisture as HF: " +
     H2OHF +
     "<br/>" +
     "Valore Nickel: " +
     NiHF +
     "<br/>" +
     "Valore Potassium: " +
-    "<br/>" +
     KHF +
     "<br/>" +
     "Valore Sodium: " +

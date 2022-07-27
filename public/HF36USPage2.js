@@ -136,6 +136,7 @@ function HFDrumsPag2() {
     "<br/>" +
     "Valore Copper: " +
     CuHFP2 +
+    "<br/>" +
     "Valore Fluorisilic acid: " +
     FHFP2 +
     "<br/>" +
@@ -155,7 +156,6 @@ function HFDrumsPag2() {
     NiHFP2 +
     "<br/>" +
     "Valore Potassium: " +
-    "<br/>" +
     KHFP2 +
     "<br/>" +
     "Valore Sodium: " +
