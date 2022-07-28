@@ -1607,11 +1607,12 @@ app.post("/apiHF18US", (req, res) => {
     xw.writeAttribute("ExpiryDate", dataHFUSPost.expiryDate[id]);
     xw.writeAttribute("MfgDate", dataHFUSPost.manDate[id]);
     xw.writeAttribute("LotQty", 1);
-    xw.startElement("DIM_Chloride_Cl");
+    xw.writeAttribute("ContainerID", dataHFUSPost.lotNumber[id]);
+    xw.startElement("DIM_Chloride_CL");
     xw.startElement("RAW");
     xw.writeAttribute("VALUE", dataHFUSPost.Cl2HF[id]);
     xw.endElement();
-    xw.endElement("DIM_Chloride_Cl");
+    xw.endElement("DIM_Chloride_CL");
 
     xw.startElement("DIM_Phosphate_PO4");
     xw.startElement("RAW");
